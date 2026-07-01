@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "entirius-service-volkanos"
+version = "3.0.0a1"
+description = "Entirius Volkanos Service - base Django service adopting Volkanos modules"
+authors = [
+    { name = "Piotr Brzozowski", email = "piotrb@entirius.com" },
+]
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: Django",
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "django>=5.2",
+    "djangorestframework>=3.16",
+    "drf-spectacular>=0.28",
+    "python-decouple>=3.8",
+]
+
+[project.urls]
+Repository = "https://github.com/entirius/entirius-service-volkanos"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12",
+    "pytest>=8.4",
+    "pytest-django>=4.11",
+    "pytest-cov>=6.2",
+    "pre-commit>=4.0",
+    "pyyaml>=6.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["apps", "main"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+src = ["apps", "main"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "C4", "UP", "DJ", "S"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"main/settings*.py" = ["F403", "F405", "S105"]
+"*/migrations/*.py" = ["E501"]
+"tests/**" = ["S101"]
+"**/tests/**" = ["S101"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["apps", "main"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "main.settings"
+python_files = ["test_*.py", "*_test.py", "tests.py"]
+testpaths = ["apps", "tests"]
+
+[tool.coverage.run]
+source = ["apps", "main"]
+omit = ["*/migrations/*", "*/tests/*", "manage.py", "main/wsgi.py", "main/asgi.py"]

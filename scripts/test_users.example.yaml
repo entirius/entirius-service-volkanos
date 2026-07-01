@@ -1,0 +1,14 @@
+# Template for non-production test users. Copy to scripts/test_users.yaml (gitignored)
+# and set local passwords. Committed file holds placeholders only — never real secrets.
+# Created idempotently by `make test-users` / `make init`. Add entries freely.
+
+users:
+  - username: admin
+    email: admin@example.com
+    password: changeme
+    superuser: true
+
+  - username: editor
+    email: editor@example.com
+    password: changeme
+    staff: true

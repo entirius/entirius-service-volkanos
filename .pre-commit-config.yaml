@@ -1,0 +1,39 @@
+repos:
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.5.6
+    hooks:
+      - id: insert-license
+        files: \.py$
+        exclude: (^|/)__init__\.py$
+        args:
+          - --license-filepath
+          - .license-header.txt
+          - --comment-style
+          - "#"
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.20
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: require-client-blocklist
+        name: require .gitleaks.toml (client blocklist)
+        entry: bash -c 'test -e .gitleaks.toml || { echo "Missing .gitleaks.toml - create it per the internal secret-scanning standard"; exit 1; }'
+        language: system
+        always_run: true
+        pass_filenames: false
+      - id: gitleaks-config-untracked
+        name: .gitleaks.toml must stay gitignored
+        entry: bash -c '! git ls-files --error-unmatch .gitleaks.toml 2>/dev/null || { echo ".gitleaks.toml is tracked - add it to .gitignore"; exit 1; }'
+        language: system
+        always_run: true
+        pass_filenames: false
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.0
+    hooks:
+      - id: gitleaks
