@@ -41,7 +41,7 @@ coverage.xml
 .claude/memory/
 
 
-# Secret scanning (client blocklist — local symlink, never committed)
+# Secret scanning (forbidden-names blocklist — local symlink, never committed)
 .gitleaks.toml
 
 # Local test users (real passwords stay out of git; commit only the .example)
