@@ -43,7 +43,7 @@ dev = [
 packages = ["apps", "main"]
 
 [tool.ruff]
-line-length = 88
+line-length = 120
 target-version = "py312"
 src = ["apps", "main"]
 
