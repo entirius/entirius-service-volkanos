@@ -30,9 +30,7 @@ def main() -> None:
     django.setup()
 
     if settings.ENVIRONMENT not in ALLOWED_ENVIRONMENTS:
-        sys.exit(
-            f"REFUSED: ENVIRONMENT={settings.ENVIRONMENT!r} is not a dev environment."
-        )
+        sys.exit(f"REFUSED: ENVIRONMENT={settings.ENVIRONMENT!r} is not a dev environment.")
 
     config = LOCAL_CONFIG if LOCAL_CONFIG.exists() else EXAMPLE_CONFIG
     if config is EXAMPLE_CONFIG:
