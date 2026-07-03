@@ -29,6 +29,9 @@ dependencies = [
     "entirius-py-int-enum-choices>=2.0.0",
     "entirius-py-lockfile>=2.0.0",
     "entirius-py-idx-normalizator>=2.0.0",
+    "entirius-py-process-logger>=2.0.0",
+    "entirius-py-image-transformations>=2.0.0",
+    "entirius-py-pdf-generator>=2.0.0",
 ]
 
 [project.urls]
