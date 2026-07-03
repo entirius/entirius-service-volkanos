@@ -12,3 +12,9 @@ users:
     email: editor@example.com
     password: changeme
     staff: true
+
+  - username: fenix
+    email: editor@example.com
+    password: testujemy
+    staff: true
+

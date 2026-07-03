@@ -24,6 +24,11 @@ dependencies = [
     "djangorestframework>=3.16",
     "drf-spectacular>=0.28",
     "python-decouple>=3.8",
+    "entirius-py-bievents>=2.0.0",
+    "entirius-py-graylog-json-formatter>=2.0.0",
+    "entirius-py-int-enum-choices>=2.0.0",
+    "entirius-py-lockfile>=2.0.0",
+    "entirius-py-idx-normalizator>=2.0.0",
 ]
 
 [project.urls]
