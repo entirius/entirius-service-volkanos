@@ -7,8 +7,9 @@ Currently **Stage 0**: clean skeleton, no business modules.
 ## What this service is
 
 Modules **do not live in this repo** — each is its own repo, installed as a dependency.
-Adopting a module = add the dependency in `pyproject.toml`, add it to `LOCAL_APPS`
-(`main/settings.py`), `include()` its urls in `main/urls.py`.
+Adopting an `entirius-django-*` module = dependency in `pyproject.toml` (+ `uv lock`),
+its app in `LOCAL_APPS` (`main/settings.py`), `include()` of its urls in `main/urls.py`.
+Plain `entirius-py-*` libraries are dependencies only — no `LOCAL_APPS` / urls wiring.
 Adopting a module does not change its name / app_label / DB tables.
 
 ## Stack and tooling

@@ -4,6 +4,14 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Adopted Stage 1 leaf libraries from PyPI (>=2.0.0): `entirius-py-bievents`,
+  `entirius-py-graylog-json-formatter`, `entirius-py-int-enum-choices`,
+  `entirius-py-lockfile`, `entirius-py-idx-normalizator`.
+
 ## [3.0.0a1] - 2026-07-01
 
 First public pre-release of the Volkanos service. Alpha — modules land stage by stage;
