@@ -41,6 +41,7 @@ dependencies = [
     "entirius-py-synerise-sdk>=2.0.0",
     "entirius-py-salesmanago-sdk>=2.0.0",
     "entirius-py-edrone-sdk>=2.0.0",
+    "entirius-py-get-response-sdk>=3.0.0",
 ]
 
 [project.urls]
