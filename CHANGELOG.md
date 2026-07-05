@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `entirius-py-graylog-json-formatter`, `entirius-py-int-enum-choices`,
   `entirius-py-lockfile`, `entirius-py-idx-normalizator`, `entirius-py-process-logger`,
   `entirius-py-image-transformations`, `entirius-py-pdf-generator`.
+- Adopted Stage 1 payment SDKs from PyPI (>=2.0.0): `entirius-py-payu-sdk`, `entirius-py-paypal-sdk`.
 
 ## [3.0.0a1] - 2026-07-01
 

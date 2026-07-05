@@ -32,6 +32,8 @@ dependencies = [
     "entirius-py-process-logger>=2.0.0",
     "entirius-py-image-transformations>=2.0.0",
     "entirius-py-pdf-generator>=2.0.0",
+    "entirius-py-payu-sdk>=2.0.0",
+    "entirius-py-paypal-sdk>=2.0.0",
 ]
 
 [project.urls]
