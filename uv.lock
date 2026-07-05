@@ -395,6 +395,18 @@ wheels = [
 ]
 
 [[package]]
+name = "entirius-py-magento2-sdk"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4b/e2/4cc75b082ee1af392a95b9a528e2c922c5f08d34a78b53dd6f113e9e3e59/entirius_py_magento2_sdk-2.0.0.tar.gz", hash = "sha256:8c264ae2b8195459d001ec3070fd90842ad80984514224f42b901550c7514da4", size = 35396, upload-time = "2026-07-05T14:10:54.926Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d0/bf/f445ba3a454c9a1b21a45cf74398fddc7db67d15e63e3683d56f37f2d8c8/entirius_py_magento2_sdk-2.0.0-py3-none-any.whl", hash = "sha256:c5aec2031fbfe311330a473457b5805f39972108f413ffce3442f9c2d55a03dc", size = 17404, upload-time = "2026-07-05T14:10:54.059Z" },
+]
+
+[[package]]
 name = "entirius-py-paynow-sdk"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -481,6 +493,7 @@ dependencies = [
     { name = "entirius-py-image-transformations" },
     { name = "entirius-py-int-enum-choices" },
     { name = "entirius-py-lockfile" },
+    { name = "entirius-py-magento2-sdk" },
     { name = "entirius-py-paynow-sdk" },
     { name = "entirius-py-paypal-sdk" },
     { name = "entirius-py-payu-sdk" },
@@ -512,6 +525,7 @@ requires-dist = [
     { name = "entirius-py-image-transformations", specifier = ">=2.0.0" },
     { name = "entirius-py-int-enum-choices", specifier = ">=2.0.0" },
     { name = "entirius-py-lockfile", specifier = ">=2.0.0" },
+    { name = "entirius-py-magento2-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-paynow-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-paypal-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-payu-sdk", specifier = ">=2.0.0" },
