@@ -342,6 +342,18 @@ wheels = [
 ]
 
 [[package]]
+name = "entirius-py-edrone-sdk"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/53/c8/4ca685a615bd92f959630f8c4eb5abee96fe56a11c7524508776977e0f07/entirius_py_edrone_sdk-2.0.0.tar.gz", hash = "sha256:b17a8ca67952765c3f0a0ab879d5fbc38f24b9a88dacacf8791250838b12d619", size = 32266, upload-time = "2026-07-05T19:25:28.282Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/23/11/4a4aec927fef741041ffeb6c4f4bee4ca89e68b8e989b393af45df5cd0ac/entirius_py_edrone_sdk-2.0.0-py3-none-any.whl", hash = "sha256:28eee8ca8b7c06f1f1ec5d4ac691b079a7b382252971b5323c19481e4e4ba379", size = 11969, upload-time = "2026-07-05T19:25:27.379Z" },
+]
+
+[[package]]
 name = "entirius-py-graylog-json-formatter"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -479,6 +491,32 @@ wheels = [
 ]
 
 [[package]]
+name = "entirius-py-salesmanago-sdk"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "marshmallow" },
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/fa/18/4387003aa1109a2dc36364391a0e40de42808310c52d9f69d6e0773b6876/entirius_py_salesmanago_sdk-2.0.0.tar.gz", hash = "sha256:88600fe37979c517a4a3e9100c30b1ef7301d0a06aa3cbe51820facc8cab48c3", size = 35863, upload-time = "2026-07-05T19:25:23.468Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e5/9f/10e1cc88ca645471aa848cc7e16806acae0f3fefc3cf815c87b64f506105/entirius_py_salesmanago_sdk-2.0.0-py3-none-any.whl", hash = "sha256:8df5fd1df386f11dd63c2958eefb455c47bab87ae932d94116035eeb4aabf6ae", size = 13298, upload-time = "2026-07-05T19:25:22.51Z" },
+]
+
+[[package]]
+name = "entirius-py-synerise-sdk"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/70/14/db0dc60f287c20ca0cae8c4cd80f039017b3f5ccb70858a190ffb4030799/entirius_py_synerise_sdk-2.0.0.tar.gz", hash = "sha256:489fdb123865fd29bfb14455a2467db6304c4ff22400e69b76ac76f076a8f9c8", size = 31692, upload-time = "2026-07-05T19:25:21.946Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/5a/e4/355d91999bf3c2e60c3f171db683cdd08a5b300af1f756434322786e3b1c/entirius_py_synerise_sdk-2.0.0-py3-none-any.whl", hash = "sha256:9a5378ff515fd7a8a10da887fe814fda83747b68345f659d71ca4d29328ea911", size = 10010, upload-time = "2026-07-05T19:25:20.988Z" },
+]
+
+[[package]]
 name = "entirius-service-volkanos"
 version = "3.0.0a1"
 source = { editable = "." }
@@ -488,6 +526,7 @@ dependencies = [
     { name = "drf-spectacular" },
     { name = "entirius-py-autopay-sdk" },
     { name = "entirius-py-bievents" },
+    { name = "entirius-py-edrone-sdk" },
     { name = "entirius-py-graylog-json-formatter" },
     { name = "entirius-py-idx-normalizator" },
     { name = "entirius-py-image-transformations" },
@@ -500,6 +539,8 @@ dependencies = [
     { name = "entirius-py-pdf-generator" },
     { name = "entirius-py-process-logger" },
     { name = "entirius-py-przelewy24-sdk" },
+    { name = "entirius-py-salesmanago-sdk" },
+    { name = "entirius-py-synerise-sdk" },
     { name = "python-decouple" },
 ]
 
@@ -520,6 +561,7 @@ requires-dist = [
     { name = "drf-spectacular", specifier = ">=0.28" },
     { name = "entirius-py-autopay-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-bievents", specifier = ">=2.0.0" },
+    { name = "entirius-py-edrone-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-graylog-json-formatter", specifier = ">=2.0.0" },
     { name = "entirius-py-idx-normalizator", specifier = ">=2.0.0" },
     { name = "entirius-py-image-transformations", specifier = ">=2.0.0" },
@@ -532,6 +574,8 @@ requires-dist = [
     { name = "entirius-py-pdf-generator", specifier = ">=2.0.0" },
     { name = "entirius-py-process-logger", specifier = ">=2.0.0" },
     { name = "entirius-py-przelewy24-sdk", specifier = ">=2.0.0" },
+    { name = "entirius-py-salesmanago-sdk", specifier = ">=2.0.0" },
+    { name = "entirius-py-synerise-sdk", specifier = ">=2.0.0" },
     { name = "python-decouple", specifier = ">=3.8" },
 ]
 
@@ -751,6 +795,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/0f/41/c5f71f9f00aabcc71fee8b7475e3f64747282580c2fe748961ba29b18385/kiwisolver-1.5.0-graalpy312-graalpy250_312_native-macosx_11_0_arm64.whl", hash = "sha256:f6764a4ccab3078db14a632420930f6186058750df066b8ea2a7106df91d3203", size = 138036, upload-time = "2026-03-09T13:15:36.894Z" },
     { url = "https://files.pythonhosted.org/packages/fa/06/7399a607f434119c6e1fdc8ec89a8d51ccccadf3341dee4ead6bd14caaf5/kiwisolver-1.5.0-graalpy312-graalpy250_312_native-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c31c13da98624f957b0fb1b5bae5383b2333c2c3f6793d9825dd5ce79b525cb7", size = 194295, upload-time = "2026-03-09T13:15:38.22Z" },
     { url = "https://files.pythonhosted.org/packages/b5/91/53255615acd2a1eaca307ede3c90eb550bae9c94581f8c00081b6b1c8f44/kiwisolver-1.5.0-graalpy312-graalpy250_312_native-win_amd64.whl", hash = "sha256:1f1489f769582498610e015a8ef2d36f28f505ab3096d0e16b4858a9ec214f57", size = 75987, upload-time = "2026-03-09T13:15:39.65Z" },
+]
+
+[[package]]
+name = "marshmallow"
+version = "4.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/25/7e/1dbd4096eb7c148cd2841841916f78820bb85a4d80a0c25c02d30815a7fb/marshmallow-4.3.0.tar.gz", hash = "sha256:fb43c53b3fe240b8f6af37223d6ef1636f927ad9bea8ab323afad95dff090880", size = 224485, upload-time = "2026-04-03T21:46:32.72Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f4/e0/ff24e25218bb59eb6290a530cea40651b14068b6e3659b20f9c175179632/marshmallow-4.3.0-py3-none-any.whl", hash = "sha256:46c4fe6984707e3cbd485dfebbf0a59874f58d695aad05c1668d15e8c6e13b46", size = 49148, upload-time = "2026-04-03T21:46:31.241Z" },
 ]
 
 [[package]]

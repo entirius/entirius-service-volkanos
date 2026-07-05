@@ -38,6 +38,9 @@ dependencies = [
     "entirius-py-przelewy24-sdk>=2.0.0",
     "entirius-py-paynow-sdk>=2.0.0",
     "entirius-py-magento2-sdk>=2.0.0",
+    "entirius-py-synerise-sdk>=2.0.0",
+    "entirius-py-salesmanago-sdk>=2.0.0",
+    "entirius-py-edrone-sdk>=2.0.0",
 ]
 
 [project.urls]
