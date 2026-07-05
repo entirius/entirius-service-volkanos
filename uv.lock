@@ -395,6 +395,18 @@ wheels = [
 ]
 
 [[package]]
+name = "entirius-py-paynow-sdk"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/21/16/096b554d6ef656e3dc71c2d2d7cc50583b70ac61473b7ff5dc2a8c732282/entirius_py_paynow_sdk-2.0.0.tar.gz", hash = "sha256:9d7c98cffeb3a92eb66881c6670e398043abd79e996c67af55ff0b2c4657f95b", size = 33724, upload-time = "2026-07-05T13:44:45.685Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/65/26/b3c4f13f92ff61d4eecf81230b9776a3ff8e562e9d3f981cb1144c107a69/entirius_py_paynow_sdk-2.0.0-py3-none-any.whl", hash = "sha256:e1110b9666ccac7f140832107b820efcd6195a28a3df05a8aa286158a4815a4d", size = 13067, upload-time = "2026-07-05T13:44:44.764Z" },
+]
+
+[[package]]
 name = "entirius-py-paypal-sdk"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -469,6 +481,7 @@ dependencies = [
     { name = "entirius-py-image-transformations" },
     { name = "entirius-py-int-enum-choices" },
     { name = "entirius-py-lockfile" },
+    { name = "entirius-py-paynow-sdk" },
     { name = "entirius-py-paypal-sdk" },
     { name = "entirius-py-payu-sdk" },
     { name = "entirius-py-pdf-generator" },
@@ -499,6 +512,7 @@ requires-dist = [
     { name = "entirius-py-image-transformations", specifier = ">=2.0.0" },
     { name = "entirius-py-int-enum-choices", specifier = ">=2.0.0" },
     { name = "entirius-py-lockfile", specifier = ">=2.0.0" },
+    { name = "entirius-py-paynow-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-paypal-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-payu-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-pdf-generator", specifier = ">=2.0.0" },
