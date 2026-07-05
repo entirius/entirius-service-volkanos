@@ -317,6 +317,19 @@ wheels = [
 ]
 
 [[package]]
+name = "entirius-py-autopay-sdk"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "entirius-py-process-logger" },
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/31/8f/7ecb96b1f5a42d1c22f00652997c014e06ed534986be31e7c21ed8501a85/entirius_py_autopay_sdk-2.0.0.tar.gz", hash = "sha256:161c045c043e808fa70b25785da20507c537f827e1c22fc6d152fab161734838", size = 33407, upload-time = "2026-07-05T13:08:15.79Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/57/2e/d36ad52ed22d67b8b1e890f28e3eb452e1fe22f99a5c22d713dbbf0d7bcf/entirius_py_autopay_sdk-2.0.0-py3-none-any.whl", hash = "sha256:d2720af4d4f58be09e92a51f0455099dd27e0f527103824c643ff26234200eca", size = 14362, upload-time = "2026-07-05T13:08:14.955Z" },
+]
+
+[[package]]
 name = "entirius-py-bievents"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -428,6 +441,20 @@ wheels = [
 ]
 
 [[package]]
+name = "entirius-py-przelewy24-sdk"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "entirius-py-process-logger" },
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/18/3a/1d7f7234aec57e44dc96a5f1408871f266372336c0072912d17f98a8ec09/entirius_py_przelewy24_sdk-2.0.0.tar.gz", hash = "sha256:453e3dbdb485d5aab2293941bcdbe6cce6c5dbd41c5d34c2eac7bad055cd4df8", size = 34953, upload-time = "2026-07-05T13:08:34.536Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/dc/00/68fa3c9b3da439e4792efc482155689595364965efaf475fcb305f1cdd5c/entirius_py_przelewy24_sdk-2.0.0-py3-none-any.whl", hash = "sha256:33f7f746981181db17213d216b604e55265bc5c07dd6217ebf169215bbb025fb", size = 13442, upload-time = "2026-07-05T13:08:33.627Z" },
+]
+
+[[package]]
 name = "entirius-service-volkanos"
 version = "3.0.0a1"
 source = { editable = "." }
@@ -435,6 +462,7 @@ dependencies = [
     { name = "django" },
     { name = "djangorestframework" },
     { name = "drf-spectacular" },
+    { name = "entirius-py-autopay-sdk" },
     { name = "entirius-py-bievents" },
     { name = "entirius-py-graylog-json-formatter" },
     { name = "entirius-py-idx-normalizator" },
@@ -445,6 +473,7 @@ dependencies = [
     { name = "entirius-py-payu-sdk" },
     { name = "entirius-py-pdf-generator" },
     { name = "entirius-py-process-logger" },
+    { name = "entirius-py-przelewy24-sdk" },
     { name = "python-decouple" },
 ]
 
@@ -463,6 +492,7 @@ requires-dist = [
     { name = "django", specifier = ">=5.2" },
     { name = "djangorestframework", specifier = ">=3.16" },
     { name = "drf-spectacular", specifier = ">=0.28" },
+    { name = "entirius-py-autopay-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-bievents", specifier = ">=2.0.0" },
     { name = "entirius-py-graylog-json-formatter", specifier = ">=2.0.0" },
     { name = "entirius-py-idx-normalizator", specifier = ">=2.0.0" },
@@ -473,6 +503,7 @@ requires-dist = [
     { name = "entirius-py-payu-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-pdf-generator", specifier = ">=2.0.0" },
     { name = "entirius-py-process-logger", specifier = ">=2.0.0" },
+    { name = "entirius-py-przelewy24-sdk", specifier = ">=2.0.0" },
     { name = "python-decouple", specifier = ">=3.8" },
 ]
 
