@@ -4,6 +4,28 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [3.0.0a2] - 2026-07-06
+
+Stage 1 complete — all Python leaf modules (libraries and SDKs) adopted from PyPI.
+
+### Added
+
+- Adopted Stage 1 leaf libraries from PyPI (>=2.0.0): `entirius-py-bievents`,
+  `entirius-py-graylog-json-formatter`, `entirius-py-int-enum-choices`,
+  `entirius-py-lockfile`, `entirius-py-idx-normalizator`, `entirius-py-process-logger`,
+  `entirius-py-image-transformations`, `entirius-py-pdf-generator`.
+- Adopted Stage 1 payment SDKs from PyPI (>=2.0.0): `entirius-py-payu-sdk`, `entirius-py-paypal-sdk`,
+  `entirius-py-autopay-sdk`, `entirius-py-przelewy24-sdk`, `entirius-py-paynow-sdk`.
+- Adopted Stage 1 integration SDKs from PyPI (>=2.0.0): `entirius-py-magento2-sdk`,
+  `entirius-py-magento2-sdk2`, `entirius-py-synerise-sdk`, `entirius-py-salesmanago-sdk`,
+  `entirius-py-edrone-sdk`; `entirius-py-get-response-sdk` (>=3.0.0).
+
+### Changed
+
+- Hardened gitleaks guard: canonical forbidden-names blocklist required (pre-commit + `make check`).
+
 ## [3.0.0a1] - 2026-07-01
 
 First public pre-release of the Volkanos service. Alpha — modules land stage by stage;

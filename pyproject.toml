@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "3.0.0a1"
+version = "3.0.0a2"
 description = "Entirius Volkanos Service - base Django service adopting Volkanos modules"
 authors = [
     { name = "Piotr Brzozowski", email = "piotrb@entirius.com" },
@@ -24,6 +24,25 @@ dependencies = [
     "djangorestframework>=3.16",
     "drf-spectacular>=0.28",
     "python-decouple>=3.8",
+    "entirius-py-bievents>=2.0.0",
+    "entirius-py-graylog-json-formatter>=2.0.0",
+    "entirius-py-int-enum-choices>=2.0.0",
+    "entirius-py-lockfile>=2.0.0",
+    "entirius-py-idx-normalizator>=2.0.0",
+    "entirius-py-process-logger>=2.0.0",
+    "entirius-py-image-transformations>=2.0.0",
+    "entirius-py-pdf-generator>=2.0.0",
+    "entirius-py-payu-sdk>=2.0.0",
+    "entirius-py-paypal-sdk>=2.0.0",
+    "entirius-py-autopay-sdk>=2.0.0",
+    "entirius-py-przelewy24-sdk>=2.0.0",
+    "entirius-py-paynow-sdk>=2.0.0",
+    "entirius-py-magento2-sdk>=2.0.0",
+    "entirius-py-synerise-sdk>=2.0.0",
+    "entirius-py-salesmanago-sdk>=2.0.0",
+    "entirius-py-edrone-sdk>=2.0.0",
+    "entirius-py-get-response-sdk>=3.0.0",
+    "entirius-py-magento2-sdk2>=2.0.0",
 ]
 
 [project.urls]
@@ -43,7 +62,7 @@ dev = [
 packages = ["apps", "main"]
 
 [tool.ruff]
-line-length = 88
+line-length = 120
 target-version = "py312"
 src = ["apps", "main"]
 

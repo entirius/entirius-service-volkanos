@@ -20,7 +20,8 @@ health:  ## Prod-safe system health check (read-only)
 install:  ## Sync dependencies (uv)
 	uv sync
 
-check:  ## Lint + format-check (ruff)
+check:  ## Lint + format-check (ruff) + canonical .gitleaks.toml
+	@grep -q "forbidden-names" .gitleaks.toml 2>/dev/null || { echo "Missing or non-canonical .gitleaks.toml - symlink the config per the internal secret-scanning standard"; exit 1; }
 	uv run ruff check .
 	uv run ruff format --check .
 
