@@ -32,6 +32,17 @@ dependencies = [
     "entirius-py-process-logger>=2.0.0",
     "entirius-py-image-transformations>=2.0.0",
     "entirius-py-pdf-generator>=2.0.0",
+    "entirius-py-payu-sdk>=2.0.0",
+    "entirius-py-paypal-sdk>=2.0.0",
+    "entirius-py-autopay-sdk>=2.0.0",
+    "entirius-py-przelewy24-sdk>=2.0.0",
+    "entirius-py-paynow-sdk>=2.0.0",
+    "entirius-py-magento2-sdk>=2.0.0",
+    "entirius-py-synerise-sdk>=2.0.0",
+    "entirius-py-salesmanago-sdk>=2.0.0",
+    "entirius-py-edrone-sdk>=2.0.0",
+    "entirius-py-get-response-sdk>=3.0.0",
+    "entirius-py-magento2-sdk2>=2.0.0",
 ]
 
 [project.urls]
