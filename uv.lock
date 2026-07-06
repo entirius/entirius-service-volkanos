@@ -545,7 +545,7 @@ wheels = [
 
 [[package]]
 name = "entirius-service-volkanos"
-version = "3.0.0a1"
+version = "3.0.0a2"
 source = { editable = "." }
 dependencies = [
     { name = "django" },
