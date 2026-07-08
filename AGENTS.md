@@ -17,7 +17,8 @@ Adopting a module does not change its name / app_label / DB tables.
 - Django 5.2+ / DRF / drf-spectacular (OpenAPI)
 - uv (packages), ruff (lint + format), hatchling (build), pytest
 - DB: `DATABASE_URL` env var (postgres under entirius-zeno / CI); sqlite fallback
-- Local settings: copy `main/settings_example.py` -> `main/settings_local.py` (gitignored)
+- Per-environment config: `main/settings_local.py` (gitignored) - REQUIRED, service refuses to boot
+  without it; template: `main/settings_example.py`; must define ENVIRONMENT, SECRET_KEY, DATABASES
 
 ## Commands
 

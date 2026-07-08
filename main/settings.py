@@ -3,26 +3,18 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 """
-Base settings for the Entirius Volkanos service.
+Base settings for the Entirius Volkanos service — framework wiring only.
 
-Base skeleton (Stage 0) - no business modules yet.
-Keep environment overrides in main/settings_local.py (gitignored);
-template: main/settings_example.py.
+Environment configuration (ENVIRONMENT, SECRET_KEY, DATABASES, adopted modules)
+lives in main/settings_local.py (gitignored) — REQUIRED, one per environment;
+template: main/settings_example.py. The service refuses to boot without it.
 """
 
 from pathlib import Path
 
-import dj_database_url
-from decouple import Csv, config
+from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Fail-closed: assume production unless a dev box declares otherwise (drives dev-only guards).
-ENVIRONMENT = config("ENVIRONMENT", default="production")
-
-SECRET_KEY = config("SECRET_KEY", default="django-insecure-change-me-in-production")
-DEBUG = config("DEBUG", default=True, cast=bool)
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1", cast=Csv())
 
 DJANGO_APPS = [
     "django.contrib.admin",
@@ -38,10 +30,8 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
 ]
 
-# Volkanos modules, adopted bottom-up stage by stage.
+# Volkanos modules, adopted bottom-up stage by stage — override per environment in settings_local.
 LOCAL_APPS: list[str] = []
-
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -72,14 +62,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "main.wsgi.application"
 
-# DATABASE_URL drives the engine (postgres under entirius-zeno / CI);
-# bare local dev falls back to sqlite.
-DATABASES = {
-    "default": dj_database_url.parse(
-        config("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
-    )
-}
-
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -106,3 +88,19 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Fail-closed: no settings_local.py means the environment was never consciously
+# configured (no explicit env type, DB, secret key) — refuse to boot.
+try:
+    from .settings_local import *  # noqa: F403
+except ModuleNotFoundError as exc:
+    raise ImproperlyConfigured(
+        "main/settings_local.py not found - every environment must provide its own. "
+        "Copy main/settings_example.py and set ENVIRONMENT, SECRET_KEY, DATABASES."
+    ) from exc
+
+_missing = [name for name in ("ENVIRONMENT", "SECRET_KEY", "DATABASES") if name not in globals()]
+if _missing:
+    raise ImproperlyConfigured(f"main/settings_local.py must define: {', '.join(_missing)}")
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

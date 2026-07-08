@@ -1,5 +1,5 @@
 .PHONY: help health install check fix test run migrate makemigrations \
-        shell schema guard-dev reinstall recreate-db test-users init rebuild
+        shell schema guard-dev reinstall recreate-db test-users settings-local init rebuild
 .DEFAULT_GOAL := help
 
 -include .env
@@ -61,7 +61,11 @@ recreate-db: guard-dev  ## DEV-ONLY DESTRUCTIVE: wipe dev DB (db.sqlite3)
 
 test-users: guard-dev  ## DEV-ONLY: create configured test users (scripts/test_users.yaml)
 	uv run python scripts/ensure_test_users.py
-init: guard-dev migrate test-users  ## DEV-ONLY: migrate + create test users
+settings-local: guard-dev  ## DEV-ONLY: bootstrap main/settings_local.py from example (required to boot)
+	@test -f main/settings_local.py || \
+		(cp main/settings_example.py main/settings_local.py && echo "Created main/settings_local.py from example")
+
+init: guard-dev settings-local migrate test-users  ## DEV-ONLY: settings_local + migrate + create test users
 	@echo "Init complete."
 
 rebuild: guard-dev reinstall recreate-db init check test  ## DEV-ONLY: full from-scratch local test (no integration)
