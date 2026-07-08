@@ -43,6 +43,8 @@ dependencies = [
     "entirius-py-edrone-sdk>=2.0.0",
     "entirius-py-get-response-sdk>=3.0.0",
     "entirius-py-magento2-sdk2>=2.0.0",
+    "dj-database-url>=2.2",
+    "psycopg[binary]>=3.2",
 ]
 
 [project.urls]

@@ -11,7 +11,7 @@ Status: **Stage 0** — clean skeleton, no business modules yet.
 - Django 5.2+ with Django REST Framework
 - drf-spectacular (OpenAPI 3.0)
 - uv (packages), ruff (lint + format), hatchling (build), pytest
-- DB: sqlite (Stage 0); PostgreSQL is added in Stage 2
+- DB: `DATABASE_URL` env var (postgres under entirius-zeno / CI); sqlite fallback for bare local dev
 
 ## Quick start
 

@@ -17,21 +17,5 @@ ENVIRONMENT = "development"
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-# PostgreSQL (from Stage 2 - first django-* module):
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": config("DB_NAME", default="volkanos"),
-#         "USER": config("DB_USER", default="volkanos"),
-#         "PASSWORD": config("DB_PASSWORD", default=""),
-#         "HOST": config("DB_HOST", default="localhost"),
-#         "PORT": config("DB_PORT", default="5432"),
-#     }
-# }
+# DB is driven by the DATABASE_URL env var (see main/settings.py) — sqlite fallback,
+# postgres e.g.: DATABASE_URL=postgresql://user:pass@localhost:5432/dbname

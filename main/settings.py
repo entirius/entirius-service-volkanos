@@ -12,6 +12,7 @@ template: main/settings_example.py.
 
 from pathlib import Path
 
+import dj_database_url
 from decouple import Csv, config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -71,12 +72,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "main.wsgi.application"
 
-# Stage 0: sqlite. PostgreSQL is added in Stage 2 (first django-* module).
+# DATABASE_URL drives the engine (postgres under entirius-zeno / CI);
+# bare local dev falls back to sqlite.
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": dj_database_url.parse(
+        config("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
