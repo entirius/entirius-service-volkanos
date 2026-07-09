@@ -31,4 +31,6 @@ DATABASES = {
 }
 
 # Volkanos modules adopted in THIS environment (entirius-django-* app labels).
+# Full django set (order matters: regional before pim — FK targets first):
+# LOCAL_APPS = ["django_regional", "django_utils", "django_pim"]
 LOCAL_APPS: list[str] = []

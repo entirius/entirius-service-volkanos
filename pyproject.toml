@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "3.0.0a2"
+version = "3.0.0a3"
 description = "Entirius Volkanos Service - base Django service adopting Volkanos modules"
 authors = [
     { name = "Piotr Brzozowski", email = "piotrb@entirius.com" },
@@ -43,6 +43,9 @@ dependencies = [
     "entirius-py-edrone-sdk>=2.0.0",
     "entirius-py-get-response-sdk>=3.0.0",
     "entirius-py-magento2-sdk2>=2.0.0",
+    "entirius-django-regional>=2.0.0",
+    "entirius-django-utils>=2.0.0",
+    "entirius-django-pim>=3.0.0",
     "dj-database-url>=2.2",
     "psycopg[binary]>=3.2",
 ]
