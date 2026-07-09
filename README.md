@@ -11,7 +11,7 @@ Status: **Stage 0** — clean skeleton, no business modules yet.
 - Django 5.2+ with Django REST Framework
 - drf-spectacular (OpenAPI 3.0)
 - uv (packages), ruff (lint + format), hatchling (build), pytest
-- DB: sqlite (Stage 0); PostgreSQL is added in Stage 2
+- DB: `DATABASE_URL` env var (postgres under entirius-zeno / CI); sqlite fallback for bare local dev
 
 ## Quick start
 
@@ -26,8 +26,9 @@ uv run python manage.py runserver
 - ReDoc:        http://localhost:8000/api/schema/redoc/
 - Admin:        http://localhost:8000/admin/
 
-Local settings: copy `main/settings_example.py` -> `main/settings_local.py`
-and run with `DJANGO_SETTINGS_MODULE=main.settings_local`.
+Per-environment config: copy `main/settings_example.py` -> `main/settings_local.py` (gitignored).
+The file is REQUIRED - the service refuses to boot without it (fail-closed: no explicit
+env type, DB and secret key means the environment was never consciously configured).
 
 ## Development
 

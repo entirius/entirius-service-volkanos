@@ -4,8 +4,9 @@
 
 """URL routing for the Entirius Volkanos service."""
 
+from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
@@ -27,3 +28,7 @@ urlpatterns = [
     ),
     # Volkanos modules wire their include() here as they are adopted.
 ]
+
+# Adopted modules route only where the environment enables them (LOCAL_APPS in settings_local).
+if "django_pim" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_pim.urls")))
