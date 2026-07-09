@@ -50,10 +50,6 @@ dependencies = [
     "psycopg[binary]>=3.2",
 ]
 
-# Transitional until entirius-django-pim 3.0.0 lands on PyPI — then drop this block.
-[tool.uv.sources]
-entirius-django-pim = { git = "https://github.com/entirius/entirius-django-pim.git", branch = "develop" }
-
 [project.urls]
 Repository = "https://github.com/entirius/entirius-service-volkanos"
 

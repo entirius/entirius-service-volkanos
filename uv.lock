@@ -491,7 +491,7 @@ wheels = [
 [[package]]
 name = "entirius-django-pim"
 version = "3.0.0"
-source = { git = "https://github.com/entirius/entirius-django-pim.git?branch=develop#5dcee25848d84c7137add484e874286e42236015" }
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
     { name = "django" },
@@ -517,6 +517,10 @@ dependencies = [
     { name = "requests" },
     { name = "trafaret" },
     { name = "urllib3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7e/3a/3c39e427bfb2d3397e9741f5329bd282613ae82af200fec88211e00701ff/entirius_django_pim-3.0.0.tar.gz", hash = "sha256:9db204a8876dca10888508936a57dec29e2e5bc60448026d8a99b5a45aeaa4be", size = 418199, upload-time = "2026-07-09T17:21:17.526Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/76/f1/10080c595ca2879f35b2d5f472e5ecfe9d18df731531d548932dab6c49f4/entirius_django_pim-3.0.0-py3-none-any.whl", hash = "sha256:087ed3b25ff3aba18c5227265476e70e2215ef86d5a96a6317ae3e92a1ffbcc4", size = 323024, upload-time = "2026-07-09T17:21:16.399Z" },
 ]
 
 [[package]]
@@ -837,7 +841,7 @@ requires-dist = [
     { name = "django", specifier = ">=5.2" },
     { name = "djangorestframework", specifier = ">=3.16" },
     { name = "drf-spectacular", specifier = ">=0.28" },
-    { name = "entirius-django-pim", git = "https://github.com/entirius/entirius-django-pim.git?branch=develop" },
+    { name = "entirius-django-pim", specifier = ">=3.0.0" },
     { name = "entirius-django-regional", specifier = ">=2.0.0" },
     { name = "entirius-django-utils", specifier = ">=2.0.0" },
     { name = "entirius-py-autopay-sdk", specifier = ">=2.0.0" },
