@@ -24,6 +24,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v4
       - run: uv sync --frozen
+      # settings_local.py is required to boot (fail-closed) — CI configures its env explicitly
+      - run: cp main/settings_example.py main/settings_local.py
       - run: uv run pytest -x -q
 
   secret-scan:
