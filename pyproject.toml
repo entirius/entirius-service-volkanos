@@ -43,9 +43,16 @@ dependencies = [
     "entirius-py-edrone-sdk>=2.0.0",
     "entirius-py-get-response-sdk>=3.0.0",
     "entirius-py-magento2-sdk2>=2.0.0",
+    "entirius-django-regional>=2.0.0",
+    "entirius-django-utils>=2.0.0",
+    "entirius-django-pim>=3.0.0",
     "dj-database-url>=2.2",
     "psycopg[binary]>=3.2",
 ]
+
+# Transitional until entirius-django-pim 3.0.0 lands on PyPI — then drop this block.
+[tool.uv.sources]
+entirius-django-pim = { git = "https://github.com/entirius/entirius-django-pim.git", branch = "develop" }
 
 [project.urls]
 Repository = "https://github.com/entirius/entirius-service-volkanos"

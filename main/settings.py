@@ -87,6 +87,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
+TMP_DIR = BASE_DIR / "tmp"  # required by django_pim (file/picture processing)
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Fail-closed: no settings_local.py means the environment was never consciously
