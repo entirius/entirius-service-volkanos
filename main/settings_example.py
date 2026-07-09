@@ -3,35 +3,32 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 """
-Template for local settings - copy to main/settings_local.py and adjust.
+Template for the REQUIRED per-environment config - copy to main/settings_local.py.
 
-settings_local.py is gitignored. Run with the override:
-    DJANGO_SETTINGS_MODULE=main.settings_local
+settings_local.py is gitignored; the service refuses to boot without it
+(no explicit env type, DB and secret key means the environment was never
+consciously configured). Must define: ENVIRONMENT, SECRET_KEY, DATABASES.
 """
 
-from .settings import *
+import dj_database_url
+from decouple import config
+
+from .settings import BASE_DIR
 
 # Marks this as a dev box; unblocks dev-only Makefile targets (guard-dev). Keep in .env too.
 ENVIRONMENT = "development"
 
+SECRET_KEY = "django-insecure-dev-only-change-me"
 DEBUG = True
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
+# DATABASE_URL drives the engine (e.g. postgres under entirius-zeno / CI);
+# bare local dev falls back to sqlite.
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": dj_database_url.parse(
+        config("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+    )
 }
 
-# PostgreSQL (from Stage 2 - first django-* module):
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": config("DB_NAME", default="volkanos"),
-#         "USER": config("DB_USER", default="volkanos"),
-#         "PASSWORD": config("DB_PASSWORD", default=""),
-#         "HOST": config("DB_HOST", default="localhost"),
-#         "PORT": config("DB_PORT", default="5432"),
-#     }
-# }
+# Volkanos modules adopted in THIS environment (entirius-django-* app labels).
+LOCAL_APPS: list[str] = []
