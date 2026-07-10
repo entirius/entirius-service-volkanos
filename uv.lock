@@ -502,6 +502,113 @@ wheels = [
 ]
 
 [[package]]
+name = "entirius-django-agreements"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "djangorestframework" },
+    { name = "djangorestframework-simplejwt" },
+    { name = "drf-spectacular" },
+    { name = "entirius-django-regional" },
+    { name = "entirius-django-utils" },
+    { name = "entirius-py-process-logger" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/dd/ce/d88380c71f9ba0db3b82d2205eaa723ed0e989d7a5018337e50e90744c70/entirius_django_agreements-2.0.0.tar.gz", hash = "sha256:e9f66d7b59006ba71a2f0beccd5e70e6ce2d83019cee1ac3cc4119b16c38c26f", size = 125668, upload-time = "2026-07-10T18:59:42.983Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0e/4c/cbc4a42d83c030604002d62d900252ae3f3f3484c75ab723ca5ab1783d69/entirius_django_agreements-2.0.0-py3-none-any.whl", hash = "sha256:67763ace58571745c2b7f035f1d0e1f789edbeae04e379988cad663115b0a21b", size = 86637, upload-time = "2026-07-10T18:59:41.622Z" },
+]
+
+[[package]]
+name = "entirius-django-captcha"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "entirius-django-utils" },
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c0/f9/60d2884155af7f6148eb4e36ac7f7448697762244a08ddffa559b1c4e94d/entirius_django_captcha-2.0.0.tar.gz", hash = "sha256:124c2baeb9fada8aff8e0df1f81a3e6e4135c74249d14ee2df0f299a50a6f9b3", size = 64206, upload-time = "2026-07-10T18:59:35.884Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/21/b4/e2a30b63922e4cd8566f995e317da2731361c8c18e0a3d2c94f7da763b81/entirius_django_captcha-2.0.0-py3-none-any.whl", hash = "sha256:0b1e6908452d31427e0fd0363ff25b5f7620f08a1ac69fedaa266d11fc29d829", size = 12544, upload-time = "2026-07-10T18:59:34.928Z" },
+]
+
+[[package]]
+name = "entirius-django-deliverypoints"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "djangorestframework" },
+    { name = "djangorestframework-simplejwt" },
+    { name = "drf-spectacular" },
+    { name = "entirius-django-regional" },
+    { name = "entirius-django-utils" },
+    { name = "pydantic" },
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/9b/a7/a083aafc73c35e13ecfc512523e021cb63829dfcfd1a1f83d1761397bd1d/entirius_django_deliverypoints-2.0.0.tar.gz", hash = "sha256:5dfdcbf8a6a24eb0e7fbb11d358cbe0867375ea41205bb97d45cdc9eab5a2131", size = 105791, upload-time = "2026-07-10T18:59:51.106Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/27/b8/1e336c3c20358d481a2ce7836b36064139dff457eb301871134483721725/entirius_django_deliverypoints-2.0.0-py3-none-any.whl", hash = "sha256:5a299a09ccc89b0249472b95a363264a3d6e8477584b504cbea67a70b1ca36dc", size = 56456, upload-time = "2026-07-10T18:59:50.045Z" },
+]
+
+[[package]]
+name = "entirius-django-email"
+version = "4.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "djangorestframework" },
+    { name = "djangorestframework-simplejwt" },
+    { name = "drf-spectacular" },
+    { name = "entirius-django-regional" },
+    { name = "entirius-django-utils" },
+    { name = "entirius-py-process-logger" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f2/a0/3080136a3f2d6beba804b492b7d8c62ee413d8c17a3bdba1c0cde9e1e0c5/entirius_django_email-4.0.0.tar.gz", hash = "sha256:5d447c9fab23c4a8dd71b38107ba6b6cf7b3e5e4d6d9ad1aaff393714ecd7e11", size = 112421, upload-time = "2026-07-10T19:06:49.265Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/23/38/ebf94fcd3aef3136c3016de1c1e10eb622fb5a5902baf508d429c7e8691d/entirius_django_email-4.0.0-py3-none-any.whl", hash = "sha256:36e744f5a61a1c4ba8ca09af63550b93c1e8c1293b7ccf0fa6587c0c7760ea46", size = 126736, upload-time = "2026-07-10T19:06:48.152Z" },
+]
+
+[[package]]
+name = "entirius-django-faq"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "djangorestframework" },
+    { name = "djangorestframework-simplejwt" },
+    { name = "drf-spectacular" },
+    { name = "entirius-django-regional" },
+    { name = "entirius-django-utils" },
+    { name = "pillow" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/be/94/04af45d82f59dc451c5754d5ff364782b31d33e8eead2a4c392360ac1eda/entirius_django_faq-2.0.0.tar.gz", hash = "sha256:7b68c7620c018e2e14af9d740a568ef4579988f84bccdc8280e67036667e3a75", size = 86308, upload-time = "2026-07-10T18:51:52.625Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/db/c5/49b63832a32199f41f41f7f1c57a0cceba03b65ace2160934e45c49ef309/entirius_django_faq-2.0.0-py3-none-any.whl", hash = "sha256:3963f85fd8d80df68544560b590d34a866da699a7e41d738ed3d1dd713d23f49", size = 44672, upload-time = "2026-07-10T18:51:51.659Z" },
+]
+
+[[package]]
+name = "entirius-django-munin"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "djangorestframework" },
+    { name = "djangorestframework-simplejwt" },
+    { name = "drf-spectacular" },
+    { name = "entirius-django-utils" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/2d/11/c2fcdc2a5db36063a128c613e58030f02ccb17443730f1df09ecb5ff02b5/entirius_django_munin-2.0.0.tar.gz", hash = "sha256:423e1cb180c76ff09c1acb80448dd1aa7fe2d5315cd64a8f8f16f4d8d45df657", size = 68104, upload-time = "2026-07-10T18:51:57.952Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/40/87/92ed080f76bbe8ce5eacfdc8fdb062324126155c7658755b02320c43be27/entirius_django_munin-2.0.0-py3-none-any.whl", hash = "sha256:4c736f848af1559934d3f237291cdae1a5554291584cd60d07e234d0a16852d5", size = 25017, upload-time = "2026-07-10T18:51:57.032Z" },
+]
+
+[[package]]
 name = "entirius-django-pim"
 version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -644,6 +751,28 @@ wheels = [
 ]
 
 [[package]]
+name = "entirius-django-qms"
+version = "4.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "celery" },
+    { name = "celery-once" },
+    { name = "django" },
+    { name = "djangorestframework" },
+    { name = "djangorestframework-simplejwt" },
+    { name = "drf-spectacular" },
+    { name = "entirius-django-utils" },
+    { name = "entirius-py-bievents" },
+    { name = "entirius-py-idx-normalizator" },
+    { name = "entirius-py-process-logger" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e4/f1/dcf14bbb991d906f97e05b31f98b95d6f2a2e92d613c16930fbfb2727116/entirius_django_qms-4.0.0.tar.gz", hash = "sha256:fd610a3adff0602cc68b85d59a5194a9b724e1ca8fcdeec9313c3f3fac4bdcd9", size = 150630, upload-time = "2026-07-10T19:06:40.171Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0c/b9/b94188f811191611bfac3ca7c1fa5fd7acb090ff7b07f6bc3e4b610935bd/entirius_django_qms-4.0.0-py3-none-any.whl", hash = "sha256:e2659d46fb6be785d0aea7beee5d0547b9f219a2c3628e5ab0e4ba5f67fd7289", size = 73197, upload-time = "2026-07-10T19:06:39.202Z" },
+]
+
+[[package]]
 name = "entirius-django-regional"
 version = "2.0.1"
 source = { registry = "https://pypi.org/simple" }
@@ -697,6 +826,22 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/c8/1a/d14c23aa0a1a9a772eed3dfc920f1aa07ead8a86e688dea573324c404fbb/entirius_django_utils_translator-2.0.0.tar.gz", hash = "sha256:bacabbd4b10d3f13b3e8f9c320fe6b605e155ec5753ee8c3c5f3da57cd83c490", size = 48599, upload-time = "2026-07-10T16:17:43.425Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f1/bb/fe3d692498cbbb275fb0519a6683ae024f31cdfcde0a2c114659d9d7d2e4/entirius_django_utils_translator-2.0.0-py3-none-any.whl", hash = "sha256:f7412e7331f785d3922e48bc8b206c0e44df85a6377631fc74242d1fc5741c19", size = 16982, upload-time = "2026-07-10T16:17:42.539Z" },
+]
+
+[[package]]
+name = "entirius-django-vat-validator"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "entirius-django-regional" },
+    { name = "entirius-django-utils" },
+    { name = "entirius-py-process-logger" },
+    { name = "marshmallow-dataclass" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ed/52/69dbfc5f6ad3bb729428234c4a6e4d10a73956599ded8435ddceb24e9ed1/entirius_django_vat_validator-2.0.0.tar.gz", hash = "sha256:8005fa223a798f165615a6e75f71ba90972cf5ef7763ed79e2d4f0937eb3e846", size = 59192, upload-time = "2026-07-10T18:51:52.548Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e3/5c/a2313fdf0990674d2f39b0f8ee3dbb512c12fd5f2be49a066d37369fe897/entirius_django_vat_validator-2.0.0-py3-none-any.whl", hash = "sha256:1004ad5cddb2e06d1d9f20a3206ebf1f98895542f1827ff2893b8ae6ec819771", size = 18093, upload-time = "2026-07-10T18:51:51.36Z" },
 ]
 
 [[package]]
@@ -928,22 +1073,30 @@ wheels = [
 
 [[package]]
 name = "entirius-service-volkanos"
-version = "3.0.0a4"
+version = "3.0.0a5"
 source = { editable = "." }
 dependencies = [
     { name = "dj-database-url" },
     { name = "django" },
     { name = "djangorestframework" },
     { name = "drf-spectacular" },
+    { name = "entirius-django-agreements" },
+    { name = "entirius-django-captcha" },
+    { name = "entirius-django-deliverypoints" },
+    { name = "entirius-django-email" },
+    { name = "entirius-django-faq" },
+    { name = "entirius-django-munin" },
     { name = "entirius-django-pim" },
     { name = "entirius-django-pim-csv" },
     { name = "entirius-django-pim-export-to-magento-api" },
     { name = "entirius-django-pim-export-to-magento-package" },
     { name = "entirius-django-pim-translator" },
     { name = "entirius-django-pricemanager" },
+    { name = "entirius-django-qms" },
     { name = "entirius-django-regional" },
     { name = "entirius-django-utils" },
     { name = "entirius-django-utils-translator" },
+    { name = "entirius-django-vat-validator" },
     { name = "entirius-py-autopay-sdk" },
     { name = "entirius-py-bievents" },
     { name = "entirius-py-edrone-sdk" },
@@ -983,15 +1136,23 @@ requires-dist = [
     { name = "django", specifier = ">=5.2" },
     { name = "djangorestframework", specifier = ">=3.16" },
     { name = "drf-spectacular", specifier = ">=0.28" },
+    { name = "entirius-django-agreements", specifier = ">=2.0.0" },
+    { name = "entirius-django-captcha", specifier = ">=2.0.0" },
+    { name = "entirius-django-deliverypoints", specifier = ">=2.0.0" },
+    { name = "entirius-django-email", specifier = ">=4.0.0" },
+    { name = "entirius-django-faq", specifier = ">=2.0.0" },
+    { name = "entirius-django-munin", specifier = ">=2.0.0" },
     { name = "entirius-django-pim", specifier = ">=3.0.0" },
     { name = "entirius-django-pim-csv", specifier = ">=3.0.0" },
     { name = "entirius-django-pim-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-pim-export-to-magento-package", specifier = ">=2.0.0" },
     { name = "entirius-django-pim-translator", specifier = ">=2.0.0" },
     { name = "entirius-django-pricemanager", specifier = ">=4.0.0" },
+    { name = "entirius-django-qms", specifier = ">=4.0.0" },
     { name = "entirius-django-regional", specifier = ">=2.0.1" },
     { name = "entirius-django-utils", specifier = ">=2.0.0" },
     { name = "entirius-django-utils-translator", specifier = ">=2.0.0" },
+    { name = "entirius-django-vat-validator", specifier = ">=2.0.0" },
     { name = "entirius-py-autopay-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-bievents", specifier = ">=2.0.0" },
     { name = "entirius-py-edrone-sdk", specifier = ">=2.0.0" },

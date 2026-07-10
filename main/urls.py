@@ -36,3 +36,17 @@ if "django_pricemanager" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pricemanager.urls")))
 if "django_pim_translator" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pim_translator.urls")))
+if "django_vat_validator" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_vat_validator.urls")))
+if "django_faq" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_faq.urls")))
+if "django_munin" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_munin.urls")))
+if "django_agreements" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_agreements.urls")))
+if "django_deliverypoints" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_deliverypoints.urls")))
+if "django_qms" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_qms.urls")))
+if "django_email" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_email.urls")))
