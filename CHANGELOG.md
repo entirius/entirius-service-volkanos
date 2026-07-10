@@ -6,6 +6,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0a4] - 2026-07-10
+
+Stage 3 complete — django-pim satellites and their dependencies adopted from PyPI.
+
+### Added
+
+- Adopted from PyPI: `entirius-django-pricemanager>=4.0.0`, `entirius-django-utils-translator>=2.0.0`,
+  `entirius-django-pim-csv>=3.0.0`, `entirius-django-pim-translator>=2.0.0`,
+  `entirius-django-pim-export-to-magento-api>=2.0.0`, `entirius-django-pim-export-to-magento-package>=2.0.0`.
+- Conditional URL wiring for `django_pricemanager` and `django_pim_translator` (LOCAL_APPS-gated).
+- Base settings required by the new modules: `DATA_DIR`, `EXPORT_DIR`, `BI_ENVIRONMENT`,
+  `BI_BUSINESS_UNIT`, `T9N_DEFAULT_LANG`.
+
+### Changed
+
+- `entirius-django-regional` floor raised to `>=2.0.1` (postgres pk-sequence fix after seeded data).
+
+## [3.0.0a3] - 2026-07-09
+
+Stage 2/3 core — Django modules adopted from PyPI.
+
+### Added
+
+- Adopted from PyPI: `entirius-django-regional>=2.0.0`, `entirius-django-utils>=2.0.0`,
+  `entirius-django-pim>=3.0.0`; per-environment `LOCAL_APPS` (settings_local) with conditional
+  `django_pim.urls` include; `MEDIA_*`/`TMP_DIR` in base settings.
+
 ## [3.0.0a2] - 2026-07-06
 
 Stage 1 complete — all Python leaf modules (libraries and SDKs) adopted from PyPI.

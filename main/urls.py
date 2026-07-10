@@ -32,3 +32,7 @@ urlpatterns = [
 # Adopted modules route only where the environment enables them (LOCAL_APPS in settings_local).
 if "django_pim" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pim.urls")))
+if "django_pricemanager" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_pricemanager.urls")))
+if "django_pim_translator" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_pim_translator.urls")))
