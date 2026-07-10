@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "3.0.0a4"
+version = "3.0.0a5"
 description = "Entirius Volkanos Service - base Django service adopting Volkanos modules"
 authors = [
     { name = "Piotr Brzozowski", email = "piotrb@entirius.com" },
@@ -52,6 +52,14 @@ dependencies = [
     "entirius-django-pim-translator>=2.0.0",
     "entirius-django-pim-export-to-magento-api>=2.0.0",
     "entirius-django-pim-export-to-magento-package>=2.0.0",
+    "entirius-django-vat-validator>=2.0.0",
+    "entirius-django-faq>=2.0.0",
+    "entirius-django-munin>=2.0.0",
+    "entirius-django-captcha>=2.0.0",
+    "entirius-django-agreements>=2.0.0",
+    "entirius-django-deliverypoints>=2.0.0",
+    "entirius-django-qms>=4.0.0",
+    "entirius-django-email>=4.0.0",
     "dj-database-url>=2.2",
     "psycopg[binary]>=3.2",
 ]

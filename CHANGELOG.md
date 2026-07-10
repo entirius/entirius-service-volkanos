@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0a5] - 2026-07-10
+
+Stage 4 leaves — remaining Django leaf modules adopted from PyPI.
+
+### Added
+
+- Adopted from PyPI: `entirius-django-vat-validator>=2.0.0`, `entirius-django-faq>=2.0.0`,
+  `entirius-django-munin>=2.0.0`, `entirius-django-captcha>=2.0.0`, `entirius-django-agreements>=2.0.0`,
+  `entirius-django-deliverypoints>=2.0.0`, `entirius-django-qms>=4.0.0`, `entirius-django-email>=4.0.0`.
+- Conditional URL wiring (LOCAL_APPS-gated) for `django_vat_validator`, `django_faq`, `django_munin`,
+  `django_agreements`, `django_deliverypoints`, `django_qms`, `django_email`
+  (`django_captcha` exposes a decorator only — no routes).
+
 ## [3.0.0a4] - 2026-07-10
 
 Stage 3 complete — django-pim satellites and their dependencies adopted from PyPI.
