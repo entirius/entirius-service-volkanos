@@ -31,6 +31,17 @@ DATABASES = {
 }
 
 # Volkanos modules adopted in THIS environment (entirius-django-* app labels).
-# Full django set (order matters: regional before pim — FK targets first):
-# LOCAL_APPS = ["django_regional", "django_utils", "django_pim"]
+# Full django set (order matters: FK targets first — regional/utils before pim,
+# pim/pricemanager before the pim satellites):
+# LOCAL_APPS = [
+#     "django_regional",
+#     "django_utils",
+#     "django_utils_translator",
+#     "django_pim",
+#     "django_pricemanager",
+#     "django_pim_csv",
+#     "django_pim_translator",
+#     "django_pim_export_to_magento_api",
+#     "django_pim_export_to_magento_package",
+# ]
 LOCAL_APPS: list[str] = []

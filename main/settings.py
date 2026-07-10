@@ -90,6 +90,16 @@ STATIC_URL = "static/"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 TMP_DIR = BASE_DIR / "tmp"  # required by django_pim (file/picture processing)
+DATA_DIR = BASE_DIR / "data"  # required by django_pim_export_to_magento_package
+EXPORT_DIR = BASE_DIR / "export"  # required by django_pim_export_to_magento_package
+
+# Read at import time by django_pim_csv / django_pim_export_to_magento_package (BI events);
+# override per environment in settings_local.
+BI_ENVIRONMENT = "development"
+BI_BUSINESS_UNIT = "volkanos"
+
+# Default language for PIM translations (django_pim_csv requires it).
+T9N_DEFAULT_LANG = "en"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
