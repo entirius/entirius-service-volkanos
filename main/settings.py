@@ -24,6 +24,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",  # required by allauth (django_accounts)
+    "django.contrib.postgres",  # GinIndex / full-text search in django_matrix
 ]
 
 THIRD_PARTY_APPS = [
