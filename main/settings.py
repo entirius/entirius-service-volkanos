@@ -23,11 +23,18 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",  # required by allauth (django_accounts)
 ]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
     "drf_spectacular",
+    # Required by django_accounts (JWT auth, token blacklist, email verification, social login).
+    "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
 ]
 
 # Volkanos modules, adopted bottom-up stage by stage — override per environment in settings_local.
@@ -41,6 +48,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "main.urls"
@@ -92,6 +100,11 @@ MEDIA_ROOT = BASE_DIR / "media"
 TMP_DIR = BASE_DIR / "tmp"  # required by django_pim (file/picture processing)
 DATA_DIR = BASE_DIR / "data"  # required by django_pim_export_to_magento_package
 EXPORT_DIR = BASE_DIR / "export"  # required by django_pim_export_to_magento_package
+PRIVATE_DIR = BASE_DIR / "private"  # required by django_accounts (customer file storage)
+
+# Required by django_accounts: wishlist restructuring mode for the squashed 0024 data
+# migration; 1 = fresh installations (no legacy wishlists to migrate).
+MIGRATION_0023_MECHANISM = 1
 
 # Read at import time by django_pim_csv / django_pim_export_to_magento_package (BI events);
 # override per environment in settings_local.
@@ -102,6 +115,8 @@ BI_BUSINESS_UNIT = "volkanos"
 T9N_DEFAULT_LANG = "en"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SITE_ID = 1  # django.contrib.sites (allauth)
 
 # Fail-closed: no settings_local.py means the environment was never consciously
 # configured (no explicit env type, DB, secret key) — refuse to boot.
@@ -116,5 +131,9 @@ except ModuleNotFoundError as exc:
 _missing = [name for name in ("ENVIRONMENT", "SECRET_KEY", "DATABASES") if name not in globals()]
 if _missing:
     raise ImproperlyConfigured(f"main/settings_local.py must define: {', '.join(_missing)}")
+
+# django_accounts refuses to boot without JWT_SECRET; default to SECRET_KEY, override per environment.
+if "JWT_SECRET" not in globals():
+    JWT_SECRET = SECRET_KEY  # noqa: F405
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
