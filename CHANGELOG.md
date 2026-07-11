@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0a6] - 2026-07-11
+
+Stage 4 middle layer, wave 1 — adopted from PyPI.
+
+### Added
+
+- Adopted from PyPI: `entirius-django-baselinker>=2.0.0`, `entirius-django-crypt>=2.0.0`,
+  `entirius-django-enrichment>=2.0.0`, `entirius-django-contentdb>=5.0.0`.
+- Conditional URL wiring (LOCAL_APPS-gated) for `django_enrichment` and `django_contentdb`
+  (`django_baselinker` ships empty urlpatterns, `django_crypt` has no routes).
+
 ## [3.0.0a5] - 2026-07-10
 
 Stage 4 leaves — remaining Django leaf modules adopted from PyPI.
