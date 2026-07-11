@@ -62,3 +62,7 @@ if "django_contentdb_translator" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_contentdb_translator.urls")))
 if "django_vault" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_vault.urls")))
+if "django_reviews" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_reviews.urls")))
+if "django_matrix" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_matrix.urls")))
