@@ -55,5 +55,9 @@ DATABASES = {
 #     "django_crypt",
 #     "django_enrichment",
 #     "django_contentdb",
+#     "django_accounts",
+#     "django_suppliers",
+#     "django_contentdb_translator",
+#     "django_sitemap",
 # ]
 LOCAL_APPS: list[str] = []

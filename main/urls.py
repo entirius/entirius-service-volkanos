@@ -54,3 +54,9 @@ if "django_enrichment" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_enrichment.urls")))
 if "django_contentdb" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_contentdb.urls")))
+if "django_accounts" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_accounts.urls")))
+if "django_suppliers" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_suppliers.urls")))
+if "django_contentdb_translator" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_contentdb_translator.urls")))
