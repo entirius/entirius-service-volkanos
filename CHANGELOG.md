@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0a7] - 2026-07-11
+
+Stage 4 middle layer, wave 2 — adopted from PyPI.
+
+### Added
+
+- Adopted from PyPI: `entirius-django-accounts[pim]>=5.0.0`, `entirius-django-suppliers[qms]>=2.0.0`,
+  `entirius-django-contentdb-translator>=2.0.1`, `entirius-django-sitemap[pim,contentdb,faq]>=4.0.0`.
+- Conditional URL wiring (LOCAL_APPS-gated) for `django_accounts`, `django_suppliers` and
+  `django_contentdb_translator` (`django_sitemap` is worker-only — no routes).
+- Base settings required by `django_accounts`: `PRIVATE_DIR`, `MIGRATION_0023_MECHANISM`,
+  `JWT_SECRET` (defaults to `SECRET_KEY`, override per environment).
+
 ## [3.0.0a6] - 2026-07-11
 
 Stage 4 middle layer, wave 1 — adopted from PyPI.
