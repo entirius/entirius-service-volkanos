@@ -50,3 +50,7 @@ if "django_qms" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_qms.urls")))
 if "django_email" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_email.urls")))
+if "django_enrichment" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_enrichment.urls")))
+if "django_contentdb" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_contentdb.urls")))

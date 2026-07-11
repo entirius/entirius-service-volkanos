@@ -51,5 +51,9 @@ DATABASES = {
 #     "django_deliverypoints",
 #     "django_qms",
 #     "django_email",
+#     "django_baselinker",
+#     "django_crypt",
+#     "django_enrichment",
+#     "django_contentdb",
 # ]
 LOCAL_APPS: list[str] = []
