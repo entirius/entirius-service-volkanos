@@ -20,6 +20,28 @@ Stage 5 — checkout core adopted from PyPI.
 - `entirius-django-pricemanager` bumped to `>=4.0.1` (restores the `validate_access_to_price_list`
   re-export in `output.py` that `django_checkout` imports at startup).
 
+## [3.0.0a9] - 2026-07-11
+
+Stage 4 middle layer, wave 4 — adopted from PyPI.
+
+### Added
+
+- Adopted from PyPI: `entirius-django-reviews[magento]>=2.0.0`,
+  `entirius-django-matrix[qms,pricemanager,pricetuner]>=4.0.0`.
+- Conditional URL wiring (LOCAL_APPS-gated) for `django_reviews` and `django_matrix`.
+- `django.contrib.postgres` in base `INSTALLED_APPS` (GinIndex / full-text search in `django_matrix`).
+
+## [3.0.0a8] - 2026-07-11
+
+Stage 4 middle layer, wave 3 — adopted from PyPI.
+
+### Added
+
+- Adopted from PyPI: `entirius-django-accounts-export-to-magento-api>=2.0.0`,
+  `entirius-django-pricetuner>=2.0.0`, `entirius-django-vault>=2.0.0`.
+- Conditional URL wiring (LOCAL_APPS-gated) for `django_vault` (`django_accounts_export_to_magento_api`
+  and `django_pricetuner` are admin/command-only — no routes).
+
 ## [3.0.0a7] - 2026-07-11
 
 Stage 4 middle layer, wave 2 — adopted from PyPI.
