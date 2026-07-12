@@ -66,3 +66,5 @@ if "django_reviews" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_reviews.urls")))
 if "django_matrix" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_matrix.urls")))
+if "django_checkout" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_checkout.urls")))
