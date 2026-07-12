@@ -62,5 +62,8 @@ DATABASES = {
 #     "django_accounts_export_to_magento_api",
 #     "django_pricetuner",
 #     "django_vault",
+#     "django_reviews",
+#     "django_matrix",
+#     "django_checkout",
 # ]
 LOCAL_APPS: list[str] = []
