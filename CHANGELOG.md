@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0a10] - 2026-07-12
+
+Stage 5 — checkout core adopted from PyPI.
+
+### Added
+
+- Adopted from PyPI: `entirius-django-checkout[qms,vault,vat,pricetuner]>=9.0.0`.
+- Conditional URL wiring (LOCAL_APPS-gated) for `django_checkout` (v1 + v2 API, payment webhooks).
+
+### Changed
+
+- `entirius-django-pricemanager` bumped to `>=4.0.1` (restores the `validate_access_to_price_list`
+  re-export in `output.py` that `django_checkout` imports at startup).
+
 ## [3.0.0a7] - 2026-07-11
 
 Stage 4 middle layer, wave 2 — adopted from PyPI.
