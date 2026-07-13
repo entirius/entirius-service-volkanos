@@ -1776,7 +1776,7 @@ wheels = [
 
 [[package]]
 name = "entirius-service-volkanos"
-version = "3.0.0a11"
+version = "3.0.0b1"
 source = { editable = "." }
 dependencies = [
     { name = "dj-database-url" },
