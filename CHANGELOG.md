@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0b1] - 2026-07-13
+
+First beta — the full active module dependency graph is adopted from PyPI and verified
+(fresh-database migrate plus existing-database upgrade, smoke and HTTP probes).
+
+### Changed
+
+- Development Status classifier: Alpha → Beta. No functional changes since 3.0.0a11.
+
 ## [3.0.0a11] - 2026-07-13
 
 Stage 5 — checkout satellites adopted from PyPI (closes the module middle layer).
