@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "3.0.0a10"
+version = "3.0.0a11"
 description = "Entirius Volkanos Service - base Django service adopting Volkanos modules"
 authors = [
     { name = "Piotr Brzozowski", email = "piotrb@entirius.com" },
@@ -73,7 +73,15 @@ dependencies = [
     "entirius-django-vault>=2.0.0",
     "entirius-django-reviews[magento]>=2.0.0",
     "entirius-django-matrix[qms,pricemanager,pricetuner]>=4.0.0",
-    "entirius-django-checkout[qms,vault,vat,pricetuner]>=9.0.0",
+    "entirius-django-checkout[qms,vault,vat,pricetuner,returns,voucher]>=9.1.0",
+    "entirius-django-checkout-voucher>=2.0.0",
+    "entirius-django-checkout-export-to-magento-api>=2.0.0",
+    "entirius-django-checkout-import-from-magento-api>=2.0.0",
+    "entirius-django-getresponse>=2.1.0",
+    "entirius-django-returns>=3.0.0",
+    "entirius-django-omnibus>=3.0.0",
+    "entirius-django-crm>=3.0.0",
+    "entirius-django-loyalty>=2.0.0",
     "dj-database-url>=2.2",
     "psycopg[binary]>=3.2",
 ]

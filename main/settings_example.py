@@ -65,5 +65,21 @@ DATABASES = {
 #     "django_reviews",
 #     "django_matrix",
 #     "django_checkout",
+#     "django_checkout_voucher",  # must stay AFTER pim/checkout/accounts/crypt/email (FK targets)
+#     "django_checkout_export_to_magento_api",
+#     "django_checkout_import_from_magento_api",
+#     "django_getresponse",
+#     "django_returns",
+#     "django_omnibus",
+#     "django_crm",
+#     "django_loyalty",
 # ]
 LOCAL_APPS: list[str] = []
+
+# Voucher-flow secrets — REQUIRED per environment when django_checkout_voucher is adopted
+# (module raises at first use, not at boot; never commit real values):
+# VOUCHER_LOOKUP_HMAC_KEY — salt for HMAC-SHA256 voucher balance lookups (django_checkout_voucher);
+# CRYPT_SALT — Fernet key for voucher code encryption (django_crypt), generate with:
+#   python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+# VOUCHER_LOOKUP_HMAC_KEY = "change-me"
+# CRYPT_SALT = "change-me-valid-fernet-key"
