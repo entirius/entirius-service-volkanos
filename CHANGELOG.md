@@ -6,6 +6,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0a11] - 2026-07-13
+
+Stage 5 — checkout satellites adopted from PyPI (closes the module middle layer).
+
+### Added
+
+- Adopted from PyPI: `entirius-django-checkout-voucher>=2.0.0`,
+  `entirius-django-checkout-export-to-magento-api>=2.0.0`,
+  `entirius-django-checkout-import-from-magento-api>=2.0.0`, `entirius-django-getresponse>=2.1.0`,
+  `entirius-django-returns>=3.0.0`, `entirius-django-omnibus>=3.0.0`, `entirius-django-crm>=3.0.0`,
+  `entirius-django-loyalty>=2.0.0`.
+- Conditional URL wiring (LOCAL_APPS-gated) for `django_checkout_voucher`, `django_returns`,
+  `django_crm` and `django_loyalty` (the export/import satellites, `django_omnibus` and
+  `django_getresponse` are command/task/receiver-only — no routes).
+- Base settings: `MAGENTO2_URL_FOR_CHECKOUT_EXPORT` / `MAGENTO2_TOKEN_FOR_CHECKOUT_EXPORT`
+  (read at import by `django_checkout_export_to_magento_api` tasks; real values per environment)
+  and `USE_VALIDATE_VOUCHERS_SIGNAL = True` (routes checkout voucher validation through
+  `django_checkout_voucher` signal handlers).
+- Per-environment voucher-flow secrets documented in `settings_example.py`:
+  `VOUCHER_LOOKUP_HMAC_KEY`, `CRYPT_SALT`.
+
+### Changed
+
+- `entirius-django-checkout` bumped to `>=9.1.0`, extras extended to
+  `[qms,vault,vat,pricetuner,returns,voucher]`.
+
 ## [3.0.0a10] - 2026-07-12
 
 Stage 5 — checkout core adopted from PyPI.
