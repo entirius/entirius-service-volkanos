@@ -115,6 +115,15 @@ BI_BUSINESS_UNIT = "volkanos"
 # Default language for PIM translations (django_pim_csv requires it).
 T9N_DEFAULT_LANG = "en"
 
+# Read at import time by django_checkout_export_to_magento_api tasks (module-level
+# settings.MAGENTO2_* reads — boot fails with AttributeError without them);
+# real endpoint/token per environment in settings_local.
+MAGENTO2_URL_FOR_CHECKOUT_EXPORT = ""
+MAGENTO2_TOKEN_FOR_CHECKOUT_EXPORT = ""
+
+# django_checkout: route voucher validation through django_checkout_voucher signal handlers.
+USE_VALIDATE_VOUCHERS_SIGNAL = True
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SITE_ID = 1  # django.contrib.sites (allauth)
