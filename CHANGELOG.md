@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0rc1] - 2026-07-13
+
+Stabilization — dependency floors raised to the patched module releases.
+
+### Changed
+
+- `entirius-django-baselinker>=2.0.1` (fixes NameError on API error paths in the client),
+  `entirius-django-accounts>=5.0.1` (fixes broken password-validator help text),
+  `entirius-django-omnibus>=3.0.1` (fixes NameError on the pricemanager import fallback),
+  `entirius-django-crm>=3.0.1` (newsletter consent and campaign resolution per channel).
+
 ## [3.0.0b1] - 2026-07-13
 
 First beta — the full active module dependency graph is adopted from PyPI and verified
