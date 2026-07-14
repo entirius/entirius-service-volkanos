@@ -90,3 +90,7 @@ LOCAL_APPS: list[str] = []
 # CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
 # REDIS_URL = "redis://localhost:6379"
 # CELERY_RESULT_BACKEND = REDIS_URL + "/2"
+
+# QMS quantities strategy per environment: "XRAY" (CSV/point-in-time driven, used by the
+# Emporium demo package) or "ZULU" (storage-driven). Default in django_qms is ZULU.
+# QMS_TYPE = "XRAY"
