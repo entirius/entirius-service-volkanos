@@ -80,6 +80,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    # v2 error envelope (error/debug_id) with v1 fallback — see main/v2_errors.py.
+    "EXCEPTION_HANDLER": "main.v2_errors.volkanos_exception_handler",
 }
 
 SPECTACULAR_SETTINGS = {

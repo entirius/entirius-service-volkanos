@@ -12,9 +12,13 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # JWT for module admin APIs (v2, IsAdminUser) and the CMS admin panel.
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/schema/swagger-ui/",
@@ -30,6 +34,8 @@ urlpatterns = [
 ]
 
 # Adopted modules route only where the environment enables them (LOCAL_APPS in settings_local).
+if "django_regional" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_regional.urls")))
 if "django_pim" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pim.urls")))
 if "django_pricemanager" in settings.INSTALLED_APPS:

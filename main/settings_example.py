@@ -83,3 +83,14 @@ LOCAL_APPS: list[str] = []
 #   python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
 # VOUCHER_LOOKUP_HMAC_KEY = "change-me"
 # CRYPT_SALT = "change-me-valid-fernet-key"
+
+# Celery (module workers: QMS quantities, PIM thumbnails, pricemanager pricelists).
+# The app lives in main/celery.py and reads CELERY_-prefixed keys from settings;
+# REDIS_URL additionally feeds the celery_once backend used by some module tasks.
+# CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
+# REDIS_URL = "redis://localhost:6379"
+# CELERY_RESULT_BACKEND = REDIS_URL + "/2"
+
+# QMS quantities strategy per environment: "XRAY" (CSV/point-in-time driven, used by the
+# Emporium demo package) or "ZULU" (storage-driven). Default in django_qms is ZULU.
+# QMS_TYPE = "XRAY"

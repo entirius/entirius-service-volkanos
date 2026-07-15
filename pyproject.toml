@@ -20,6 +20,8 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
+    # django-redis: CACHES backend contract of django_matrix signal batching (caches["default"].client)
+    "django-redis>=5.4",
     "django>=5.2",
     "djangorestframework>=3.16",
     "drf-spectacular>=0.28",
