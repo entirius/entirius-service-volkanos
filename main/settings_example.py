@@ -94,3 +94,8 @@ LOCAL_APPS: list[str] = []
 # QMS quantities strategy per environment: "XRAY" (CSV/point-in-time driven, used by the
 # Emporium demo package) or "ZULU" (storage-driven). Default in django_qms is ZULU.
 # QMS_TYPE = "XRAY"
+
+# CORS — browser frontends (storefront demo, admin CMS) call the API cross-origin.
+# Dev harness may allow all; production lists explicit origins.
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOWED_ORIGINS = ["https://shop.example.com"]
