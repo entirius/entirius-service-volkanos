@@ -1349,7 +1349,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-qms"
-version = "4.0.0"
+version = "4.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1364,9 +1364,9 @@ dependencies = [
     { name = "entirius-py-process-logger" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e4/f1/dcf14bbb991d906f97e05b31f98b95d6f2a2e92d613c16930fbfb2727116/entirius_django_qms-4.0.0.tar.gz", hash = "sha256:fd610a3adff0602cc68b85d59a5194a9b724e1ca8fcdeec9313c3f3fac4bdcd9", size = 150630, upload-time = "2026-07-10T19:06:40.171Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1f/c4/c78fd375c779e32077622ed7b5430a95660927e4e702c66faffbb0eb17ec/entirius_django_qms-4.0.1.tar.gz", hash = "sha256:6ab6edf93bd92b827c8b839d623348e1fb007b754c9e1b75d38a8381439f1bf2", size = 150795, upload-time = "2026-07-15T18:18:54.7Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0c/b9/b94188f811191611bfac3ca7c1fa5fd7acb090ff7b07f6bc3e4b610935bd/entirius_django_qms-4.0.0-py3-none-any.whl", hash = "sha256:e2659d46fb6be785d0aea7beee5d0547b9f219a2c3628e5ab0e4ba5f67fd7289", size = 73197, upload-time = "2026-07-10T19:06:39.202Z" },
+    { url = "https://files.pythonhosted.org/packages/60/b2/0f2bce4a737d419a3dc3a6f8d0ddb799d7be34eed8dcbfcd55fc6f35ea12/entirius_django_qms-4.0.1-py3-none-any.whl", hash = "sha256:b77a6d5298fcc3dd10ba5fea9c3a5fabedd1b99df1288e3bf110cde4a4ce2d08", size = 73511, upload-time = "2026-07-15T18:18:53.505Z" },
 ]
 
 [[package]]
@@ -1790,7 +1790,7 @@ wheels = [
 
 [[package]]
 name = "entirius-service-volkanos"
-version = "3.0.0rc1"
+version = "3.0.0rc2"
 source = { editable = "." }
 dependencies = [
     { name = "dj-database-url" },
@@ -1906,7 +1906,7 @@ requires-dist = [
     { name = "entirius-django-pim-translator", specifier = ">=2.0.0" },
     { name = "entirius-django-pricemanager", specifier = ">=4.0.1" },
     { name = "entirius-django-pricetuner", specifier = ">=2.0.0" },
-    { name = "entirius-django-qms", specifier = ">=4.0.0" },
+    { name = "entirius-django-qms", specifier = ">=4.0.1" },
     { name = "entirius-django-regional", specifier = ">=2.0.1" },
     { name = "entirius-django-returns", specifier = ">=3.0.0" },
     { name = "entirius-django-reviews", extras = ["magento"], specifier = ">=2.0.0" },
