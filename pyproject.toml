@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "3.0.0rc1"
+version = "3.0.0rc2"
 description = "Entirius Volkanos Service - base Django service adopting Volkanos modules"
 authors = [
     { name = "Piotr Brzozowski", email = "piotrb@entirius.com" },
@@ -20,6 +20,8 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
+    # django-redis: CACHES backend contract of django_matrix signal batching (caches["default"].client)
+    "django-redis>=5.4",
     "django>=5.2",
     "djangorestframework>=3.16",
     "drf-spectacular>=0.28",
@@ -58,7 +60,7 @@ dependencies = [
     "entirius-django-captcha>=2.0.0",
     "entirius-django-agreements>=2.0.0",
     "entirius-django-deliverypoints>=2.0.0",
-    "entirius-django-qms>=4.0.0",
+    "entirius-django-qms>=4.0.1",
     "entirius-django-email>=4.0.0",
     "entirius-django-baselinker>=2.0.1",
     "entirius-django-crypt>=2.0.0",
