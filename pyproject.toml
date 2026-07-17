@@ -20,6 +20,8 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
+    # browser frontends (storefront/CMS) call the API cross-origin; origins per environment
+    "django-cors-headers>=4.4",
     # django-redis: CACHES backend contract of django_matrix signal batching (caches["default"].client)
     "django-redis>=5.4",
     "django>=5.2",

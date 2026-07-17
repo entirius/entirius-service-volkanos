@@ -82,3 +82,10 @@ if "django_crm" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_crm.urls")))
 if "django_loyalty" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_loyalty.urls")))
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+
+    # Dev server serves media (product images, CMS uploads) — production fronts them
+    # with a web server.
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
