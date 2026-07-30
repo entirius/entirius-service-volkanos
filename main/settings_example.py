@@ -58,7 +58,6 @@ DATABASES = {
 #     "django_contentdb_translator",
 #     "django_sitemap",
 #     "django_accounts_export_to_magento_api",
-#     "django_pricetuner",
 #     "django_vault",
 #     "django_reviews",
 #     "django_matrix",

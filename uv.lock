@@ -848,9 +848,6 @@ wheels = [
 ]
 
 [package.optional-dependencies]
-pricetuner = [
-    { name = "entirius-django-pricetuner" },
-]
 qms = [
     { name = "entirius-django-qms" },
 ]
@@ -1153,10 +1150,6 @@ wheels = [
 pricemanager = [
     { name = "entirius-django-pricemanager" },
 ]
-pricetuner = [
-    { name = "entirius-django-accounts" },
-    { name = "entirius-django-pricetuner" },
-]
 qms = [
     { name = "entirius-django-qms" },
 ]
@@ -1320,24 +1313,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/d1/8c/069aa997b3e42d5da659dfe653cb9a83ae312bb43dc0eb59e8d6f1859fbc/entirius_django_pricemanager-4.0.1.tar.gz", hash = "sha256:a95d2a998cbb107ee664332b5dcaedefa9df8e46ce03d7a721d489899f48eb6d", size = 132349, upload-time = "2026-07-12T15:37:05.321Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ac/e0/da8d72439b445e8dac7b3399ee86836a0345162e5469ea520428ebda9bae/entirius_django_pricemanager-4.0.1-py3-none-any.whl", hash = "sha256:aa7511e947f72be47410df879d1b3131162c8f59c3df44fbcb84e35b23472c56", size = 99320, upload-time = "2026-07-12T15:37:04.193Z" },
-]
-
-[[package]]
-name = "entirius-django-pricetuner"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-    { name = "django-admin-inline-paginator" },
-    { name = "entirius-django-accounts" },
-    { name = "entirius-django-pim" },
-    { name = "entirius-django-regional" },
-    { name = "entirius-py-bievents" },
-    { name = "entirius-py-idx-normalizator" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/e5/11/6f3ec0aad15dd52e8630906f8605889f052cb1d59139f67bf153844c5baa/entirius_django_pricetuner-2.0.0.tar.gz", hash = "sha256:fadbf714d6b8a61a8cdfdd0271f6947ddf2c4f60edcb93275d802fc4072ea29d", size = 140044, upload-time = "2026-07-11T15:08:58.348Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/15/f0/780f452594d3a7c1734f7d7ef3770e4b3129d901ea0f1d9bd4267ac64b79/entirius_django_pricetuner-2.0.0-py3-none-any.whl", hash = "sha256:f8b95b8f1ad55490d4cacd49870598dbd4dd0c2d6037d7b095df8081abc071c2", size = 20528, upload-time = "2026-07-11T15:08:57.29Z" },
 ]
 
 [[package]]
@@ -1781,7 +1756,7 @@ dependencies = [
     { name = "entirius-django-agreements" },
     { name = "entirius-django-baselinker" },
     { name = "entirius-django-captcha" },
-    { name = "entirius-django-checkout", extra = ["pricetuner", "qms", "returns", "vault", "voucher"] },
+    { name = "entirius-django-checkout", extra = ["qms", "returns", "vault", "voucher"] },
     { name = "entirius-django-checkout-export-to-magento-api" },
     { name = "entirius-django-checkout-import-from-magento-api" },
     { name = "entirius-django-checkout-voucher" },
@@ -1795,7 +1770,7 @@ dependencies = [
     { name = "entirius-django-faq" },
     { name = "entirius-django-getresponse" },
     { name = "entirius-django-loyalty" },
-    { name = "entirius-django-matrix", extra = ["pricemanager", "pricetuner", "qms"] },
+    { name = "entirius-django-matrix", extra = ["pricemanager", "qms"] },
     { name = "entirius-django-munin" },
     { name = "entirius-django-omnibus" },
     { name = "entirius-django-pim" },
@@ -1803,7 +1778,6 @@ dependencies = [
     { name = "entirius-django-pim-export-to-magento-api" },
     { name = "entirius-django-pim-translator" },
     { name = "entirius-django-pricemanager" },
-    { name = "entirius-django-pricetuner" },
     { name = "entirius-django-qms" },
     { name = "entirius-django-regional" },
     { name = "entirius-django-returns" },
@@ -1859,7 +1833,7 @@ requires-dist = [
     { name = "entirius-django-agreements", specifier = ">=2.0.0" },
     { name = "entirius-django-baselinker", specifier = ">=2.0.1" },
     { name = "entirius-django-captcha", specifier = ">=2.0.0" },
-    { name = "entirius-django-checkout", extras = ["qms", "vault", "pricetuner", "returns", "voucher"], specifier = ">=9.1.0" },
+    { name = "entirius-django-checkout", extras = ["qms", "vault", "returns", "voucher"], specifier = ">=9.1.0" },
     { name = "entirius-django-checkout-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-checkout-import-from-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-checkout-voucher", specifier = ">=2.0.0" },
@@ -1873,7 +1847,7 @@ requires-dist = [
     { name = "entirius-django-faq", specifier = ">=2.0.0" },
     { name = "entirius-django-getresponse", specifier = ">=2.1.0" },
     { name = "entirius-django-loyalty", specifier = ">=2.0.0" },
-    { name = "entirius-django-matrix", extras = ["qms", "pricemanager", "pricetuner"], specifier = ">=4.0.0" },
+    { name = "entirius-django-matrix", extras = ["qms", "pricemanager"], specifier = ">=4.0.0" },
     { name = "entirius-django-munin", specifier = ">=2.0.0" },
     { name = "entirius-django-omnibus", specifier = ">=3.0.1" },
     { name = "entirius-django-pim", specifier = ">=3.0.0" },
@@ -1881,7 +1855,6 @@ requires-dist = [
     { name = "entirius-django-pim-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-pim-translator", specifier = ">=2.0.0" },
     { name = "entirius-django-pricemanager", specifier = ">=4.0.1" },
-    { name = "entirius-django-pricetuner", specifier = ">=2.0.0" },
     { name = "entirius-django-qms", specifier = ">=4.0.1" },
     { name = "entirius-django-regional", specifier = ">=2.0.1" },
     { name = "entirius-django-returns", specifier = ">=3.0.0" },
