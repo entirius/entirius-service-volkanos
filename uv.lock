@@ -857,9 +857,6 @@ qms = [
 returns = [
     { name = "entirius-django-returns" },
 ]
-vat = [
-    { name = "entirius-django-vat-validator" },
-]
 vault = [
     { name = "entirius-django-vault" },
 ]
@@ -1523,22 +1520,6 @@ wheels = [
 ]
 
 [[package]]
-name = "entirius-django-vat-validator"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-    { name = "entirius-django-regional" },
-    { name = "entirius-django-utils" },
-    { name = "entirius-py-process-logger" },
-    { name = "marshmallow-dataclass" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/ed/52/69dbfc5f6ad3bb729428234c4a6e4d10a73956599ded8435ddceb24e9ed1/entirius_django_vat_validator-2.0.0.tar.gz", hash = "sha256:8005fa223a798f165615a6e75f71ba90972cf5ef7763ed79e2d4f0937eb3e846", size = 59192, upload-time = "2026-07-10T18:51:52.548Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e3/5c/a2313fdf0990674d2f39b0f8ee3dbb512c12fd5f2be49a066d37369fe897/entirius_django_vat_validator-2.0.0-py3-none-any.whl", hash = "sha256:1004ad5cddb2e06d1d9f20a3206ebf1f98895542f1827ff2893b8ae6ec819771", size = 18093, upload-time = "2026-07-10T18:51:51.36Z" },
-]
-
-[[package]]
 name = "entirius-django-vault"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1800,7 +1781,7 @@ dependencies = [
     { name = "entirius-django-agreements" },
     { name = "entirius-django-baselinker" },
     { name = "entirius-django-captcha" },
-    { name = "entirius-django-checkout", extra = ["pricetuner", "qms", "returns", "vat", "vault", "voucher"] },
+    { name = "entirius-django-checkout", extra = ["pricetuner", "qms", "returns", "vault", "voucher"] },
     { name = "entirius-django-checkout-export-to-magento-api" },
     { name = "entirius-django-checkout-import-from-magento-api" },
     { name = "entirius-django-checkout-voucher" },
@@ -1831,7 +1812,6 @@ dependencies = [
     { name = "entirius-django-suppliers", extra = ["qms"] },
     { name = "entirius-django-utils" },
     { name = "entirius-django-utils-translator" },
-    { name = "entirius-django-vat-validator" },
     { name = "entirius-django-vault" },
     { name = "entirius-py-autopay-sdk" },
     { name = "entirius-py-bievents" },
@@ -1879,7 +1859,7 @@ requires-dist = [
     { name = "entirius-django-agreements", specifier = ">=2.0.0" },
     { name = "entirius-django-baselinker", specifier = ">=2.0.1" },
     { name = "entirius-django-captcha", specifier = ">=2.0.0" },
-    { name = "entirius-django-checkout", extras = ["qms", "vault", "vat", "pricetuner", "returns", "voucher"], specifier = ">=9.1.0" },
+    { name = "entirius-django-checkout", extras = ["qms", "vault", "pricetuner", "returns", "voucher"], specifier = ">=9.1.0" },
     { name = "entirius-django-checkout-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-checkout-import-from-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-checkout-voucher", specifier = ">=2.0.0" },
@@ -1910,7 +1890,6 @@ requires-dist = [
     { name = "entirius-django-suppliers", extras = ["qms"], specifier = ">=2.0.0" },
     { name = "entirius-django-utils", specifier = ">=2.0.0" },
     { name = "entirius-django-utils-translator", specifier = ">=2.0.0" },
-    { name = "entirius-django-vat-validator", specifier = ">=2.0.0" },
     { name = "entirius-django-vault", specifier = ">=2.0.0" },
     { name = "entirius-py-autopay-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-bievents", specifier = ">=2.0.0" },

@@ -42,8 +42,6 @@ if "django_pricemanager" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pricemanager.urls")))
 if "django_pim_translator" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pim_translator.urls")))
-if "django_vat_validator" in settings.INSTALLED_APPS:
-    urlpatterns.append(path("", include("django_vat_validator.urls")))
 if "django_faq" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_faq.urls")))
 if "django_munin" in settings.INSTALLED_APPS:
