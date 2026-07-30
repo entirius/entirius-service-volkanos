@@ -1098,29 +1098,6 @@ wheels = [
 ]
 
 [[package]]
-name = "entirius-django-loyalty"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-    { name = "django-admin-inline-paginator" },
-    { name = "django-allauth" },
-    { name = "djangorestframework" },
-    { name = "entirius-django-accounts" },
-    { name = "entirius-django-checkout" },
-    { name = "entirius-django-crm" },
-    { name = "entirius-django-email" },
-    { name = "entirius-django-regional" },
-    { name = "entirius-django-utils" },
-    { name = "entirius-py-idx-normalizator" },
-    { name = "entirius-py-salesmanago-sdk" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/4d/69/fc3d3a73c24592545abb1fce028aefb55cb0fed822ce254a239ef96b03a0/entirius_django_loyalty-2.0.0.tar.gz", hash = "sha256:2c03a10b1c6324f8443da7ae9cc7f4e3747c88034c265edbc003206a9a606281", size = 152469, upload-time = "2026-07-13T00:05:11Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ce/5b/7ceec92dc596cfe7ea1678dccac1cd00bcecc20049ab959f4a6ffa848717/entirius_django_loyalty-2.0.0-py3-none-any.whl", hash = "sha256:1d5b9e661da99ff4e0953ff303f0e38c45d63da654deadb9b27773898a57f5f8", size = 23904, upload-time = "2026-07-13T00:05:10.02Z" },
-]
-
-[[package]]
 name = "entirius-django-matrix"
 version = "4.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1769,7 +1746,6 @@ dependencies = [
     { name = "entirius-django-enrichment" },
     { name = "entirius-django-faq" },
     { name = "entirius-django-getresponse" },
-    { name = "entirius-django-loyalty" },
     { name = "entirius-django-matrix", extra = ["pricemanager", "qms"] },
     { name = "entirius-django-munin" },
     { name = "entirius-django-omnibus" },
@@ -1846,7 +1822,6 @@ requires-dist = [
     { name = "entirius-django-enrichment", specifier = ">=2.0.0" },
     { name = "entirius-django-faq", specifier = ">=2.0.0" },
     { name = "entirius-django-getresponse", specifier = ">=2.1.0" },
-    { name = "entirius-django-loyalty", specifier = ">=2.0.0" },
     { name = "entirius-django-matrix", extras = ["qms", "pricemanager"], specifier = ">=4.0.0" },
     { name = "entirius-django-munin", specifier = ">=2.0.0" },
     { name = "entirius-django-omnibus", specifier = ">=3.0.1" },
