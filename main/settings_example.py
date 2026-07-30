@@ -67,7 +67,6 @@ DATABASES = {
 #     "django_getresponse",
 #     "django_returns",
 #     "django_omnibus",
-#     "django_crm",
 # ]
 LOCAL_APPS: list[str] = []
 

@@ -86,7 +86,6 @@ dependencies = [
     "entirius-django-getresponse>=2.1.0",
     "entirius-django-returns>=3.0.0",
     "entirius-django-omnibus>=3.0.1",
-    "entirius-django-crm>=3.0.1",
     "dj-database-url>=2.2",
     "psycopg[binary]>=3.2",
 ]

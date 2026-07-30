@@ -74,9 +74,6 @@ if "django_checkout" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_checkout.urls")))
 if "django_returns" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_returns.urls")))
-if "django_crm" in settings.INSTALLED_APPS:
-    urlpatterns.append(path("", include("django_crm.urls")))
-
 if settings.DEBUG:
     from django.conf.urls.static import static
 
