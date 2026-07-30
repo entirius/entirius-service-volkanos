@@ -1280,23 +1280,6 @@ wheels = [
 ]
 
 [[package]]
-name = "entirius-django-pim-export-to-magento-package"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-    { name = "entirius-django-pim" },
-    { name = "entirius-django-regional" },
-    { name = "entirius-py-bievents" },
-    { name = "python-slugify" },
-    { name = "pytz" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/be/de/679636912307c314031711b9d12c5fb0b6359561442882ee2ec444c48937/entirius_django_pim_export_to_magento_package-2.0.0.tar.gz", hash = "sha256:b2fbd2eaab27e6c054ef1bf93769cbb3552c7b2fb82f6ee3cf8eeb89dec90ff4", size = 132005, upload-time = "2026-07-10T16:17:28.232Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/2e/cc/b69cc7d596f2ff8ed563b62138495a9bdd2fd0a58a7d86ec9c1a14d7c99d/entirius_django_pim_export_to_magento_package-2.0.0-py3-none-any.whl", hash = "sha256:90289e1b8602b5184319d2277cbfceffbdea6d68a664438fa4b5b4593a6fbd9a", size = 29633, upload-time = "2026-07-10T16:17:27.373Z" },
-]
-
-[[package]]
 name = "entirius-django-pim-translator"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1837,7 +1820,6 @@ dependencies = [
     { name = "entirius-django-pim" },
     { name = "entirius-django-pim-csv" },
     { name = "entirius-django-pim-export-to-magento-api" },
-    { name = "entirius-django-pim-export-to-magento-package" },
     { name = "entirius-django-pim-translator" },
     { name = "entirius-django-pricemanager" },
     { name = "entirius-django-pricetuner" },
@@ -1917,7 +1899,6 @@ requires-dist = [
     { name = "entirius-django-pim", specifier = ">=3.0.0" },
     { name = "entirius-django-pim-csv", specifier = ">=3.0.0" },
     { name = "entirius-django-pim-export-to-magento-api", specifier = ">=2.0.0" },
-    { name = "entirius-django-pim-export-to-magento-package", specifier = ">=2.0.0" },
     { name = "entirius-django-pim-translator", specifier = ">=2.0.0" },
     { name = "entirius-django-pricemanager", specifier = ">=4.0.1" },
     { name = "entirius-django-pricetuner", specifier = ">=2.0.0" },
