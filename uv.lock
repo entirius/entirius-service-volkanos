@@ -811,7 +811,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-checkout"
-version = "9.1.0"
+version = "9.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -842,9 +842,9 @@ dependencies = [
     { name = "stripe" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6b/c8/cf83e41e5922e21b6949bf5f8c2a014a9bb235629557f092815747769084/entirius_django_checkout-9.1.0.tar.gz", hash = "sha256:b2250c1c9bddf4b4f5f31fa32aef641b924866acc7c276345a8767ae7a1c13c7", size = 871650, upload-time = "2026-07-13T00:55:14.942Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6c/c4/c674b968272e4aa92fe3dfc87f5c5c160c18e75725ccba143ffab1ab4f25/entirius_django_checkout-9.2.0.tar.gz", hash = "sha256:f8087bd6078cec8ca64c29d5e30556165def0b562b4133b7c77d57251c855d9d", size = 870845, upload-time = "2026-07-30T17:26:32.974Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f0/c7/3f4e45c00644b16f0d5288a80b5f0d3f5f65d277c218f5ef5dc97dbaee00/entirius_django_checkout-9.1.0-py3-none-any.whl", hash = "sha256:910ad4eb75b8fa7a0e8c38e3743759dfa56422c8eaad84b24e7d0fa2236ef73a", size = 317632, upload-time = "2026-07-13T00:55:13.539Z" },
+    { url = "https://files.pythonhosted.org/packages/9b/6e/4d5b0b468e3c995038b70b50755367b2f96051a63715f58c4c0698c66ddd/entirius_django_checkout-9.2.0-py3-none-any.whl", hash = "sha256:866e5b822715c3390bec2d6914a54fd6940611fd5d05436b95791848ea6cdb8e", size = 317636, upload-time = "2026-07-30T17:26:31.701Z" },
 ]
 
 [package.optional-dependencies]
@@ -1073,7 +1073,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-matrix"
-version = "4.0.0"
+version = "4.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1092,9 +1092,9 @@ dependencies = [
     { name = "marshmallow-dataclass" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/77/03/42d785d7db47887db3279d288743babed77840c30b979f521ce0478ba7b4/entirius_django_matrix-4.0.0.tar.gz", hash = "sha256:6e335cdc8b1636087c06ef09b6f8426fbdf37ab843f69fe71348daf7d8acea5a", size = 260603, upload-time = "2026-07-11T18:10:34.757Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/93/8b/4f7ee4402ed045bfba1b809848a7a0dcc7f04de04eb7a612fe68bc9be012/entirius_django_matrix-4.2.0.tar.gz", hash = "sha256:d3dfb490aa600ceff5379ea1743a3807953dd778ed778b1badd5212afa6f1d52", size = 268641, upload-time = "2026-07-30T17:26:52.892Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e1/ad/c395c4b0f154d8542a416ba051eaf3fc7359b9911d59fff275514b298f5e/entirius_django_matrix-4.0.0-py3-none-any.whl", hash = "sha256:708c8608152ddffa13c2507108284d92ba8612f792254437c344dcacb06fd205", size = 178608, upload-time = "2026-07-11T18:10:33.652Z" },
+    { url = "https://files.pythonhosted.org/packages/b8/8a/9f4a05c4701d080a4f8e855173db0c5ceaf61a84b5d1a0339de45a7d277e/entirius_django_matrix-4.2.0-py3-none-any.whl", hash = "sha256:c1265023c597fe6639be518f380714140fab613599eabe9f9575ec8fce33466a", size = 178678, upload-time = "2026-07-30T17:26:51.727Z" },
 ]
 
 [package.optional-dependencies]
@@ -1693,7 +1693,7 @@ wheels = [
 
 [[package]]
 name = "entirius-service-volkanos"
-version = "3.0.0rc4"
+version = "3.0.0rc5"
 source = { editable = "." }
 dependencies = [
     { name = "dj-database-url" },
@@ -1782,7 +1782,7 @@ requires-dist = [
     { name = "entirius-django-agreements", specifier = ">=2.0.0" },
     { name = "entirius-django-baselinker", specifier = ">=2.0.1" },
     { name = "entirius-django-captcha", specifier = ">=2.0.0" },
-    { name = "entirius-django-checkout", extras = ["qms", "vault", "returns"], specifier = ">=9.1.0" },
+    { name = "entirius-django-checkout", extras = ["qms", "vault", "returns"], specifier = ">=9.2.0" },
     { name = "entirius-django-checkout-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-checkout-import-from-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-contentdb", specifier = ">=5.0.0" },
@@ -1794,7 +1794,7 @@ requires-dist = [
     { name = "entirius-django-enrichment", specifier = ">=2.0.0" },
     { name = "entirius-django-faq", specifier = ">=2.0.0" },
     { name = "entirius-django-getresponse", specifier = ">=2.1.0" },
-    { name = "entirius-django-matrix", extras = ["qms", "pricemanager"], specifier = ">=4.0.0" },
+    { name = "entirius-django-matrix", extras = ["qms", "pricemanager"], specifier = ">=4.2.0" },
     { name = "entirius-django-munin", specifier = ">=2.0.0" },
     { name = "entirius-django-omnibus", specifier = ">=3.0.1" },
     { name = "entirius-django-pim", specifier = ">=3.0.0" },
