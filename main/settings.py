@@ -111,16 +111,16 @@ STATIC_URL = "static/"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 TMP_DIR = BASE_DIR / "tmp"  # required by django_pim (file/picture processing)
-DATA_DIR = BASE_DIR / "data"  # required by django_pim_export_to_magento_package
-EXPORT_DIR = BASE_DIR / "export"  # required by django_pim_export_to_magento_package and django_checkout
+DATA_DIR = BASE_DIR / "data"  # required by api-key commands (checkout/vault/returns/reviews/accounts) and django_qms
+EXPORT_DIR = BASE_DIR / "export"  # required by django_checkout (import-time read) and django_qms path placeholders
 PRIVATE_DIR = BASE_DIR / "private"  # required by django_accounts (customer file storage)
 
 # Required by django_accounts: wishlist restructuring mode for the squashed 0024 data
 # migration; 1 = fresh installations (no legacy wishlists to migrate).
 MIGRATION_0023_MECHANISM = 1
 
-# Read at import time by django_pim_csv / django_pim_export_to_magento_package / django_checkout
-# (BI events); override per environment in settings_local.
+# Read at import time by django_pim_csv / django_checkout (BI events);
+# override per environment in settings_local.
 BI_ENVIRONMENT = "development"
 BI_BUSINESS_UNIT = "volkanos"
 
@@ -132,9 +132,6 @@ T9N_DEFAULT_LANG = "en"
 # real endpoint/token per environment in settings_local.
 MAGENTO2_URL_FOR_CHECKOUT_EXPORT = ""
 MAGENTO2_TOKEN_FOR_CHECKOUT_EXPORT = ""
-
-# django_checkout: route voucher validation through django_checkout_voucher signal handlers.
-USE_VALIDATE_VOUCHERS_SIGNAL = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

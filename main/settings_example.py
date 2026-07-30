@@ -42,8 +42,6 @@ DATABASES = {
 #     "django_pim_csv",
 #     "django_pim_translator",
 #     "django_pim_export_to_magento_api",
-#     "django_pim_export_to_magento_package",
-#     "django_vat_validator",
 #     "django_faq",
 #     "django_munin",
 #     "django_captcha",
@@ -60,28 +58,21 @@ DATABASES = {
 #     "django_contentdb_translator",
 #     "django_sitemap",
 #     "django_accounts_export_to_magento_api",
-#     "django_pricetuner",
 #     "django_vault",
 #     "django_reviews",
 #     "django_matrix",
 #     "django_checkout",
-#     "django_checkout_voucher",  # must stay AFTER pim/checkout/accounts/crypt/email (FK targets)
 #     "django_checkout_export_to_magento_api",
 #     "django_checkout_import_from_magento_api",
 #     "django_getresponse",
 #     "django_returns",
 #     "django_omnibus",
 #     "django_crm",
-#     "django_loyalty",
 # ]
 LOCAL_APPS: list[str] = []
 
-# Voucher-flow secrets — REQUIRED per environment when django_checkout_voucher is adopted
-# (module raises at first use, not at boot; never commit real values):
-# VOUCHER_LOOKUP_HMAC_KEY — salt for HMAC-SHA256 voucher balance lookups (django_checkout_voucher);
-# CRYPT_SALT — Fernet key for voucher code encryption (django_crypt), generate with:
+# CRYPT_SALT — Fernet key for django_crypt encrypted fields, generate with:
 #   python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
-# VOUCHER_LOOKUP_HMAC_KEY = "change-me"
 # CRYPT_SALT = "change-me-valid-fernet-key"
 
 # Celery (module workers: QMS quantities, PIM thumbnails, pricemanager pricelists).

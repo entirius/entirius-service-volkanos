@@ -42,8 +42,6 @@ if "django_pricemanager" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pricemanager.urls")))
 if "django_pim_translator" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pim_translator.urls")))
-if "django_vat_validator" in settings.INSTALLED_APPS:
-    urlpatterns.append(path("", include("django_vat_validator.urls")))
 if "django_faq" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_faq.urls")))
 if "django_munin" in settings.INSTALLED_APPS:
@@ -74,14 +72,10 @@ if "django_matrix" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_matrix.urls")))
 if "django_checkout" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_checkout.urls")))
-if "django_checkout_voucher" in settings.INSTALLED_APPS:
-    urlpatterns.append(path("", include("django_checkout_voucher.urls")))
 if "django_returns" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_returns.urls")))
 if "django_crm" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_crm.urls")))
-if "django_loyalty" in settings.INSTALLED_APPS:
-    urlpatterns.append(path("", include("django_loyalty.urls")))
 
 if settings.DEBUG:
     from django.conf.urls.static import static
