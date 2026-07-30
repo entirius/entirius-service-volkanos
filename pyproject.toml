@@ -9,6 +9,12 @@ description = "Entirius Volkanos Service - base Django service adopting Volkanos
 authors = [
     { name = "Piotr Brzozowski", email = "piotrb@entirius.com" },
 ]
+maintainers = [
+    { name = "Piotr Brzozowski" },
+    { name = "Paweł Kiełt" },
+    { name = "Mateusz Baran" },
+    { name = "Michał Kloczkowski" },
+]
 readme = "README.md"
 requires-python = ">=3.12"
 classifiers = [
