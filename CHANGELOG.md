@@ -6,6 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0rc5] - 2026-07-30
+
+Module cleanup — five modules withdrawn from the public platform.
+
+### Removed
+
+- `entirius-django-pim-export-to-magento-package`, `entirius-django-vat-validator`,
+  `entirius-django-pricetuner`, `entirius-django-loyalty`, `entirius-django-checkout-voucher`
+  (deps, LOCAL_APPS template entries, URL wiring, voucher signal flag and secrets docs).
+
+### Changed
+
+- Floors: `entirius-django-checkout[qms,vault,returns]>=9.2.0`, `entirius-django-matrix[qms,pricemanager]>=4.2.0`
+  (releases without the withdrawn extras).
+- Stewardship metadata: maintainers in pyproject, CODEOWNERS, Commit Message Format block in AGENTS.md.
+
 ## [3.0.0rc1] - 2026-07-13
 
 Stabilization — dependency floors raised to the patched module releases.
