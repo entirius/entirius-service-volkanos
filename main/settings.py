@@ -133,9 +133,6 @@ T9N_DEFAULT_LANG = "en"
 MAGENTO2_URL_FOR_CHECKOUT_EXPORT = ""
 MAGENTO2_TOKEN_FOR_CHECKOUT_EXPORT = ""
 
-# django_checkout: route voucher validation through django_checkout_voucher signal handlers.
-USE_VALIDATE_VOUCHERS_SIGNAL = True
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SITE_ID = 1  # django.contrib.sites (allauth)

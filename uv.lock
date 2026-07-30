@@ -857,9 +857,6 @@ returns = [
 vault = [
     { name = "entirius-django-vault" },
 ]
-voucher = [
-    { name = "entirius-django-checkout-voucher" },
-]
 
 [[package]]
 name = "entirius-django-checkout-export-to-magento-api"
@@ -890,29 +887,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/91/50/6f17057d0897df93f5372e39eb7d0fe080a00d4c55b7afee0ac2ca7f9fe3/entirius_django_checkout_import_from_magento_api-2.0.0.tar.gz", hash = "sha256:d43b8409f95ff7e0eecbf3a68b6ef966bd1fadaf39c3a3e57a9baf17d4a50920", size = 146433, upload-time = "2026-07-12T20:49:15.541Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/31/c6/473f9af84e7d8e5c9f4d63bd58225687f8116c103872d3ef0b455234122a/entirius_django_checkout_import_from_magento_api-2.0.0-py3-none-any.whl", hash = "sha256:a7e3232977dca5205c177bdb4fc7a8634b8680b6d0ef7c2afb8a1946c47b2401", size = 19329, upload-time = "2026-07-12T20:49:14.398Z" },
-]
-
-[[package]]
-name = "entirius-django-checkout-voucher"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-    { name = "djangorestframework" },
-    { name = "djangorestframework-simplejwt" },
-    { name = "drf-spectacular" },
-    { name = "entirius-django-accounts" },
-    { name = "entirius-django-checkout" },
-    { name = "entirius-django-crypt" },
-    { name = "entirius-django-pim" },
-    { name = "entirius-django-regional" },
-    { name = "entirius-django-utils" },
-    { name = "entirius-py-process-logger" },
-    { name = "pydantic" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/fa/cf/b9ab8b97620923df816aee73cb92fe1c90b047118aeae93aba809609b208/entirius_django_checkout_voucher-2.0.0.tar.gz", hash = "sha256:77a903ac6b0c9e570be50edc972c86037874f9492e26480bbc38419227de442c", size = 1388030, upload-time = "2026-07-12T20:49:02.031Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/20/11/52990ab686c23aa924c94862ce7e897d65630b12d35b625fd858526667f5/entirius_django_checkout_voucher-2.0.0-py3-none-any.whl", hash = "sha256:0edf1d190e58d6fe7fed761954d3b1ecf3282d84ab2fbeb1ae3be63bbeb777f0", size = 130811, upload-time = "2026-07-12T20:49:00.842Z" },
 ]
 
 [[package]]
@@ -1733,10 +1707,9 @@ dependencies = [
     { name = "entirius-django-agreements" },
     { name = "entirius-django-baselinker" },
     { name = "entirius-django-captcha" },
-    { name = "entirius-django-checkout", extra = ["qms", "returns", "vault", "voucher"] },
+    { name = "entirius-django-checkout", extra = ["qms", "returns", "vault"] },
     { name = "entirius-django-checkout-export-to-magento-api" },
     { name = "entirius-django-checkout-import-from-magento-api" },
-    { name = "entirius-django-checkout-voucher" },
     { name = "entirius-django-contentdb" },
     { name = "entirius-django-contentdb-translator" },
     { name = "entirius-django-crm" },
@@ -1809,10 +1782,9 @@ requires-dist = [
     { name = "entirius-django-agreements", specifier = ">=2.0.0" },
     { name = "entirius-django-baselinker", specifier = ">=2.0.1" },
     { name = "entirius-django-captcha", specifier = ">=2.0.0" },
-    { name = "entirius-django-checkout", extras = ["qms", "vault", "returns", "voucher"], specifier = ">=9.1.0" },
+    { name = "entirius-django-checkout", extras = ["qms", "vault", "returns"], specifier = ">=9.1.0" },
     { name = "entirius-django-checkout-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-checkout-import-from-magento-api", specifier = ">=2.0.0" },
-    { name = "entirius-django-checkout-voucher", specifier = ">=2.0.0" },
     { name = "entirius-django-contentdb", specifier = ">=5.0.0" },
     { name = "entirius-django-contentdb-translator", specifier = ">=2.0.1" },
     { name = "entirius-django-crm", specifier = ">=3.0.1" },
