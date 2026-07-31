@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0rc6] - 2026-07-31
+
+Module cleanup wave 2 — django-crm withdrawn from the public platform.
+
+### Removed
+
+- `entirius-django-crm` (dep, LOCAL_APPS template entry, URL wiring).
+
+### Changed
+
+- Floor: `entirius-django-getresponse>=3.0.0` — contact carries its own email,
+  marketing consent gate reads `django-agreements`.
+
 ## [3.0.0rc5] - 2026-07-30
 
 Module cleanup — five modules withdrawn from the public platform.

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "3.0.0rc5"
+version = "3.0.0rc6"
 description = "Entirius Volkanos Service - base Django service adopting Volkanos modules"
 authors = [
     { name = "Piotr Brzozowski", email = "piotrb@entirius.com" },
@@ -83,7 +83,7 @@ dependencies = [
     "entirius-django-checkout[qms,vault,returns]>=9.2.0",
     "entirius-django-checkout-export-to-magento-api>=2.0.0",
     "entirius-django-checkout-import-from-magento-api>=2.0.0",
-    "entirius-django-getresponse>=2.1.0",
+    "entirius-django-getresponse>=3.0.0",
     "entirius-django-returns>=3.0.0",
     "entirius-django-omnibus>=3.0.1",
     "dj-database-url>=2.2",
