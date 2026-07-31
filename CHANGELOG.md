@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0rc7] - 2026-07-31
+
+Supplementary Core migrations — contact forms and REGON lookup join the platform.
+
+### Added
+
+- `entirius-django-contact-forms[bookings,google-ads]>=3.0.0` (dep, LOCAL_APPS template entry,
+  URL wiring) — contact forms, bookings, leads, ad-conversion uploads; unlocks the CMS
+  ContactForms section.
+- `entirius-django-regon-api>=3.0.0` (dep, LOCAL_APPS template entry, URL wiring) —
+  NIP/REGON lookup against Polish government registries; no models.
+
 ## [3.0.0rc6] - 2026-07-31
 
 Module cleanup wave 2 — django-crm withdrawn from the public platform.

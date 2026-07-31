@@ -74,6 +74,10 @@ if "django_checkout" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_checkout.urls")))
 if "django_returns" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_returns.urls")))
+if "django_contact_forms" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_contact_forms.urls")))
+if "django_regon_api" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_regon_api.urls")))
 if settings.DEBUG:
     from django.conf.urls.static import static
 
