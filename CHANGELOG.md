@@ -6,6 +6,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0rc7] - 2026-07-31
+
+Supplementary Core migrations — contact forms and REGON lookup join the platform.
+
+### Added
+
+- `entirius-django-contact-forms[bookings,google-ads]>=3.0.0` (dep, LOCAL_APPS template entry,
+  URL wiring) — contact forms, bookings, leads, ad-conversion uploads; unlocks the CMS
+  ContactForms section.
+- `entirius-django-regon-api>=3.0.0` (dep, LOCAL_APPS template entry, URL wiring) —
+  NIP/REGON lookup against Polish government registries; no models.
+
+## [3.0.0rc6] - 2026-07-31
+
+Module cleanup wave 2 — django-crm withdrawn from the public platform.
+
+### Removed
+
+- `entirius-django-crm` (dep, LOCAL_APPS template entry, URL wiring).
+
+### Changed
+
+- Floor: `entirius-django-getresponse>=3.0.0` — contact carries its own email,
+  marketing consent gate reads `django-agreements`.
+
+## [3.0.0rc5] - 2026-07-30
+
+Module cleanup — five modules withdrawn from the public platform.
+
+### Removed
+
+- `entirius-django-pim-export-to-magento-package`, `entirius-django-vat-validator`,
+  `entirius-django-pricetuner`, `entirius-django-loyalty`, `entirius-django-checkout-voucher`
+  (deps, LOCAL_APPS template entries, URL wiring, voucher signal flag and secrets docs).
+
+### Changed
+
+- Floors: `entirius-django-checkout[qms,vault,returns]>=9.2.0`, `entirius-django-matrix[qms,pricemanager]>=4.2.0`
+  (releases without the withdrawn extras).
+- Stewardship metadata: maintainers in pyproject, CODEOWNERS, Commit Message Format block in AGENTS.md.
+
+## [3.0.0rc1] - 2026-07-13
+
+Stabilization — dependency floors raised to the patched module releases.
+
+### Changed
+
+- `entirius-django-baselinker>=2.0.1` (fixes NameError on API error paths in the client),
+  `entirius-django-accounts>=5.0.1` (fixes broken password-validator help text),
+  `entirius-django-omnibus>=3.0.1` (fixes NameError on the pricemanager import fallback),
+  `entirius-django-crm>=3.0.1` (newsletter consent and campaign resolution per channel).
+
 ## [3.0.0b1] - 2026-07-13
 
 First beta — the full active module dependency graph is adopted from PyPI and verified

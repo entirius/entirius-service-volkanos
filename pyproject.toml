@@ -4,10 +4,16 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "3.0.0b1"
+version = "3.0.0rc8"
 description = "Entirius Volkanos Service - base Django service adopting Volkanos modules"
 authors = [
     { name = "Piotr Brzozowski", email = "piotrb@entirius.com" },
+]
+maintainers = [
+    { name = "Piotr Brzozowski" },
+    { name = "Paweł Kiełt" },
+    { name = "Mateusz Baran" },
+    { name = "Michał Kloczkowski" },
 ]
 readme = "README.md"
 requires-python = ">=3.12"
@@ -20,6 +26,10 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
+    # browser frontends (storefront/CMS) call the API cross-origin; origins per environment
+    "django-cors-headers>=4.4",
+    # django-redis: CACHES backend contract of django_matrix signal batching (caches["default"].client)
+    "django-redis>=5.4",
     "django>=5.2",
     "djangorestframework>=3.16",
     "drf-spectacular>=0.28",
@@ -45,43 +55,39 @@ dependencies = [
     "entirius-py-magento2-sdk2>=2.0.0",
     "entirius-django-regional>=2.0.1",
     "entirius-django-utils>=2.0.0",
-    "entirius-django-pim>=3.0.0",
+    "entirius-django-pim>=3.1.0",
     "entirius-django-utils-translator>=2.0.0",
-    "entirius-django-pricemanager>=4.0.1",
+    "entirius-django-pricemanager>=4.1.0",
     "entirius-django-pim-csv>=3.0.0",
     "entirius-django-pim-translator>=2.0.0",
-    "entirius-django-pim-export-to-magento-api>=2.0.0",
-    "entirius-django-pim-export-to-magento-package>=2.0.0",
-    "entirius-django-vat-validator>=2.0.0",
+    "entirius-django-pim-export-to-magento-api>=2.1.0",
     "entirius-django-faq>=2.0.0",
     "entirius-django-munin>=2.0.0",
     "entirius-django-captcha>=2.0.0",
     "entirius-django-agreements>=2.0.0",
-    "entirius-django-deliverypoints>=2.0.0",
-    "entirius-django-qms>=4.0.0",
-    "entirius-django-email>=4.0.0",
-    "entirius-django-baselinker>=2.0.0",
+    "entirius-django-deliverypoints>=2.1.0",
+    "entirius-django-qms>=4.0.2",
+    "entirius-django-email>=4.0.1",
+    "entirius-django-contact-forms[bookings,google-ads]>=3.0.0",
+    "entirius-django-regon-api>=3.0.0",
+    "entirius-django-baselinker>=2.0.1",
     "entirius-django-crypt>=2.0.0",
     "entirius-django-enrichment>=2.0.0",
-    "entirius-django-contentdb>=5.0.0",
-    "entirius-django-accounts[pim]>=5.0.0",
+    "entirius-django-contentdb>=5.0.1",
+    "entirius-django-accounts[pim]>=5.0.1",
     "entirius-django-suppliers[qms]>=2.0.0",
     "entirius-django-contentdb-translator>=2.0.1",
-    "entirius-django-sitemap[pim,contentdb,faq]>=4.0.0",
+    "entirius-django-sitemap[pim,contentdb,faq]>=4.0.1",
     "entirius-django-accounts-export-to-magento-api>=2.0.0",
-    "entirius-django-pricetuner>=2.0.0",
     "entirius-django-vault>=2.0.0",
     "entirius-django-reviews[magento]>=2.0.0",
-    "entirius-django-matrix[qms,pricemanager,pricetuner]>=4.0.0",
-    "entirius-django-checkout[qms,vault,vat,pricetuner,returns,voucher]>=9.1.0",
-    "entirius-django-checkout-voucher>=2.0.0",
+    "entirius-django-matrix[qms,pricemanager]>=4.3.0",
+    "entirius-django-checkout[qms,vault,returns]>=9.3.0",
     "entirius-django-checkout-export-to-magento-api>=2.0.0",
     "entirius-django-checkout-import-from-magento-api>=2.0.0",
-    "entirius-django-getresponse>=2.1.0",
+    "entirius-django-getresponse>=3.0.0",
     "entirius-django-returns>=3.0.0",
-    "entirius-django-omnibus>=3.0.0",
-    "entirius-django-crm>=3.0.0",
-    "entirius-django-loyalty>=2.0.0",
+    "entirius-django-omnibus>=3.0.1",
     "dj-database-url>=2.2",
     "psycopg[binary]>=3.2",
 ]

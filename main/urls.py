@@ -12,9 +12,13 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # JWT for module admin APIs (v2, IsAdminUser) and the CMS admin panel.
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/schema/swagger-ui/",
@@ -30,14 +34,14 @@ urlpatterns = [
 ]
 
 # Adopted modules route only where the environment enables them (LOCAL_APPS in settings_local).
+if "django_regional" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_regional.urls")))
 if "django_pim" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pim.urls")))
 if "django_pricemanager" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pricemanager.urls")))
 if "django_pim_translator" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pim_translator.urls")))
-if "django_vat_validator" in settings.INSTALLED_APPS:
-    urlpatterns.append(path("", include("django_vat_validator.urls")))
 if "django_faq" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_faq.urls")))
 if "django_munin" in settings.INSTALLED_APPS:
@@ -68,11 +72,15 @@ if "django_matrix" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_matrix.urls")))
 if "django_checkout" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_checkout.urls")))
-if "django_checkout_voucher" in settings.INSTALLED_APPS:
-    urlpatterns.append(path("", include("django_checkout_voucher.urls")))
 if "django_returns" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_returns.urls")))
-if "django_crm" in settings.INSTALLED_APPS:
-    urlpatterns.append(path("", include("django_crm.urls")))
-if "django_loyalty" in settings.INSTALLED_APPS:
-    urlpatterns.append(path("", include("django_loyalty.urls")))
+if "django_contact_forms" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_contact_forms.urls")))
+if "django_regon_api" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_regon_api.urls")))
+if settings.DEBUG:
+    from django.conf.urls.static import static
+
+    # Dev server serves media (product images, CMS uploads) — production fronts them
+    # with a web server.
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

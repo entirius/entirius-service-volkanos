@@ -5,9 +5,12 @@ resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'win32'",
     "python_full_version >= '3.14' and sys_platform == 'emscripten'",
     "python_full_version >= '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32'",
-    "python_full_version < '3.14' and sys_platform == 'win32'",
-    "python_full_version < '3.14' and sys_platform == 'emscripten'",
-    "python_full_version < '3.14' and sys_platform != 'emscripten' and sys_platform != 'win32'",
+    "python_full_version == '3.13.*' and sys_platform == 'win32'",
+    "python_full_version < '3.13' and sys_platform == 'win32'",
+    "python_full_version == '3.13.*' and sys_platform == 'emscripten'",
+    "python_full_version < '3.13' and sys_platform == 'emscripten'",
+    "python_full_version == '3.13.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
+    "python_full_version < '3.13' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 
 [[package]]
@@ -610,6 +613,19 @@ socialaccount = [
 ]
 
 [[package]]
+name = "django-cors-headers"
+version = "4.9.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "asgiref" },
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/21/39/55822b15b7ec87410f34cd16ce04065ff390e50f9e29f31d6d116fc80456/django_cors_headers-4.9.0.tar.gz", hash = "sha256:fe5d7cb59fdc2c8c646ce84b727ac2bca8912a247e6e68e1fb507372178e59e8", size = 21458, upload-time = "2025-09-18T10:40:52.326Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/30/d8/19ed1e47badf477d17fb177c1c19b5a21da0fd2d9f093f23be3fb86c5fab/django_cors_headers-4.9.0-py3-none-any.whl", hash = "sha256:15c7f20727f90044dcee2216a9fd7303741a864865f0c3657e28b7056f61b449", size = 12809, upload-time = "2025-09-18T10:40:50.843Z" },
+]
+
+[[package]]
 name = "django-filter"
 version = "25.2"
 source = { registry = "https://pypi.org/simple" }
@@ -619,6 +635,20 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/2c/e4/465d2699cd388c0005fb8d6ae6709f239917c6d8790ac35719676fffdcf3/django_filter-25.2.tar.gz", hash = "sha256:760e984a931f4468d096f5541787efb8998c61217b73006163bf2f9523fe8f23", size = 143818, upload-time = "2025-10-05T09:51:31.521Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c1/40/6a02495c5658beb1f31eb09952d8aa12ef3c2a66342331ce3a35f7132439/django_filter-25.2-py3-none-any.whl", hash = "sha256:9c0f8609057309bba611062fe1b720b4a873652541192d232dd28970383633e3", size = 94145, upload-time = "2025-10-05T09:51:29.728Z" },
+]
+
+[[package]]
+name = "django-redis"
+version = "7.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "redis" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/fb/78/203a0cdc0f1c083a5407d01f77b58099a120bb8a5a04562f56a9bb341314/django_redis-7.0.0.tar.gz", hash = "sha256:e48491c862f4350b0747ceb1016700686fb93c4f4e0fb9c490fe6c6658ffd933", size = 64601, upload-time = "2026-06-02T14:17:48.819Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7e/9f/09cdb9a1eebe8533b02a7694ca787acfc1e4d93b5b6175ff99366d4e6d64/django_redis-7.0.0-py3-none-any.whl", hash = "sha256:4b23aa6e0cd0937bb1242e9a463809e6004de3ca2150f34e986306bb6220d688", size = 38932, upload-time = "2026-06-02T14:17:47.281Z" },
 ]
 
 [[package]]
@@ -645,6 +675,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/a8/27/2874a325c11112066139769f7794afae238a07ce6adf96259f08fd37a9d7/djangorestframework_simplejwt-5.5.1.tar.gz", hash = "sha256:e72c5572f51d7803021288e2057afcbd03f17fe11d484096f40a460abc76e87f", size = 101265, upload-time = "2025-07-21T16:52:25.026Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/60/94/fdfb7b2f0b16cd3ed4d4171c55c1c07a2d1e3b106c5978c8ad0c15b4a48b/djangorestframework_simplejwt-5.5.1-py3-none-any.whl", hash = "sha256:2c30f3707053d384e9f315d11c2daccfcb548d4faa453111ca19a542b732e469", size = 107674, upload-time = "2025-07-21T16:52:07.493Z" },
+]
+
+[[package]]
+name = "dnspython"
+version = "2.8.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/8c/8b/57666417c0f90f08bcafa776861060426765fdb422eb10212086fb811d26/dnspython-2.8.0.tar.gz", hash = "sha256:181d3c6996452cb1189c4046c61599b84a5a86e099562ffde77d26984ff26d0f", size = 368251, upload-time = "2025-09-07T18:58:00.022Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ba/5a/18ad964b0086c6e62e2e7500f7edc89e3faa45033c71c1893d34eed2b2de/dnspython-2.8.0-py3-none-any.whl", hash = "sha256:01d9bbc4a2d76bf0db7c1f729812ded6d912bd318d3b1cf81d30c0f845dbf3af", size = 331094, upload-time = "2025-09-07T18:57:58.071Z" },
 ]
 
 [[package]]
@@ -679,8 +718,21 @@ wheels = [
 ]
 
 [[package]]
+name = "email-validator"
+version = "2.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "dnspython" },
+    { name = "idna" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f5/22/900cb125c76b7aaa450ce02fd727f452243f2e91a61af068b40adba60ea9/email_validator-2.3.0.tar.gz", hash = "sha256:9fc05c37f2f6cf439ff414f8fc46d917929974a82244c20eb10231ba60c54426", size = 51238, upload-time = "2025-08-26T13:09:06.831Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/de/15/545e2b6cf2e3be84bc1ed85613edd75b8aea69807a71c26f4ca6a9258e82/email_validator-2.3.0-py3-none-any.whl", hash = "sha256:80f13f623413e6b197ae73bb10bf4eb0908faf509ad8362c5edeb0be7fd450b4", size = 35604, upload-time = "2025-08-26T13:09:05.858Z" },
+]
+
+[[package]]
 name = "entirius-django-accounts"
-version = "5.0.0"
+version = "5.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -702,9 +754,9 @@ dependencies = [
     { name = "requests" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/87/6c/b87fd27387a04e117843576c398d12ee921b702e8b244179c89e255dba5e/entirius_django_accounts-5.0.0.tar.gz", hash = "sha256:2520358ed629c1265282526d57682a800fb5e652e236ed690c3e0ebed4317bf6", size = 181506, upload-time = "2026-07-11T12:29:32.374Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ff/56/60ea4746357657c4c6dcadf025b6cf60e14506368aa44de5d21756477f7c/entirius_django_accounts-5.0.1.tar.gz", hash = "sha256:1c394af5e061091264cffcf4ea3aebc6764c0f8884c6cc9bd672d0fb2b4b839d", size = 181500, upload-time = "2026-07-13T16:24:19.969Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/24/aa/ff43a65088b591e936b7e5710855796a911f531850ebd9cc12c51c5c9255/entirius_django_accounts-5.0.0-py3-none-any.whl", hash = "sha256:886ba50d57c35478bcbbcab451661ba2597a9886cf80405e61ba47ee09c5e038", size = 75404, upload-time = "2026-07-11T12:29:31.399Z" },
+    { url = "https://files.pythonhosted.org/packages/74/0f/8962d5e7c3012e8df1f9ce53e0a95ed92a7358d3af20fbb27b9e8b546a94/entirius_django_accounts-5.0.1-py3-none-any.whl", hash = "sha256:9ebf30536b2b06454015a39493ba63a79b56928feb708c0246252fc223eb848a", size = 75392, upload-time = "2026-07-13T16:24:19.007Z" },
 ]
 
 [package.optional-dependencies]
@@ -755,7 +807,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-baselinker"
-version = "2.0.0"
+version = "2.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -763,9 +815,9 @@ dependencies = [
     { name = "marshmallow-dataclass" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ef/70/561b8d6db1b0861dd219edcce202dab7c690f71dcd38f3b968985fd65ff0/entirius_django_baselinker-2.0.0.tar.gz", hash = "sha256:b6287fa1cd2ec10c1d63e92310ca9cb4c56d82e1cb2fd0e95015cb9908d35d89", size = 38817, upload-time = "2026-07-11T03:19:43.21Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/23/64/b11cb2ea833b8a5cde6bdec12fcf878d5bc3bcdd5ffee481ac122af5d34a/entirius_django_baselinker-2.0.1.tar.gz", hash = "sha256:a0df3ccff4b6ea66788bc46885332c6ac6d93bd44859b162f9274b07559824da", size = 38806, upload-time = "2026-07-13T16:24:07.228Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4c/5d/3a97c2bccb712a957e9c16a5f6e602cccbe4a7b412313cd3dfd050c9c191/entirius_django_baselinker-2.0.0-py3-none-any.whl", hash = "sha256:0a089db2be440f3140720b83a2c92829ae628d6cfceca4b2e5a49e81e9310c1c", size = 17072, upload-time = "2026-07-11T03:19:42.24Z" },
+    { url = "https://files.pythonhosted.org/packages/80/08/53b7c40e18e8621faedb847099c7a7af7dae79dd85c4cbf44f24be87fcb9/entirius_django_baselinker-2.0.1-py3-none-any.whl", hash = "sha256:e113156b35a48e3fd07c82d21e9747a3840497405aa0954954f5eaff1860d847", size = 17064, upload-time = "2026-07-13T16:24:06.104Z" },
 ]
 
 [[package]]
@@ -784,7 +836,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-checkout"
-version = "9.1.0"
+version = "9.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -815,29 +867,20 @@ dependencies = [
     { name = "stripe" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6b/c8/cf83e41e5922e21b6949bf5f8c2a014a9bb235629557f092815747769084/entirius_django_checkout-9.1.0.tar.gz", hash = "sha256:b2250c1c9bddf4b4f5f31fa32aef641b924866acc7c276345a8767ae7a1c13c7", size = 871650, upload-time = "2026-07-13T00:55:14.942Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ed/04/e9109b755a791d344810366ef3ffcb7c113536c1816f95957f4268a40b1c/entirius_django_checkout-9.3.0.tar.gz", hash = "sha256:056cb7f762b49adcc78704ee717eab063f273b8ed40babad76e49426ca2e146c", size = 899959, upload-time = "2026-08-06T11:59:59.051Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f0/c7/3f4e45c00644b16f0d5288a80b5f0d3f5f65d277c218f5ef5dc97dbaee00/entirius_django_checkout-9.1.0-py3-none-any.whl", hash = "sha256:910ad4eb75b8fa7a0e8c38e3743759dfa56422c8eaad84b24e7d0fa2236ef73a", size = 317632, upload-time = "2026-07-13T00:55:13.539Z" },
+    { url = "https://files.pythonhosted.org/packages/76/da/a2b777fbb61c79b0c40b644f74fe72f1edb753044a8b62f2428d20d2b803/entirius_django_checkout-9.3.0-py3-none-any.whl", hash = "sha256:1baa2f10f371fb2bd29f023c1db5047bb0032ed6353c4694485b217c002212f3", size = 337161, upload-time = "2026-08-06T11:59:57.538Z" },
 ]
 
 [package.optional-dependencies]
-pricetuner = [
-    { name = "entirius-django-pricetuner" },
-]
 qms = [
     { name = "entirius-django-qms" },
 ]
 returns = [
     { name = "entirius-django-returns" },
 ]
-vat = [
-    { name = "entirius-django-vat-validator" },
-]
 vault = [
     { name = "entirius-django-vault" },
-]
-voucher = [
-    { name = "entirius-django-checkout-voucher" },
 ]
 
 [[package]]
@@ -872,31 +915,41 @@ wheels = [
 ]
 
 [[package]]
-name = "entirius-django-checkout-voucher"
-version = "2.0.0"
+name = "entirius-django-contact-forms"
+version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
+    { name = "amqp" },
+    { name = "celery" },
+    { name = "cryptography" },
     { name = "django" },
     { name = "djangorestframework" },
     { name = "djangorestframework-simplejwt" },
     { name = "drf-spectacular" },
-    { name = "entirius-django-accounts" },
-    { name = "entirius-django-checkout" },
-    { name = "entirius-django-crypt" },
-    { name = "entirius-django-pim" },
     { name = "entirius-django-regional" },
     { name = "entirius-django-utils" },
+    { name = "entirius-py-idx-normalizator" },
     { name = "entirius-py-process-logger" },
-    { name = "pydantic" },
+    { name = "marshmallow" },
+    { name = "marshmallow-dataclass" },
+    { name = "pydantic", extra = ["email"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fa/cf/b9ab8b97620923df816aee73cb92fe1c90b047118aeae93aba809609b208/entirius_django_checkout_voucher-2.0.0.tar.gz", hash = "sha256:77a903ac6b0c9e570be50edc972c86037874f9492e26480bbc38419227de442c", size = 1388030, upload-time = "2026-07-12T20:49:02.031Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/56/d2/5c7b914d9d3965e152f038ed2c232ac52e6d90f3bd8c6306a2a94b1a7f0e/entirius_django_contact_forms-3.0.0.tar.gz", hash = "sha256:7cd8463549d45da7f3510849e022d4f228f727bfcf00b68b26cd69b1191d9780", size = 195162, upload-time = "2026-07-31T13:32:03.398Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/20/11/52990ab686c23aa924c94862ce7e897d65630b12d35b625fd858526667f5/entirius_django_checkout_voucher-2.0.0-py3-none-any.whl", hash = "sha256:0edf1d190e58d6fe7fed761954d3b1ecf3282d84ab2fbeb1ae3be63bbeb777f0", size = 130811, upload-time = "2026-07-12T20:49:00.842Z" },
+    { url = "https://files.pythonhosted.org/packages/a1/6c/7fb7757398b46dd35711c9b55cd37cec0e00411a514663d19fe88dfc9906/entirius_django_contact_forms-3.0.0-py3-none-any.whl", hash = "sha256:bd9d0cce81be7aabf6832bcb83d7c48dc52d3cdcde8de488d4bc47a69738df08", size = 131548, upload-time = "2026-07-31T13:32:02.155Z" },
+]
+
+[package.optional-dependencies]
+bookings = [
+    { name = "entirius-py-google-calendar-sdk" },
+]
+google-ads = [
+    { name = "entirius-py-google-ads-sdk" },
 ]
 
 [[package]]
 name = "entirius-django-contentdb"
-version = "5.0.0"
+version = "5.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -917,9 +970,9 @@ dependencies = [
     { name = "python-dateutil" },
     { name = "python-slugify" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/af/cb/b287e82d980a133eca39c9f6d0b81acac5627e2d5921b988f249b6d61f87/entirius_django_contentdb-5.0.0.tar.gz", hash = "sha256:2cc961b9781f2916ecb0f266284f02c55d13112b529a00f91c60098960d0736a", size = 194924, upload-time = "2026-07-11T03:24:40.262Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/09/d2/c68f5926202bd30f3e59bfc96094add46a3165bd7762f256348befc576e7/entirius_django_contentdb-5.0.1.tar.gz", hash = "sha256:bf5b737ce6c19c3c6b98b59401e1f0a639cd778c95e6c4da483fb32d971c976f", size = 194947, upload-time = "2026-08-06T11:42:10.678Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/50/12/2250ec46bb6b73725d2c3d7b6a5b8cd3271e6385f76b687349ff9fb32ffd/entirius_django_contentdb-5.0.0-py3-none-any.whl", hash = "sha256:3cc0eff3b42a4f545f23f1fbd23ebe560a9598994afd66b3127d5648bee547f0", size = 116250, upload-time = "2026-07-11T03:24:38.914Z" },
+    { url = "https://files.pythonhosted.org/packages/54/3a/e870237ff1e78d55a375dda94d296df99d9b5477a6f81cc75180ab1d60f6/entirius_django_contentdb-5.0.1-py3-none-any.whl", hash = "sha256:63f616203eaebd88692dc0ac918f03589df819e9b3b8fbe7ddd47ae41656f8f3", size = 116282, upload-time = "2026-08-06T11:42:09.629Z" },
 ]
 
 [[package]]
@@ -944,29 +997,6 @@ wheels = [
 ]
 
 [[package]]
-name = "entirius-django-crm"
-version = "3.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-    { name = "entirius-django-checkout" },
-    { name = "entirius-django-getresponse" },
-    { name = "entirius-django-regional" },
-    { name = "entirius-django-utils" },
-    { name = "entirius-py-edrone-sdk" },
-    { name = "entirius-py-get-response-sdk" },
-    { name = "entirius-py-process-logger" },
-    { name = "entirius-py-synerise-sdk" },
-    { name = "marshmallow" },
-    { name = "marshmallow-dataclass" },
-    { name = "tqdm" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/b1/3b/00fbcd9f66d878479cf62408163f583eb185ed08136aeb6d1c36ba3b2248/entirius_django_crm-3.0.0.tar.gz", hash = "sha256:cc201915dfd54394a4affe9a776bc33d14c44af2d5085a2230706708ca9aaad5", size = 195761, upload-time = "2026-07-12T23:27:46.961Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/9f/52/526f949985da4fd5f303cbb90e7c130dac125f0661e5ba968d0997c8e5a4/entirius_django_crm-3.0.0-py3-none-any.whl", hash = "sha256:077599ba97651ea68a3841cc057e9aa7e4d3afe0915a7128ebb9c4795c27b7fd", size = 35922, upload-time = "2026-07-12T23:27:46.081Z" },
-]
-
-[[package]]
 name = "entirius-django-crypt"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -981,7 +1011,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-deliverypoints"
-version = "2.0.0"
+version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -993,14 +1023,14 @@ dependencies = [
     { name = "pydantic" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9b/a7/a083aafc73c35e13ecfc512523e021cb63829dfcfd1a1f83d1761397bd1d/entirius_django_deliverypoints-2.0.0.tar.gz", hash = "sha256:5dfdcbf8a6a24eb0e7fbb11d358cbe0867375ea41205bb97d45cdc9eab5a2131", size = 105791, upload-time = "2026-07-10T18:59:51.106Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/24/48/935d00323d1c6350969a84a089b94d54d0364a33ea7265dbbb31dc61cb45/entirius_django_deliverypoints-2.1.0.tar.gz", hash = "sha256:d77ac89113214b351d7dc7209eeba783f111f1cb26aac6a6fd51463df15d2ad6", size = 107421, upload-time = "2026-08-06T11:42:04.33Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/27/b8/1e336c3c20358d481a2ce7836b36064139dff457eb301871134483721725/entirius_django_deliverypoints-2.0.0-py3-none-any.whl", hash = "sha256:5a299a09ccc89b0249472b95a363264a3d6e8477584b504cbea67a70b1ca36dc", size = 56456, upload-time = "2026-07-10T18:59:50.045Z" },
+    { url = "https://files.pythonhosted.org/packages/f0/4f/f87b5559afc4c5a51dc173967185b792a7c8543da77e735415c8fae21544/entirius_django_deliverypoints-2.1.0-py3-none-any.whl", hash = "sha256:106d04af2d9f389739dbaa0a96005d9904c65d2223565a686817c7cb8ca59838", size = 57724, upload-time = "2026-08-06T11:42:03.008Z" },
 ]
 
 [[package]]
 name = "entirius-django-email"
-version = "4.0.0"
+version = "4.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -1012,9 +1042,9 @@ dependencies = [
     { name = "entirius-py-process-logger" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f2/a0/3080136a3f2d6beba804b492b7d8c62ee413d8c17a3bdba1c0cde9e1e0c5/entirius_django_email-4.0.0.tar.gz", hash = "sha256:5d447c9fab23c4a8dd71b38107ba6b6cf7b3e5e4d6d9ad1aaff393714ecd7e11", size = 112421, upload-time = "2026-07-10T19:06:49.265Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a1/51/eeb149156d03956b0830121c776357b789a8b2599115ad1f28ee0d6322e3/entirius_django_email-4.0.1.tar.gz", hash = "sha256:1c5259102acd23f8f767eaf3aca1230656b84410d4f3d5e57f1203c63ab7081b", size = 112523, upload-time = "2026-07-22T11:48:42.529Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/23/38/ebf94fcd3aef3136c3016de1c1e10eb622fb5a5902baf508d429c7e8691d/entirius_django_email-4.0.0-py3-none-any.whl", hash = "sha256:36e744f5a61a1c4ba8ca09af63550b93c1e8c1293b7ccf0fa6587c0c7760ea46", size = 126736, upload-time = "2026-07-10T19:06:48.152Z" },
+    { url = "https://files.pythonhosted.org/packages/45/e2/59bdfe856589360ce35ec9596613ce4038a5735f0c88e114dfb50b03c1c4/entirius_django_email-4.0.1-py3-none-any.whl", hash = "sha256:ce1fb1174f1af562bdbc281dec8c527bf78fe6f73425d973b28f4774db719e1b", size = 126841, upload-time = "2026-07-22T11:48:41.573Z" },
 ]
 
 [[package]]
@@ -1056,13 +1086,13 @@ wheels = [
 
 [[package]]
 name = "entirius-django-getresponse"
-version = "2.1.0"
+version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
     { name = "django" },
+    { name = "entirius-django-agreements" },
     { name = "entirius-django-checkout" },
-    { name = "entirius-django-crm" },
     { name = "entirius-django-pim" },
     { name = "entirius-django-pricemanager" },
     { name = "entirius-django-regional" },
@@ -1071,37 +1101,14 @@ dependencies = [
     { name = "entirius-py-get-response-sdk" },
     { name = "entirius-py-process-logger" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2b/71/55a7be07672953b19d77909f32dae4b3f7ff710cef6a0f60d3352813f3df/entirius_django_getresponse-2.1.0.tar.gz", hash = "sha256:11d93a63bf2a95acd4bf1d9cc78bdf1a96202f7231a9473b86503b350887fc88", size = 190218, upload-time = "2026-07-13T00:55:01.944Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/99/d2/2e92c350ea1f357881b53758933b4cb64b199509207499e6a6e3237b15fa/entirius_django_getresponse-3.0.0.tar.gz", hash = "sha256:ceb2429a5b7731a7ee5bb6f0e1a5a5c8db113bba5b75b004c64198e489df723f", size = 190902, upload-time = "2026-07-31T09:57:45.553Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0d/22/f8dc508dfa7069ac62f4ef1cf7c90847d8d26682565b037fabc150df206c/entirius_django_getresponse-2.1.0-py3-none-any.whl", hash = "sha256:2f9c041ea19d3d486e6f0ecf07ad1e766ebe3360b1020e4d72349e29ea2e2008", size = 89216, upload-time = "2026-07-13T00:55:00.681Z" },
-]
-
-[[package]]
-name = "entirius-django-loyalty"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-    { name = "django-admin-inline-paginator" },
-    { name = "django-allauth" },
-    { name = "djangorestframework" },
-    { name = "entirius-django-accounts" },
-    { name = "entirius-django-checkout" },
-    { name = "entirius-django-crm" },
-    { name = "entirius-django-email" },
-    { name = "entirius-django-regional" },
-    { name = "entirius-django-utils" },
-    { name = "entirius-py-idx-normalizator" },
-    { name = "entirius-py-salesmanago-sdk" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/4d/69/fc3d3a73c24592545abb1fce028aefb55cb0fed822ce254a239ef96b03a0/entirius_django_loyalty-2.0.0.tar.gz", hash = "sha256:2c03a10b1c6324f8443da7ae9cc7f4e3747c88034c265edbc003206a9a606281", size = 152469, upload-time = "2026-07-13T00:05:11Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ce/5b/7ceec92dc596cfe7ea1678dccac1cd00bcecc20049ab959f4a6ffa848717/entirius_django_loyalty-2.0.0-py3-none-any.whl", hash = "sha256:1d5b9e661da99ff4e0953ff303f0e38c45d63da654deadb9b27773898a57f5f8", size = 23904, upload-time = "2026-07-13T00:05:10.02Z" },
+    { url = "https://files.pythonhosted.org/packages/e2/94/2afef6e6ad3991d4e5c3c81e5b44b86e167d99418ab5038d52db3109545b/entirius_django_getresponse-3.0.0-py3-none-any.whl", hash = "sha256:05c3bcd8eefb5a14f2950a615257cf3a063be22be449c4faed5c32ad6f68d2ed", size = 90288, upload-time = "2026-07-31T09:57:44.609Z" },
 ]
 
 [[package]]
 name = "entirius-django-matrix"
-version = "4.0.0"
+version = "4.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1120,18 +1127,14 @@ dependencies = [
     { name = "marshmallow-dataclass" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/77/03/42d785d7db47887db3279d288743babed77840c30b979f521ce0478ba7b4/entirius_django_matrix-4.0.0.tar.gz", hash = "sha256:6e335cdc8b1636087c06ef09b6f8426fbdf37ab843f69fe71348daf7d8acea5a", size = 260603, upload-time = "2026-07-11T18:10:34.757Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/2e/35/6d055182772e6e4c5a5edf302bed7033bc45b32b997916307e518e86b172/entirius_django_matrix-4.3.0.tar.gz", hash = "sha256:e16164131edfc6e9fa361b261d0c596028ca81a3a1c6f1e80a268137d7a6c561", size = 285109, upload-time = "2026-08-06T11:59:46.752Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e1/ad/c395c4b0f154d8542a416ba051eaf3fc7359b9911d59fff275514b298f5e/entirius_django_matrix-4.0.0-py3-none-any.whl", hash = "sha256:708c8608152ddffa13c2507108284d92ba8612f792254437c344dcacb06fd205", size = 178608, upload-time = "2026-07-11T18:10:33.652Z" },
+    { url = "https://files.pythonhosted.org/packages/9d/53/ff9c2ef2e4cdc099081576c072e48f03cdabfcfc975dde9833fbc65938e8/entirius_django_matrix-4.3.0-py3-none-any.whl", hash = "sha256:d559199e8923d88254bc0a2fc8cc6953621d6f35e494d999a1c7a1e1ef2e55d6", size = 192035, upload-time = "2026-08-06T11:59:45.238Z" },
 ]
 
 [package.optional-dependencies]
 pricemanager = [
     { name = "entirius-django-pricemanager" },
-]
-pricetuner = [
-    { name = "entirius-django-accounts" },
-    { name = "entirius-django-pricetuner" },
 ]
 qms = [
     { name = "entirius-django-qms" },
@@ -1156,7 +1159,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-omnibus"
-version = "3.0.0"
+version = "3.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -1168,14 +1171,14 @@ dependencies = [
     { name = "marshmallow" },
     { name = "marshmallow-dataclass" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ea/4a/06a94aca73985fcc0f5de7146a83f0f8ee32366e022693e0583c6c951461/entirius_django_omnibus-3.0.0.tar.gz", hash = "sha256:6c289ed54aadf0730deff88e457f3be6904ea57e8bfdcc2b41aa0a536bc21a5a", size = 155405, upload-time = "2026-07-12T22:29:35.4Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/db/ed/9be3c4cfdf24e8c54c2b3a38328d2a07add64b73695e99fe1a4d147fa444/entirius_django_omnibus-3.0.1.tar.gz", hash = "sha256:6fd758da5ba3e4a4aa7d9a9e166963566967e9ac355e8a97e24a975d8fac6940", size = 155382, upload-time = "2026-07-13T16:35:16.315Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b7/c0/ba2dc72518902c076161acfbb6430273de98ccf8e51eb4d5ec29de7553ad/entirius_django_omnibus-3.0.0-py3-none-any.whl", hash = "sha256:39b70add4ed010a5f9b40e1386ebde749afd8509a54b7d34643289307e07c87f", size = 28496, upload-time = "2026-07-12T22:29:34.242Z" },
+    { url = "https://files.pythonhosted.org/packages/e2/ad/246356c3005947a91f7e1111a06fe7f07203de497fe2d3d60fbde7d513f2/entirius_django_omnibus-3.0.1-py3-none-any.whl", hash = "sha256:47ebe010dee19d3683aa6b16baa04df58fde9f92aa44487c6d7932ebe2db657c", size = 28492, upload-time = "2026-07-13T16:35:15.131Z" },
 ]
 
 [[package]]
 name = "entirius-django-pim"
-version = "3.0.0"
+version = "3.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1203,9 +1206,9 @@ dependencies = [
     { name = "trafaret" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7e/3a/3c39e427bfb2d3397e9741f5329bd282613ae82af200fec88211e00701ff/entirius_django_pim-3.0.0.tar.gz", hash = "sha256:9db204a8876dca10888508936a57dec29e2e5bc60448026d8a99b5a45aeaa4be", size = 418199, upload-time = "2026-07-09T17:21:17.526Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/15/64/af07657a0e271712bc7306898773e4c000341c9f125d144ef8fa373411e3/entirius_django_pim-3.1.0.tar.gz", hash = "sha256:86769fc8629cecd447c94c0f2e42984adfbb30be4643cea8ce114fd77e3418df", size = 424012, upload-time = "2026-08-06T11:41:37.049Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/76/f1/10080c595ca2879f35b2d5f472e5ecfe9d18df731531d548932dab6c49f4/entirius_django_pim-3.0.0-py3-none-any.whl", hash = "sha256:087ed3b25ff3aba18c5227265476e70e2215ef86d5a96a6317ae3e92a1ffbcc4", size = 323024, upload-time = "2026-07-09T17:21:16.399Z" },
+    { url = "https://files.pythonhosted.org/packages/4a/8b/7c17d431873eaefa09a39d12b885ff58ccbc4bd545aea8f6b4a45eb2701c/entirius_django_pim-3.1.0-py3-none-any.whl", hash = "sha256:9bfb2bb4e151659cfe4a037b6f99d44d0a5ad8b33e6c6f44a5c16f1f5ca9b0e5", size = 331234, upload-time = "2026-08-06T11:41:35.583Z" },
 ]
 
 [[package]]
@@ -1231,7 +1234,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-pim-export-to-magento-api"
-version = "2.0.0"
+version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1247,26 +1250,9 @@ dependencies = [
     { name = "python-slugify" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8a/60/7a9dfe8ad6062abb26ff8f1859882df31207486f407bc5d777fe5e5213c2/entirius_django_pim_export_to_magento_api-2.0.0.tar.gz", hash = "sha256:a124c0dac449f6b58c0e467acc474291c1819c7d3a0603551f70c2d9ad126600", size = 136088, upload-time = "2026-07-10T16:30:16.919Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/85/5e/92d935ab171a2eece24aad84a0cf5c773c51ddb4be56e568651d4beea35d/entirius_django_pim_export_to_magento_api-2.1.0.tar.gz", hash = "sha256:66b725528a4a442a6b41fe5da715aba712001e8187df3e733b3444b3865c922c", size = 136883, upload-time = "2026-08-06T11:42:00.476Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/40/6c/11aed304ad16cd7b86955d0f9006ae81d6586358563e3018f891aed27a7a/entirius_django_pim_export_to_magento_api-2.0.0-py3-none-any.whl", hash = "sha256:6cc2532684b213207d2075c66e5914f963aa226aff9cb388c14780560b80e3b0", size = 39449, upload-time = "2026-07-10T16:30:15.818Z" },
-]
-
-[[package]]
-name = "entirius-django-pim-export-to-magento-package"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-    { name = "entirius-django-pim" },
-    { name = "entirius-django-regional" },
-    { name = "entirius-py-bievents" },
-    { name = "python-slugify" },
-    { name = "pytz" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/be/de/679636912307c314031711b9d12c5fb0b6359561442882ee2ec444c48937/entirius_django_pim_export_to_magento_package-2.0.0.tar.gz", hash = "sha256:b2fbd2eaab27e6c054ef1bf93769cbb3552c7b2fb82f6ee3cf8eeb89dec90ff4", size = 132005, upload-time = "2026-07-10T16:17:28.232Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/2e/cc/b69cc7d596f2ff8ed563b62138495a9bdd2fd0a58a7d86ec9c1a14d7c99d/entirius_django_pim_export_to_magento_package-2.0.0-py3-none-any.whl", hash = "sha256:90289e1b8602b5184319d2277cbfceffbdea6d68a664438fa4b5b4593a6fbd9a", size = 29633, upload-time = "2026-07-10T16:17:27.373Z" },
+    { url = "https://files.pythonhosted.org/packages/fd/42/0dbdfa7c0e7be00ac6e2b4aa24f2ec3a56890491706a2eb381228382ca60/entirius_django_pim_export_to_magento_api-2.1.0-py3-none-any.whl", hash = "sha256:224d8624e0770b6f0c14bfb4e3d11aecb3ccb467d1ba75aac73d0188e272533a", size = 40925, upload-time = "2026-08-06T11:41:59.542Z" },
 ]
 
 [[package]]
@@ -1291,7 +1277,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-pricemanager"
-version = "4.0.1"
+version = "4.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1310,32 +1296,14 @@ dependencies = [
     { name = "pydantic" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d1/8c/069aa997b3e42d5da659dfe653cb9a83ae312bb43dc0eb59e8d6f1859fbc/entirius_django_pricemanager-4.0.1.tar.gz", hash = "sha256:a95d2a998cbb107ee664332b5dcaedefa9df8e46ce03d7a721d489899f48eb6d", size = 132349, upload-time = "2026-07-12T15:37:05.321Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ec/b7/70143c43d07a29a2998956ac0196045510aabb19303102287326f9052082/entirius_django_pricemanager-4.1.0.tar.gz", hash = "sha256:5bd1eb8d8f0645acc4802cdda807d95ebe0482adec510ada8064681002e6fbe1", size = 134109, upload-time = "2026-08-06T11:41:45.111Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ac/e0/da8d72439b445e8dac7b3399ee86836a0345162e5469ea520428ebda9bae/entirius_django_pricemanager-4.0.1-py3-none-any.whl", hash = "sha256:aa7511e947f72be47410df879d1b3131162c8f59c3df44fbcb84e35b23472c56", size = 99320, upload-time = "2026-07-12T15:37:04.193Z" },
-]
-
-[[package]]
-name = "entirius-django-pricetuner"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-    { name = "django-admin-inline-paginator" },
-    { name = "entirius-django-accounts" },
-    { name = "entirius-django-pim" },
-    { name = "entirius-django-regional" },
-    { name = "entirius-py-bievents" },
-    { name = "entirius-py-idx-normalizator" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/e5/11/6f3ec0aad15dd52e8630906f8605889f052cb1d59139f67bf153844c5baa/entirius_django_pricetuner-2.0.0.tar.gz", hash = "sha256:fadbf714d6b8a61a8cdfdd0271f6947ddf2c4f60edcb93275d802fc4072ea29d", size = 140044, upload-time = "2026-07-11T15:08:58.348Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/15/f0/780f452594d3a7c1734f7d7ef3770e4b3129d901ea0f1d9bd4267ac64b79/entirius_django_pricetuner-2.0.0-py3-none-any.whl", hash = "sha256:f8b95b8f1ad55490d4cacd49870598dbd4dd0c2d6037d7b095df8081abc071c2", size = 20528, upload-time = "2026-07-11T15:08:57.29Z" },
+    { url = "https://files.pythonhosted.org/packages/c1/d4/904430ad60e25e491349d15d7c7ea24df72da6c633b8fc695aedbab4a5e3/entirius_django_pricemanager-4.1.0-py3-none-any.whl", hash = "sha256:35b58604cf474dd688621d4b31cfc8a66b92f0d4e100855359b2e479bc968c4e", size = 101109, upload-time = "2026-08-06T11:41:43.773Z" },
 ]
 
 [[package]]
 name = "entirius-django-qms"
-version = "4.0.0"
+version = "4.0.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1350,9 +1318,9 @@ dependencies = [
     { name = "entirius-py-process-logger" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e4/f1/dcf14bbb991d906f97e05b31f98b95d6f2a2e92d613c16930fbfb2727116/entirius_django_qms-4.0.0.tar.gz", hash = "sha256:fd610a3adff0602cc68b85d59a5194a9b724e1ca8fcdeec9313c3f3fac4bdcd9", size = 150630, upload-time = "2026-07-10T19:06:40.171Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/3c/5e/0ddab148d094692af1d9d09bd7a8b635f43dbeb351c859bff0319ecf65aa/entirius_django_qms-4.0.2.tar.gz", hash = "sha256:81b221e1251ed53207d6f74a91379fecbac11c454e45d0bfaa8fcaf361c54b85", size = 150811, upload-time = "2026-08-06T11:41:51.981Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0c/b9/b94188f811191611bfac3ca7c1fa5fd7acb090ff7b07f6bc3e4b610935bd/entirius_django_qms-4.0.0-py3-none-any.whl", hash = "sha256:e2659d46fb6be785d0aea7beee5d0547b9f219a2c3628e5ab0e4ba5f67fd7289", size = 73197, upload-time = "2026-07-10T19:06:39.202Z" },
+    { url = "https://files.pythonhosted.org/packages/4e/5d/abdd9cb86ac384cfb901930e2f45a8a41425c0cb1293fabf4d2286fbeb19/entirius_django_qms-4.0.2-py3-none-any.whl", hash = "sha256:5b14aa44e40bb7d32264bd53c744b0284fc1cc45adfd1e9ff44de5813af892ba", size = 73529, upload-time = "2026-08-06T11:41:50.833Z" },
 ]
 
 [[package]]
@@ -1370,6 +1338,25 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/c0/01/eb6c08eb5788a2de5748b35522502f2f59f6ea0ed756d0a7fca90b0d3f43/entirius_django_regional-2.0.1.tar.gz", hash = "sha256:3a094605b6fde20ee78013641932d1f2c7633b4c76e7d1ea5f9b496e8f68c045", size = 65650, upload-time = "2026-07-10T16:01:20.454Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/29/04/09d14c48ad92b8249bbed20e3093e410357cba59f319dbe55fcfebcc1602/entirius_django_regional-2.0.1-py3-none-any.whl", hash = "sha256:aff9bd7ae5fdf602a8f8507984b2df296b875ea6f0cdb9db1064626b5c04c861", size = 32829, upload-time = "2026-07-10T16:01:19.443Z" },
+]
+
+[[package]]
+name = "entirius-django-regon-api"
+version = "3.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "entirius-django-utils" },
+    { name = "entirius-py-bievents" },
+    { name = "entirius-py-gov-rejestr-wl-sdk" },
+    { name = "entirius-py-process-logger" },
+    { name = "marshmallow" },
+    { name = "marshmallow-dataclass" },
+    { name = "zeep" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ee/e2/23c708716aac2cab38dfb7d3503bcc0f5c5aed2a23f840cb69730575312e/entirius_django_regon_api-3.0.0.tar.gz", hash = "sha256:e92371cf16dd6bd163f0511706444061c92d51fae108095cdb254196afc9b621", size = 82346, upload-time = "2026-07-31T13:32:14.739Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f7/ac/af9688f1b0391c9a25c6fda5605e71acc08c14e758d4344fc4f0fce63028/entirius_django_regon_api-3.0.0-py3-none-any.whl", hash = "sha256:1e4449d2f79f28d50714f40d7bdb90a7df1e2a6d10aaa6818e6c76fd0abcf6b9", size = 17881, upload-time = "2026-07-31T13:32:13.624Z" },
 ]
 
 [[package]]
@@ -1421,7 +1408,7 @@ magento = [
 
 [[package]]
 name = "entirius-django-sitemap"
-version = "4.0.0"
+version = "4.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -1430,9 +1417,9 @@ dependencies = [
     { name = "pytz" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f1/94/8e29e47d429c997d105d8b765a540c8b11fcaf965609805427fda598e572/entirius_django_sitemap-4.0.0.tar.gz", hash = "sha256:464ba13bf1ca0a26feb6bfae6605c9f4d257cd213c4e7f4bd3676b8100c9f1a4", size = 137677, upload-time = "2026-07-11T12:32:04.487Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/11/ab/fb54b628b22252d18a997bc288f939bfc8034fc00994c7e45e40ecded0bd/entirius_django_sitemap-4.0.1.tar.gz", hash = "sha256:b5547a9cb1336392cdaa569f8bb1645b39a811640ca3d33587015d145008147b", size = 142667, upload-time = "2026-07-22T11:48:50.284Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ec/75/ee3a1b9c06de7890b2488d81198dc31c1818d3ddf5124d7b727ad7592cd0/entirius_django_sitemap-4.0.0-py3-none-any.whl", hash = "sha256:76e922efb53aafd42a54f136614d5bf83a3e3d0348461d25120008bd66cc060d", size = 33501, upload-time = "2026-07-11T12:32:03.473Z" },
+    { url = "https://files.pythonhosted.org/packages/2b/17/29d98ea315febf736dbe1d1ca44311a9afcf48399f60d7542c2ab44b0a8e/entirius_django_sitemap-4.0.1-py3-none-any.whl", hash = "sha256:55da4d3061baadc3fa84e1b334d921c1ff04bdc982a59230e87a8fdbf326e66b", size = 42442, upload-time = "2026-07-22T11:48:48.969Z" },
 ]
 
 [package.optional-dependencies]
@@ -1513,22 +1500,6 @@ wheels = [
 ]
 
 [[package]]
-name = "entirius-django-vat-validator"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-    { name = "entirius-django-regional" },
-    { name = "entirius-django-utils" },
-    { name = "entirius-py-process-logger" },
-    { name = "marshmallow-dataclass" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/ed/52/69dbfc5f6ad3bb729428234c4a6e4d10a73956599ded8435ddceb24e9ed1/entirius_django_vat_validator-2.0.0.tar.gz", hash = "sha256:8005fa223a798f165615a6e75f71ba90972cf5ef7763ed79e2d4f0937eb3e846", size = 59192, upload-time = "2026-07-10T18:51:52.548Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e3/5c/a2313fdf0990674d2f39b0f8ee3dbb512c12fd5f2be49a066d37369fe897/entirius_django_vat_validator-2.0.0-py3-none-any.whl", hash = "sha256:1004ad5cddb2e06d1d9f20a3206ebf1f98895542f1827ff2893b8ae6ec819771", size = 18093, upload-time = "2026-07-10T18:51:51.36Z" },
-]
-
-[[package]]
 name = "entirius-django-vault"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1595,6 +1566,44 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/09/1f/628f3d73a89c13ef09b7b5908f64cb99944c7be6ad60af572ccc12fc52b6/entirius_py_get_response_sdk-3.0.0.tar.gz", hash = "sha256:2c5609a55cc14c152fd07f7576c8e1773e4bff2e3a8b8d78afe419c5afd76cfc", size = 35464, upload-time = "2026-07-05T20:33:36.596Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/86/42/51819203c4d12721f0799f478bfa2b69ebb71dfc29d1eefc001b743913f6/entirius_py_get_response_sdk-3.0.0-py3-none-any.whl", hash = "sha256:6ca484171c274391763826c7397942e97a3b682388e6ebfe9550289310413d2b", size = 12665, upload-time = "2026-07-05T20:33:35.592Z" },
+]
+
+[[package]]
+name = "entirius-py-google-ads-sdk"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-ads" },
+    { name = "google-auth" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c5/b6/a89537850d9f779e7b83daf4b941d80d93002fa4edb929e57da25400d0f2/entirius_py_google_ads_sdk-2.0.0.tar.gz", hash = "sha256:3d86b35b64633e58c9c743325c526b72ff0ae955b5a34af299070dd1fff547af", size = 59556, upload-time = "2026-07-31T11:41:49.653Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/73/38/9a34dad9014c99f47d473ea5e99966afbaab6877f603e243599a094ca4ee/entirius_py_google_ads_sdk-2.0.0-py3-none-any.whl", hash = "sha256:3c1ccb76579c097abdb17c12c3608cea6511c3a447878d798dbe9de66c3064ed", size = 13596, upload-time = "2026-07-31T11:41:48.508Z" },
+]
+
+[[package]]
+name = "entirius-py-google-calendar-sdk"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-api-python-client" },
+    { name = "google-auth" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b0/a4/dab8697cce332812103428af4c031f7d1d5a3bd1b0d8f282c267066a3f2d/entirius_py_google_calendar_sdk-2.0.0.tar.gz", hash = "sha256:d3ab3bc05bcd92583764dbeb6e6a6dbbdab047b1a3ae6afdd25168ce9755d8d1", size = 54004, upload-time = "2026-07-31T11:41:47.131Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b3/27/6239014eedd85799dab7bec0e59f535064527d01721b4df94c81b1de6e2d/entirius_py_google_calendar_sdk-2.0.0-py3-none-any.whl", hash = "sha256:d9dc891f16a94c8587839dae19e5cf4bdbbe51bb47cfd55ae3040c2d7c6d8164", size = 13710, upload-time = "2026-07-31T11:41:45.973Z" },
+]
+
+[[package]]
+name = "entirius-py-gov-rejestr-wl-sdk"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0f/7d/b6b942bfafc9653efae935c54266c6f2f0233b25e2a6744698d5a50e3c20/entirius_py_gov_rejestr_wl_sdk-2.0.0.tar.gz", hash = "sha256:9b8440ed1c7bcc3e515d3a043f5665f0001281b3dc3ae15ed3e5fa1e00698e66", size = 30782, upload-time = "2026-07-31T11:45:08.165Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8c/0f/71ddb101e134d46efcb12ef1e01cdf5de5e288840bb5ef26f318cc4881a5/entirius_py_gov_rejestr_wl_sdk-2.0.0-py3-none-any.whl", hash = "sha256:b6c3c82d674c8d820a9dd162f58ff9f2012c13402b6ac340ce9a2a2d30a17157", size = 9346, upload-time = "2026-07-31T11:45:07.246Z" },
 ]
 
 [[package]]
@@ -1776,11 +1785,13 @@ wheels = [
 
 [[package]]
 name = "entirius-service-volkanos"
-version = "3.0.0b1"
+version = "3.0.0rc8"
 source = { editable = "." }
 dependencies = [
     { name = "dj-database-url" },
     { name = "django" },
+    { name = "django-cors-headers" },
+    { name = "django-redis" },
     { name = "djangorestframework" },
     { name = "drf-spectacular" },
     { name = "entirius-django-accounts", extra = ["pim"] },
@@ -1788,39 +1799,35 @@ dependencies = [
     { name = "entirius-django-agreements" },
     { name = "entirius-django-baselinker" },
     { name = "entirius-django-captcha" },
-    { name = "entirius-django-checkout", extra = ["pricetuner", "qms", "returns", "vat", "vault", "voucher"] },
+    { name = "entirius-django-checkout", extra = ["qms", "returns", "vault"] },
     { name = "entirius-django-checkout-export-to-magento-api" },
     { name = "entirius-django-checkout-import-from-magento-api" },
-    { name = "entirius-django-checkout-voucher" },
+    { name = "entirius-django-contact-forms", extra = ["bookings", "google-ads"] },
     { name = "entirius-django-contentdb" },
     { name = "entirius-django-contentdb-translator" },
-    { name = "entirius-django-crm" },
     { name = "entirius-django-crypt" },
     { name = "entirius-django-deliverypoints" },
     { name = "entirius-django-email" },
     { name = "entirius-django-enrichment" },
     { name = "entirius-django-faq" },
     { name = "entirius-django-getresponse" },
-    { name = "entirius-django-loyalty" },
-    { name = "entirius-django-matrix", extra = ["pricemanager", "pricetuner", "qms"] },
+    { name = "entirius-django-matrix", extra = ["pricemanager", "qms"] },
     { name = "entirius-django-munin" },
     { name = "entirius-django-omnibus" },
     { name = "entirius-django-pim" },
     { name = "entirius-django-pim-csv" },
     { name = "entirius-django-pim-export-to-magento-api" },
-    { name = "entirius-django-pim-export-to-magento-package" },
     { name = "entirius-django-pim-translator" },
     { name = "entirius-django-pricemanager" },
-    { name = "entirius-django-pricetuner" },
     { name = "entirius-django-qms" },
     { name = "entirius-django-regional" },
+    { name = "entirius-django-regon-api" },
     { name = "entirius-django-returns" },
     { name = "entirius-django-reviews", extra = ["magento"] },
     { name = "entirius-django-sitemap", extra = ["contentdb", "faq", "pim"] },
     { name = "entirius-django-suppliers", extra = ["qms"] },
     { name = "entirius-django-utils" },
     { name = "entirius-django-utils-translator" },
-    { name = "entirius-django-vat-validator" },
     { name = "entirius-django-vault" },
     { name = "entirius-py-autopay-sdk" },
     { name = "entirius-py-bievents" },
@@ -1859,46 +1866,44 @@ dev = [
 requires-dist = [
     { name = "dj-database-url", specifier = ">=2.2" },
     { name = "django", specifier = ">=5.2" },
+    { name = "django-cors-headers", specifier = ">=4.4" },
+    { name = "django-redis", specifier = ">=5.4" },
     { name = "djangorestframework", specifier = ">=3.16" },
     { name = "drf-spectacular", specifier = ">=0.28" },
-    { name = "entirius-django-accounts", extras = ["pim"], specifier = ">=5.0.0" },
+    { name = "entirius-django-accounts", extras = ["pim"], specifier = ">=5.0.1" },
     { name = "entirius-django-accounts-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-agreements", specifier = ">=2.0.0" },
-    { name = "entirius-django-baselinker", specifier = ">=2.0.0" },
+    { name = "entirius-django-baselinker", specifier = ">=2.0.1" },
     { name = "entirius-django-captcha", specifier = ">=2.0.0" },
-    { name = "entirius-django-checkout", extras = ["qms", "vault", "vat", "pricetuner", "returns", "voucher"], specifier = ">=9.1.0" },
+    { name = "entirius-django-checkout", extras = ["qms", "vault", "returns"], specifier = ">=9.3.0" },
     { name = "entirius-django-checkout-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-checkout-import-from-magento-api", specifier = ">=2.0.0" },
-    { name = "entirius-django-checkout-voucher", specifier = ">=2.0.0" },
-    { name = "entirius-django-contentdb", specifier = ">=5.0.0" },
+    { name = "entirius-django-contact-forms", extras = ["bookings", "google-ads"], specifier = ">=3.0.0" },
+    { name = "entirius-django-contentdb", specifier = ">=5.0.1" },
     { name = "entirius-django-contentdb-translator", specifier = ">=2.0.1" },
-    { name = "entirius-django-crm", specifier = ">=3.0.0" },
     { name = "entirius-django-crypt", specifier = ">=2.0.0" },
-    { name = "entirius-django-deliverypoints", specifier = ">=2.0.0" },
-    { name = "entirius-django-email", specifier = ">=4.0.0" },
+    { name = "entirius-django-deliverypoints", specifier = ">=2.1.0" },
+    { name = "entirius-django-email", specifier = ">=4.0.1" },
     { name = "entirius-django-enrichment", specifier = ">=2.0.0" },
     { name = "entirius-django-faq", specifier = ">=2.0.0" },
-    { name = "entirius-django-getresponse", specifier = ">=2.1.0" },
-    { name = "entirius-django-loyalty", specifier = ">=2.0.0" },
-    { name = "entirius-django-matrix", extras = ["qms", "pricemanager", "pricetuner"], specifier = ">=4.0.0" },
+    { name = "entirius-django-getresponse", specifier = ">=3.0.0" },
+    { name = "entirius-django-matrix", extras = ["qms", "pricemanager"], specifier = ">=4.3.0" },
     { name = "entirius-django-munin", specifier = ">=2.0.0" },
-    { name = "entirius-django-omnibus", specifier = ">=3.0.0" },
-    { name = "entirius-django-pim", specifier = ">=3.0.0" },
+    { name = "entirius-django-omnibus", specifier = ">=3.0.1" },
+    { name = "entirius-django-pim", specifier = ">=3.1.0" },
     { name = "entirius-django-pim-csv", specifier = ">=3.0.0" },
-    { name = "entirius-django-pim-export-to-magento-api", specifier = ">=2.0.0" },
-    { name = "entirius-django-pim-export-to-magento-package", specifier = ">=2.0.0" },
+    { name = "entirius-django-pim-export-to-magento-api", specifier = ">=2.1.0" },
     { name = "entirius-django-pim-translator", specifier = ">=2.0.0" },
-    { name = "entirius-django-pricemanager", specifier = ">=4.0.1" },
-    { name = "entirius-django-pricetuner", specifier = ">=2.0.0" },
-    { name = "entirius-django-qms", specifier = ">=4.0.0" },
+    { name = "entirius-django-pricemanager", specifier = ">=4.1.0" },
+    { name = "entirius-django-qms", specifier = ">=4.0.2" },
     { name = "entirius-django-regional", specifier = ">=2.0.1" },
+    { name = "entirius-django-regon-api", specifier = ">=3.0.0" },
     { name = "entirius-django-returns", specifier = ">=3.0.0" },
     { name = "entirius-django-reviews", extras = ["magento"], specifier = ">=2.0.0" },
-    { name = "entirius-django-sitemap", extras = ["pim", "contentdb", "faq"], specifier = ">=4.0.0" },
+    { name = "entirius-django-sitemap", extras = ["pim", "contentdb", "faq"], specifier = ">=4.0.1" },
     { name = "entirius-django-suppliers", extras = ["qms"], specifier = ">=2.0.0" },
     { name = "entirius-django-utils", specifier = ">=2.0.0" },
     { name = "entirius-django-utils-translator", specifier = ">=2.0.0" },
-    { name = "entirius-django-vat-validator", specifier = ">=2.0.0" },
     { name = "entirius-django-vault", specifier = ">=2.0.0" },
     { name = "entirius-py-autopay-sdk", specifier = ">=2.0.0" },
     { name = "entirius-py-bievents", specifier = ">=2.0.0" },
@@ -2017,6 +2022,163 @@ wheels = [
 ]
 
 [[package]]
+name = "google-ads"
+version = "31.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-api-core" },
+    { name = "google-auth-oauthlib" },
+    { name = "googleapis-common-protos" },
+    { name = "grpcio" },
+    { name = "grpcio-status" },
+    { name = "proto-plus" },
+    { name = "protobuf" },
+    { name = "pyyaml" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6d/c9/2d9a9f167ae4affb9799a562e295612a6c32c01651d372ac5c027a1a2dce/google_ads-31.2.0.tar.gz", hash = "sha256:7099181c1a7f627739b5c69cf86472bab462fccb743ec7659e252fb87fa1a7da", size = 12446661, upload-time = "2026-07-22T20:46:22.777Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3f/53/8ab880a552cd584a01ece34bcf2a9a5333c3d557d447464cc677da06e693/google_ads-31.2.0-py3-none-any.whl", hash = "sha256:80e3c57e54c561f6b24c02988e7fa981b50b00a0a1d85e4596702d3398cf1cff", size = 23673871, upload-time = "2026-07-22T20:46:18.872Z" },
+]
+
+[[package]]
+name = "google-api-core"
+version = "2.33.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-auth" },
+    { name = "googleapis-common-protos" },
+    { name = "proto-plus" },
+    { name = "protobuf" },
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/87/62/8fb1fb647d2788c950d69d6a769cd9d55c918ac1fc57be2f90b7e4029787/google_api_core-2.33.0.tar.gz", hash = "sha256:3a36bcc3e319783f4c97da41f6f45ea6ffcaa55848e341de16e09cb70243c2bb", size = 181607, upload-time = "2026-07-22T16:28:28.027Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/89/31/5056a347bb934ea04583c8b27916ef1501729c72638629545bce26ff4223/google_api_core-2.33.0-py3-none-any.whl", hash = "sha256:a2e22a0c1d0f03eafff1858b38cf46f832d5902b0c052235bf0ab8402929fbdc", size = 176462, upload-time = "2026-07-22T16:28:22.447Z" },
+]
+
+[[package]]
+name = "google-api-python-client"
+version = "2.198.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-api-core" },
+    { name = "google-auth" },
+    { name = "google-auth-httplib2" },
+    { name = "httplib2" },
+    { name = "uritemplate" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6b/53/0cd38e3a29d72ce45e27feba2ce1cd8049d69af9c48cb14fb164f1be9133/google_api_python_client-2.198.0.tar.gz", hash = "sha256:dfe3e16fb241af6e9c460a33f65085b3450e05cea09364f6b5d8997fb7e43e2a", size = 15060142, upload-time = "2026-06-25T14:32:42.953Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d5/92/0fc9e7a09eb240c31b879bd8d2e43f81ed1f86c4798b79ead4a083921ab3/google_api_python_client-2.198.0-py3-none-any.whl", hash = "sha256:fabac935474e817da5e662ff61bf7139439d6f92b32d332a7318a2d45931e03e", size = 15644203, upload-time = "2026-06-25T14:32:39.963Z" },
+]
+
+[[package]]
+name = "google-auth"
+version = "2.56.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cryptography" },
+    { name = "pyasn1-modules" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c7/33/dbc946a407401b975f0719658f18e664ece2109f79ffd1ff3bf226c205f4/google_auth-2.56.2.tar.gz", hash = "sha256:e28f103ca8091fb7012b99c44243d7366c29863713b8e34a220c3322b7a07051", size = 365820, upload-time = "2026-07-21T21:53:28.188Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/88/63/50636aae68c9bf17c891c7eb18b49baa9bd6b31d2a97b8de4813a9fc8d1c/google_auth-2.56.2-py3-none-any.whl", hash = "sha256:c8270ea95b2697b74e3d8438ae9c5b898e38b623b915c7b5c5635921e7de68a6", size = 258588, upload-time = "2026-07-21T21:53:26.399Z" },
+]
+
+[[package]]
+name = "google-auth-httplib2"
+version = "0.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-auth" },
+    { name = "httplib2" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/1c/b3/f192c8bc7e41e0ebdbd95afcae4783417a34b6a6af62d22daf22c3fd38fc/google_auth_httplib2-0.4.0.tar.gz", hash = "sha256:d5b030a204b7a4b4d553ba9ca701b62481ee2b74419325580be70f7d85ffed35", size = 11161, upload-time = "2026-05-07T08:03:46.878Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/97/be/954c35a62b9e31de66b0a43c225c9b6bb9e0f98d6b1dc110a2308e3644f5/google_auth_httplib2-0.4.0-py3-none-any.whl", hash = "sha256:8e55cfafa3358cba85f6cad4a886138e88e158d71e7e5c9ee5936a5c1507fb91", size = 9529, upload-time = "2026-05-07T08:02:12.375Z" },
+]
+
+[[package]]
+name = "google-auth-oauthlib"
+version = "1.4.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-auth" },
+    { name = "requests-oauthlib" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/70/18/90c7fac516e63cf2058166fce0c88c353647c677b51cc036c09c49bb5cbb/google_auth_oauthlib-1.4.0.tar.gz", hash = "sha256:18b5e28880eb8eba9065c436becdc0ee8e4b59117a73a510679c82f70cd363d2", size = 21675, upload-time = "2026-05-07T08:03:47.816Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/37/d3/d7dff0d58a9e9244b48044bfb6a898bfcc8ecc42e0031d1bebc695344725/google_auth_oauthlib-1.4.0-py3-none-any.whl", hash = "sha256:251314f213a9ee46a5ae73988e84fd7cca8bb68e7ecf4bfd45940f9e7f51d070", size = 19261, upload-time = "2026-05-07T08:02:13.798Z" },
+]
+
+[[package]]
+name = "googleapis-common-protos"
+version = "1.75.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "protobuf" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b5/c8/f439cffde755cffa462bfbb156278fa6f9d09119719af9814b858fd4f81f/googleapis_common_protos-1.75.0.tar.gz", hash = "sha256:53a062ff3c32552fbd62c11fe23768b78e4ddf0494d5e5fd97d3f4689c75fbbd", size = 151035, upload-time = "2026-05-07T08:04:49.423Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e7/c8/e2645aa8ed02fd4c7a2f59d68783b65b1f3cbdfe39a6308e156509d1fee8/googleapis_common_protos-1.75.0-py3-none-any.whl", hash = "sha256:961ed60399c457ceb0ee8f285a84c870aabc9c6a832b9d37bb281b5bebde43ed", size = 300631, upload-time = "2026-05-07T08:03:30.345Z" },
+]
+
+[[package]]
+name = "grpcio"
+version = "1.83.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0c/98/304898ac4e04e2d5e4e4c2eadc178b1f2a16d5f4bc2f91306c87d64680b9/grpcio-1.83.0.tar.gz", hash = "sha256:7674587248fbbb2ac6e4eecf83a8a0f3d91a928f941de571acfd3a2f007fbc24", size = 13428824, upload-time = "2026-07-23T15:20:37.759Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/15/2b/51e32514a4e9b715375c99721aadff0f24164cc2049b8269eda4de82a814/grpcio-1.83.0-cp312-cp312-linux_armv7l.whl", hash = "sha256:28f6c35ac8fcf10e4594f138e468f194360089dde40d126a7033e863fc479930", size = 6303167, upload-time = "2026-07-23T15:19:33.78Z" },
+    { url = "https://files.pythonhosted.org/packages/39/33/b5b50fc2c6fbe350e04814047bb2d409feec7b36ef8b170254c050e06bc0/grpcio-1.83.0-cp312-cp312-macosx_11_0_universal2.whl", hash = "sha256:33898e6a28e4ae598f1577cb1c4fec2a15c033d0ec52b9b45a09610dd045b9da", size = 12160538, upload-time = "2026-07-23T15:19:35.958Z" },
+    { url = "https://files.pythonhosted.org/packages/7b/5f/734e72e7b9f79bcf0b2c270b8d3bca0e4ebb97a27a50d06240b145f6d41e/grpcio-1.83.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:6fb8a1dd0c6f0f931e69e9d0dc6d1c406ed2a44fa963414eafba07b7fb685d16", size = 6869310, upload-time = "2026-07-23T15:19:38.607Z" },
+    { url = "https://files.pythonhosted.org/packages/a4/17/a1735f215b2a5cd43c38b79eac072ad197e61be9829905b6b29550abd0db/grpcio-1.83.0-cp312-cp312-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:2b5e75c34842cd9c1b95285ca395c6a569664b81e3ffa6b714125922942abaaf", size = 7613472, upload-time = "2026-07-23T15:19:40.645Z" },
+    { url = "https://files.pythonhosted.org/packages/b2/78/c9e81f806ac704b6b145cb01628db398985b1f8dfdc10e23b55fb0902b3d/grpcio-1.83.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:aeb339838db07600481ef869507279b75326c75eac6d10f7afa62a0da1d2bcdd", size = 7040616, upload-time = "2026-07-23T15:19:42.349Z" },
+    { url = "https://files.pythonhosted.org/packages/9a/ba/94cd5af859876049d340480acbb61a959096c84b567f215534faa78d0424/grpcio-1.83.0-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:f47d62808b4c0a97b78bff88a6d4ca283a2a492b9a04a87d814af95ca3b9c19c", size = 7570491, upload-time = "2026-07-23T15:19:44.357Z" },
+    { url = "https://files.pythonhosted.org/packages/3e/15/108d30d5a5c964312ae8b9cb0e8cc5b3c1cc68d8f757cca52b3565534d26/grpcio-1.83.0-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:62003babc444a606dcd1f009cd16391ce23669ae4ad6ec267a873da7937a69f5", size = 8605036, upload-time = "2026-07-23T15:19:46.454Z" },
+    { url = "https://files.pythonhosted.org/packages/ea/23/3828ae13c3db8233d123ad612747665817b952d8a954f32390230b582336/grpcio-1.83.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:1aa567f8c3f19850ffd5d2858c9a8ea7c80f0db6c01186b71eb31e923ec984f5", size = 7981587, upload-time = "2026-07-23T15:19:48.913Z" },
+    { url = "https://files.pythonhosted.org/packages/17/5b/77af31228f55f55a2a5112bb0077ad0a1c4d23dbb0c2853a62475bbdcc14/grpcio-1.83.0-cp312-cp312-win32.whl", hash = "sha256:cb2906c61db4f9c64cc360054b5df70eeb81846228e9e56a4944bd415a63dadc", size = 4394004, upload-time = "2026-07-23T15:19:50.618Z" },
+    { url = "https://files.pythonhosted.org/packages/c0/da/f706e39550e7a3732ce2b9c5926107a93d74a802775b19b642a6df27dc96/grpcio-1.83.0-cp312-cp312-win_amd64.whl", hash = "sha256:1c699bbb20f143c8f2bff219de578aa2dc1f919399d67dc702b038b986ee62df", size = 5158525, upload-time = "2026-07-23T15:19:52.246Z" },
+    { url = "https://files.pythonhosted.org/packages/56/eb/135daaa713f32d33b8f99b4153b3f8dc3b2a124996ac15581bf9ebdad3c3/grpcio-1.83.0-cp313-cp313-linux_armv7l.whl", hash = "sha256:6662f3b1e07cc7493d437351860dc867bddc6a93c83ecf33bbfdaf0c217ab2d0", size = 6304480, upload-time = "2026-07-23T15:19:53.962Z" },
+    { url = "https://files.pythonhosted.org/packages/8f/a1/121806ce69f23138dabe06aa595b0e5f1ae051a37e4c1954eed7d692c800/grpcio-1.83.0-cp313-cp313-macosx_11_0_universal2.whl", hash = "sha256:74fe6f9e8a35c7dbf32255ee154d15e3e5338a81ed39173d079d594d2e544cd1", size = 12154419, upload-time = "2026-07-23T15:19:56.3Z" },
+    { url = "https://files.pythonhosted.org/packages/b0/e8/d0389e09cd6b4c4d3089b92967ae4e3ffd64795bd349bf2f85cd6656d3da/grpcio-1.83.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:10b3fa0475eb572c9a81a6fe37fa16a9c500c0c91cfc148cac15692b7e3c2867", size = 6873200, upload-time = "2026-07-23T15:19:58.701Z" },
+    { url = "https://files.pythonhosted.org/packages/f8/51/f464c1d211fa50d5adbabe1b2e519948d99c13757052bfc9ea7afa28e284/grpcio-1.83.0-cp313-cp313-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:5f20a988480b0f28207f057f7f7ae1313393c3cef0adcfeae8248f9947eaf881", size = 7618811, upload-time = "2026-07-23T15:20:00.733Z" },
+    { url = "https://files.pythonhosted.org/packages/e8/c0/539fe0832f2dd6500a28f5263071623fb34e8d4867aec632ccf81bd21156/grpcio-1.83.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:7bd82671b39065ba18cd536e9cd45b27ff649053f81ddd2c6a966d595067080f", size = 7042310, upload-time = "2026-07-23T15:20:02.675Z" },
+    { url = "https://files.pythonhosted.org/packages/8c/ca/ccf617d37ffa72567fa8e005ec7090c99da922799be2fb9847c8b21ca18c/grpcio-1.83.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:bc60215b5cb9fc8ca72942c498b551ac2305bd08f6ef8d4e3f0d21b64fbecd61", size = 7575412, upload-time = "2026-07-23T15:20:04.712Z" },
+    { url = "https://files.pythonhosted.org/packages/eb/b9/fd8d5245f823a8e0fd35d90e20ea3aa4acd47f8d5318fa8df307df52dec6/grpcio-1.83.0-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:f1c3e5689d4b90987b1d72022bcfe866a9a3dc66197484cf856d96b6150e7f45", size = 8604248, upload-time = "2026-07-23T15:20:06.77Z" },
+    { url = "https://files.pythonhosted.org/packages/14/1e/f37632fc11db72dfa4bba86c3a43e54358e53030df111ecae5e91a733ad6/grpcio-1.83.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:a21cb4eeeba124443f399be2e8b624943cde864dcbe588cb42e5c483a52a906c", size = 7977458, upload-time = "2026-07-23T15:20:09.109Z" },
+    { url = "https://files.pythonhosted.org/packages/93/b6/d70b69ae5c0cfc341b9ba474980e4ed99cbf05c0e4a14e9eee8cb73db0a5/grpcio-1.83.0-cp313-cp313-win32.whl", hash = "sha256:8fe04f1050a59f875601eb55d42b4f66946fe89817f967e34db1462ccd07dadf", size = 4393993, upload-time = "2026-07-23T15:20:11.017Z" },
+    { url = "https://files.pythonhosted.org/packages/0f/13/45d4cccb555cf4c476226979bf3d2fd0b0254216f7564c3a053e35117efc/grpcio-1.83.0-cp313-cp313-win_amd64.whl", hash = "sha256:6e01ecd9d8ef280abe1365138a4dc318f9a5287f4cb1b41d07816f796653f735", size = 5159650, upload-time = "2026-07-23T15:20:12.979Z" },
+    { url = "https://files.pythonhosted.org/packages/9c/60/f2cca8147ea213d3e43ae9158d03ad04e020fdf32ff027253e1fe93f921d/grpcio-1.83.0-cp314-cp314-linux_armv7l.whl", hash = "sha256:3f351629f6ae16ecc0ec3553e586a6763ffd9f6114044286d0cbec3e09241bfa", size = 6305607, upload-time = "2026-07-23T15:20:15.353Z" },
+    { url = "https://files.pythonhosted.org/packages/d0/ab/d3874931d123a95e83a3ebf8aa04537988fb62425cedb8bf3cefc5ad41b2/grpcio-1.83.0-cp314-cp314-macosx_11_0_universal2.whl", hash = "sha256:d05ff664100d429335b93c91b8b34ddf9e94a112205e7fa06dede309e44a4e4c", size = 12166617, upload-time = "2026-07-23T15:20:17.435Z" },
+    { url = "https://files.pythonhosted.org/packages/92/ff/6f18f9426b69306f4e00a9add3b0ee2748da8aad53836ef80cab0d62d04f/grpcio-1.83.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:7936f2a56cf04f6514705c0fedf400971de01b6aa1719327e4718f410a765e2b", size = 6880213, upload-time = "2026-07-23T15:20:19.98Z" },
+    { url = "https://files.pythonhosted.org/packages/70/21/706d1147c6b93b98f179240c13991fbcc56880eba0c868abb1ad40d8a0a6/grpcio-1.83.0-cp314-cp314-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:b0a0be840e51b6b7ee9df9269770faf77bdf4b771053c257c21d12bad607714c", size = 7618335, upload-time = "2026-07-23T15:20:22.161Z" },
+    { url = "https://files.pythonhosted.org/packages/74/04/1a8443c889115ec9e213a213e86bc93a71ee9088027e5befa09aaa0edd9d/grpcio-1.83.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:009667eaf3dcd5224c713589cdc98e7ca4ed0ff0b61132c6b276e930eb83a2df", size = 7043416, upload-time = "2026-07-23T15:20:24.209Z" },
+    { url = "https://files.pythonhosted.org/packages/86/c6/94e0fee5b12bc1da1370185b680988db6f739d19b42d9959db01a7ea50bf/grpcio-1.83.0-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:bb669918fd88936b15599caff4160a77ab74bdeb25f2231f6e45b61282d6107b", size = 7583253, upload-time = "2026-07-23T15:20:26.313Z" },
+    { url = "https://files.pythonhosted.org/packages/a0/97/de1ccb671fb85575bc5192faedf9ecdbdf5b390d2e6584dcf552bcbd370e/grpcio-1.83.0-cp314-cp314-musllinux_1_2_i686.whl", hash = "sha256:c19b454d3d3f28db81f2c7c4dbaee96e7f6fd149721733ffe79d6bc530f17404", size = 8605102, upload-time = "2026-07-23T15:20:28.437Z" },
+    { url = "https://files.pythonhosted.org/packages/17/0f/0e0ec749a7034ffcbaa050e39779872950ead90c22e7e0116be3f28b2b46/grpcio-1.83.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:61007cd08640abc5c54547ee32505474c482cd733a53cb87551ea81faa6350af", size = 7979826, upload-time = "2026-07-23T15:20:31.182Z" },
+    { url = "https://files.pythonhosted.org/packages/83/fa/c3fda157287f64bc65acee6c5aa90c41acf9e0d3a8e69a265eecff6d00a1/grpcio-1.83.0-cp314-cp314-win32.whl", hash = "sha256:32e11c37f5285b0c6fa3042c05fe06903696689749833fc64e67dec71b9bbe33", size = 4471765, upload-time = "2026-07-23T15:20:33.195Z" },
+    { url = "https://files.pythonhosted.org/packages/a1/00/b1b26431c9d54eee11724fd6e5585473a2ed47fbc1fb95e5204906a642ce/grpcio-1.83.0-cp314-cp314-win_amd64.whl", hash = "sha256:2bb48cb5e6dd005ca12b89ce4b6ac0b48ff3112c747542ee7986ef611a8ca6d9", size = 5298932, upload-time = "2026-07-23T15:20:35.48Z" },
+]
+
+[[package]]
+name = "grpcio-status"
+version = "1.83.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "googleapis-common-protos" },
+    { name = "grpcio" },
+    { name = "protobuf" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/52/fd/848dd7e009de85f8ca59999d1cc618ff8ebf7ea5636d083a47455d212d24/grpcio_status-1.83.0.tar.gz", hash = "sha256:837219c6de9afdccb6f6f72b34bc71e151a2011ef04040e3faaca746a57e54ae", size = 13965, upload-time = "2026-07-23T15:24:26.98Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d6/00/73204406228cf989bea6b0fd9fe4702fab49a8a152a0c6f90856dadb6ac7/grpcio_status-1.83.0-py3-none-any.whl", hash = "sha256:f6a838a7c5fb84ae98833ec0ef81ed438c26e11e54b2ddb8e92ad328c861de69", size = 14636, upload-time = "2026-07-23T15:23:49.044Z" },
+]
+
+[[package]]
 name = "h11"
 version = "0.16.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2036,6 +2198,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/06/94/82699a10bca87a5556c9c59b5963f2d039dbd239f25bc2a63907a05a14cb/httpcore-1.0.9.tar.gz", hash = "sha256:6e34463af53fd2ab5d807f399a9b45ea31c3dfa2276f15a2c3f00afff6e176e8", size = 85484, upload-time = "2025-04-24T22:06:22.219Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/7e/f5/f66802a942d491edb555dd61e3a9961140fd64c90bce1eafd741609d334d/httpcore-1.0.9-py3-none-any.whl", hash = "sha256:2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55", size = 78784, upload-time = "2025-04-24T22:06:20.566Z" },
+]
+
+[[package]]
+name = "httplib2"
+version = "0.32.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyparsing" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/84/f5/ccf58de92d61e3ad921119668f54ed36ca1d0cf5dcc5c1657dfb164fd78b/httplib2-0.32.0.tar.gz", hash = "sha256:48a0ef30a42db65d8f3399045e1d09ab0ba66e3b9efc360d07f80ea55d286025", size = 254283, upload-time = "2026-06-26T10:13:56.265Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/33/a0/550eec327e5f5c7b732531c489f5307efec41f047b0d703bd4ca1e5ad2db/httplib2-0.32.0-py3-none-any.whl", hash = "sha256:dc6705cacdf3fb0a2aba7629fa33c90fd93e30035db0c157325826be177e4816", size = 93148, upload-time = "2026-06-26T10:13:54.985Z" },
 ]
 
 [[package]]
@@ -2087,6 +2261,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/72/34/14ca021ce8e5dfedc35312d08ba8bf51fdd999c576889fc2c24cb97f4f10/iniconfig-2.3.0.tar.gz", hash = "sha256:c76315c77db068650d49c5b56314774a7804df16fee4402c1f19d6d15d8c4730", size = 20503, upload-time = "2025-10-18T21:55:43.219Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/cb/b1/3846dd7f199d53cb17f49cba7e651e9ce294d8497c8c150530ed11865bb8/iniconfig-2.3.0-py3-none-any.whl", hash = "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12", size = 7484, upload-time = "2025-10-18T21:55:41.639Z" },
+]
+
+[[package]]
+name = "isodate"
+version = "0.7.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/54/4d/e940025e2ce31a8ce1202635910747e5a87cc3a6a6bb2d00973375014749/isodate-0.7.2.tar.gz", hash = "sha256:4cd1aa0f43ca76f4a6c6c0292a85f40b35ec2e43e315b59f06e6d32171a953e6", size = 29705, upload-time = "2024-10-08T23:04:11.5Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/15/aa/0aca39a37d3c7eb941ba736ede56d689e7be91cab5d9ca846bde3999eba6/isodate-0.7.2-py3-none-any.whl", hash = "sha256:28009937d8031054830160fce6d409ed342816b543597cece116d966c6d99e15", size = 22320, upload-time = "2024-10-08T23:04:09.501Z" },
 ]
 
 [[package]]
@@ -2308,11 +2491,14 @@ wheels = [
 
 [[package]]
 name = "marshmallow"
-version = "4.3.0"
+version = "3.26.2"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/25/7e/1dbd4096eb7c148cd2841841916f78820bb85a4d80a0c25c02d30815a7fb/marshmallow-4.3.0.tar.gz", hash = "sha256:fb43c53b3fe240b8f6af37223d6ef1636f927ad9bea8ab323afad95dff090880", size = 224485, upload-time = "2026-04-03T21:46:32.72Z" }
+dependencies = [
+    { name = "packaging" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/55/79/de6c16cc902f4fc372236926b0ce2ab7845268dcc30fb2fbb7f71b418631/marshmallow-3.26.2.tar.gz", hash = "sha256:bbe2adb5a03e6e3571b573f42527c6fe926e17467833660bebd11593ab8dfd57", size = 222095, upload-time = "2025-12-22T06:53:53.309Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f4/e0/ff24e25218bb59eb6290a530cea40651b14068b6e3659b20f9c175179632/marshmallow-4.3.0-py3-none-any.whl", hash = "sha256:46c4fe6984707e3cbd485dfebbf0a59874f58d695aad05c1668d15e8c6e13b46", size = 49148, upload-time = "2026-04-03T21:46:31.241Z" },
+    { url = "https://files.pythonhosted.org/packages/be/2f/5108cb3ee4ba6501748c4908b908e55f42a5b66245b4cfe0c99326e1ef6e/marshmallow-3.26.2-py3-none-any.whl", hash = "sha256:013fa8a3c4c276c24d26d84ce934dc964e2aa794345a0f8c7e5a7191482c8a73", size = 50964, upload-time = "2025-12-22T06:53:51.801Z" },
 ]
 
 [[package]]
@@ -2702,6 +2888,33 @@ wheels = [
 ]
 
 [[package]]
+name = "proto-plus"
+version = "1.28.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "protobuf" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/73/3e/29e0d6a2c5adde6ab5772253fd16ab346324026b89a66e354689c86d0584/proto_plus-1.28.2.tar.gz", hash = "sha256:26d843eb99c1e32fdf1d20ff0faae56607f7748fe774acf9ecd5cfe6c6472501", size = 58063, upload-time = "2026-07-22T16:28:29.119Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9d/84/4e9a53a062d4073c74897a6bd20fff74d55307341b3e85c081002462b3ef/proto_plus-1.28.2-py3-none-any.whl", hash = "sha256:b874236fcac2358f601e4330bcb76cb8b89c851303ccf4078408b3d4774d1c52", size = 50693, upload-time = "2026-07-22T16:28:24.059Z" },
+]
+
+[[package]]
+name = "protobuf"
+version = "7.35.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/da/01/9ef0afd7999eb9badb3a768b4aedd78c86d4c65cfaf1958ab276199e76b4/protobuf-7.35.1.tar.gz", hash = "sha256:ce115a26fe0c39a2c29973d914d327e516a6455464489fe3cd1e51a1b354f81a", size = 458717, upload-time = "2026-06-11T21:55:40.257Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/10/03/8aeeb7458d22546bf64b5250ca1daeb5ff757d900e8e4a7476c6f0db843e/protobuf-7.35.1-cp310-abi3-macosx_10_9_universal2.whl", hash = "sha256:24f857477359a85c0c235261b8ba905fd51b2562f4a64ca1df5473f29850cbf6", size = 433226, upload-time = "2026-06-11T21:55:31.719Z" },
+    { url = "https://files.pythonhosted.org/packages/37/4b/dfb89eb0e652a1ff073c39a59fb5e3a83cfe9b57a2c83fa6d78270101767/protobuf-7.35.1-cp310-abi3-manylinux2014_aarch64.whl", hash = "sha256:11d6b0ec246892d85215b0a13ca6e0233cf5284b68f0ac02646427f4ff88a799", size = 328847, upload-time = "2026-06-11T21:55:34.035Z" },
+    { url = "https://files.pythonhosted.org/packages/0f/58/dc12f2cd484951524af6e3382c785869b9b3fb5e52ee95ae23add53ee8f9/protobuf-7.35.1-cp310-abi3-manylinux2014_s390x.whl", hash = "sha256:b73f9489a4b8b1c9cb1f8ed951c736392592edb24b9d6819f36d2e10b171d5b4", size = 344030, upload-time = "2026-06-11T21:55:34.941Z" },
+    { url = "https://files.pythonhosted.org/packages/e4/be/5b3cfe508bfab6761414ff944e3366eb13be4fd71efcd69450f89ba39f43/protobuf-7.35.1-cp310-abi3-manylinux2014_x86_64.whl", hash = "sha256:74758715c53d7158fb76caf4f0cfdacc5329a4b1bb994f865d6cf302d413a1c4", size = 327130, upload-time = "2026-06-11T21:55:35.921Z" },
+    { url = "https://files.pythonhosted.org/packages/d8/bc/6d6c7ba8709c85f8f2c390b2b118d6fb08a783676a572271851bf45a7d22/protobuf-7.35.1-cp310-abi3-win32.whl", hash = "sha256:353652e4efd0bca5b5fc2656abf8307ef351f0cf938c9eba09f0e09c20a25c30", size = 428945, upload-time = "2026-06-11T21:55:37.034Z" },
+    { url = "https://files.pythonhosted.org/packages/0a/19/8d0cb6f20a1ef7b18f1c8986ad5783f22f84cce39c6ce9a6e645ea55192e/protobuf-7.35.1-cp310-abi3-win_amd64.whl", hash = "sha256:230a75ddfc2de4806e56696ce9640c1cdfdb6543b7cfce98d42a4c0a0e7bdb87", size = 439996, upload-time = "2026-06-11T21:55:38.123Z" },
+    { url = "https://files.pythonhosted.org/packages/19/c7/5f7c636ec43e0c545e28d1f1db71990108306f7bdcb89f069ba97e428e7f/protobuf-7.35.1-py3-none-any.whl", hash = "sha256:4bc97768d8fe4ad6743c8a19403e314511ed9f6d13205b687e52421c023ac1b9", size = 171659, upload-time = "2026-06-11T21:55:39.155Z" },
+]
+
+[[package]]
 name = "psycopg"
 version = "3.3.4"
 source = { registry = "https://pypi.org/simple" }
@@ -2760,6 +2973,27 @@ wheels = [
 ]
 
 [[package]]
+name = "pyasn1"
+version = "0.6.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a4/9a/23310166d960def5897e91fe20e5b724601b02a22e84ba1f94232c0b7f67/pyasn1-0.6.4.tar.gz", hash = "sha256:9c447d8431c947fe4c8febc4ed9e760bc29011a5b01e5c74b67025bd9fb8ce81", size = 151262, upload-time = "2026-07-09T01:12:33.988Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9a/3b/6163796d69c3977d1e4287bea4a6979161cbbdd170ebb430511e8e1999ce/pyasn1-0.6.4-py3-none-any.whl", hash = "sha256:deda9277cfd454080ec40b207fb6df82206a3a2688735233cdcd8d3d565f088b", size = 84410, upload-time = "2026-07-09T01:12:32.92Z" },
+]
+
+[[package]]
+name = "pyasn1-modules"
+version = "0.4.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyasn1" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e9/e6/78ebbb10a8c8e4b61a59249394a4a594c1a7af95593dc933a349c8d00964/pyasn1_modules-0.4.2.tar.gz", hash = "sha256:677091de870a80aae844b1ca6134f54652fa2c8c5a52aa396440ac3106e941e6", size = 307892, upload-time = "2025-03-28T02:41:22.17Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/47/8d/d529b5d697919ba8c11ad626e835d4039be708a35b0d22de83a269a6682c/pyasn1_modules-0.4.2-py3-none-any.whl", hash = "sha256:29253a9207ce32b64c3ac6600edc75368f98473906e8fd1043bd6b5b1de2c14a", size = 181259, upload-time = "2025-03-28T02:41:19.028Z" },
+]
+
+[[package]]
 name = "pycparser"
 version = "3.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2781,6 +3015,11 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/18/a5/b60d21ac674192f8ab0ba4e9fd860690f9b4a6e51ca5df118733b487d8d6/pydantic-2.13.4.tar.gz", hash = "sha256:c40756b57adaa8b1efeeced5c196f3f3b7c435f90e84ea7f443901bec8099ef6", size = 844775, upload-time = "2026-05-06T13:43:05.343Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fd/7b/122376b1fd3c62c1ed9dc80c931ace4844b3c55407b6fb2d199377c9736f/pydantic-2.13.4-py3-none-any.whl", hash = "sha256:45a282cde31d808236fd7ea9d919b128653c8b38b393d1c4ab335c62924d9aba", size = 472262, upload-time = "2026-05-06T13:43:02.641Z" },
+]
+
+[package.optional-dependencies]
+email = [
+    { name = "email-validator" },
 ]
 
 [[package]]
@@ -3096,6 +3335,43 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz", hash = "sha256:f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed", size = 142856, upload-time = "2026-05-14T19:25:27.735Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl", hash = "sha256:2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0", size = 73075, upload-time = "2026-05-14T19:25:26.443Z" },
+]
+
+[[package]]
+name = "requests-file"
+version = "3.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3c/f8/5dc70102e4d337063452c82e1f0d95e39abfe67aa222ed8a5ddeb9df8de8/requests_file-3.0.1.tar.gz", hash = "sha256:f14243d7796c588f3521bd423c5dea2ee4cc730e54a3cac9574d78aca1272576", size = 6967, upload-time = "2025-10-20T18:56:42.279Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e1/d5/de8f089119205a09da657ed4784c584ede8381a0ce6821212a6d4ca47054/requests_file-3.0.1-py2.py3-none-any.whl", hash = "sha256:d0f5eb94353986d998f80ac63c7f146a307728be051d4d1cd390dbdb59c10fa2", size = 4514, upload-time = "2025-10-20T18:56:41.184Z" },
+]
+
+[[package]]
+name = "requests-oauthlib"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "oauthlib" },
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/42/f2/05f29bc3913aea15eb670be136045bf5c5bbf4b99ecb839da9b422bb2c85/requests-oauthlib-2.0.0.tar.gz", hash = "sha256:b3dffaebd884d8cd778494369603a9e7b58d29111bf6b41bdc2dcd87203af4e9", size = 55650, upload-time = "2024-03-22T20:32:29.939Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3b/5d/63d4ae3b9daea098d5d6f5da83984853c1bbacd5dc826764b249fe119d24/requests_oauthlib-2.0.0-py2.py3-none-any.whl", hash = "sha256:7dd8a5c40426b779b0868c404bdef9768deccf22749cde15852df527e6269b36", size = 24179, upload-time = "2024-03-22T20:32:28.055Z" },
+]
+
+[[package]]
+name = "requests-toolbelt"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f3/61/d7545dafb7ac2230c70d38d31cbfe4cc64f7144dc41f6e4e4b78ecd9f5bb/requests-toolbelt-1.0.0.tar.gz", hash = "sha256:7681a0a3d047012b5bdc0ee37d7f8f07ebe76ab08caeccfc3921ce23c88d5bc6", size = 206888, upload-time = "2023-05-01T04:11:33.229Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3f/51/d4db610ef29373b879047326cbf6fa98b6c1969d6f6dc423279de2b1be2c/requests_toolbelt-1.0.0-py2.py3-none-any.whl", hash = "sha256:cccfdd665f0a24fcf4726e690f65639d272bb0637b9b92dfd91a5568ccf6bd06", size = 54481, upload-time = "2023-05-01T04:11:28.427Z" },
 ]
 
 [[package]]
@@ -3432,4 +3708,22 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/37/64/17afc4e6f47eef154a553c6e56adcc9f1ac3003305c7df978d11aa62937e/webargs-8.7.1.tar.gz", hash = "sha256:799bf9039c76c23fd8dc1951107a75a9e561203c15d6ae8f89c1e46e234636c1", size = 97351, upload-time = "2025-10-29T16:07:50.066Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/41/ef/b0d17f3943429358184449771b592e0e1d33bbeaa6ed326434a95eac187b/webargs-8.7.1-py3-none-any.whl", hash = "sha256:a184aed9d2509e6e14ab99ee3e9dc3a614c7070affe94cd4dfdb0d002e0a6e5f", size = 32500, upload-time = "2025-10-29T16:07:47.895Z" },
+]
+
+[[package]]
+name = "zeep"
+version = "4.3.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs" },
+    { name = "isodate" },
+    { name = "lxml" },
+    { name = "platformdirs" },
+    { name = "requests" },
+    { name = "requests-file" },
+    { name = "requests-toolbelt" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7e/c2/e06e5f177d818d0fc34fcbe2f98c175af2cba63b7d90f4bfcb6fe360d343/zeep-4.3.3.tar.gz", hash = "sha256:99d5059f92f721020998695fd9c85289ccb03ec5a2398ad49c6dbe43f19cfb94", size = 167372, upload-time = "2026-06-18T17:17:58.994Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b5/87/5c1d29f52fc32da98b75dc8a681cd0de78c9cfd5c10493cd7fb730e1d4b0/zeep-4.3.3-py3-none-any.whl", hash = "sha256:5adfae35582848819f8bb97b6ea9f1a34a2d4851a539f830e14dbab09961dd18", size = 102054, upload-time = "2026-06-18T17:17:57.223Z" },
 ]

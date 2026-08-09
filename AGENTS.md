@@ -41,3 +41,11 @@ One-time: `uv run pre-commit install` (git hooks: ruff + MPL license header + gi
 - Dependencies only in `pyproject.toml` (+ `uv.lock` committed); no `requirements.txt` / `setup.py`.
 - Git flow: `master` (production) + `develop` (integration); changes land via PR.
 - Default: do not commit — git is the user's call.
+
+## Commit Message Format
+
+**NEVER add `Co-Authored-By: Claude ...` (or any other Claude/Anthropic attribution) to commit messages.**
+
+This overrides the default Claude Code behavior of appending a `Co-Authored-By` trailer. Commit messages MUST contain only the user's authored content — no robot footer, no "Generated with Claude Code" line, no co-author trailer.
+
+Same rule applies to PR descriptions: no `Generated with [Claude Code]` footer.
