@@ -949,7 +949,7 @@ google-ads = [
 
 [[package]]
 name = "entirius-django-contentdb"
-version = "5.0.1"
+version = "5.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -970,9 +970,9 @@ dependencies = [
     { name = "python-dateutil" },
     { name = "python-slugify" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/09/d2/c68f5926202bd30f3e59bfc96094add46a3165bd7762f256348befc576e7/entirius_django_contentdb-5.0.1.tar.gz", hash = "sha256:bf5b737ce6c19c3c6b98b59401e1f0a639cd778c95e6c4da483fb32d971c976f", size = 194947, upload-time = "2026-08-06T11:42:10.678Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e1/16/33f608d9715e65429d356f4f09f038643b6c2a154c1680298b53f432f2e7/entirius_django_contentdb-5.1.0.tar.gz", hash = "sha256:57c5456cc3bcee68b699819d412de04773e953be5b19e9c7749f0405f84a6443", size = 204843, upload-time = "2026-08-11T16:25:09.261Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/54/3a/e870237ff1e78d55a375dda94d296df99d9b5477a6f81cc75180ab1d60f6/entirius_django_contentdb-5.0.1-py3-none-any.whl", hash = "sha256:63f616203eaebd88692dc0ac918f03589df819e9b3b8fbe7ddd47ae41656f8f3", size = 116282, upload-time = "2026-08-06T11:42:09.629Z" },
+    { url = "https://files.pythonhosted.org/packages/c7/d6/896c4305531bbc9c6c2748f8df293041825a5498cb6cdf66a9b05d08c6b1/entirius_django_contentdb-5.1.0-py3-none-any.whl", hash = "sha256:e2c4193ae75ee6a0f211eb8f9e7f4841fd35391bf93e06cd077622b778ea3fc8", size = 116218, upload-time = "2026-08-11T16:25:07.995Z" },
 ]
 
 [[package]]
@@ -1879,7 +1879,7 @@ requires-dist = [
     { name = "entirius-django-checkout-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-checkout-import-from-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-contact-forms", extras = ["bookings", "google-ads"], specifier = ">=3.0.0" },
-    { name = "entirius-django-contentdb", specifier = ">=5.0.1" },
+    { name = "entirius-django-contentdb", specifier = ">=5.1.0" },
     { name = "entirius-django-contentdb-translator", specifier = ">=2.0.1" },
     { name = "entirius-django-crypt", specifier = ">=2.0.0" },
     { name = "entirius-django-deliverypoints", specifier = ">=2.1.0" },
