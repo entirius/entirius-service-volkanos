@@ -90,6 +90,12 @@ dependencies = [
     "entirius-django-omnibus>=3.0.1",
     "dj-database-url>=2.2",
     "psycopg[binary]>=3.2",
+    # django_lookup (private module, editable in zeno dev mode) — runtime deps absent from the module
+    # registry lock: pgvector column/index types, image hashing, fuzzy scoring, GTIN check digits.
+    "pgvector>=0.3",
+    "imagehash>=4.3",
+    "rapidfuzz>=3.0",
+    "python-stdnum>=1.20",
 ]
 
 [project.urls]
