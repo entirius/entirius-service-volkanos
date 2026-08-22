@@ -4,8 +4,6 @@ Volkanos — base Django service of the Entirius platform. A thin shell (Django 
 that bottom-up adopts `entirius-py-*` / `entirius-django-*` modules, each released
 as its own repo and usable standalone.
 
-Status: **Stage 0** — clean skeleton, no business modules yet.
-
 ## Stack
 
 - Django 5.2+ with Django REST Framework

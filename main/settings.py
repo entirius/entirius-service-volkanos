@@ -10,6 +10,7 @@ lives in main/settings_local.py (gitignored) — REQUIRED, one per environment;
 template: main/settings_example.py. The service refuses to boot without it.
 """
 
+import tomllib
 from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
@@ -94,10 +95,13 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "main.v2_errors.volkanos_exception_handler",
 }
 
+with (BASE_DIR / "pyproject.toml").open("rb") as _pyproject:
+    _PROJECT_VERSION = tomllib.load(_pyproject)["project"]["version"]
+
 SPECTACULAR_SETTINGS = {
     "TITLE": "Entirius Volkanos Service API",
     "DESCRIPTION": "Base Volkanos service of the Entirius platform",
-    "VERSION": "3.0.0a1",
+    "VERSION": _PROJECT_VERSION,
     "SERVE_INCLUDE_SCHEMA": False,
 }
 
