@@ -82,6 +82,8 @@ if "django_atlas" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_atlas.urls")))
 if "django_pricefighter" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pricefighter.urls")))
+if "django_lookup" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_lookup.urls")))
 if settings.DEBUG:
     from django.conf.urls.static import static
 

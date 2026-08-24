@@ -103,6 +103,10 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Base Volkanos service of the Entirius platform",
     "VERSION": _PROJECT_VERSION,
     "SERVE_INCLUDE_SCHEMA": False,
+    # Modules describe their Pydantic schemas with `examples` (JSON Schema 2020-12), which is
+    # only legal from OpenAPI 3.1 on — under the 3.0.3 default `spectacular --validate` fails
+    # on every module that documents an example. Module settings already declare 3.1.0.
+    "OAS_VERSION": "3.1.0",
 }
 
 LANGUAGE_CODE = "en-us"
