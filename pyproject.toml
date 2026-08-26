@@ -55,9 +55,9 @@ dependencies = [
     "entirius-py-magento2-sdk2>=2.0.0",
     "entirius-django-regional>=2.0.1",
     "entirius-django-utils>=2.0.0",
-    "entirius-django-pim>=3.1.0",
+    "entirius-django-pim>=3.2.0",
     "entirius-django-utils-translator>=2.0.0",
-    "entirius-django-pricemanager>=4.1.0",
+    "entirius-django-pricemanager>=4.2.0",
     "entirius-django-pim-csv>=3.0.0",
     "entirius-django-pim-translator>=2.0.0",
     "entirius-django-pim-export-to-magento-api>=2.1.0",
@@ -88,14 +88,11 @@ dependencies = [
     "entirius-django-getresponse>=3.0.0",
     "entirius-django-returns>=3.0.0",
     "entirius-django-omnibus>=3.0.1",
+    "entirius-django-lookup>=0.1.0",
+    "entirius-django-atlas[qms,lookup]>=2.0.0",
+    "entirius-django-pricefighter[pim]>=1.0.0",
     "dj-database-url>=2.2",
     "psycopg[binary]>=3.2",
-    # django_lookup (private module, editable in zeno dev mode) — runtime deps absent from the module
-    # registry lock: pgvector column/index types, image hashing, fuzzy scoring, GTIN check digits.
-    "pgvector>=0.3",
-    "imagehash>=4.3",
-    "rapidfuzz>=3.0",
-    "python-stdnum>=1.20",
 ]
 
 [project.urls]
