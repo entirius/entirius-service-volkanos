@@ -1079,7 +1079,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-enrichment"
-version = "2.0.0"
+version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1090,9 +1090,9 @@ dependencies = [
     { name = "entirius-django-utils" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/23/6c/a07eff26e14348b0d2cfa7bca491778448d9fb2ceb51aea8e73472fa1cb5/entirius_django_enrichment-2.0.0.tar.gz", hash = "sha256:d32aa475c71f4b1c80228217cf8a5ab9814b3a9eae78f9e6bc5006e8180147ac", size = 147730, upload-time = "2026-07-11T03:19:55.337Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8a/eb/26596d3851d17d47c8eae42e6220bd51df8da4dadda9824a4d79f09f032d/entirius_django_enrichment-2.1.0.tar.gz", hash = "sha256:bad3a8e7787f0257ec526d0cb5509ab8f3414ea03e170bd7d23eb63e6e95b91f", size = 157451, upload-time = "2026-08-26T22:16:31.138Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/56/9c/4ac613e7d2f5b7d1ac867e04867f0f0be9c56a75a87efe623c41d9e69450/entirius_django_enrichment-2.0.0-py3-none-any.whl", hash = "sha256:4937ca6e46857de4ae29453429485f53b0044b1da917c8d40185e23b792a2044", size = 75913, upload-time = "2026-07-11T03:19:54.445Z" },
+    { url = "https://files.pythonhosted.org/packages/49/08/7339579f2655cab413ac4fa0a5ddc23a4a05b716891ea48720c766a71646/entirius_django_enrichment-2.1.0-py3-none-any.whl", hash = "sha256:2bd6da4d6c7f28c6f65b6a07751ec0f373b794e5bc47b6466e9287457ebe2c17", size = 76736, upload-time = "2026-08-26T22:16:30.199Z" },
 ]
 
 [[package]]
@@ -1138,7 +1138,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-lookup"
-version = "0.1.0"
+version = "0.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1155,9 +1155,9 @@ dependencies = [
     { name = "rapidfuzz" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ba/59/fa84832041ebbdf6f22a3fc2dde692683a7a87d2a7a393e763ada6b52d87/entirius_django_lookup-0.1.0.tar.gz", hash = "sha256:b4b36f9d876690a089e6a401aa1e99bb810c2c5b56f0bd75f56598b8d97a09bc", size = 204458, upload-time = "2026-08-26T13:22:31.232Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7c/a6/469d4a2aa0386168e194aac1d41d94154cd0f655df591818e6da48c025c2/entirius_django_lookup-0.1.1.tar.gz", hash = "sha256:56d7fc107130160dec4ec22d8e0a927efb2f6ad1b7d578d421489ae22c0d59ee", size = 207200, upload-time = "2026-08-26T22:11:29.907Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e2/64/d15d1272ecf585a32a3e02c75c149f1c7c8a1f6e281ec081113548984568/entirius_django_lookup-0.1.0-py3-none-any.whl", hash = "sha256:f21f77c0292a1fdac109c3f30ef873c1193c4048a11a167c023ade231e119f7a", size = 90489, upload-time = "2026-08-26T13:22:30.051Z" },
+    { url = "https://files.pythonhosted.org/packages/88/73/ef9e4183581c4fe1574e68fb373430851caec96e879bbf577c3e6ba7d42e/entirius_django_lookup-0.1.1-py3-none-any.whl", hash = "sha256:9761cf9eba8b6e82e511171d2ea334ad308dc3164b6ef140443a73a3393e21de", size = 91702, upload-time = "2026-08-26T22:11:28.79Z" },
 ]
 
 [[package]]
@@ -1968,10 +1968,10 @@ requires-dist = [
     { name = "entirius-django-crypt", specifier = ">=2.0.0" },
     { name = "entirius-django-deliverypoints", specifier = ">=2.1.0" },
     { name = "entirius-django-email", specifier = ">=4.0.1" },
-    { name = "entirius-django-enrichment", specifier = ">=2.0.0" },
+    { name = "entirius-django-enrichment", specifier = ">=2.1.0" },
     { name = "entirius-django-faq", specifier = ">=2.0.0" },
     { name = "entirius-django-getresponse", specifier = ">=3.0.0" },
-    { name = "entirius-django-lookup", specifier = ">=0.1.0" },
+    { name = "entirius-django-lookup", specifier = ">=0.1.1" },
     { name = "entirius-django-matrix", extras = ["qms", "pricemanager"], specifier = ">=4.3.0" },
     { name = "entirius-django-munin", specifier = ">=2.0.0" },
     { name = "entirius-django-omnibus", specifier = ">=3.0.1" },
