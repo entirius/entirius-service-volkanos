@@ -4,8 +4,6 @@
 
 """URL routing for the Entirius Volkanos service."""
 
-import importlib.util
-
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
@@ -84,8 +82,7 @@ if "django_siteintel" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_siteintel.urls")))
 if "django_communicator" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_communicator.urls")))
-# django_leads ships urls.py with its first plan; the find_spec guard keeps the service booting before that.
-if "django_leads" in settings.INSTALLED_APPS and importlib.util.find_spec("django_leads.urls"):
+if "django_leads" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_leads.urls")))
 if "django_regon_api" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_regon_api.urls")))

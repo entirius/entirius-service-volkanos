@@ -54,9 +54,9 @@ dependencies = [
     "entirius-py-get-response-sdk>=3.0.0",
     "entirius-py-magento2-sdk2>=2.0.0",
     "entirius-django-regional>=2.0.1",
-    "entirius-django-utils>=2.0.0",
+    "entirius-django-utils>=2.1.0",
     "entirius-django-pim>=3.2.0",
-    "entirius-django-utils-translator>=2.0.0",
+    "entirius-django-utils-translator>=2.1.0",
     "entirius-django-pricemanager>=4.2.0",
     "entirius-django-pim-csv>=3.0.0",
     "entirius-django-pim-translator>=2.0.0",
@@ -64,7 +64,7 @@ dependencies = [
     "entirius-django-faq>=2.0.0",
     "entirius-django-munin>=2.0.0",
     "entirius-django-captcha>=2.0.0",
-    "entirius-django-agreements>=2.0.0",
+    "entirius-django-agreements>=2.1.0",
     "entirius-django-deliverypoints>=2.1.0",
     "entirius-django-qms>=4.0.2",
     "entirius-django-email>=4.0.1",
@@ -91,12 +91,32 @@ dependencies = [
     "entirius-django-lookup>=0.1.1",
     "entirius-django-atlas[qms,lookup]>=2.0.0",
     "entirius-django-pricefighter[pim]>=1.0.0",
+    "entirius-django-notifications>=0.1.0",
+    "entirius-django-siteintel>=0.1.0",
+    "entirius-django-communicator>=0.1.0",
+    "entirius-django-leads>=0.1.0",
     "dj-database-url>=2.2",
     "psycopg[binary]>=3.2",
 ]
 
 [project.urls]
 Repository = "https://github.com/entirius/entirius-service-volkanos"
+
+[tool.uv.sources]
+# until entirius-django-utils is on PyPI (plan 15 replaces this with the published floor)
+entirius-django-utils = { path = "../../django/entirius-django-utils", editable = true }
+# until entirius-django-utils-translator is on PyPI (plan 15 replaces this with the published floor)
+entirius-django-utils-translator = { path = "../../django/entirius-django-utils-translator", editable = true }
+# until entirius-django-agreements is on PyPI (plan 15 replaces this with the published floor)
+entirius-django-agreements = { path = "../../django/entirius-django-agreements", editable = true }
+# until entirius-django-notifications is on PyPI (plan 15 replaces this with the published floor)
+entirius-django-notifications = { path = "../../django/entirius-django-notifications", editable = true }
+# until entirius-django-siteintel is on PyPI (plan 15 replaces this with the published floor)
+entirius-django-siteintel = { path = "../../django/entirius-django-siteintel", editable = true }
+# until entirius-django-communicator is on PyPI (plan 15 replaces this with the published floor)
+entirius-django-communicator = { path = "../../django/entirius-django-communicator", editable = true }
+# until entirius-django-leads is on PyPI (plan 15 replaces this with the published floor)
+entirius-django-leads = { path = "../../django/entirius-django-leads", editable = true }
 
 [dependency-groups]
 dev = [
