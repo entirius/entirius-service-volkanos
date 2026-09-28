@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `entirius-django-pim>=3.2.2` (was 3.2.0): category import keeps hand-written descriptions;
+  `Product.thumb_picture` no longer raises. Also brings 3.2.1's lookup hit shape.
+- `entirius-django-lookup>=0.3.0` (was 0.1.1): the pim 3.2.x provider expects the 0.2.0+ hit
+  shape; 0.3.0 adds brand-strip symmetry and the word-similarity leg.
+
 ## [3.0.0rc7] - 2026-07-31
 
 Supplementary Core migrations — contact forms and REGON lookup join the platform.
