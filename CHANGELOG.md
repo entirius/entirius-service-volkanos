@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0rc10] - 2026-09-30
+
+### Security
+
+- PyJWT 2.14.0 (advisories published 2026-09-30, one critical). oauthlib stays at 3.3.1: 4.0.0 would force django-allauth
+  back from 65.18 to 65.9 (newer allauth caps oauthlib < 4) — the two medium oauthlib alerts stay open until allauth
+  supports oauthlib 4.
+
 ## [3.0.0rc9] - 2026-09-30
 
 Leads platform and the CMS 3.0 backend: every module from PyPI, security lock refresh.
