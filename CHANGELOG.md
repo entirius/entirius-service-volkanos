@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- `entirius-django-pim>=3.3.1` — the legacy `/api-viewer/pim/` routes (11, one of them an anonymous PUT that
+  overwrote `Attribute.extension`) require a staff JWT.
+
 ## [3.0.0] - 2026-09-30
 
 First final release of the 3.0 line: every platform module from PyPI, the leads platform, and the CMS 3.x backend.
