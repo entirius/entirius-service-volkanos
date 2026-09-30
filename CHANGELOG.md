@@ -6,6 +6,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0rc9] - 2026-09-30
+
+Leads platform and the CMS 3.0 backend: every module from PyPI, security lock refresh.
+
+### Added
+
+- Leads platform modules from PyPI — `entirius-django-notifications[googlechat]`, `entirius-django-siteintel>=0.2.0`,
+  `entirius-django-communicator>=0.3.0`, `entirius-django-leads>=0.3.0` (deps, LOCAL_APPS template entries, guarded URL
+  includes); the CMS Leads panel (inbox, review, board, lead types, contacts) runs on them.
+- `entirius-django-lookup`, `entirius-django-atlas`, `entirius-django-pricefighter` from PyPI with their routes mounted
+  when installed; lookup runtime deps (pgvector, imagehash, rapidfuzz, python-stdnum).
+
+### Changed
+
+- Floors: `entirius-django-munin>=2.2.0` (configuration health `health/`), `entirius-django-email>=4.1.0` (per-channel
+  SMTP status and checks), `entirius-django-pim>=3.2.2`, `entirius-django-lookup>=0.3.0`, `entirius-django-contentdb>=5.1.0`,
+  utils 2.2.0, pim-csv 4.0.0; path sources removed — every module resolves from PyPI.
+- OpenAPI 3.1 schema (Pydantic examples validate); the API version is read from `pyproject.toml`.
+
+### Security
+
+- Lock refresh closing the open Dependabot alerts: anyio 4.14.2, cryptography 50.0.1, Django 6.0.8, Django REST
+  framework 3.17.2, sqlparse 0.6.0, soupsieve 2.10. PyPDF2 has no fixed release (abandoned upstream) and stays open.
+
 ## [3.0.0rc7] - 2026-07-31
 
 Supplementary Core migrations — contact forms and REGON lookup join the platform.

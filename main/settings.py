@@ -10,6 +10,7 @@ lives in main/settings_local.py (gitignored) — REQUIRED, one per environment;
 template: main/settings_example.py. The service refuses to boot without it.
 """
 
+import tomllib
 from pathlib import Path
 
 from django.core.exceptions import ImproperlyConfigured
@@ -94,11 +95,18 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "main.v2_errors.volkanos_exception_handler",
 }
 
+with (BASE_DIR / "pyproject.toml").open("rb") as _pyproject:
+    _PROJECT_VERSION = tomllib.load(_pyproject)["project"]["version"]
+
 SPECTACULAR_SETTINGS = {
     "TITLE": "Entirius Volkanos Service API",
     "DESCRIPTION": "Base Volkanos service of the Entirius platform",
-    "VERSION": "3.0.0a1",
+    "VERSION": _PROJECT_VERSION,
     "SERVE_INCLUDE_SCHEMA": False,
+    # Modules describe their Pydantic schemas with `examples` (JSON Schema 2020-12), which is
+    # only legal from OpenAPI 3.1 on — under the 3.0.3 default `spectacular --validate` fails
+    # on every module that documents an example. Module settings already declare 3.1.0.
+    "OAS_VERSION": "3.1.0",
 }
 
 LANGUAGE_CODE = "en-us"
