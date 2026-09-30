@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.1] - 2026-09-30
+
 ### Security
 
 - `entirius-django-pim>=3.3.1` — the legacy `/api-viewer/pim/` routes (11, one of them an anonymous PUT that
