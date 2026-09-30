@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-09-30
+
+First final release of the 3.0 line: every platform module from PyPI, the leads platform, and the CMS 3.x backend.
+
+### Changed
+
+- `entirius-django-pim>=3.3.0` — required features per feature set (off by default,
+  `PIM_ENFORCE_REQUIRED_ON_CREATE` / `PIM_STRICT_CREATE`), declared units of weight/dimensions; migration `django_pim.0063`.
+  CMS 3.1.0 detects it and renders required fields on product create.
+- `entirius-django-pim-csv>=4.1.0` — optional `required` column in the features-in-feature-sets CSV.
+- `entirius-django-pricemanager>=4.2.1` — `manage-pricelists` exits cleanly with no price lists.
+
+### Verified
+
+- Full harness `LOCAL_APPS` (43 apps) on PostgreSQL 16 + pgvector: 515 migrations across 44 apps apply,
+  `makemigrations --check` clean, `manage.py check` with only the dev-config warnings rc10 also had; pytest and ruff green.
+
 ## [3.0.0rc10] - 2026-09-30
 
 ### Security
