@@ -1308,7 +1308,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-pim"
-version = "3.3.0"
+version = "3.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1336,9 +1336,9 @@ dependencies = [
     { name = "trafaret" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/07/b8/e2d98deadef8c64776a12c6140c462c494bcd940fc1a9250d28da06edc01/entirius_django_pim-3.3.0.tar.gz", hash = "sha256:d7962ea4f0c482378340aedf8ed36fbb5be1f9ff8f59829dbd65aec38c7998e9", size = 482995, upload-time = "2026-09-30T11:28:06.93Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/95/30/467df063fa2d5d1394cb22762b15cf706f8a8a8332e1fd5338769d7a7adb/entirius_django_pim-3.3.1.tar.gz", hash = "sha256:837654ae9c28cd604744a339682db2bf1e016894e68db2a1b56b9dda7f8a7750", size = 484334, upload-time = "2026-09-30T16:09:14.453Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4a/26/d495090c5fe89cdc026bce43415224e261bd868adf00e2505b3642b59dd9/entirius_django_pim-3.3.0-py3-none-any.whl", hash = "sha256:b5d353038fc65cc455146d31426f151c9ef24c0a34cddf5f3e66684fb55ec402", size = 352714, upload-time = "2026-09-30T11:28:05.508Z" },
+    { url = "https://files.pythonhosted.org/packages/47/36/cf1d99413a30a421922c54862e3f82b7b57c9ddc1ea2d9db3d9788708111/entirius_django_pim-3.3.1-py3-none-any.whl", hash = "sha256:0104129f77335a1a14eb215009975caf0ab983b8c615162853c4850d55059dd9", size = 353592, upload-time = "2026-09-30T16:09:12.813Z" },
 ]
 
 [[package]]
@@ -1974,7 +1974,7 @@ wheels = [
 
 [[package]]
 name = "entirius-service-volkanos"
-version = "3.0.0"
+version = "3.0.1"
 source = { editable = "." }
 dependencies = [
     { name = "dj-database-url" },
@@ -2091,7 +2091,7 @@ requires-dist = [
     { name = "entirius-django-munin", specifier = ">=2.2.0" },
     { name = "entirius-django-notifications", extras = ["googlechat"], specifier = ">=0.1.0" },
     { name = "entirius-django-omnibus", specifier = ">=3.0.1" },
-    { name = "entirius-django-pim", specifier = ">=3.3.0" },
+    { name = "entirius-django-pim", specifier = ">=3.3.1" },
     { name = "entirius-django-pim-csv", specifier = ">=4.1.0" },
     { name = "entirius-django-pim-export-to-magento-api", specifier = ">=2.1.0" },
     { name = "entirius-django-pim-translator", specifier = ">=2.0.0" },
