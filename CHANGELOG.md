@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `AUTHENTICATION_BACKENDS` registers `django_accounts.backends.JWTAccessBackend` (before `ModelBackend`) when
+  `django_accounts` is installed. Without it the customer Bearer token was never read: `customer/me/`, profile,
+  addresses, wishlist, password change, logout, and the checkout/returns/vault customer views answered 401.
+
 ## [3.0.1] - 2026-09-30
 
 ### Security
