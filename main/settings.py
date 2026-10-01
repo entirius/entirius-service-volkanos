@@ -164,3 +164,10 @@ if "JWT_SECRET" not in globals():
     JWT_SECRET = SECRET_KEY  # noqa: F405
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+# django_accounts customer views (@authenticate) call django.contrib.auth.authenticate(request), which only
+# tries these backends: without JWTAccessBackend no customer Bearer token is read and every customer endpoint
+# is 401. ModelBackend stays for the Django admin login.
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
+if "django_accounts" in INSTALLED_APPS:
+    AUTHENTICATION_BACKENDS.insert(0, "django_accounts.backends.JWTAccessBackend")
