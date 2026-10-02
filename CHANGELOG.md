@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Access wiring: when `entirius-django-access` is importable, `django_access` joins `INSTALLED_APPS`, the
+  `AccessGateMiddleware` is appended last to `MIDDLEWARE`, its URLs are mounted (`api/access/v2/`) and the OpenAPI
+  document gains the `ApiKeyAuth` scheme on the token-scope routes. The gate runs in its default `enforce` mode;
+  environments override `ACCESS_GATE_MODE` in `settings_local`.
+- `tests/test_access_routes.py`: every admin route has an access area, the token-scope routes stay outside the admin
+  set; `tests/test_access_security.py`: public set untouched (0 queries), admin principal sweep (a token is anonymous
+  there), route-map invariants, path mutations, OpenAPI exposure, no `x-api-admin-key` in CORS.
+
 ## [3.0.1] - 2026-09-30
 
 ### Security

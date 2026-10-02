@@ -10,6 +10,7 @@ lives in main/settings_local.py (gitignored) — REQUIRED, one per environment;
 template: main/settings_example.py. The service refuses to boot without it.
 """
 
+import importlib.util
 import tomllib
 from pathlib import Path
 
@@ -163,4 +164,18 @@ if _missing:
 if "JWT_SECRET" not in globals():
     JWT_SECRET = SECRET_KEY  # noqa: F405
 
+# Platform module owned by the service: installed wherever it is importable (no environment lists it).
+if importlib.util.find_spec("django_access") and "django_access" not in LOCAL_APPS:  # noqa: F405
+    LOCAL_APPS = [*LOCAL_APPS, "django_access"]  # noqa: F405
+
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+if "django_access" in INSTALLED_APPS:
+    # The admin gate decides after authentication; last, so it sees the resolved view.
+    MIDDLEWARE = [*MIDDLEWARE, "django_access.middleware.AccessGateMiddleware"]
+    # The ApiKeyAuth scheme on the key routes, after the default (or the environment's) hooks.
+    _hooks = SPECTACULAR_SETTINGS.get("POSTPROCESSING_HOOKS", ["drf_spectacular.hooks.postprocess_schema_enums"])
+    SPECTACULAR_SETTINGS = {
+        **SPECTACULAR_SETTINGS,
+        "POSTPROCESSING_HOOKS": [*_hooks, "django_access.openapi.add_api_key_security"],
+    }
