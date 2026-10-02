@@ -12,12 +12,14 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
+
+from apps.platform.auth_views import ThrottledTokenObtainPairView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # JWT for module admin APIs (v2, IsAdminUser) and the CMS admin panel.
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    # JWT for module admin APIs (v2, IsAdminUser) and the CMS admin panel; failed logins are throttled.
+    path("api/token/", ThrottledTokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
