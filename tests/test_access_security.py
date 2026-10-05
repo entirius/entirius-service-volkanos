@@ -130,12 +130,21 @@ def expected(info, callback, method: str, who: Who) -> tuple:
         return (True, 200, None, False) if info.self_auth else (False, 401, "NOT_AUTHENTICATED", False)
     needed = route_map.required_permission(info, method)
     if who.user.is_superuser:
-        return True, 200, None, needed.endswith(":write")
+        return True, 200, None, superuser_writes(needed, method)
     if not who.user.is_staff:
         return False, 403, "STAFF_ONLY", False
     if needed == "staff.baseline" or (who.name == "viewer" and viewer_reads(needed)):
         return True, 200, None, False
     return False, 403, "ACCESS_DENIED", False
+
+
+def superuser_writes(needed: str, method: str) -> bool:
+    """A bypass row: a write permission, or an unsafe method behind ``superuser.only`` (the Django admin, D32)."""
+    from django_access.catalogue.areas import SUPERUSER_ONLY
+
+    if needed == SUPERUSER_ONLY:
+        return method not in ("GET", "HEAD", "OPTIONS")
+    return needed.endswith(":write")
 
 
 def viewer_reads(needed: str) -> bool:
