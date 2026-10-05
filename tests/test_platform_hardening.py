@@ -18,6 +18,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from apps.platform.checks import CHECK_TAG, check_num_proxies
 from main.security import SCHEMA_SERVE_PERMISSIONS, with_num_proxies, with_schema_access
+from tests.conftest import requires_access
 
 PASSWORD = "correct-horse-battery"  # noqa: S105 — throwaway test user
 SCHEMA_PATHS = ("/api/schema/", "/api/schema/swagger-ui/", "/api/schema/redoc/")
@@ -134,6 +135,7 @@ def _login(client, username: str, password: str, addr: str = "192.0.2.10", **ext
     return client.post("/api/token/", body, content_type="application/json", REMOTE_ADDR=addr, **extra).status_code
 
 
+@requires_access
 @pytest.mark.django_db
 def test_ten_failures_block_the_user_on_that_address_even_with_the_right_password(client, staff):
     assert [_login(client, "staffer", "wrong") for _ in range(10)] == [401] * 10
@@ -148,6 +150,7 @@ def test_ten_failures_block_the_user_on_that_address_even_with_the_right_passwor
     assert _login(client, "staffer", PASSWORD, addr="192.0.2.99") == 200
 
 
+@requires_access
 @pytest.mark.django_db
 def test_hundred_failures_over_usernames_block_the_address(client, staff):
     assert {_login(client, f"guess{i}", "wrong") for i in range(100)} == {401}
@@ -155,12 +158,14 @@ def test_hundred_failures_over_usernames_block_the_address(client, staff):
     assert _login(client, "staffer", PASSWORD, addr="192.0.2.99") == 200
 
 
+@requires_access
 @pytest.mark.django_db
 def test_successful_logins_are_never_counted(client, staff, login_cache):
     assert {_login(client, "staffer", PASSWORD) for _ in range(50)} == {200}
     assert not login_cache._cache
 
 
+@requires_access
 @pytest.mark.django_db
 def test_success_clears_the_user_address_counter(client, staff):
     for _ in range(2):
@@ -168,6 +173,7 @@ def test_success_clears_the_user_address_counter(client, staff):
         assert _login(client, "staffer", PASSWORD) == 200
 
 
+@requires_access
 @pytest.mark.django_db
 def test_cache_keys_hold_neither_username_nor_address(client, staff, login_cache):
     _login(client, "staffer", "wrong")
@@ -176,6 +182,7 @@ def test_cache_keys_hold_neither_username_nor_address(client, staff, login_cache
     assert not [k for k in keys if "staffer" in k or "192.0.2.10" in k]
 
 
+@requires_access
 @pytest.mark.django_db
 def test_spoofed_leading_forwarded_entry_keeps_the_visitor_blocked(client, staff, settings):
     settings.REST_FRAMEWORK = {**settings.REST_FRAMEWORK, "NUM_PROXIES": 1}
@@ -185,6 +192,7 @@ def test_spoofed_leading_forwarded_entry_keeps_the_visitor_blocked(client, staff
     assert _login(client, "staffer", PASSWORD, **spoofed) == 429
 
 
+@requires_access
 @pytest.mark.django_db
 def test_padded_username_hits_the_same_counter(client, staff):
     assert [_login(client, "staffer", "wrong") for _ in range(10)] == [401] * 10

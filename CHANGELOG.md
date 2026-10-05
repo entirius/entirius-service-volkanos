@@ -33,7 +33,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   address (`AUTH_TOKEN_MAX_FAILURES_PER_IP`, 100) within `AUTH_TOKEN_FAILURE_WINDOW_S` (900 s); at the limit it
   answers 429 with `Retry-After`, also for a correct password. Successes are never counted and clear the username +
   address counter; cache keys hold hashes only. Behaviour change for anyone scripting `api/token/` with wrong
-  passwords. The CMS customer login (`customer/tokens/`) is not covered.
+  passwords. The counter is access' public `django_access.services.login_guard` (same settings and key shape); without
+  `django_access` installed `api/token/` is SimpleJWT's own view, unthrottled. The CMS customer login
+  (`customer/tokens/`) is not covered yet (accounts adopts the guard).
 
 ## [3.0.1] - 2026-09-30
 

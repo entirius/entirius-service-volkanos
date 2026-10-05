@@ -12,14 +12,17 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from apps.platform.auth_views import ThrottledTokenObtainPairView
+if "django_access" in settings.INSTALLED_APPS:
+    from apps.platform.auth_views import ThrottledTokenObtainPairView as StaffTokenView
+else:  # the failed-login guard lives in django_access: without it the login is SimpleJWT's own
+    StaffTokenView = TokenObtainPairView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # JWT for module admin APIs (v2, IsAdminUser) and the CMS admin panel; failed logins are throttled.
-    path("api/token/", ThrottledTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    # JWT for module admin APIs (v2, IsAdminUser) and the CMS admin panel; failed logins are throttled (access).
+    path("api/token/", StaffTokenView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(

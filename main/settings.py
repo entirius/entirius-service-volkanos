@@ -153,8 +153,8 @@ SITE_ID = 1  # django.contrib.sites (allauth)
 DRF_NUM_PROXIES: int | None = None
 # The OpenAPI document and its swagger/redoc UIs are served to staff only unless this is True.
 API_SCHEMA_PUBLIC = False
-# Failed-login throttle on api/token/ (apps.platform.auth_views): failures per window, per username + address and
-# per address; successes are never counted.
+# Failed-login throttle on api/token/ (apps.platform.auth_views → django_access.services.login_guard, which reads
+# these): failures per window, per username + address and per address; successes are never counted.
 AUTH_TOKEN_FAILURE_WINDOW_S = 900
 AUTH_TOKEN_MAX_FAILURES_PER_USER_IP = 10
 AUTH_TOKEN_MAX_FAILURES_PER_IP = 100

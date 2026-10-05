@@ -41,7 +41,7 @@ Defaults live in `main/settings.py`; values that feed DRF / drf-spectacular are 
 |---|---|---|
 | `DRF_NUM_PROXIES` | `None` | trusted `X-Forwarded-For` hops for per-IP throttles; `1` behind Cloudflare → Caddy → nginx; unset with `DEBUG=False` → `volkanos.W001` |
 | `API_SCHEMA_PUBLIC` | `False` | `True` serves `api/schema/`, swagger-ui and redoc anonymously; otherwise staff only |
-| `AUTH_TOKEN_FAILURE_WINDOW_S` | `900` | window of the failed-login counters on `api/token/` |
+| `AUTH_TOKEN_FAILURE_WINDOW_S` | `900` | window of the failed-login counters on `api/token/` (read by `django_access.services.login_guard`; no access, no counter) |
 | `AUTH_TOKEN_MAX_FAILURES_PER_USER_IP` | `10` | failures per username + address before 429 |
 | `AUTH_TOKEN_MAX_FAILURES_PER_IP` | `100` | failures per address before 429 |
 
