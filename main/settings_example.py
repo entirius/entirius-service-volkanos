@@ -21,6 +21,8 @@ ENVIRONMENT = "development"
 SECRET_KEY = "django-insecure-dev-only-change-me"
 DEBUG = True
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+# X-Forwarded-For hops in front of the app (0 = none); unset fails check --deploy (volkanos.E001) — choose it.
+# DRF_NUM_PROXIES = 0
 
 # DATABASE_URL drives the engine (e.g. postgres under entirius-zeno / CI);
 # bare local dev falls back to sqlite.

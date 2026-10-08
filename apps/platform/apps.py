@@ -16,4 +16,4 @@ class PlatformConfig(AppConfig):
 
         from apps.platform.checks import CHECK_TAG, check_num_proxies
 
-        checks.register(check_num_proxies, CHECK_TAG)
+        checks.register(check_num_proxies, CHECK_TAG, deploy=True)

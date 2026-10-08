@@ -16,11 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   set; `tests/test_access_security.py`: public set untouched (0 queries), admin principal sweep (a token is anonymous
   there), route-map invariants, path mutations, OpenAPI exposure, no `x-api-admin-key` in CORS.
 - `DRF_NUM_PROXIES` (settings_local, default None = DRF's behaviour): copied into `REST_FRAMEWORK["NUM_PROXIES"]`
-  after the settings_local import, so per-IP throttles trust only that many `X-Forwarded-For` hops. System check
-  `volkanos.W001` (tag `entirius_config`) warns when `DEBUG` is False and it is unset; behind Cloudflare → Caddy →
-  nginx the value is `1`.
-- Service app `apps.platform` (label `volkanos_platform`, no models): the W001 check and the staff login view.
-- `tests/test_platform_hardening.py`: proxies, W001, OpenAPI access per principal, the login throttle.
+  after the settings_local import, so per-IP throttles trust only that many `X-Forwarded-For` hops. Deployment check
+  `volkanos.E001` (Error, tag `entirius_config`, `check --deploy` only) fails whenever it is unset, in any `DEBUG`;
+  `0` = no proxy, behind Cloudflare → Caddy → nginx the value is `1`. Every deployment must set it before upgrading.
+  `settings_example.py` carries it commented out, so a copied template fails `check --deploy` until it is chosen.
+- Service app `apps.platform` (label `volkanos_platform`, no models): the E001 check and the staff login view.
+- `tests/test_platform_hardening.py`: proxies, E001, OpenAPI access per principal, the login throttle.
 
 ### Changed
 
@@ -37,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `django_access` installed `api/token/` is SimpleJWT's own view, unthrottled. The CMS customer login
   (`customer/tokens/`) is not covered yet (accounts adopts the guard).
 - The guard's third counter, failed logins per username from any address (`AUTH_TOKEN_MAX_FAILURES_PER_USER`, 50
-  within `AUTH_TOKEN_USER_FAILURE_WINDOW_S`, 3600 s), applies to `api/token/` unchanged; `Retry-After` is now the
+  within `AUTH_TOKEN_USER_FAILURE_WINDOW_S`, 3600 s; both declared in `main/settings.py`), applies to `api/token/` unchanged; `Retry-After` is now the
   window of the counter that blocks (the longest when several do), not always `AUTH_TOKEN_FAILURE_WINDOW_S`.
 
 ## [3.0.1] - 2026-09-30

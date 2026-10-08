@@ -2,7 +2,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-"""Service hardening: DRF_NUM_PROXIES + volkanos.W001, staff-only OpenAPI, failed-login throttle on api/token/."""
+"""Service hardening: DRF_NUM_PROXIES + volkanos.E001, staff-only OpenAPI, failed-login throttle on api/token/."""
 
 import pytest
 from django.conf import settings as django_settings
@@ -43,16 +43,30 @@ def test_one_proxy_trusts_only_the_last_forwarded_hop(settings):
     assert BaseThrottle().get_ident(spoofed) == BaseThrottle().get_ident(honest) == "203.0.113.9"
 
 
-def test_w001_fires_in_production_without_num_proxies(settings):
-    settings.DEBUG, settings.DRF_NUM_PROXIES = False, None
-    assert [m.id for m in check_num_proxies()] == ["volkanos.W001"]
-    assert "volkanos.W001" in [m.id for m in checks.run_checks(tags=[CHECK_TAG])]
+@pytest.mark.parametrize("debug", [True, False])
+def test_e001_fires_without_num_proxies_in_any_debug(settings, debug):
+    settings.DEBUG, settings.DRF_NUM_PROXIES = debug, None
+    messages = check_num_proxies()
+    assert [m.id for m in messages] == ["volkanos.E001"]
+    assert messages[0].level == checks.ERROR
 
 
-@pytest.mark.parametrize(("debug", "num_proxies"), [(True, None), (False, 1), (False, 0)])
-def test_w001_silent_in_debug_or_when_set(settings, debug, num_proxies):
-    settings.DEBUG, settings.DRF_NUM_PROXIES = debug, num_proxies
+@pytest.mark.parametrize("num_proxies", [0, 1])
+def test_e001_silent_when_set(settings, num_proxies):
+    settings.DEBUG, settings.DRF_NUM_PROXIES = False, num_proxies
     assert check_num_proxies() == []
+
+
+def test_e001_is_a_deployment_check_only(settings):
+    settings.DRF_NUM_PROXIES = None
+    deploy = checks.run_checks(tags=[CHECK_TAG], include_deployment_checks=True)
+    assert "volkanos.E001" in [m.id for m in deploy]
+    assert "volkanos.E001" not in [m.id for m in checks.run_checks()]
+
+
+def test_login_settings_declare_the_per_login_counter():
+    assert django_settings.AUTH_TOKEN_MAX_FAILURES_PER_USER == 50
+    assert django_settings.AUTH_TOKEN_USER_FAILURE_WINDOW_S == 3600
 
 
 # --- OpenAPI ------------------------------------------------------------------------------------------------------
@@ -169,7 +183,7 @@ def test_fifty_failures_over_addresses_block_the_username_for_its_window(client,
         REMOTE_ADDR="192.0.2.99",
     )
     assert response.status_code == 429
-    assert response["Retry-After"] == "3600"  # access default of AUTH_TOKEN_USER_FAILURE_WINDOW_S
+    assert response["Retry-After"] == str(django_settings.AUTH_TOKEN_USER_FAILURE_WINDOW_S)
 
 
 @requires_access

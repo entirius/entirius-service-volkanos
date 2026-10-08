@@ -149,15 +149,19 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 SITE_ID = 1  # django.contrib.sites (allauth)
 
 # Security defaults, override per environment in settings_local (applied below, after its import).
-# X-Forwarded-For hops DRF's per-IP throttles trust; None = DRF's default (the whole header, client-supplied).
+# X-Forwarded-For hops DRF's per-IP throttles trust; None = DRF's default (the whole header, client-supplied) and
+# fails check --deploy (volkanos.E001) — every deployment sets it, 0 = no proxy.
 DRF_NUM_PROXIES: int | None = None
 # The OpenAPI document and its swagger/redoc UIs are served to staff only unless this is True.
 API_SCHEMA_PUBLIC = False
 # Failed-login throttle on api/token/ (apps.platform.auth_views → django_access.services.login_guard, which reads
-# these): failures per window, per username + address and per address; successes are never counted.
+# these): failures per window, per username + address and per address, and per username from any address in its own
+# window; successes are never counted.
 AUTH_TOKEN_FAILURE_WINDOW_S = 900
 AUTH_TOKEN_MAX_FAILURES_PER_USER_IP = 10
 AUTH_TOKEN_MAX_FAILURES_PER_IP = 100
+AUTH_TOKEN_MAX_FAILURES_PER_USER = 50
+AUTH_TOKEN_USER_FAILURE_WINDOW_S = 3600
 
 # Fail-closed: no settings_local.py means the environment was never consciously
 # configured (no explicit env type, DB, secret key) — refuse to boot.
