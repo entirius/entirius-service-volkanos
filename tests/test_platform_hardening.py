@@ -178,7 +178,7 @@ def test_success_clears_the_user_address_counter(client, staff):
 def test_cache_keys_hold_neither_username_nor_address(client, staff, login_cache):
     _login(client, "staffer", "wrong")
     keys = list(login_cache._cache)
-    assert len(keys) == 2
+    assert len(keys) == 3  # user+address, address, user (per-login limit)
     assert not [k for k in keys if "staffer" in k or "192.0.2.10" in k]
 
 
