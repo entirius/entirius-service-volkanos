@@ -160,6 +160,20 @@ def test_hundred_failures_over_usernames_block_the_address(client, staff):
 
 @requires_access
 @pytest.mark.django_db
+def test_fifty_failures_over_addresses_block_the_username_for_its_window(client, staff):
+    assert {_login(client, "staffer", "wrong", addr=f"198.51.100.{i}") for i in range(50)} == {401}
+    response = client.post(
+        "/api/token/",
+        {"username": "staffer", "password": PASSWORD},
+        content_type="application/json",
+        REMOTE_ADDR="192.0.2.99",
+    )
+    assert response.status_code == 429
+    assert response["Retry-After"] == "3600"  # access default of AUTH_TOKEN_USER_FAILURE_WINDOW_S
+
+
+@requires_access
+@pytest.mark.django_db
 def test_successful_logins_are_never_counted(client, staff, login_cache):
     assert {_login(client, "staffer", PASSWORD) for _ in range(50)} == {200}
     assert not login_cache._cache

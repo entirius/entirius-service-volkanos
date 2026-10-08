@@ -4,6 +4,8 @@
 
 """Staff login (``api/token/``) behind access' failed-login guard (``django_access.services.login_guard``)."""
 
+import math
+
 from django_access.services import login_guard
 from rest_framework.exceptions import AuthenticationFailed, Throttled
 from rest_framework.request import Request
@@ -28,5 +30,5 @@ class ThrottledTokenObtainPairView(TokenObtainPairView):
     def handle_exception(self, exc: Exception) -> Response:
         response = super().handle_exception(exc)
         if isinstance(exc, Throttled):  # the service's v1 error handler drops DRF's Retry-After
-            response["Retry-After"] = str(login_guard.failure_window_s())
+            response["Retry-After"] = str(math.ceil(exc.wait))
         return response
