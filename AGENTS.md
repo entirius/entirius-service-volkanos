@@ -33,6 +33,20 @@ Adopting a module does not change its name / app_label / DB tables.
 Dev-only tasks require `ENVIRONMENT=development` in `.env` — they refuse to run otherwise.
 One-time: `uv run pre-commit install` (git hooks: ruff + MPL license header + gitleaks).
 
+## Security settings (settings_local)
+
+Defaults live in `main/settings.py`; values that feed DRF / drf-spectacular are applied after the settings_local import.
+
+| Setting | Default | Meaning |
+|---|---|---|
+| `DRF_NUM_PROXIES` | `None` | trusted `X-Forwarded-For` hops for per-IP throttles; `0` = no proxy, `1` behind Cloudflare → Caddy → nginx; unset → `volkanos.E001` in `check --deploy` (any `DEBUG`) |
+| `API_SCHEMA_PUBLIC` | `False` | `True` serves `api/schema/`, swagger-ui and redoc anonymously; otherwise staff only |
+| `AUTH_TOKEN_FAILURE_WINDOW_S` | `900` | window of the failed-login counters on `api/token/` (read by `django_access.services.login_guard`; no access, no counter) |
+| `AUTH_TOKEN_MAX_FAILURES_PER_USER_IP` | `10` | failures per username + address before 429 |
+| `AUTH_TOKEN_MAX_FAILURES_PER_IP` | `100` | failures per address before 429 |
+| `AUTH_TOKEN_MAX_FAILURES_PER_USER` | `50` | failures per username from any address before 429 |
+| `AUTH_TOKEN_USER_FAILURE_WINDOW_S` | `3600` | window of the per-username counter (`Retry-After` when it blocks) |
+
 ## Conventions
 
 - English only: code, docs, commits, branches, PRs.
