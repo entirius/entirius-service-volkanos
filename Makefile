@@ -1,5 +1,5 @@
 .PHONY: help health install check fix test run migrate makemigrations \
-        shell schema guard-dev reinstall recreate-db test-users settings-local init rebuild
+        shell schema settings-example guard-dev reinstall recreate-db test-users settings-local init rebuild
 .DEFAULT_GOAL := help
 
 -include .env
@@ -44,6 +44,8 @@ shell:  ## Django shell
 	uv run python manage.py shell
 schema:  ## Generate OpenAPI schema
 	uv run python manage.py spectacular --file schema.yaml
+settings-example:  ## Regenerate the module list of main/settings_example.py from modules.yaml
+	uv run python scripts/render_settings_example.py
 
 # --- dev-only, state-changing (guarded, fail-closed on ENVIRONMENT) ---
 guard-dev:

@@ -32,15 +32,21 @@ DATABASES = {
     )
 }
 
-# Volkanos modules adopted in THIS environment (entirius-django-* app labels).
-# Full django set (order matters: FK targets first — regional/utils before pim,
-# pim/pricemanager before the pim satellites; leaves last):
+# Volkanos modules adopted in THIS environment (entirius-django-* app labels), the full set in
+# the order of modules.yaml (order matters: every module after the modules it requires):
+# BEGIN generated from modules.yaml (make settings-example)
 # LOCAL_APPS = [
 #     "django_regional",
 #     "django_utils",
+#     "django_utils.toolbox",
 #     "django_utils_translator",
 #     "django_pim",
 #     "django_pricemanager",
+#     "django_atlas",
+#     "django_pricefighter",
+#     "django_lookup",
+#     "django_notifications",
+#     "django_siteintel",
 #     "django_pim_csv",
 #     "django_pim_translator",
 #     "django_pim_export_to_magento_api",
@@ -51,6 +57,8 @@ DATABASES = {
 #     "django_deliverypoints",
 #     "django_qms",
 #     "django_email",
+#     "django_communicator",
+#     "django_leads",
 #     "django_contact_forms",
 #     "django_regon_api",
 #     "django_baselinker",
@@ -72,6 +80,8 @@ DATABASES = {
 #     "django_returns",
 #     "django_omnibus",
 # ]
+# django_access is added by main/settings.py wherever it is importable
+# END generated
 LOCAL_APPS: list[str] = []
 
 # CRYPT_SALT — Fernet key for django_crypt encrypted fields, generate with:
