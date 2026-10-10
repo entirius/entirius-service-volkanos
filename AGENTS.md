@@ -29,6 +29,7 @@ The registry of modules and libraries is `modules.yaml`, kept true by `tests/tes
 | `make test` | migration drift check + pytest |
 | `make run` / `migrate` / `makemigrations` / `shell` / `schema` | Django dev tasks |
 | `make settings-example` | regenerate the module list of `main/settings_example.py` from `modules.yaml` |
+| `make first-channel` | first channel on a migrated, empty database, in every enabled module, with a storefront key (`CONFIG=`, default `scripts/first-channel.example.toml`; idempotent; `createsuperuser` first) |
 | `make health` | prod-safe read-only health check |
 | `make init` / `recreate-db` / `reinstall` / `rebuild` / `test-users` | dev-only, fail-closed on `ENVIRONMENT` |
 

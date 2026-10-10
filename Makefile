@@ -1,5 +1,5 @@
 .PHONY: help health install check fix test run migrate makemigrations \
-        shell schema settings-example guard-dev reinstall recreate-db test-users settings-local init rebuild
+        shell schema settings-example first-channel guard-dev reinstall recreate-db test-users settings-local init rebuild
 .DEFAULT_GOAL := help
 
 -include .env
@@ -46,6 +46,8 @@ schema:  ## Generate OpenAPI schema
 	uv run python manage.py spectacular --file schema.yaml
 settings-example:  ## Regenerate the module list of main/settings_example.py from modules.yaml
 	uv run python scripts/render_settings_example.py
+first-channel:  ## Create the first channel from CONFIG (default scripts/first-channel.example.toml)
+	uv run python scripts/first_channel.py $(or $(CONFIG),scripts/first-channel.example.toml)
 
 # --- dev-only, state-changing (guarded, fail-closed on ENVIRONMENT) ---
 guard-dev:
