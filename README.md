@@ -13,8 +13,13 @@ as its own repo and usable standalone.
 
 ## Quick start
 
+Per-environment config: copy `main/settings_example.py` -> `main/settings_local.py` (gitignored).
+The file is REQUIRED - the service refuses to boot without it (fail-closed: no explicit
+env type, DB and secret key means the environment was never consciously configured).
+
 ```bash
 uv sync                      # install dependencies + dev
+cp main/settings_example.py main/settings_local.py
 uv run python manage.py migrate
 uv run python manage.py runserver
 ```
@@ -24,9 +29,17 @@ uv run python manage.py runserver
 - ReDoc:        http://localhost:8000/api/schema/redoc/
 - Admin:        http://localhost:8000/admin/
 
-Per-environment config: copy `main/settings_example.py` -> `main/settings_local.py` (gitignored).
-The file is REQUIRED - the service refuses to boot without it (fail-closed: no explicit
-env type, DB and secret key means the environment was never consciously configured).
+## Choosing modules
+
+[modules.yaml](modules.yaml) lists every module and library the service depends on: what each one does,
+what it requires, the worker queues it uses, the settings it reads and whether it routes URLs.
+
+- Enabling a module: its package in `pyproject.toml`, its app in `LOCAL_APPS` (`main/settings_local.py`) in
+  registry order, together with the apps of its `requires` and `also_enable`, and a URL guard in `main/urls.py`
+  when `urls: true`.
+- The `platform` entry (access) is never listed: the service enables it itself wherever the package is installed.
+- The worker consumes `celery` plus the `queues` of every enabled module: `celery -A main worker -Q <list>`.
+- `make settings-example` regenerates the module list of `main/settings_example.py` from the registry.
 
 ## Development
 
@@ -37,7 +50,7 @@ make test        # migration drift check + tests
 make run         # dev server
 ```
 
-Dev-only tasks (`init`, `reset-db`, `reinstall`, `rebuild`, `test-users`) require
+Dev-only tasks (`init`, `recreate-db`, `reinstall`, `rebuild`, `test-users`) require
 `ENVIRONMENT=development` in `.env` — they refuse to run otherwise (fail-closed).
 
 ## Layout

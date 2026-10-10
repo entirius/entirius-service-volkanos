@@ -10,6 +10,7 @@ Adopting an `entirius-django-*` module = dependency in `pyproject.toml` (+ `uv l
 its app in `LOCAL_APPS` (`main/settings.py`), `include()` of its urls in `main/urls.py`.
 Plain `entirius-py-*` libraries are dependencies only — no `LOCAL_APPS` / urls wiring.
 Adopting a module does not change its name / app_label / DB tables.
+The registry of modules and libraries is `modules.yaml`, kept true by `tests/test_modules_registry.py`.
 
 ## Stack and tooling
 
@@ -27,6 +28,7 @@ Adopting a module does not change its name / app_label / DB tables.
 | `make check` / `make fix` | lint + format (ruff) |
 | `make test` | migration drift check + pytest |
 | `make run` / `migrate` / `makemigrations` / `shell` / `schema` | Django dev tasks |
+| `make settings-example` | regenerate the module list of `main/settings_example.py` from `modules.yaml` |
 | `make health` | prod-safe read-only health check |
 | `make init` / `recreate-db` / `reinstall` / `rebuild` / `test-users` | dev-only, fail-closed on `ENVIRONMENT` |
 
