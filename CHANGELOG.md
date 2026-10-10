@@ -27,6 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The OpenAPI document and its swagger/redoc UIs are served to staff only (`IsAdminUser`, JWT or Django admin
   session; 401 anonymous, 403 customers) unless `API_SCHEMA_PUBLIC = True` in settings_local.
+- OpenAPI: `POST api/token/` and `POST api/token/refresh/` carry the `Authentication` tag (they fell back to the
+  default tag). The token views are thin tagged subclasses in `apps/platform/token_views.py`; routes, URL names and
+  behaviour are unchanged.
 
 ### Security
 

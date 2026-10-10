@@ -7,12 +7,14 @@
 import math
 
 from django_access.services import login_guard
+from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework.exceptions import AuthenticationFailed, Throttled
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
+@extend_schema_view(post=extend_schema(tags=["Authentication"]))
 class ThrottledTokenObtainPairView(TokenObtainPairView):
     """SimpleJWT's token pair view behind a failed-login throttle."""
 

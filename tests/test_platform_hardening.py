@@ -9,6 +9,8 @@ from django.conf import settings as django_settings
 from django.contrib.auth import get_user_model
 from django.core import checks
 from django.core.cache import caches
+from django.urls import path as url_path
+from drf_spectacular.generators import SchemaGenerator
 from drf_spectacular.settings import IMPORT_STRINGS, SPECTACULAR_DEFAULTS, SpectacularSettings
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework.permissions import AllowAny
@@ -17,6 +19,8 @@ from rest_framework.throttling import BaseThrottle
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from apps.platform.checks import CHECK_TAG, check_num_proxies
+from apps.platform.token_views import TaggedTokenObtainPairView, TaggedTokenRefreshView
+from main import urls as service_urls
 from main.security import SCHEMA_SERVE_PERMISSIONS, with_num_proxies, with_schema_access
 from tests.conftest import requires_access
 
@@ -125,6 +129,20 @@ def test_live_schema_ui_follows_the_environment_setting(client):
     assert (SpectacularAPIView.permission_classes == [AllowAny]) is django_settings.API_SCHEMA_PUBLIC
     expected = 200 if django_settings.API_SCHEMA_PUBLIC else 401
     assert [client.get(path).status_code for path in SCHEMA_PATHS[1:]] == [expected, expected]
+
+
+def _post_tags(patterns: list) -> set[str]:
+    paths = SchemaGenerator(patterns=patterns).get_schema(request=None, public=True)["paths"]
+    return {tag for item in paths.values() for tag in item["post"]["tags"]}
+
+
+def test_token_routes_carry_the_authentication_tag():
+    """The served pair (the login `main/urls.py` picks, refresh) and the login of a service without access."""
+    served = [p for p in service_urls.urlpatterns if getattr(p, "name", None) in ("token_obtain_pair", "token_refresh")]
+    fallback = [url_path("api/token/", TaggedTokenObtainPairView.as_view())]
+    assert len(served) == 2
+    assert _post_tags(served) == _post_tags(fallback) == {"Authentication"}
+    assert served[1].callback.view_class is TaggedTokenRefreshView
 
 
 # --- api/token/ failed-login throttle -----------------------------------------------------------------------------
