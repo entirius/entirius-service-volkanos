@@ -356,8 +356,7 @@ modules:
     core: false
     requires: [entirius-django-utils]
     optional: []
-    also_enable:
-      - django_checkout  # django_qms/signals/handlers.py, django_qms/storage_managers.py
+    also_enable: []
     queues: [quantities]
     settings: [
       BI_BUSINESS_UNIT, BI_ENVIRONMENT, DATA_DIR, EXPORT_DIR, IMPORT_DIR, QMS_BULK_BATCH_SIZE,
@@ -556,8 +555,7 @@ modules:
     core: false
     requires: [entirius-django-email, entirius-django-regional, entirius-django-utils]
     optional: [entirius-django-pim]
-    also_enable:
-      - django_captcha  # django_accounts/views/api/customer.py, through django_utils/api/decorators.py
+    also_enable: []
     queues: []
     settings: [
       ACCOUNTS_CHANNEL_BLACKLIST, ACCOUNTS_CUSTOMER_IS_ACTIVE_WITHOUT_DOUBLE_OPTIN, ACCOUNTS_PASSWORD_LIST_SYMBOLS,
@@ -692,12 +690,7 @@ modules:
       entirius-django-checkout, entirius-django-omnibus, entirius-django-pricemanager, entirius-django-qms,
       entirius-django-reviews
     ]
-    also_enable:
-      - django_pricemanager  # django_matrix/services/bundle_service.py
-      - django_qms  # django_matrix/workers/fill_read_model_on_stock.py
-      - django_checkout  # django_matrix/services/stock_service.py
-      - django_omnibus  # django_matrix/workers/fill_read_model_prices.py
-      - django_reviews  # django_matrix/workers/fill_read_model_products_and_attributes.py
+    also_enable: []
     queues: [matrix_pull]
     settings: [
       API_BASE_URL, APPLIED_SPECIAL_PRICE_WHEN_NULL_VALIDITY_DATES, BLACKLISTED_FEATURES_IDX_VISIBILITY,

@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OpenAPI: `POST api/token/` and `POST api/token/refresh/` carry the `Authentication` tag (they fell back to the
   default tag). The token views are thin tagged subclasses in `apps/platform/token_views.py`; routes, URL names and
   behaviour are unchanged.
+- modules.yaml: no module forces another one any more (`also_enable` is empty for matrix, qms and accounts; the
+  modules no longer crash when an optional sibling app is installed but not enabled).
 
 ### Security
 
