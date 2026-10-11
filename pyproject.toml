@@ -5,7 +5,8 @@ build-backend = "hatchling.build"
 [project]
 name = "entirius-service-volkanos"
 version = "3.0.1"
-description = "Entirius Volkanos Service - base Django service adopting Volkanos modules"
+description = "Backend service of Entirius: a thin Django shell that runs the platform's modules behind one REST API"
+keywords = ["django", "ecommerce", "entirius", "rest-api", "headless", "backend"]
 authors = [
     { name = "Piotr Brzozowski", email = "piotrb@entirius.com" },
 ]
@@ -18,12 +19,16 @@ maintainers = [
 readme = "README.md"
 requires-python = ">=3.12"
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Framework :: Django",
+    "Framework :: Django :: 5.2",
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
 ]
 dependencies = [
     # browser frontends (storefront/CMS) call the API cross-origin; origins per environment
@@ -100,7 +105,11 @@ dependencies = [
 ]
 
 [project.urls]
+Homepage = "https://docs.entirius.com/"
+Documentation = "https://docs.entirius.com/"
 Repository = "https://github.com/entirius/entirius-service-volkanos"
+Changelog = "https://github.com/entirius/entirius-service-volkanos/blob/develop/CHANGELOG.md"
+Issues = "https://github.com/entirius/entirius-service-volkanos/issues"
 
 [dependency-groups]
 dev = [
