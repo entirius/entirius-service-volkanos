@@ -3,7 +3,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 """Service hardening: DRF_NUM_PROXIES + volkanos.E001, JWT-only default authentication + volkanos.E002, staff-only
-OpenAPI, failed-login throttle on api/token/."""
+OpenAPI, failed-login throttle on api/token/ and the Django admin login form."""
 
 import base64
 
@@ -324,3 +324,26 @@ def test_spoofed_leading_forwarded_entry_keeps_the_visitor_blocked(client, staff
 def test_padded_username_hits_the_same_counter(client, staff):
     assert [_login(client, "staffer", "wrong") for _ in range(10)] == [401] * 10
     assert _login(client, " staffer\t", PASSWORD) == 429
+
+
+# --- admin/login/ shares the failed-login throttle ----------------------------------------------------------------
+
+
+def _admin_login(client, username: str, password: str, addr: str = "192.0.2.10") -> int:
+    return client.post("/admin/login/", {"username": username, "password": password}, REMOTE_ADDR=addr).status_code
+
+
+@requires_access
+@pytest.mark.django_db
+def test_ten_failures_on_the_admin_form_block_the_user_there_and_on_the_api(client, staff):
+    assert [_admin_login(client, "staffer", "wrong") for _ in range(10)] == [200] * 10
+    assert _admin_login(client, "staffer", PASSWORD) == 429
+    assert _login(client, "staffer", PASSWORD) == 429
+    assert _admin_login(client, "staffer", PASSWORD, addr="192.0.2.99") == 302
+
+
+@requires_access
+@pytest.mark.django_db
+def test_a_user_blocked_on_the_api_is_refused_on_the_admin_form(client, staff):
+    assert [_login(client, "staffer", "wrong") for _ in range(10)] == [401] * 10
+    assert _admin_login(client, "staffer", PASSWORD) == 429

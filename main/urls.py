@@ -16,11 +16,19 @@ from drf_spectacular.views import (
 from apps.platform.token_views import TaggedTokenRefreshView
 
 if "django_access" in settings.INSTALLED_APPS:
+    from django_access.services.login_guard import guarded_admin_login
+
     from apps.platform.auth_views import ThrottledTokenObtainPairView as StaffTokenView
-else:  # the failed-login guard lives in django_access: without it the login is SimpleJWT's own
+
+    # The admin login form counts on the failed-login counters of api/token/; it resolves before the site's own.
+    admin_login = [path("admin/login/", guarded_admin_login(admin.site.login))]
+else:  # the failed-login guard lives in django_access: without it both logins are the framework's own
     from apps.platform.token_views import TaggedTokenObtainPairView as StaffTokenView
 
+    admin_login = []
+
 urlpatterns = [
+    *admin_login,
     path("admin/", admin.site.urls),
     # JWT for module admin APIs (v2, IsAdminUser) and the CMS admin panel; failed logins are throttled (access).
     path("api/token/", StaffTokenView.as_view(), name="token_obtain_pair"),

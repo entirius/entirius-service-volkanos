@@ -52,6 +52,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   when `BasicAuthentication` or `SessionAuthentication` is in the defaults; an environment that replaces
   `REST_FRAMEWORK` in settings_local must keep the key. Views that declare their own classes are unchanged, and so
   are the Django admin and the staff-only schema UIs (JWT or admin session, declared).
+- The Django admin login form (`admin/login/`) counts on the failed-login counters of `api/token/`: the same limits
+  per username + address, per address and per username, and a login blocked on one is blocked on the other (429 with
+  `Retry-After`, also for a correct password). The form accepted unlimited guesses, also while `api/token/` was
+  blocked. Wired only where `django_access` is installed; no new setting.
 
 ## [3.0.1] - 2026-09-30
 
