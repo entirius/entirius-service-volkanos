@@ -45,6 +45,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The guard's third counter, failed logins per username from any address (`AUTH_TOKEN_MAX_FAILURES_PER_USER`, 50
   within `AUTH_TOKEN_USER_FAILURE_WINDOW_S`, 3600 s; both declared in `main/settings.py`), applies to `api/token/` unchanged; `Retry-After` is now the
   window of the counter that blocks (the longest when several do), not always `AUTH_TOKEN_FAILURE_WINDOW_S`.
+- `REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"]` is set to JWT only. It was unset, so DRF's own defaults (session
+  and Basic) applied to every view that declares no classes: a public route answered differently for a right and a
+  wrong password sent as `Authorization: Basic`, outside the failed-login counters of `api/token/`. Such a view now
+  ignores Basic credentials and session cookies. Deployment check `volkanos.E002` (Error, `check --deploy` only) fails
+  when `BasicAuthentication` or `SessionAuthentication` is in the defaults; an environment that replaces
+  `REST_FRAMEWORK` in settings_local must keep the key. Views that declare their own classes are unchanged, and so
+  are the Django admin and the staff-only schema UIs (JWT or admin session, declared).
 
 ## [3.0.1] - 2026-09-30
 

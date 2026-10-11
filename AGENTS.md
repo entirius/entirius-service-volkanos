@@ -39,6 +39,8 @@ One-time: `uv run pre-commit install` (git hooks: ruff + MPL license header + gi
 ## Security settings (settings_local)
 
 Defaults live in `main/settings.py`; values that feed DRF / drf-spectacular are applied after the settings_local import.
+DRF's default authentication is JWT only (`REST_FRAMEWORK` in `main/settings.py`): a view without its own classes never
+reads Basic credentials or a session; `volkanos.E002` in `check --deploy` fails when either class is in the defaults.
 
 | Setting | Default | Meaning |
 |---|---|---|

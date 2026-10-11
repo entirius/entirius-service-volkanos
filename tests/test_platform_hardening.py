@@ -2,7 +2,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-"""Service hardening: DRF_NUM_PROXIES + volkanos.E001, staff-only OpenAPI, failed-login throttle on api/token/."""
+"""Service hardening: DRF_NUM_PROXIES + volkanos.E001, JWT-only default authentication + volkanos.E002, staff-only
+OpenAPI, failed-login throttle on api/token/."""
+
+import base64
 
 import pytest
 from django.conf import settings as django_settings
@@ -14,11 +17,13 @@ from drf_spectacular.generators import SchemaGenerator
 from drf_spectacular.settings import IMPORT_STRINGS, SPECTACULAR_DEFAULTS, SpectacularSettings
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 from rest_framework.test import APIRequestFactory
 from rest_framework.throttling import BaseThrottle
+from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from apps.platform.checks import CHECK_TAG, check_num_proxies
+from apps.platform.checks import CHECK_TAG, check_default_authentication, check_num_proxies
 from apps.platform.token_views import TaggedTokenObtainPairView, TaggedTokenRefreshView
 from main import urls as service_urls
 from main.security import SCHEMA_SERVE_PERMISSIONS, with_num_proxies, with_schema_access
@@ -71,6 +76,82 @@ def test_e001_is_a_deployment_check_only(settings):
 def test_login_settings_declare_the_per_login_counter():
     assert django_settings.AUTH_TOKEN_MAX_FAILURES_PER_USER == 50
     assert django_settings.AUTH_TOKEN_USER_FAILURE_WINDOW_S == 3600
+
+
+# --- default authentication ---------------------------------------------------------------------------------------
+
+JWT_ONLY = ["rest_framework_simplejwt.authentication.JWTAuthentication"]
+MATRIX_PRODUCTS = "/api/matrix/v2/no-such-channel/products/"
+
+
+class _UndeclaredPublicView(APIView):
+    """A module view that declares no authentication classes: it gets the service default."""
+
+    permission_classes = [AllowAny]
+
+    def get(self, request) -> Response:
+        return Response({})
+
+
+def _basic(username: str, password: str) -> dict:
+    token = base64.b64encode(f"{username}:{password}".encode()).decode()
+    return {"HTTP_AUTHORIZATION": f"Basic {token}"}
+
+
+def _without_default_authentication(rest_framework: dict) -> dict:
+    return {k: v for k, v in rest_framework.items() if k != "DEFAULT_AUTHENTICATION_CLASSES"}
+
+
+def test_default_authentication_is_jwt_only():
+    assert django_settings.REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] == JWT_ONLY
+
+
+@pytest.mark.django_db
+def test_view_without_declared_classes_ignores_basic_credentials():
+    _user("staffer", is_staff=True)
+    view, factory = _UndeclaredPublicView.as_view(), APIRequestFactory()
+    credentials = [{}, _basic("staffer", "wrong-password"), _basic("staffer", PASSWORD)]
+    responses = [view(factory.get("/", **headers)) for headers in credentials]
+    assert [r.status_code for r in responses] == [200, 200, 200]
+    assert not [r for r in responses if "WWW-Authenticate" in r]
+
+
+@pytest.mark.skipif("django_matrix" not in django_settings.INSTALLED_APPS, reason="django_matrix is not enabled")
+@pytest.mark.django_db
+def test_public_catalogue_route_answers_the_same_for_any_basic_credentials(client):
+    _user("staffer", is_staff=True)
+    credentials = [{}, _basic("staffer", "wrong-password"), _basic("staffer", PASSWORD)]
+    responses = [client.get(MATRIX_PRODUCTS, **headers) for headers in credentials]
+    assert len({r.status_code for r in responses}) == 1
+    assert not [r for r in responses if "WWW-Authenticate" in r]
+
+
+@pytest.mark.parametrize("name", ["BasicAuthentication", "SessionAuthentication"])
+def test_e002_fires_on_a_password_class_in_the_defaults(settings, name):
+    classes = [*JWT_ONLY, f"rest_framework.authentication.{name}"]
+    settings.REST_FRAMEWORK = {**settings.REST_FRAMEWORK, "DEFAULT_AUTHENTICATION_CLASSES": classes}
+    messages = check_default_authentication()
+    assert [m.id for m in messages] == ["volkanos.E002"]
+    assert messages[0].level == checks.ERROR
+    assert name in messages[0].msg
+
+
+def test_e002_fires_when_the_defaults_are_left_to_drf(settings):
+    settings.REST_FRAMEWORK = _without_default_authentication(settings.REST_FRAMEWORK)
+    assert [m.id for m in check_default_authentication()] == ["volkanos.E002"]
+
+
+@pytest.mark.parametrize("classes", [JWT_ONLY, []])
+def test_e002_silent_without_a_password_class(settings, classes):
+    settings.REST_FRAMEWORK = {**settings.REST_FRAMEWORK, "DEFAULT_AUTHENTICATION_CLASSES": classes}
+    assert check_default_authentication() == []
+
+
+def test_e002_is_a_deployment_check_only(settings):
+    settings.REST_FRAMEWORK = _without_default_authentication(settings.REST_FRAMEWORK)
+    deploy = checks.run_checks(tags=[CHECK_TAG], include_deployment_checks=True)
+    assert "volkanos.E002" in [m.id for m in deploy]
+    assert "volkanos.E002" not in [m.id for m in checks.run_checks()]
 
 
 # --- OpenAPI ------------------------------------------------------------------------------------------------------
