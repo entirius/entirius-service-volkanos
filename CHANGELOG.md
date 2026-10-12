@@ -4,7 +4,10 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [4.0.0] - 2026-10-12
+
+A major release: `entirius-django-access` is a required dependency, the default authentication is JWT only and the
+module keys are access tokens. Read `### Changed` and `### Security` before upgrading.
 
 ### Added
 
@@ -25,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Breaking:** `entirius-django-access` (1.0.0 or later) is a required dependency. `main/settings.py` enables
+  `django_access` in every environment and refuses to start without the package. It was enabled only where the
+  package happened to be installed.
+- The module floors in `pyproject.toml` are the versions released with this one (the key modules as majors).
 - The OpenAPI document and its swagger/redoc UIs are served to staff only (`IsAdminUser`, JWT or Django admin
   session; 401 anonymous, 403 customers) unless `API_SCHEMA_PUBLIC = True` in settings_local.
 - OpenAPI: `POST api/token/` and `POST api/token/refresh/` carry the `Authentication` tag (they fell back to the
