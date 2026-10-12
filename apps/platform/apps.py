@@ -14,6 +14,7 @@ class PlatformConfig(AppConfig):
     def ready(self) -> None:
         from django.core import checks
 
-        from apps.platform.checks import CHECK_TAG, check_num_proxies
+        from apps.platform.checks import CHECK_TAG, check_default_authentication, check_num_proxies
 
         checks.register(check_num_proxies, CHECK_TAG, deploy=True)
+        checks.register(check_default_authentication, CHECK_TAG, deploy=True)

@@ -94,6 +94,9 @@ CORS_ALLOW_HEADERS = (*default_headers, "x-api-key")
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    # JWT only, stated: DRF's own defaults check a password (or a session cookie) on every view that declares no
+    # classes, outside the login guard. check --deploy fails on them (volkanos.E002).
+    "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework_simplejwt.authentication.JWTAuthentication"],
     # v2 error envelope (error/debug_id) with v1 fallback — see main/v2_errors.py.
     "EXCEPTION_HANDLER": "main.v2_errors.volkanos_exception_handler",
 }

@@ -7,14 +7,16 @@
 ``django_access`` is imported lazily — the service runs without it, and its tests then skip.
 """
 
+import importlib.util
 import io
 import json
 
 import pytest
-from django.conf import settings
 
+# main/settings.py installs django_access wherever it is importable; asking the import system keeps this file
+# loadable without Django settings (tests/test_modules_registry.py runs with -p no:django).
 requires_access = pytest.mark.skipif(
-    "django_access" not in settings.INSTALLED_APPS, reason="django_access is not installed"
+    importlib.util.find_spec("django_access") is None, reason="django_access is not installed"
 )
 
 

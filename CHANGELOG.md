@@ -27,6 +27,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The OpenAPI document and its swagger/redoc UIs are served to staff only (`IsAdminUser`, JWT or Django admin
   session; 401 anonymous, 403 customers) unless `API_SCHEMA_PUBLIC = True` in settings_local.
+- OpenAPI: `POST api/token/` and `POST api/token/refresh/` carry the `Authentication` tag (they fell back to the
+  default tag). The token views are thin tagged subclasses in `apps/platform/token_views.py`; routes, URL names and
+  behaviour are unchanged.
+- modules.yaml: no module forces another one any more (`also_enable` is empty for matrix, qms and accounts; the
+  modules no longer crash when an optional sibling app is installed but not enabled).
 
 ### Security
 
@@ -40,6 +45,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The guard's third counter, failed logins per username from any address (`AUTH_TOKEN_MAX_FAILURES_PER_USER`, 50
   within `AUTH_TOKEN_USER_FAILURE_WINDOW_S`, 3600 s; both declared in `main/settings.py`), applies to `api/token/` unchanged; `Retry-After` is now the
   window of the counter that blocks (the longest when several do), not always `AUTH_TOKEN_FAILURE_WINDOW_S`.
+- `REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"]` is set to JWT only. It was unset, so DRF's own defaults (session
+  and Basic) applied to every view that declares no classes: a public route answered differently for a right and a
+  wrong password sent as `Authorization: Basic`, outside the failed-login counters of `api/token/`. Such a view now
+  ignores Basic credentials and session cookies. Deployment check `volkanos.E002` (Error, `check --deploy` only) fails
+  when `BasicAuthentication` or `SessionAuthentication` is in the defaults; an environment that replaces
+  `REST_FRAMEWORK` in settings_local must keep the key. Views that declare their own classes are unchanged, and so
+  are the Django admin and the staff-only schema UIs (JWT or admin session, declared).
+- The Django admin login form (`admin/login/`) counts on the failed-login counters of `api/token/`: the same limits
+  per username + address, per address and per username, and a login blocked on one is blocked on the other (429 with
+  `Retry-After`, also for a correct password). The form accepted unlimited guesses, also while `api/token/` was
+  blocked. Wired only where `django_access` is installed; no new setting.
 
 ## [3.0.1] - 2026-09-30
 
