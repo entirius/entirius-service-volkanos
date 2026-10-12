@@ -19,7 +19,7 @@ REGISTRY = ROOT / "modules.yaml"
 EXAMPLE = ROOT / "main" / "settings_example.py"
 BEGIN = "# BEGIN generated from modules.yaml (make settings-example)"
 END = "# END generated"
-ACCESS_NOTE = "# django_access is added by main/settings.py wherever it is importable"
+ACCESS_NOTE = "# django_access is added by main/settings.py in every environment (a required dependency)"
 
 
 def _block(registry: dict) -> str:

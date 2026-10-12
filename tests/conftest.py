@@ -13,7 +13,7 @@ import json
 
 import pytest
 
-# main/settings.py installs django_access wherever it is importable; asking the import system keeps this file
+# main/settings.py installs django_access in every environment; asking the import system keeps this file
 # loadable without Django settings (tests/test_modules_registry.py runs with -p no:django).
 requires_access = pytest.mark.skipif(
     importlib.util.find_spec("django_access") is None, reason="django_access is not installed"
