@@ -6,6 +6,56 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Access wiring: when `entirius-django-access` is importable, `django_access` joins `INSTALLED_APPS`, the
+  `AccessGateMiddleware` is appended last to `MIDDLEWARE`, its URLs are mounted (`api/access/v2/`) and the OpenAPI
+  document gains the `ApiKeyAuth` scheme on the token-scope routes. The gate runs in its default `enforce` mode;
+  environments override `ACCESS_GATE_MODE` in `settings_local`.
+- `tests/test_access_routes.py`: every admin route has an access area, the token-scope routes stay outside the admin
+  set; `tests/test_access_security.py`: public set untouched (0 queries), admin principal sweep (a token is anonymous
+  there), route-map invariants, path mutations, OpenAPI exposure, no `x-api-admin-key` in CORS.
+- `DRF_NUM_PROXIES` (settings_local, default None = DRF's behaviour): copied into `REST_FRAMEWORK["NUM_PROXIES"]`
+  after the settings_local import, so per-IP throttles trust only that many `X-Forwarded-For` hops. Deployment check
+  `volkanos.E001` (Error, tag `entirius_config`, `check --deploy` only) fails whenever it is unset, in any `DEBUG`;
+  `0` = no proxy, behind Cloudflare → Caddy → nginx the value is `1`. Every deployment must set it before upgrading.
+  `settings_example.py` carries it commented out, so a copied template fails `check --deploy` until it is chosen.
+- Service app `apps.platform` (label `volkanos_platform`, no models): the E001 check and the staff login view.
+- `tests/test_platform_hardening.py`: proxies, E001, OpenAPI access per principal, the login throttle.
+
+### Changed
+
+- The OpenAPI document and its swagger/redoc UIs are served to staff only (`IsAdminUser`, JWT or Django admin
+  session; 401 anonymous, 403 customers) unless `API_SCHEMA_PUBLIC = True` in settings_local.
+- OpenAPI: `POST api/token/` and `POST api/token/refresh/` carry the `Authentication` tag (they fell back to the
+  default tag). The token views are thin tagged subclasses in `apps/platform/token_views.py`; routes, URL names and
+  behaviour are unchanged.
+- modules.yaml: no module forces another one any more (`also_enable` is empty for matrix, qms and accounts; the
+  modules no longer crash when an optional sibling app is installed but not enabled).
+
+### Security
+
+- `api/token/` counts failed logins per username + address (`AUTH_TOKEN_MAX_FAILURES_PER_USER_IP`, 10) and per
+  address (`AUTH_TOKEN_MAX_FAILURES_PER_IP`, 100) within `AUTH_TOKEN_FAILURE_WINDOW_S` (900 s); at the limit it
+  answers 429 with `Retry-After`, also for a correct password. Successes are never counted and clear the username +
+  address counter; cache keys hold hashes only. Behaviour change for anyone scripting `api/token/` with wrong
+  passwords. The counter is access' public `django_access.services.login_guard` (same settings and key shape); without
+  `django_access` installed `api/token/` is SimpleJWT's own view, unthrottled. The CMS customer login
+  (`customer/tokens/`) is not covered yet (accounts adopts the guard).
+- The guard's third counter, failed logins per username from any address (`AUTH_TOKEN_MAX_FAILURES_PER_USER`, 50
+  within `AUTH_TOKEN_USER_FAILURE_WINDOW_S`, 3600 s; both declared in `main/settings.py`), applies to `api/token/` unchanged; `Retry-After` is now the
+  window of the counter that blocks (the longest when several do), not always `AUTH_TOKEN_FAILURE_WINDOW_S`.
+- `REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"]` is set to JWT only. It was unset, so DRF's own defaults (session
+  and Basic) applied to every view that declares no classes: a public route answered differently for a right and a
+  wrong password sent as `Authorization: Basic`, outside the failed-login counters of `api/token/`. Such a view now
+  ignores Basic credentials and session cookies. Deployment check `volkanos.E002` (Error, `check --deploy` only) fails
+  when `BasicAuthentication` or `SessionAuthentication` is in the defaults; an environment that replaces
+  `REST_FRAMEWORK` in settings_local must keep the key. Views that declare their own classes are unchanged, and so
+  are the Django admin and the staff-only schema UIs (JWT or admin session, declared).
+- The Django admin login form (`admin/login/`) counts on the failed-login counters of `api/token/`: the same limits
+  per username + address, per address and per username, and a login blocked on one is blocked on the other (429 with
+  `Retry-After`, also for a correct password). The form accepted unlimited guesses, also while `api/token/` was
+  blocked. Wired only where `django_access` is installed; no new setting.
 ### Fixed
 
 - `AUTHENTICATION_BACKENDS` registers `django_accounts.backends.JWTAccessBackend` (before `ModelBackend`) when

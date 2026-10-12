@@ -1,0 +1,983 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+# Registry of the modules and libraries this service depends on. The order of `modules` is the order of LOCAL_APPS:
+# every module comes after the modules it requires. tests/test_modules_registry.py keeps this file true against
+# pyproject.toml, main/urls.py and the installed package metadata; main/settings_example.py is generated from it
+# (make settings-example).
+#
+# requires     modules that must be enabled with it (hard package dependencies)
+# optional     modules it works with when they are enabled (package extras)
+# also_enable  apps it imports whenever their package is installed: on this service they must be enabled with it
+# queues       worker queues its tasks are routed to (celery is the default queue)
+# settings     Django settings it reads
+# urls         main/urls.py routes it when its app is enabled
+
+domains:
+  - {id: foundation, title: Foundation}
+  - {id: catalog, title: Catalog}
+  - {id: pricing-stock, title: Pricing and Stock}
+  - {id: orders, title: Orders and Payments}
+  - {id: content, title: Content}
+  - {id: customers, title: Customers}
+  - {id: suppliers, title: Suppliers and Market Intelligence}
+  - {id: leads, title: Leads and Outreach}
+  - {id: integrations, title: Integrations}
+
+modules:
+  - dist: entirius-django-regional
+    name: Regional Data
+    apps: [django_regional]
+    domain: foundation
+    description: Countries, currencies and languages that every other module refers to.
+    core: true
+    requires: []
+    optional: []
+    also_enable: []
+    queues: []
+    settings: []
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-utils
+    name: Utilities
+    apps: [django_utils, django_utils.toolbox]
+    domain: foundation
+    description: Base models, API helpers, admin tools and the AI toolbox client shared by all modules.
+    core: true
+    requires: [entirius-django-regional]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [
+      ADMIN_THEME, AI_COMPLETION_TIMEOUT, AI_TOOLBOX_API_KEY, AI_TOOLBOX_BASE_URL, AI_TOOLBOX_CHANNEL,
+      AI_TOOLBOX_MAX_RETRIES, AI_TOOLBOX_TEST_SWITCH, AI_TOOLBOX_TIMEOUT, DEBUG, ENVIRONMENT, HEADER_COUNTRY,
+      HEADER_IP_ADDRESS, LOG_HTTP_CODE_GTE, MEDIA_URL
+    ]
+    urls: false
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-utils-translator
+    name: Translation Engine
+    apps: [django_utils_translator]
+    domain: foundation
+    description: Shared plumbing of the AI translation modules, with toolbox access, errors and base schemas.
+    core: false
+    requires: [entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [AI_TRANSLATOR_LANGUAGE_CODE_MAP]
+    urls: false
+    docs: false
+    frontend: []
+
+  - dist: entirius-django-pim
+    name: PIM
+    apps: [django_pim]
+    domain: catalog
+    description: Product information management for products, categories, attributes, pictures and sales channels.
+    core: false
+    requires: [entirius-django-regional, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: [celery]
+    settings: [
+      API_ADMIN_BASE_URL, API_VIEWER_BASE_URL, AUTH_USER_MODEL, CATEGORY_THUMBS_CONFIG,
+      CUSTOM_FEATURES_ADDITIONAL_DATA, DEBUG, DEFAULT_CURRENCY, DEFAULT_LENGTH_UNIT, DEFAULT_MASS_UNIT,
+      DEFAULT_TEMPERATURE_UNIT, IS_DEFAULT_LANG_FOR_CHANNELS_FROM_PIM, LANG_LENGTH_MAPPING, LANG_MASS_MAPPING,
+      LANG_TEMPERATURE_MAPPING, LIMITED_CUSTOM_FEATURES_IDXS_TO_VIEW, MEDIA_URL, PIM_ENFORCE_REQUIRED_ON_CREATE,
+      PIM_GAPS_BATCH_SIZE, PIM_GAPS_DEBOUNCE_SECONDS, PIM_GAPS_PENDING_TTL, PIM_GAPS_QUEUE,
+      PIM_MATRIX_SIGNALS_BATCH_THRESHOLD, PIM_MATRIX_SIGNALS_CHANNEL_DENYLIST, PIM_MATRIX_SIGNALS_DEBOUNCE_SECONDS,
+      PIM_STRICT_CREATE, STATIC_URL, T9N_DEFAULT_LANG, THUMBS_CONFIG, TIMEOUT_PICTURE_SECONDS, TMP_DIR,
+      UNIT_CONVERSION_DECIMAL_PLACES, UNIT_SIGN_MAPPING
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-pricemanager
+    name: Price Manager
+    apps: [django_pricemanager]
+    domain: pricing-stock
+    description: Product prices per country, currency, channel and tax regime, with price lists.
+    core: false
+    requires: [entirius-django-regional, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: [pricemanager_create_pricelist, celery]
+    settings: [
+      APPLIED_SPECIAL_PRICE_WHEN_NULL_VALIDITY_DATES, ATTR_PRICE_CSV_SEPARATOR, AUTH_USER_MODEL, BI_BUSINESS_UNIT,
+      BI_ENVIRONMENT, CREATE_PRICELIST_MAX_WORKERS_MULTITHREADING, ERROR_PRICELIST_TO_SAVE, MEDIA_ROOT,
+      PRICEMANAGER_BULK_CREATE_BATCH_SIZE, PRICEMANAGER_DUAL_WRITE, PRICEMANAGER_MATRIX_SIGNALS_CHANNEL_DENYLIST,
+      PRICEMANAGER_MATRIX_SIGNALS_DEBOUNCE_SECONDS, PRICEMANAGER_READ_FROM_CURRENT, PRICEMANAGER_VACUUM,
+      PRICE_HISTORY_RETENTION_DAYS, SUCCES_PRICELIST_TO_SAVE
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-atlas
+    name: Supplier Catalog
+    apps: [django_atlas]
+    domain: suppliers
+    description: Ingests external product data from feeds and scrapers for sourcing, monitoring and enrichment.
+    core: false
+    requires: [entirius-django-pim, entirius-django-regional, entirius-django-utils]
+    optional: [entirius-django-lookup, entirius-django-qms]
+    also_enable: []
+    queues: [atlas_default, atlas_images, atlas_results]
+    settings: [
+      ATLAS_BLOCK_PRIVATE_HOSTS, ATLAS_BULK_BATCH_SIZE, ATLAS_IMAGE_DOWNLOAD_RETRIES, ATLAS_IMAGE_DOWNLOAD_TIMEOUT_S,
+      ATLAS_IMAGE_DOWNLOAD_USER_AGENT, ATLAS_MAX_FEED_BYTES, ATLAS_MAX_IMAGE_BYTES, ATLAS_SCRAPER_CALLBACK_HMAC_SECRET
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-pricefighter
+    name: Competitive Pricing
+    apps: [django_pricefighter]
+    domain: suppliers
+    description: Compares own prices with observed market prices and proposes price decisions.
+    core: false
+    requires: [entirius-django-atlas, entirius-django-pricemanager, entirius-django-regional, entirius-django-utils]
+    optional: [entirius-django-pim]
+    also_enable: []
+    queues: [celery]
+    settings: [
+      AUTH_USER_MODEL, PRICEFIGHTER_DECISION_RETENTION_DAYS, PRICEFIGHTER_REF_ESTIMATOR, PRICEFIGHTER_STALENESS_DAYS
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-lookup
+    name: Product Lookup
+    apps: [django_lookup]
+    domain: catalog
+    description: Finds duplicate and matching products by fingerprints, names and images.
+    core: false
+    requires: [entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: [lookup]
+    settings: [
+      AUTH_USER_MODEL, LOOKUP_BLOCK_PRIVATE_HOSTS, LOOKUP_EMBEDDING, LOOKUP_EMBED_ALLOWED_HOSTS,
+      LOOKUP_EMBED_CONCURRENCY, LOOKUP_HNSW_EF_SEARCH, LOOKUP_IMAGE_ENABLED, LOOKUP_IMAGE_TOP_K,
+      LOOKUP_PHASH_MAX_DISTANCE, LOOKUP_PROVIDERS, LOOKUP_THRESHOLDS
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-notifications
+    name: Notifications
+    apps: [django_notifications]
+    domain: leads
+    description: In-app, email and Google Chat notifications with escalation.
+    core: false
+    requires: [entirius-django-regional, entirius-django-utils]
+    optional: [entirius-django-email]
+    also_enable: []
+    queues: [notifications_default]
+    settings: [
+      ENVIRONMENT, NOTIFICATIONS_ALLOW_LIVE_SENDS, NOTIFICATIONS_DEDUP_WINDOW_S, NOTIFICATIONS_DELIVERY_STALE_MINUTES,
+      NOTIFICATIONS_QUEUE_DEFAULT
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-siteintel
+    name: Site Intelligence
+    apps: [django_siteintel]
+    domain: leads
+    description: Audits a web domain with Lighthouse, URLScan and heuristics.
+    core: false
+    requires: [entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: [siteintel_default]
+    settings: [
+      SITEINTEL_ALLOWED_HOSTS, SITEINTEL_AUDIT_STUCK_MINUTES, SITEINTEL_BLOCK_PRIVATE_HOSTS, SITEINTEL_EXPIRE_DAYS,
+      SITEINTEL_FETCH_TIMEOUT_S, SITEINTEL_MAX_PAGE_BYTES, SITEINTEL_PROCESSED_MAX_BYTES, SITEINTEL_PSI_BASE_URL,
+      SITEINTEL_URLSCAN_BASE_URL, SITEINTEL_URLSCAN_POLL_BUDGET_S, SITEINTEL_URLSCAN_POLL_INTERVAL_S
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-pim-csv
+    name: PIM CSV Import
+    apps: [django_pim_csv]
+    domain: catalog
+    description: Bulk CSV import of categories, products, attributes and channel configuration into PIM.
+    core: false
+    requires: [entirius-django-pim, entirius-django-regional, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [
+      ALLOW_CHANGE_PRODUCT_TYPE, BI_BUSINESS_UNIT, BI_ENVIRONMENT, BUNDLE_SKU_QUANTITY_SEPARATOR,
+      CSV_IMPORT_PRODUCTS_BULK_SIZE, CSV_IMPORT_PRODUCTS_MAX_WORKERS, DATETIME_FORMAT_IMPORT, DEBUG,
+      DELETE_ATTRIBUTES_NOT_IN_CSV, IMAGE_CATEGORY_SEPARATOR, IMPORT_PRODUCTS_PIM_CSV_SKIP_FEATURES_INFO,
+      IS_DEFAULT_LANG_FOR_CHANNELS_FROM_PIM, SKIP_FILES_DEFAULT, SKIP_LINKING_PRODUCTS_DEFAULT, SKIP_PICTURES_DEFAULT,
+      SKU_LINK_SEPARATOR, T9N_DEFAULT_LANG, TMP_DIR
+    ]
+    urls: false
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-pim-translator
+    name: PIM Translations
+    apps: [django_pim_translator]
+    domain: catalog
+    description: AI translation of product and category content in PIM.
+    core: false
+    requires: [entirius-django-pim, entirius-django-utils, entirius-django-utils-translator]
+    optional: []
+    also_enable: []
+    queues: [celery]
+    settings: []
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-pim-export-to-magento-api
+    name: PIM Export to Magento
+    apps: [django_pim_export_to_magento_api]
+    domain: integrations
+    category: magento
+    description: Exports products, prices, pictures and attributes from PIM to Magento 2.
+    core: false
+    requires: [entirius-django-pim, entirius-django-pricemanager, entirius-django-regional, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: [pim_pull, pim_push]
+    settings: [
+      MAGENTO2_EXPORT_API_TOKEN, MAGENTO2_EXPORT_API_URL, PICTURES_ONLY_LANGUAGE, PICTURE_POSITION_TO_MAGENTO,
+      PICTURE_ROLE_TO_MAGENTO_TYPE, PRODUCT_DEFAULT_PRICE, T9N_DEFAULT_LANG
+    ]
+    urls: false
+    docs: false
+    frontend: []
+
+  - dist: entirius-django-faq
+    name: FAQ
+    apps: [django_faq]
+    domain: content
+    description: Structured questions and answers that can be attached to products and pages.
+    core: false
+    requires: [entirius-django-regional, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: []
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-munin
+    name: Module Registry and Health
+    apps: [django_munin]
+    domain: foundation
+    description: Tells the CMS which modules are enabled, holds runtime configuration and reports health.
+    core: true
+    requires: [entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [MUNIN_CACHE_TTL]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-captcha
+    name: Captcha
+    apps: [django_captcha]
+    domain: foundation
+    description: reCAPTCHA verification for public endpoints.
+    core: false
+    requires: [entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [API_BASE_URL, CAPTCHA_TOKEN_HEADER_NAME, CAPTCHA_URL]
+    urls: false
+    docs: false
+    frontend: []
+
+  - dist: entirius-django-agreements
+    name: Agreements
+    apps: [django_agreements]
+    domain: content
+    description: Versioned agreements and consent tracking, including newsletter consent.
+    core: false
+    requires: [entirius-django-regional, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [
+      AGREEMENTS_API_KEY, AGREEMENTS_PUBLIC_CONSENT_SOURCES, AUTH_USER_MODEL, DEBUG, LEADS_ANONYMISED_DOMAIN,
+      NEWSLETTER_CONFIRM_PATH, NEWSLETTER_DOUBLE_OPTIN, NEWSLETTER_TOKEN_MAX_AGE, STOREFRONT_BASE_URL,
+      T9N_DEFAULT_LANG
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-deliverypoints
+    name: Delivery Points
+    apps: [django_deliverypoints]
+    domain: orders
+    description: Pickup points and parcel lockers with import and location search.
+    core: false
+    requires: [entirius-django-regional, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [
+      CACHE_TTL, DEBUG, DELIVERYPOINTS_GOOGLE_GEOCODING_API_KEY, DELIVERYPOINTS_IMPORT_BATCH_SIZE,
+      DELIVERYPOINTS_SEARCH_RADIUS_KM, USE_CACHED_VIEWS
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-qms
+    name: Stock
+    apps: [django_qms]
+    domain: pricing-stock
+    description: Stock quantities per warehouse and sales channel.
+    core: false
+    requires: [entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: [quantities]
+    settings: [
+      BI_BUSINESS_UNIT, BI_ENVIRONMENT, DATA_DIR, EXPORT_DIR, IMPORT_DIR, QMS_BULK_BATCH_SIZE,
+      QMS_PIT_QUANTITY_BY_CHANNEL_CHUNK_SIZE, QMS_PIT_QUANTITY_CHUNK_SIZE, QMS_PIT_SETUP_QUANTITY_CHUNK_SIZE,
+      QMS_SUPPLIER_CODE_PREFIX, QMS_TYPE, QMS_XRAY_CHUNK_SIZE, TMP_DIR
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-email
+    name: Email
+    apps: [django_email]
+    domain: foundation
+    description: Transactional email with branded templates per channel and language.
+    core: false
+    requires: [entirius-django-regional, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [
+      ALLEGRO_VIRTUAL_PRODUCT_EMAIL_TEMPLATE_PATH, AVAILABLE_LANGUAGES,
+      BOOKING_ADMIN_NOTIFICATION_EMAIL_TEMPLATE_PATH, BOOKING_CONFIRMATION_EMAIL_TEMPLATE_PATH,
+      CHECKOUT_INVOICE_EMAIL_TEMPLATE_PATH, CONTACT_FORM_CLIENT_COPY_EMAIL_TEMPLATE_PATH,
+      CONTACT_FORM_SUBMISSION_EMAIL_TEMPLATE_PATH, COUPON_CONFIRMATION_EMAIL_TEMPLATE_PATH, DEFAULT_FROM_EMAIL,
+      EMAIL_ADMIN_API_ENABLED, EMAIL_DEFAULT_LANGUAGE, EMAIL_SMTP_CONFIGURATION_CHANNELS,
+      NEWSLETTER_SIGNUP_EMAIL_TEMPLATE_PATH, NEW_ACCOUNT_EMAIL_TEMPLATE_PATH, RESET_PASSWORD_EMAIL_TEMPLATE_PATH,
+      RETURN_CONFIRMATION_EMAIL_TEMPLATE_PATH, VIRTUAL_PRODUCT_EMAIL_TEMPLATE_PATH,
+      VOUCHER_ISSUED_BY_ADMIN_EMAIL_TEMPLATE_PATH, VOUCHER_ISSUED_ON_PURCHASE_EMAIL_TEMPLATE_PATH,
+      VOUCHER_RESEND_EMAIL_TEMPLATE_PATH
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-communicator
+    name: Communicator
+    apps: [django_communicator]
+    domain: leads
+    description: Outbound messages with templates, review, follow-up sequences, send policy and inbound replies.
+    core: false
+    requires: [entirius-django-email, entirius-django-regional, entirius-django-utils]
+    optional: [entirius-django-notifications]
+    also_enable: []
+    queues: [communicator_default, communicator_send, communicator_inbound]
+    settings: [
+      AUTH_USER_MODEL, COMMUNICATOR_AUTOMATED_REWRITE_LIMIT, COMMUNICATOR_AUTOREPLY_SUBJECT_PATTERNS,
+      COMMUNICATOR_DRAFT_RETRY_LIMIT, COMMUNICATOR_INBOUND_BATCH, COMMUNICATOR_INBOUND_BODY_MAX_CHARS,
+      COMMUNICATOR_INBOUND_MAX_BYTES, COMMUNICATOR_OPTOUT_PHRASES, COMMUNICATOR_QUEUE_DEFAULT,
+      COMMUNICATOR_QUEUE_INBOUND, COMMUNICATOR_QUEUE_SEND, COMMUNICATOR_REDIS_URL, COMMUNICATOR_REQUIRE_ONCE_BACKEND,
+      COMMUNICATOR_SANDBOX_SUBJECT_PREFIX, COMMUNICATOR_SENDING_STALE_MINUTES, COMMUNICATOR_SEND_INTERVAL_MIN,
+      COMMUNICATOR_SMTP_MAX_ATTEMPTS, COMMUNICATOR_SOFT_BOUNCE_RETRY_H, DEFAULT_FROM_EMAIL,
+      EMAIL_SMTP_CONFIGURATION_CHANNELS, ENVIRONMENT, LEADS_ANONYMISED_DOMAIN, REDIS_URL, SECRET_KEY
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-leads
+    name: Leads
+    apps: [django_leads]
+    domain: leads
+    description: B2B lead pipeline with companies, contacts, stages, rules and recipient selection.
+    core: false
+    requires: [
+      entirius-django-agreements, entirius-django-communicator, entirius-django-regional, entirius-django-siteintel,
+      entirius-django-utils
+    ]
+    optional: [entirius-django-contact-forms, entirius-django-notifications]
+    also_enable: []
+    queues: [leads_default]
+    settings: [
+      AI_TOOLBOX_CHANNEL, LEADS_ANALYSIS_MAX_HOOKS, LEADS_ANONYMISED_DOMAIN, LEADS_CLAIM_STALE_MINUTES,
+      LEADS_FORM_CONSENT_KEYS, LEADS_FORM_WEBSITE_KEYS, LEADS_FREEMAIL_DOMAINS, LEADS_IMPORT_CHUNK_SIZE,
+      LEADS_IMPORT_REPORT_MAX, LEADS_IMPORT_STALE_MINUTES, LEADS_IMPORT_TMP_DIR, LEADS_INTEL_RETRY_LIMIT,
+      LEADS_NOTIFY_ROLE, LEADS_QUEUE_DEFAULT, LEADS_RETENTION_DAYS, LEADS_ROTATION_MAX, LEADS_ROTATION_MAX_FAILURES,
+      LEADS_ROTATION_RETRY_HOURS
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-contact-forms
+    name: Contact Forms
+    apps: [django_contact_forms]
+    domain: content
+    description: Contact forms, bookings and ad conversion uploads.
+    core: false
+    requires: [entirius-django-regional, entirius-django-utils]
+    optional: [entirius-django-email]
+    also_enable: []
+    queues: [contact_forms, contact_forms_conversions]
+    settings: [
+      CONTACT_FORMS_CONVERSIONS_BATCH_SIZE, CONTACT_FORMS_CREDENTIALS_DIR, CONTACT_FORM_DEFAULT_TYPE,
+      CONTACT_FORM_SEND_ADMIN_EMAIL, CONTACT_FORM_SEND_CLIENT_COPY, DATA_DIR, DEFAULT_FROM_EMAIL_CONTACT_FORM,
+      EMAIL_BACKENDS_CHANNELS, FORMS_MAX_ATTACHMENT_COUNT, FORMS_MAX_ATTACHMENT_MB_SIZE, FORMS_MAX_JSON_MB_SIZE,
+      GOOGLE_ADS_DEVELOPER_TOKEN, GOOGLE_ADS_OAUTH_CLIENT_ID, GOOGLE_ADS_OAUTH_CLIENT_SECRET, PRIVATE_DIR, SECRET_KEY
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-regon-api
+    name: Company Registry Lookup
+    apps: [django_regon_api]
+    domain: integrations
+    category: service
+    description: Looks up companies in Polish government registries by tax or registry number.
+    core: false
+    requires: [entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [
+      API_BASE_URL, BIR_API_KEY, BIR_SERVICE_URL, BIR_VERSIONS, BIR_WSDL_URL, GET_GOV_DATA_CACHE_TIMEOUT,
+      GET_REGON_DATA_CACHE_PREFIX, GET_REGON_DATA_CACHE_TIMEOUT, GOV_REJESTR_WL_USE_PROD_ENVIRONMENT
+    ]
+    urls: true
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-baselinker
+    name: BaseLinker
+    apps: [django_baselinker]
+    domain: integrations
+    category: service
+    description: BaseLinker integration for orders and stock.
+    core: false
+    requires: []
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [API_PUBLIC_BASE_URL, DEBUG]
+    urls: false
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-crypt
+    name: Encrypted Fields
+    apps: [django_crypt]
+    domain: foundation
+    description: Symmetric encryption helper for model fields that hold secrets.
+    core: false
+    requires: []
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [CRYPT_SALT]
+    urls: false
+    docs: false
+    frontend: []
+
+  - dist: entirius-django-enrichment
+    name: Enrichment
+    apps: [django_enrichment]
+    domain: catalog
+    description: Reviews and applies proposed improvements to product descriptions, attributes, SEO and media.
+    core: false
+    requires: [entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: [celery, enrichment]
+    settings: [
+      ENRICHMENT_ADAPTERS, ENRICHMENT_ALLOWED_IMAGE_MIME, ENRICHMENT_APPLY_BATCH_SIZE,
+      ENRICHMENT_ASYNC_APPLY_THRESHOLD, ENRICHMENT_CELERY_QUEUE, ENRICHMENT_MAX_CSV_BYTES, ENRICHMENT_MAX_IMAGE_BYTES,
+      ENRICHMENT_RETENTION_DAYS, ENRICHMENT_SPAWN_COOLDOWN_DAYS, ENRICHMENT_SPAWN_DEFAULT_LIMIT,
+      ENRICHMENT_STAGING_DIR, MEDIA_ROOT
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-contentdb
+    name: Content
+    apps: [django_contentdb]
+    domain: content
+    description: CMS content such as pages, blog posts, navigation and media, with drafts and publishing.
+    core: false
+    requires: [entirius-django-pim, entirius-django-regional, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: [contentdb]
+    settings: [
+      API_ADMIN_BASE_URL, API_PUBLIC_BASE_URL, CONTENTDB_IMAGE_MAX_WIDTH, CONTENTDB_NAVIGATION_CACHE_TTL,
+      CONTENTDB_THUMBNAIL_QUALITY, TMP_DIR
+    ]
+    urls: true
+    docs: true
+    frontend: [cms, storefront]
+
+  - dist: entirius-django-accounts
+    name: Accounts
+    apps: [django_accounts]
+    domain: customers
+    description: Customer accounts with registration, login, addresses and wishlists.
+    core: false
+    requires: [entirius-django-email, entirius-django-regional, entirius-django-utils]
+    optional: [entirius-django-pim]
+    also_enable: []
+    queues: []
+    settings: [
+      ACCOUNTS_CHANNEL_BLACKLIST, ACCOUNTS_CUSTOMER_IS_ACTIVE_WITHOUT_DOUBLE_OPTIN, ACCOUNTS_PASSWORD_LIST_SYMBOLS,
+      ACCOUNTS_PASSWORD_MIN_CAPITAL_LETTERS, ACCOUNTS_PASSWORD_MIN_LENGTH, ACCOUNTS_PASSWORD_MIN_NUMBERS,
+      ACCOUNTS_PASSWORD_MIN_SPECIAL_SYMBOLS, ADMIN_DELETE_CUSTOMER_MAX_BATCH, API_ADMIN_BASE_URL, API_PUBLIC_BASE_URL,
+      AUTH_PASSWORD_ACCOUNT_VALIDATORS, AUTH_USER_MODEL, BILLING_ADDRESS_EDITABLE, BILLING_ADDRESS_PHONE_EDITABLE,
+      CMS_RESET_PASSWORD_REDIRECT_URL, DATA_DIR, DEBUG, EMAIL_DOUBLE_OPTIN, IMPORT_DIR, INSTALLED_APPS,
+      IS_ACTIVE_REQUIRED, IS_VERIFY_REQUIRED, JWT_ALGORITHM, JWT_REFRESH_LIFETIME, JWT_SECRET,
+      MAGENTO2_TOKEN_FOR_CHECKOUT_EXPORT, MAGENTO2_URL_FOR_CHECKOUT_EXPORT, MIGRATION_0023_MECHANISM,
+      NEW_ACCOUNT_REDIRECT_URL, NEW_ACCOUNT_REDIRECT_URL_PARAM_KEY, NEW_ACCOUNT_REDIRECT_URL_PARAM_UID,
+      NEW_ADDRESS_SHOULD_BE_DEFAULT, PRIVATE_DIR, RESET_PASSWORD_EMAIL_LIFETIME, RESET_PASSWORD_REDIRECT_URL,
+      RESET_PASSWORD_REDIRECT_URL_PARAM_KEY, SPECIFY_KEYS_EXTRA_PROFILE_DATA_IN_API, T9N_DEFAULT_LANG,
+      WISHLIST_PRODUCT_PER_PAGE
+    ]
+    urls: true
+    docs: true
+    frontend: [cms, storefront]
+
+  - dist: entirius-django-suppliers
+    name: Suppliers
+    apps: [django_suppliers]
+    domain: suppliers
+    description: Supplier feeds and supplier products, reviewed before they reach the catalog.
+    core: false
+    requires: [entirius-django-pim, entirius-django-regional, entirius-django-utils]
+    optional: [entirius-django-qms]
+    also_enable: []
+    queues: [supplier_default, supplier_images, supplier_results]
+    settings: [
+      SUPPLIER_BLOCK_PRIVATE_HOSTS, SUPPLIER_BULK_BATCH_SIZE, SUPPLIER_IMAGE_DOWNLOAD_RETRIES,
+      SUPPLIER_IMAGE_DOWNLOAD_TIMEOUT_S, SUPPLIER_IMAGE_DOWNLOAD_USER_AGENT, SUPPLIER_MAX_FEED_BYTES,
+      SUPPLIER_MAX_IMAGE_BYTES, SUPPLIER_SCRAPER_CALLBACK_HMAC_SECRET
+    ]
+    urls: true
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-contentdb-translator
+    name: Content Translations
+    apps: [django_contentdb_translator]
+    domain: content
+    description: AI translation of CMS content drafts.
+    core: false
+    requires: [
+      entirius-django-contentdb, entirius-django-regional, entirius-django-utils, entirius-django-utils-translator
+    ]
+    optional: []
+    also_enable: []
+    queues: [celery]
+    settings: []
+    urls: true
+    docs: true
+    frontend: [cms]
+
+  - dist: entirius-django-sitemap
+    name: Sitemap
+    apps: [django_sitemap]
+    domain: content
+    description: Multilingual sitemaps and robots files for the storefront.
+    core: false
+    requires: [entirius-django-regional]
+    optional: [entirius-django-contentdb, entirius-django-faq, entirius-django-pim]
+    also_enable: []
+    queues: []
+    settings: [
+      LIST_OF_CATEGORY_IDXES_WHICH_ARE_EXCLUDED, MEDIA_ROOT, SITEMAP_FORMAT_XML, SITEMAP_LIMIT,
+      SITEMAP_ROBOTS_TEMPLATE_PATH, SITEMAP_ROOT_DIR, SITEMAP_URL_HOST
+    ]
+    urls: false
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-accounts-export-to-magento-api
+    name: Accounts Export to Magento
+    apps: [django_accounts_export_to_magento_api]
+    domain: integrations
+    category: magento
+    description: Exports customer accounts to Magento 2.
+    core: false
+    requires: [entirius-django-accounts]
+    optional: []
+    also_enable: []
+    queues: [accounts_pull]
+    settings: [DEBUG, MAGENTO2_TOKEN_FOR_CHECKOUT_EXPORT, MAGENTO2_URL_FOR_CHECKOUT_EXPORT]
+    urls: false
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-vault
+    name: Payment Vault
+    apps: [django_vault]
+    domain: orders
+    description: Stores tokenized customer payment cards.
+    core: false
+    requires: [entirius-django-accounts, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [API_BASE_URL, BI_BUSINESS_UNIT, BI_ENVIRONMENT, DATA_DIR]
+    urls: true
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-reviews
+    name: Reviews
+    apps: [django_reviews]
+    domain: content
+    description: Product reviews and ratings with moderation.
+    core: false
+    requires: [entirius-django-accounts, entirius-django-pim, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [
+      API_BASE_URL, AVAILABLE_REVIEW_SOURCE, BI_BUSINESS_UNIT, BI_ENVIRONMENT, DATA_DIR, FILL_BLANK_NAME_AS_N_SLASH_A,
+      FIRST_PLUS_LASTNAME_WHEN_REVIEW_NAME_BLANK, MAGENTO2_TOKEN_FOR_CHECKOUT_EXPORT,
+      MAGENTO2_URL_FOR_CHECKOUT_EXPORT, MAX_RATE, MAX_REVIEW_DETAIL_LENGTH, MAX_REVIEW_TITLE_LENGTH, OVERWRITE_RATES,
+      RATINGS_NAME
+    ]
+    urls: true
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-matrix
+    name: Storefront Read Model
+    apps: [django_matrix]
+    domain: catalog
+    description: Denormalized catalog the storefront reads, with search, facets, prices and stock.
+    core: false
+    requires: [entirius-django-pim, entirius-django-regional, entirius-django-utils]
+    optional: [
+      entirius-django-checkout, entirius-django-omnibus, entirius-django-pricemanager, entirius-django-qms,
+      entirius-django-reviews
+    ]
+    also_enable: []
+    queues: [matrix_pull]
+    settings: [
+      API_BASE_URL, APPLIED_SPECIAL_PRICE_WHEN_NULL_VALIDITY_DATES, BLACKLISTED_FEATURES_IDX_VISIBILITY,
+      BOOL_NAME_TRANSLATION, BREADCRUMBS_WITHOUT_ROOT_CATEGORY_IN_VIEW, CACHE_TTL, DEBUG,
+      DELETE_WHEN_IMPORT_OLD_DATA_SAFETY_FACTOR, FEATURES_FILTERING_WORK_LIKE_AND_GATE, LANGUAGE_IMAGE_IMPORT_TYPE,
+      LANGUAGE_VIDEO_IMPORT_TYPE, LIST_OF_BLACKLISTED_CATEGORIES_IDX_IN_VIEW, LIST_OF_DISABLED_CACHE_ENDPOINTS_MATRIX,
+      MAGENTO2_TOKEN_FOR_CHECKOUT_EXPORT, MAGENTO2_URL_FOR_CHECKOUT_EXPORT, MAGENTO_BASIC_AUTH_LOGIN,
+      MAGENTO_BASIC_AUTH_PASSWORD, MATRIX_DATETIME_FORMAT, MATRIX_ENABLE_REALTIME_STOCK_UPDATE,
+      MATRIX_FULL_TEXT_LANG_SEARCH, MATRIX_FULL_TEXT_SEARCH, MATRIX_FUZZY_SEARCH, MATRIX_FUZZY_SEARCH_THRESHOLD,
+      MATRIX_PRODUCTS_FULL_TEXT_SEARCH_WEIGHT, MATRIX_PRODUCTS_PARALLEL_QUERIES, MATRIX_SEARCH_DEFAULT_SORT,
+      MATRIX_V2_CACHE_TTL, MATRIX_V2_CATEGORIES_MAX_URL_KEYS, OPTIONS_META_DATA, PAGINATION_DEFAULT_RESULTS_COUNT,
+      PAGINATION_MAX_RESULTS_COUNT, PAGINATION_NEXT_PAGES_COUNT, PAGINATION_TYPE, PIM_MATRIX_SIGNALS_BATCH_THRESHOLD,
+      PIM_MATRIX_SIGNALS_CHANNEL_DENYLIST, PIM_MATRIX_SIGNALS_DEBOUNCE_SECONDS, PRICE_DECIMAL_PLACES, PRICE_TYPE,
+      PRODUCT_ADDITIONAL_ATTRIBUTES, SEARCH_LIST_OF_FEATURES_IDX_MATRIX, THUMBS_CONFIG, USE_CACHED_VIEWS,
+      USE_PRICE_TUNER_IN_MATRIX, VARIANTS_ADDITIONAL_DATA, VISIBILITY_MECHANISM
+    ]
+    urls: true
+    docs: true
+    frontend: [storefront]
+
+  - dist: entirius-django-checkout
+    name: Checkout
+    apps: [django_checkout]
+    domain: orders
+    description: Carts, orders, payments, shipping, discounts and vouchers.
+    core: false
+    requires: [
+      entirius-django-accounts, entirius-django-pim, entirius-django-pricemanager, entirius-django-regional,
+      entirius-django-utils
+    ]
+    optional: [entirius-django-qms, entirius-django-returns, entirius-django-vault]
+    also_enable: []
+    queues: [celery]
+    settings: [
+      ADD_MAX_AVAILABLE_QUANTITY, API_ADMIN_BASE_URL, API_PUBLIC_BASE_URL, AUTOPAY_HASH_KEY, BI_BUSINESS_UNIT,
+      BI_ENVIRONMENT, BLIK_REGEX_VALIDATION, CACHE_TTL, CHECKOUT_SALEABLE_QUANTITY_LIMIT,
+      CHECKOUT_UPDATE_QUANTITIES_CHUNK_SIZE, CHECKOUT_USE_ISO_DATETIME_FORMAT, COUNTRY_CHECKOUT_MECHANISM,
+      CUSTOMER_PRICES_PRICE_TUNER_IN_CHECKOUT, CUSTOMS_THRESHOLD_ENABLED, DATA_DIR, DEBUG, EXPORT_DIR,
+      GLOBAL_STOCK_DIFFERENT_SUPPLIERS, GLOBAL_STOCK_RESERVATION_CHANNELS, GRATIS_MECHANISM, GRATIS_PERCENT_DISCOUNT,
+      GRATIS_PRICE, INCLUDE_GRATIS_IN_QUANTITY_DISCOUNT_COUNTER, IS_VAT_OSS_TURN_ON, LIMIT_PRODUCT_CACHE_TIME,
+      MAX_REQUESTED_DELIVERY_DATE, ORDER_STATUSES_QUALIFIED_TO_DISCOUNT_MAX_PER_USER,
+      ORDER_STATUSES_QUALIFIED_TO_FIRST_ORDER, PAYMENT_REDIRECT_ALLOWED_HOSTS, PAYMENT_REDIRECT_BRIDGE_TARGET_SCHEMES,
+      PAYMENT_REDIRECT_BRIDGE_TTL_MINUTES, PAYMENT_REDIRECT_DIRECT_SCHEMES, PAYNOW_VALIDITY_TIME_ORDER_DAYS,
+      PAYNOW_VALIDITY_TIME_SECONDS, PAYPAL_CAPTURE_PAYMENT_AFTER_APPROVED_ORDER_WEBHOOK, PAY_CODE_RATE_LIMIT,
+      PAY_CODE_RATE_WINDOW_SECONDS, PRIVATE_DIR, RESTRICT_COMBINE_BY_PRIORITY, SANDBOX_AUTOPAY_GATEWAY_ID, SECRET_KEY,
+      SHIPPING_METHOD_METHOD_TYPE_DEDUPLICATION_IDXES, SHOW_INVALID_GRATIS,
+      TURN_ON_VIES_VALIDATION_AND_0_VAT_WHEN_VALID_AND_OUTSIDE_PL, USE_CACHED_VIEWS, USE_PRICE_TUNER_IN_CHECKOUT,
+      USE_SOURCE_PRODUCT_WHILE_CONFIGURABLE_ALL_ATTS_DEFAULT, USE_VALIDATE_ITEMS_SIGNAL, USE_VALIDATE_VOUCHERS_SIGNAL,
+      VALIDATE_ADDRESS_EMAIL
+    ]
+    urls: true
+    docs: true
+    frontend: [cms, storefront]
+
+  - dist: entirius-django-checkout-export-to-magento-api
+    name: Order Export to Magento
+    apps: [django_checkout_export_to_magento_api]
+    domain: integrations
+    category: magento
+    description: Exports orders, payments and shipments to Magento 2.
+    core: false
+    requires: [entirius-django-checkout]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [
+      BI_BUSINESS_UNIT, BI_ENVIRONMENT, MAGENTO2_EXPORT_GROUND_DATETIME, MAGENTO2_TOKEN_FOR_CHECKOUT_EXPORT,
+      MAGENTO2_URL_FOR_CHECKOUT_EXPORT, MAPPING_PAYMENT_METHODS, MAPPING_SHIPPING_METHODS,
+      SEND_FIELD_EXTENSION_ATTRIBUTES
+    ]
+    urls: false
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-checkout-import-from-magento-api
+    name: Order Import from Magento
+    apps: [django_checkout_import_from_magento_api]
+    domain: integrations
+    category: magento
+    description: Imports order statuses from Magento 2.
+    core: false
+    requires: [entirius-django-checkout]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [BI_BUSINESS_UNIT, BI_ENVIRONMENT, MAGENTO2_TOKEN_FOR_CHECKOUT_EXPORT, MAGENTO2_URL_FOR_CHECKOUT_EXPORT]
+    urls: false
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-getresponse
+    name: GetResponse
+    apps: [django_getresponse]
+    domain: integrations
+    category: marketing
+    description: Syncs contacts, categories and products with GetResponse.
+    core: false
+    requires: [
+      entirius-django-agreements, entirius-django-checkout, entirius-django-pim, entirius-django-pricemanager,
+      entirius-django-regional, entirius-django-utils
+    ]
+    optional: []
+    also_enable: []
+    queues: [pim_pull]
+    settings: [
+      BI_BUSINESS_UNIT, BI_ENVIRONMENT, GETRESPONSE_MARKETING_CONSENT_GRACE_SECONDS, GETRESPONSE_USE_CONFIG_URL_KEY,
+      MEDIA_URL, SEND_CART_UID_TO_GETRESPONSE_IN_LINK
+    ]
+    urls: false
+    docs: false
+    frontend: []
+
+  - dist: entirius-django-returns
+    name: Returns
+    apps: [django_returns]
+    domain: orders
+    description: Order returns with return requests, attachments and printable forms.
+    core: false
+    requires: [entirius-django-accounts, entirius-django-checkout, entirius-django-email, entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [
+      API_BASE_URL, BI_BUSINESS_UNIT, BI_ENVIRONMENT, DATA_DIR, DAYS_TO_RETURN, DEFAULT_FROM_EMAIL, LOGO_URL,
+      NEW_ACCOUNT_EMAIL_TEMPLATE_PATH_HTML, PDF_RETURN_TEMPLATE, PRIVATE_DIR
+    ]
+    urls: true
+    docs: true
+    frontend: []
+
+  - dist: entirius-django-omnibus
+    name: Omnibus Price History
+    apps: [django_omnibus]
+    domain: pricing-stock
+    description: Price history and the lowest recent price required by the EU Omnibus directive.
+    core: false
+    requires: [entirius-django-checkout, entirius-django-pim, entirius-django-pricemanager]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [
+      APPLIED_SPECIAL_PRICE_WHEN_NULL_VALIDITY_DATES, BI_BUSINESS_UNIT, BI_ENVIRONMENT, BULK_SIZE_OMNIBUS,
+      PRICELIST_OMNIBUS_FILTER_DATE_MECHANISM
+    ]
+    urls: false
+    docs: true
+    frontend: []
+
+# Installed by the service itself wherever the package is importable (main/settings.py); never listed in LOCAL_APPS.
+platform:
+  - dist: entirius-django-access
+    name: Access and API Tokens
+    apps: [django_access]
+    domain: foundation
+    description: Staff roles and permissions per module area, the admin API gate and application tokens.
+    core: false
+    requires: [entirius-django-utils]
+    optional: []
+    also_enable: []
+    queues: []
+    settings: [
+      ACCESS_GATE_MODE, ACCESS_TOKEN_LAST_USED_INTERVAL_S, ACCESS_TOKEN_ROTATION_DAYS, AGREEMENTS_API_KEY,
+      AUTH_TOKEN_FAILURE_WINDOW_S, AUTH_TOKEN_MAX_FAILURES_PER_IP, AUTH_TOKEN_MAX_FAILURES_PER_USER,
+      AUTH_TOKEN_MAX_FAILURES_PER_USER_IP, AUTH_TOKEN_USER_FAILURE_WINDOW_S, AUTH_USER_MODEL, CACHES, DEBUG
+    ]
+    urls: true
+    docs: true
+    frontend: [cms]
+    installed: when-importable
+
+# `via` marks a library the service gets through a module, not a dependency of its own.
+libraries:
+  - dist: entirius-py-bievents
+    name: Business events
+    category: utility
+    description: Structured JSON business event logging on top of Python logging.
+
+  - dist: entirius-py-graylog-json-formatter
+    name: Graylog log formatter
+    category: utility
+    description: JSON log formatter for Graylog.
+
+  - dist: entirius-py-int-enum-choices
+    name: Integer enum choices
+    category: utility
+    description: Integer enums with labels for model choices.
+
+  - dist: entirius-py-lockfile
+    name: Lock file
+    category: utility
+    description: File lock that keeps the same process from running twice.
+
+  - dist: entirius-py-idx-normalizator
+    name: Identifier normalizer
+    category: utility
+    description: Normalizes and validates identifiers such as SKU and EAN.
+
+  - dist: entirius-py-process-logger
+    name: Process logger
+    category: utility
+    description: Structured logger that carries the context of a running process.
+
+  - dist: entirius-py-image-transformations
+    name: Image transformations
+    category: utility
+    description: Image resizing and background removal.
+
+  - dist: entirius-py-pdf-generator
+    name: PDF generator
+    category: utility
+    description: Builds PDF files from a JSON document description with LaTeX.
+
+  - dist: entirius-py-payu-sdk
+    name: PayU
+    category: payment
+    description: PayU payment gateway client.
+
+  - dist: entirius-py-paypal-sdk
+    name: PayPal
+    category: payment
+    description: PayPal payment gateway client.
+
+  - dist: entirius-py-autopay-sdk
+    name: Autopay
+    category: payment
+    description: Autopay payment gateway client (BLIK and cards).
+
+  - dist: entirius-py-przelewy24-sdk
+    name: Przelewy24
+    category: payment
+    description: Przelewy24 payment gateway client.
+
+  - dist: entirius-py-paynow-sdk
+    name: Paynow
+    category: payment
+    description: Paynow payment gateway client.
+
+  - dist: entirius-py-magento2-sdk
+    name: Magento 2 API client
+    category: magento
+    description: Magento 2 REST API client used by the order bridges.
+
+  - dist: entirius-py-synerise-sdk
+    name: Synerise
+    category: marketing
+    description: Synerise customer data platform API client.
+
+  - dist: entirius-py-salesmanago-sdk
+    name: SALESmanago
+    category: marketing
+    description: SALESmanago marketing automation API client.
+
+  - dist: entirius-py-edrone-sdk
+    name: edrone
+    category: marketing
+    description: edrone marketing automation API client.
+
+  - dist: entirius-py-get-response-sdk
+    name: GetResponse
+    category: marketing
+    description: GetResponse email marketing API client.
+
+  - dist: entirius-py-magento2-sdk2
+    name: Magento 2 catalog API client
+    category: magento
+    description: Magento 2 REST API client for products, customers, attributes, search and stores.
+
+  - dist: entirius-py-google-ads-sdk
+    name: Google Ads
+    category: marketing
+    description: Google Ads API client for click conversion uploads.
+    via: entirius-django-contact-forms[google-ads]
+
+  - dist: entirius-py-google-calendar-sdk
+    name: Google Calendar
+    category: service
+    description: Google Calendar API client for service accounts.
+    via: entirius-django-contact-forms[bookings]
+
+  - dist: entirius-py-googlechat
+    name: Google Chat
+    category: service
+    description: Google Chat webhook client for text and card messages.
+    via: entirius-django-notifications[googlechat]
+
+  - dist: entirius-py-gov-rejestr-wl-sdk
+    name: Polish VAT taxpayer registry
+    category: service
+    description: Client of the Polish government registry of VAT taxpayers.
+    via: entirius-django-regon-api
