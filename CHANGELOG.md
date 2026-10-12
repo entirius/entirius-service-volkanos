@@ -56,6 +56,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   per username + address, per address and per username, and a login blocked on one is blocked on the other (429 with
   `Retry-After`, also for a correct password). The form accepted unlimited guesses, also while `api/token/` was
   blocked. Wired only where `django_access` is installed; no new setting.
+### Fixed
+
+- `AUTHENTICATION_BACKENDS` registers `django_accounts.backends.JWTAccessBackend` (before `ModelBackend`) when
+  `django_accounts` is installed. Without it the customer Bearer token was never read: `customer/me/`, profile,
+  addresses, wishlist, password change, logout, and the checkout/returns/vault customer views answered 401.
 
 ## [3.0.1] - 2026-09-30
 

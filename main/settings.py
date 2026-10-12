@@ -202,3 +202,10 @@ if "django_access" in INSTALLED_APPS:
         **SPECTACULAR_SETTINGS,
         "POSTPROCESSING_HOOKS": [*_hooks, "django_access.openapi.add_api_key_security"],
     }
+
+# django_accounts customer views (@authenticate) call django.contrib.auth.authenticate(request), which only
+# tries these backends: without JWTAccessBackend no customer Bearer token is read and every customer endpoint
+# is 401. An environment's own list (settings_local) is kept; ModelBackend is the default for the admin login.
+AUTHENTICATION_BACKENDS = list(globals().get("AUTHENTICATION_BACKENDS", ["django.contrib.auth.backends.ModelBackend"]))
+if "django_accounts" in INSTALLED_APPS and "django_accounts.backends.JWTAccessBackend" not in AUTHENTICATION_BACKENDS:
+    AUTHENTICATION_BACKENDS.insert(0, "django_accounts.backends.JWTAccessBackend")
