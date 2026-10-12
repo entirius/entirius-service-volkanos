@@ -12,7 +12,7 @@ settings, URL routing, authentication and the OpenAPI schema.
 - Runs the Entirius modules (catalog, pricing, content, checkout, accounts and more) as one Django project.
 - Lets every environment choose its modules: nothing is enabled until `main/settings_local.py` lists it.
 - Serves the admin and storefront REST APIs with an OpenAPI schema, Swagger UI and ReDoc.
-- Issues staff tokens and, with the access module installed, gates the admin API by role.
+- Issues staff tokens and gates the admin API by role through the access module.
 - Refuses to boot without an explicit per-environment configuration.
 
 ## Installation
@@ -51,7 +51,7 @@ it reads and whether it routes URLs.
 - Enabling a module: its package in `pyproject.toml`, its app in `LOCAL_APPS` (`main/settings_local.py`) in
   registry order, together with the apps of its `requires` and `also_enable`, and a URL guard in `main/urls.py`
   when `urls: true`.
-- The `platform` entry (access) is never listed: the service enables it itself wherever the package is installed.
+- The `platform` entry (access) is never listed: the service enables it itself in every environment.
 - The worker consumes `celery` plus the `queues` of every enabled module: `celery -A main worker -Q <list>`.
 - `make settings-example` regenerates the module list of `main/settings_example.py` from the registry.
 - `make first-channel` creates the first sales channel on a migrated, empty database.

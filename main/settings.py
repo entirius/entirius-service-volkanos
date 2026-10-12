@@ -184,8 +184,12 @@ if _missing:
 if "JWT_SECRET" not in globals():
     JWT_SECRET = SECRET_KEY  # noqa: F405
 
-# Platform module owned by the service: installed wherever it is importable (no environment lists it).
-if importlib.util.find_spec("django_access") and "django_access" not in LOCAL_APPS:  # noqa: F405
+# Platform module owned by the service: a required dependency, enabled in every environment (none lists it).
+if not importlib.util.find_spec("django_access"):
+    raise ImproperlyConfigured(
+        "entirius-django-access is not installed - it is a required dependency of the service; run 'uv sync'."
+    )
+if "django_access" not in LOCAL_APPS:  # noqa: F405
     LOCAL_APPS = [*LOCAL_APPS, "django_access"]  # noqa: F405
 
 REST_FRAMEWORK = with_num_proxies(REST_FRAMEWORK, DRF_NUM_PROXIES)

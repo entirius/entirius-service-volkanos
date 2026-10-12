@@ -80,7 +80,7 @@ DATABASES = {
 #     "django_returns",
 #     "django_omnibus",
 # ]
-# django_access is added by main/settings.py wherever it is importable
+# django_access is added by main/settings.py in every environment (a required dependency)
 # END generated
 LOCAL_APPS: list[str] = []
 
