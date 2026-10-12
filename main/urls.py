@@ -12,13 +12,27 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+from apps.platform.token_views import TaggedTokenRefreshView
+
+if "django_access" in settings.INSTALLED_APPS:
+    from django_access.services.login_guard import guarded_admin_login
+
+    from apps.platform.auth_views import ThrottledTokenObtainPairView as StaffTokenView
+
+    # The admin login form counts on the failed-login counters of api/token/; it resolves before the site's own.
+    admin_login = [path("admin/login/", guarded_admin_login(admin.site.login))]
+else:  # the failed-login guard lives in django_access: without it both logins are the framework's own
+    from apps.platform.token_views import TaggedTokenObtainPairView as StaffTokenView
+
+    admin_login = []
 
 urlpatterns = [
+    *admin_login,
     path("admin/", admin.site.urls),
-    # JWT for module admin APIs (v2, IsAdminUser) and the CMS admin panel.
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    # JWT for module admin APIs (v2, IsAdminUser) and the CMS admin panel; failed logins are throttled (access).
+    path("api/token/", StaffTokenView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TaggedTokenRefreshView.as_view(), name="token_refresh"),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/schema/swagger-ui/",
@@ -92,6 +106,8 @@ if "django_pricefighter" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_pricefighter.urls")))
 if "django_lookup" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_lookup.urls")))
+if "django_access" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_access.urls")))
 if settings.DEBUG:
     from django.conf.urls.static import static
 

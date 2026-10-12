@@ -1,0 +1,11 @@
+# The first channel of a new installation: `make first-channel` (or CONFIG=<your copy>).
+# Languages, currencies and the country are codes of the django_regional tables.
+
+[channel]
+idx = "web"
+name = "Web"
+default_language = "en"
+languages = ["en", "pl"]
+default_currency = "EUR"
+currencies = ["EUR"]
+country = "DE"
