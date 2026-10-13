@@ -1240,7 +1240,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-matrix"
-version = "4.4.0"
+version = "4.4.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1259,9 +1259,9 @@ dependencies = [
     { name = "marshmallow-dataclass" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8b/d6/d835cba90f657a3cb5134ce19fb1e3089d69f6edce3b9057488e4835d0c7/entirius_django_matrix-4.4.0.tar.gz", hash = "sha256:78ac6a07544bca219910919d7a7f2f9d5a4ca99f7d6b29aff7e00ad2aa4ee67a", size = 299793, upload-time = "2026-10-12T08:50:51.948Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/cc/46/0639e1856337095a55700ee8d22a2c07d76e608202c88a7610eda79e2cad/entirius_django_matrix-4.4.1.tar.gz", hash = "sha256:5878bbccaadfa4e9181baad5e7fe29b4616dcbe9f889c4616c22d85e3776c628", size = 304330, upload-time = "2026-10-13T08:27:55.652Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a2/ce/3004c82d0439141c35a3ca356fad246bbd85810ba7462f471b7a836a9808/entirius_django_matrix-4.4.0-py3-none-any.whl", hash = "sha256:ee2859079bfe561c14c0a3493694d0a7dc3532c64be86c60b5126ba924b50cd6", size = 194052, upload-time = "2026-10-12T08:50:50.451Z" },
+    { url = "https://files.pythonhosted.org/packages/48/41/67d8513a88ca325e2006120a4f326634c537b9aff7b7af2638ca3981278c/entirius_django_matrix-4.4.1-py3-none-any.whl", hash = "sha256:8213f4cecdcd5cfec6fb2efd5824d902bb56e20b195399721ccb94c87629937d", size = 195477, upload-time = "2026-10-13T08:27:54.324Z" },
 ]
 
 [package.optional-dependencies]
@@ -2001,7 +2001,7 @@ wheels = [
 
 [[package]]
 name = "entirius-service-volkanos"
-version = "4.0.0"
+version = "4.0.1"
 source = { editable = "." }
 dependencies = [
     { name = "dj-database-url" },
@@ -2116,7 +2116,7 @@ requires-dist = [
     { name = "entirius-django-getresponse", specifier = ">=3.0.0" },
     { name = "entirius-django-leads", specifier = ">=0.4.0" },
     { name = "entirius-django-lookup", specifier = ">=0.4.0" },
-    { name = "entirius-django-matrix", extras = ["qms", "pricemanager"], specifier = ">=4.4.0" },
+    { name = "entirius-django-matrix", extras = ["qms", "pricemanager"], specifier = ">=4.4.1" },
     { name = "entirius-django-munin", specifier = ">=2.3.0" },
     { name = "entirius-django-notifications", extras = ["googlechat"], specifier = ">=0.2.0" },
     { name = "entirius-django-omnibus", specifier = ">=3.0.1" },
