@@ -4,6 +4,14 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.1] - 2026-10-13
+
+### Fixed
+
+- `entirius-django-matrix` 4.4.1: products no longer go missing from the storefront API after a seed or a large
+  import (two read-model fills of one channel could delete each other's rows). Rows lost on an earlier version come
+  back with `python manage.py fill-read-model --channel_idx <channel>`.
+
 ## [4.0.0] - 2026-10-12
 
 A major release: `entirius-django-access` is a required dependency, the default authentication is JWT only and the

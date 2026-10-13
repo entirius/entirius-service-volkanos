@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "4.0.0"
+version = "4.0.1"
 description = "Backend service of Entirius: a thin Django shell that runs the platform's modules behind one REST API"
 keywords = ["django", "ecommerce", "entirius", "rest-api", "headless", "backend"]
 authors = [
@@ -87,7 +87,7 @@ dependencies = [
     "entirius-django-accounts-export-to-magento-api>=2.0.0",
     "entirius-django-vault>=3.0.0",
     "entirius-django-reviews[magento]>=3.0.0",
-    "entirius-django-matrix[qms,pricemanager]>=4.4.0",
+    "entirius-django-matrix[qms,pricemanager]>=4.4.1",
     "entirius-django-checkout[qms,vault,returns]>=10.0.0",
     "entirius-django-checkout-export-to-magento-api>=2.0.0",
     "entirius-django-checkout-import-from-magento-api>=2.0.0",
