@@ -193,9 +193,24 @@ def _selectors(toolbox) -> list[str]:
     return [json.loads(call.request.content)["tags"][0] for call in toolbox.complete.calls]
 
 
-def _prompts(toolbox) -> list[str]:
-    bodies = (json.loads(call.request.content) for call in toolbox.complete.calls)
-    return ["\n".join(message["content"] for message in body["messages"]) for body in bodies]
+def _messages(call) -> dict[str, str]:
+    """One completion call's message text per role: `system` = instructions, `user` = data (contract A4 § 2-3)."""
+    messages = json.loads(call.request.content)["messages"]
+    return {role: "\n".join(m["content"] for m in messages if m["role"] == role) for role in ("system", "user")}
+
+
+def _calls(toolbox, selector: str) -> list[dict[str, str]]:
+    """The messages of every generation call (corrections excluded) whose selector tag contains `selector`."""
+    tags = ((call, json.loads(call.request.content)["tags"][0]) for call in toolbox.complete.calls)
+    return [_messages(call) for call, tag in tags if selector in tag and not tag.startswith("enrichment.revise")]
+
+
+def _in_data_only(text: str, calls: list[dict[str, str]]) -> bool:
+    return bool(calls) and all(text in call["user"] and text not in call["system"] for call in calls)
+
+
+def _last(toolbox) -> dict[str, str]:
+    return _messages(toolbox.complete.calls[-1])
 
 
 # --- environment ---------------------------------------------------------------------------------------------
@@ -259,9 +274,10 @@ def catalog(db, monkeypatch):
         real = pim.RealProduct.objects.create(sku=sku)
         product = pim.Product.objects.create(shop=channel, real_product=real, feature_set=feature_set)
         pim.ProductInCategory.objects.create(product=product, category=category, position=0)
-    # The PIM adapter has no `category_of` extra yet (contract A4 § 3); without it a category-scoped brief
-    # falls back to the subject. This stand-in reads the product's first category.
-    monkeypatch.setattr(enrichment_adapter, "category_of", _category_of, raising=False)
+    # TODO(pim): drop the stand-in once the PIM adapter ships the `category_of` extra (contract A4 § 3);
+    # `test_the_pim_adapter_exposes_category_of` turns red then. Without it a category brief falls back to the subject.
+    if not hasattr(enrichment_adapter, "category_of"):
+        monkeypatch.setattr(enrichment_adapter, "category_of", _category_of, raising=False)
     return channel
 
 
@@ -328,9 +344,11 @@ class TestProductWriterWithSeo:
             (CATEGORY, "en", "low gravity sofa"),
         }
         assert {b.source for b in briefs} == {f"task:{first.pk}"}
-        assert all(
-            "Primary phrase: low gravity sofa" in prompt for prompt in _prompts(toolbox) if "Fields to write" in prompt
-        )
+
+    def test_the_brief_and_the_serp_reach_the_prompts_as_data_never_as_instructions(self, first, toolbox):
+        assert _in_data_only("Primary phrase: low gravity sofa", _calls(toolbox, "enrichment.write"))
+        assert _in_data_only("Sofas", _calls(toolbox, "enrichment.seo_brief.evaluate"))
+        assert all("Orbital Foundry" in call["system"] for call in _calls(toolbox, "enrichment.write"))
 
     def test_a_second_product_of_the_category_reuses_the_brief(self, first, toolbox, run_tasks, operator):
         seo_calls, completions = _seo_calls(toolbox), toolbox.complete.call_count
@@ -348,6 +366,13 @@ class TestProductWriterWithSeo:
         ]
         assert title.warnings == []
         assert description.revisions.get().warnings == description.warnings
+
+
+@pytest.mark.xfail(strict=True, reason="pim: the enrichment adapter has no `category_of` extra yet (contract A4 § 3)")
+def test_the_pim_adapter_exposes_category_of():
+    from django_pim.services import enrichment_adapter
+
+    assert hasattr(enrichment_adapter, "category_of")
 
 
 class TestCorrectionLoop:
@@ -393,7 +418,7 @@ class TestCorrectionLoop:
             "active",
             f"proposal:{proposal.pk}",
         )
-        assert self.RULE not in _prompts(toolbox)[-1]
+        assert self.RULE not in "\n".join(_last(toolbox).values())
 
         profile = memory_promotion.promote(suggestion, user=operator)
         suggestion.refresh_from_db()
@@ -401,7 +426,20 @@ class TestCorrectionLoop:
         assert self.RULE in profile.data["always_rules"]
         after = revise_service.revise(proposal, instruction=SHORTER, user=operator)
         assert after.profile_versions == profile_service.version_ids(CHANNEL) != before.profile_versions
-        assert self.RULE in _prompts(toolbox)[-1]
+        assert (self.RULE in _last(toolbox)["system"], self.RULE in _last(toolbox)["user"]) == (True, False)
+
+    @pytest.mark.xfail(
+        strict=True,
+        reason="enrichment: promote overwrites merged always_rules (the channel overlay replaces the section)",
+    )
+    def test_promotion_keeps_the_instance_always_rules(self, proposal, operator):
+        from django_enrichment.models import MemoryEntry
+        from django_enrichment.services import memory_promotion, profile_service, rules_service
+
+        instance_rules = profile_service.get_profile().data["always_rules"]
+        rules_service.promote(proposal, self.RULE, target="profile")
+        memory_promotion.promote(MemoryEntry.objects.get(kind="rule_suggestion"), user=operator)
+        assert profile_service.merged(CHANNEL)["always_rules"] == [*instance_rules, self.RULE]
 
 
 # --- article workflow ----------------------------------------------------------------------------------------
@@ -495,6 +533,10 @@ class TestArticleWorkflow:
         assert {a.source for a in answers} == {f"run:{article.uid}/questions"}
         outline = EnrichmentTask.objects.get(params__run=article.uid, params__template="article.outline")
         assert outline.params["inputs"]["keywords"] == {"data": PICKED}
+
+    def test_the_answers_reach_the_outline_and_draft_prompts_as_data(self, article, toolbox):
+        for step in ("article.outline", "article.draft"):
+            assert _in_data_only(ANSWERS["audience"], _calls(toolbox, step)), step
 
     def test_the_draft_correction_is_a_revision_of_the_approved_draft(self, article):
         draft = _step_proposal(article.uid, "draft")
