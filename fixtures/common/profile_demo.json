@@ -185,6 +185,7 @@
           "Write \"Orbital Foundry\" as two capitalised words; never shorten it in customer texts.",
           "Never use the long dash; use a short dash with spaces or a comma.",
           "No number that is not in the facts registry. Do not estimate, round or copy from old texts.",
+          "Use only facts with a verified_at date; a fact without one is not for publication.",
           "No AI patterns from the tone section, above all \"it's not X, it's Y\" and warm-up openers.",
           "Every sales text stands on at least one differentiator from the brand section."
         ],
@@ -486,6 +487,7 @@
           "Write \"Orbital Foundry\" as two capitalised words; never shorten it in customer texts.",
           "Never use the long dash; use a short dash with spaces or a comma.",
           "No number that is not in the facts registry. Do not estimate, round or copy from old texts.",
+          "Use only facts with a verified_at date; a fact without one is not for publication.",
           "No AI patterns from the tone section, above all \"it's not X, it's Y\" and warm-up openers.",
           "Every sales text stands on at least one differentiator from the brand section."
         ],

@@ -14,7 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the `article` workflow: questions → search phrases → outline → draft → metadata → ContentDB document). Every
   worker's model is blank (the toolbox channel's first allowed model). Load with
   `manage.py loaddata fixtures/common/enrichment_workers.json fixtures/common/article_workflow.json fixtures/common/profile_demo.json`;
-  `tests/test_enrichment_seeds.py` validates them.
+  `tests/test_enrichment_seeds.py` validates them. The seeds need the `entirius-django-enrichment` release that
+  ships contract A3/A4 (profile schema, templates, workflows); the lock still pins 2.2.0, so the tests skip and a
+  baked stack cannot load them until the pin is bumped. `profile_demo.json` is for an empty demo database only: it
+  writes the instance profile and its version-1 snapshot directly, past `profile_service`, so loading it over a
+  profile saved through the API replaces that profile and breaks its version history.
 
 ## [4.0.1] - 2026-10-13
 
