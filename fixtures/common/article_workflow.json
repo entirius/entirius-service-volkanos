@@ -1,0 +1,487 @@
+[
+  {
+    "model": "django_enrichment.worker",
+    "pk": 7,
+    "fields": {
+      "key": "article.questions",
+      "label": "Article interview",
+      "kind": "questions",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You are an editor preparing an article interview. The article will be written only from what the brief, the company profile and the operator's answers say, so your questions collect what the text needs and the data does not hold yet: first-hand experience, concrete examples, the author's position, numbers they know, what the reader should do differently afterwards.\nAsk 3 to 5 short, specific questions. No pleasantries, no paraphrasing the brief back. Never ask for something the profile facts or remembered answers already give. Use a choice question only when the answer really is one of a few options. Mark a question optional when the article can stand without it. In `why`, say in one line what the answer unlocks in the text.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 8,
+    "fields": {
+      "key": "article.keywords",
+      "label": "Article search phrases",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You choose the search phrases an article should target. Intent first, volume second: a phrase qualifies only when its results page shows texts of the same type as this article (guide or analysis, not an offer, price list or product page). Prefer a long-tail phrase with a clear intent over a short phrase dominated by giants and comparison sites. Volume only breaks ties and filters out phrases nobody types.\nUse the search brief data block when present (volumes, ideas, results-page notes); never invent volumes or results-page content: without data, set the volume to 0 and say so in the notes.\nReturn 1 primary phrase, 1 or 2 secondary phrases, the intent, results-page notes, the gaps (what the top results all have that we lack, and what nobody has that we can offer) and the candidate table the operator picks from. The primary phrase must be among the candidates.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 9,
+    "fields": {
+      "key": "article.outline",
+      "label": "Article outline",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You build the outline of an article. You do not write section bodies.\n1. A working title and the thesis (1-2 sentences: the promise to the reader). If the brief gives an angle or a title, take it instead of inventing your own.\n2. 5 to 8 sections that carry the thesis as a progression (setup, development, turn or decision), not a list of loose topics. Each section: a short title, one line of angle, and which answers or facts it carries. No supporting material, no section; never design a section on empty.\n3. SEO: the primary phrase from the keywords step goes into the title; distribute the secondary phrases across sections.\n4. Opening shapes: give each section an opening from the palette scene, question, number, a line from the operator's answers, bold thesis, short sentence. Bold thesis at most twice; neighbouring sections never share a shape; at most two sections may close on an aphorism (mark them \"closing line\").\n\nOutput markdown: `# <working title>`, a `**Thesis:**` line, a `**SEO:**` line (primary, secondary), then each section as `### N. <title>` with bullet lines `angle`, `material`, `phrase`, `opening`.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 10,
+    "fields": {
+      "key": "article.draft",
+      "label": "Article draft",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You write the full body of an article from its approved outline, section by section, in the order of the outline. Each section is written aware of all previous ones: continue the thought, never repeat a fact, example or metaphor already used, and do not copy the previous sections' skeleton or openers.\nStructure: start with a lead paragraph (a hook that states the thesis, not a summary), then each section as `## <section title>`, subsections as `###`. Do not write the H1 title and do not write an FAQ section; both come from later steps. End with a short closing reflection: one fresh conclusion drawn from the thesis, no recap of the sections, no new facts, closing with one question to the reader.\nEach main section answers its question in its first 40-60 words. Open each section with the shape the outline assigned; an aphorism only where the outline allows it, otherwise end plainly.\nRhythm: short sentences next to long ones, paragraphs of 1 to 6 sentences, sections of different lengths. At most one nominalisation per paragraph. Active voice. Weave the assigned phrase in naturally, never stuff it. Present data as an insight (what the number shows), not a bare figure.\nNever put internal anchors, timestamps or source domains in the text.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 11,
+    "fields": {
+      "key": "article.meta",
+      "label": "Article metadata",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You write the search and social metadata of a finished article. Do not change the article; the metadata reflects it and never embellishes it.\n- title: at most 60 characters, the primary phrase near the start, never a verbatim copy of the article's first heading.\n- description: 140-160 characters, the primary phrase plus a concrete benefit or hook; do not just glue the first sentence.\n- og_title: at most 90 characters (may equal the title); og_description: at most 200 characters.\n- slug: short, lowercase words joined by hyphens, built from the primary phrase.\n- faq: 0 to 6 questions a reader of this article would ask, each answered from the article in 2-4 sentences of plain markdown. Zero questions is a valid result; never pad.\nNo invented numbers or facts. If the primary phrase does not occur in the article, keep the metadata true to the article rather than forcing the phrase.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 12,
+    "fields": {
+      "key": "article.compose",
+      "label": "Article document",
+      "kind": "compose",
+      "mode": "internal",
+      "target_module": "contentdb",
+      "system_prompt": "",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 4,
+    "fields": {
+      "key": "article.questions",
+      "label": "Article: questions",
+      "worker": 7,
+      "params": {
+        "prompt": "Ask the questions this article needs answered before it can be written."
+      },
+      "rules": [],
+      "position": 100,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 5,
+    "fields": {
+      "key": "article.keywords",
+      "label": "Article: search phrases",
+      "worker": 8,
+      "params": {
+        "prompt": "Choose the search phrases for this article from the brief, the answers and the search brief data.",
+        "format": "json",
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "primary": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "secondary": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              },
+              "maxItems": 2
+            },
+            "intent": {
+              "type": "string",
+              "enum": [
+                "informational",
+                "commercial",
+                "transactional",
+                "navigational"
+              ]
+            },
+            "serp_notes": {
+              "type": "string",
+              "maxLength": 1000
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 300
+              },
+              "maxItems": 6
+            },
+            "candidates": {
+              "type": "array",
+              "maxItems": 12,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "phrase": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 120
+                  },
+                  "volume": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "intent": {
+                    "type": "string",
+                    "enum": [
+                      "informational",
+                      "commercial",
+                      "transactional",
+                      "navigational"
+                    ]
+                  },
+                  "serp_notes": {
+                    "type": "string",
+                    "maxLength": 300
+                  }
+                },
+                "required": [
+                  "phrase",
+                  "volume",
+                  "intent",
+                  "serp_notes"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "primary",
+            "secondary",
+            "intent",
+            "serp_notes",
+            "gaps",
+            "candidates"
+          ],
+          "additionalProperties": false
+        },
+        "augment": [
+          "seo_brief"
+        ],
+        "seo_scope": "subject"
+      },
+      "rules": [],
+      "position": 110,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 6,
+    "fields": {
+      "key": "article.outline",
+      "label": "Article: outline",
+      "worker": 9,
+      "params": {
+        "prompt": "Build the outline of this article.",
+        "format": "markdown"
+      },
+      "rules": [],
+      "position": 120,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 7,
+    "fields": {
+      "key": "article.draft",
+      "label": "Article: draft",
+      "worker": 10,
+      "params": {
+        "prompt": "Write the article body from the approved outline.",
+        "format": "markdown"
+      },
+      "rules": [],
+      "position": 130,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 8,
+    "fields": {
+      "key": "article.meta",
+      "label": "Article: metadata",
+      "worker": 11,
+      "params": {
+        "prompt": "Write the metadata and FAQ of the approved article draft.",
+        "format": "json",
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 60
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 160
+            },
+            "og_title": {
+              "type": "string",
+              "maxLength": 90
+            },
+            "og_description": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "slug": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "faq": {
+              "type": "array",
+              "maxItems": 6,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "question": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "answer": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1200
+                  }
+                },
+                "required": [
+                  "question",
+                  "answer"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "title",
+            "description",
+            "og_title",
+            "og_description",
+            "slug",
+            "faq"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "rules": [],
+      "position": 140,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 9,
+    "fields": {
+      "key": "article.compose",
+      "label": "Article: document",
+      "worker": 12,
+      "params": {
+        "body_step": "draft",
+        "meta_step": "meta"
+      },
+      "rules": [],
+      "position": 150,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.workflowdefinition",
+    "pk": 1,
+    "fields": {
+      "key": "article",
+      "label": "Article",
+      "target_module": "contentdb",
+      "inputs_schema": {
+        "type": "object",
+        "required": [
+          "topic",
+          "language"
+        ],
+        "properties": {
+          "topic": {
+            "type": "string",
+            "title": "Topic",
+            "minLength": 3,
+            "maxLength": 200
+          },
+          "language": {
+            "type": "string",
+            "title": "Language",
+            "pattern": "^[a-z]{2}$",
+            "default": "en"
+          },
+          "title": {
+            "type": "string",
+            "title": "Working title",
+            "maxLength": 200
+          },
+          "audience": {
+            "type": "string",
+            "title": "Audience",
+            "maxLength": 500
+          },
+          "angle": {
+            "type": "string",
+            "title": "Angle",
+            "maxLength": 1000
+          },
+          "notes": {
+            "type": "string",
+            "title": "Notes",
+            "maxLength": 4000
+          }
+        },
+        "additionalProperties": false
+      },
+      "steps": [
+        {
+          "key": "questions",
+          "label": "Questions",
+          "template": "article.questions",
+          "needs": [],
+          "gate": "review",
+          "output": "questions"
+        },
+        {
+          "key": "keywords",
+          "label": "Search phrases",
+          "template": "article.keywords",
+          "needs": [
+            "questions"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "outline",
+          "label": "Outline",
+          "template": "article.outline",
+          "needs": [
+            "questions",
+            "keywords"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "draft",
+          "label": "Draft",
+          "template": "article.draft",
+          "needs": [
+            "questions",
+            "keywords",
+            "outline"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "meta",
+          "label": "Metadata",
+          "template": "article.meta",
+          "needs": [
+            "keywords",
+            "draft"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "compose",
+          "label": "Document",
+          "template": "article.compose",
+          "needs": [
+            "draft",
+            "meta"
+          ],
+          "gate": "review",
+          "output": "document"
+        }
+      ],
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  }
+]

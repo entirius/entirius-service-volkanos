@@ -4,6 +4,18 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- AI studio seeds in `fixtures/common/`: `profile_demo.json` (company profile of the fictitious Orbital Foundry,
+  version 1), `enrichment_workers.json` gains the `pim.writer` / `pim.tagger` workers with the `meta`, `description`
+  and `tags` templates (the old `field` workers are inactive), `article_workflow.json` (step workers, templates and
+  the `article` workflow: questions → search phrases → outline → draft → metadata → ContentDB document). Every
+  worker's model is blank (the toolbox channel's first allowed model). Load with
+  `manage.py loaddata fixtures/common/enrichment_workers.json fixtures/common/article_workflow.json fixtures/common/profile_demo.json`;
+  `tests/test_enrichment_seeds.py` validates them.
+
 ## [4.0.1] - 2026-10-13
 
 ### Fixed

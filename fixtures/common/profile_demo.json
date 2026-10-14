@@ -1,0 +1,602 @@
+[
+  {
+    "model": "django_enrichment.profile",
+    "pk": 1,
+    "fields": {
+      "channel": "",
+      "data": {
+        "brand": {
+          "text": "## What the customer actually buys\n\nOrbital Foundry builds furniture and interior fittings for ships, orbital stations and colonies. The customer does not buy a sofa first. They buy a fitting that survives a hard dock, works in partial gravity and still looks like home after five years of recycled air.\n\nPractical rule: **a material name is never a promise.** \"Titanium frame\" describes a part. The promise is what stops happening: a chair that no longer rattles when the station spins up.\n\n## Mechanism\n\nEvery product goes through the vacuum test bench before it leaves the Foundry, and the test result ships with it. The customer buys a measured result, not a declaration of quality. Say the mechanism early, not in the small print.\n\n## Differentiators\n\nEvery sales text stands on at least one of them. A text that stands on none describes the furniture trade, not us.\n\n1. **Tested, not claimed.** Each piece is vacuum-tested and certified for artificial gravity; the test card travels with the order.\n2. **Built to be repaired on board.** Standard fasteners, spare parts listed per product, no glued joints in load-bearing parts.\n3. **Designed for small cabins.** Every collection has a fold, stack or wall-mount variant for crew quarters.\n\n## AI\n\nWe use automation to write first drafts of catalogue texts. It is a way of working, not a product. We never sell \"AI furniture\".\n",
+          "differentiators": [
+            "Tested, not claimed: every piece is vacuum-tested and the test card ships with the order.",
+            "Built to be repaired on board: standard fasteners and a spare parts list per product.",
+            "Designed for small cabins: every collection has a fold, stack or wall-mount variant."
+          ],
+          "never_say": [
+            "Indestructible",
+            "Space-age luxury",
+            "AI-designed furniture",
+            "The best furniture in the galaxy"
+          ]
+        },
+        "persona": {
+          "text": "Readers are practical people furnishing a place where every cubic metre is paid for. They have been burned by furniture that looked good in a render and came apart in the first gravity cycle. They believe specifications more than adjectives and expect to be told when a product is the wrong choice.\n",
+          "personas": [
+            {
+              "name": "Station quartermaster",
+              "text": "Buys for a whole deck at once. Cares about lead time, spare parts and how many pieces fit in one cargo pod. Reads the specification table before the description."
+            },
+            {
+              "name": "Long-haul crew member",
+              "text": "Furnishes one cabin for a two-year contract. Cares about comfort in low gravity, noise and whether the piece folds away. Skims; decides on the first two sentences."
+            },
+            {
+              "name": "Colony homesteader",
+              "text": "Furnishes a first permanent home. Cares about durability and repair on site, distrusts anything that needs a service technician."
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "founded",
+            "label": "Founded",
+            "value": "2131",
+            "source": "Company register, Emporium station charter",
+            "verified_at": "2026-10-01",
+            "note": "Use the year, never 'over a century'."
+          },
+          {
+            "id": "vacuum_cycles",
+            "label": "Vacuum test cycles per product",
+            "value": "500",
+            "source": "Quality handbook QH-3, section 2",
+            "verified_at": "2026-10-01",
+            "note": "Per product line, not per individual piece."
+          },
+          {
+            "id": "gravity_range",
+            "label": "Certified gravity range",
+            "value": "0.3 g to 1.2 g",
+            "source": "Certification sheet CS-12",
+            "verified_at": "2026-10-01",
+            "note": ""
+          },
+          {
+            "id": "warranty",
+            "label": "Frame warranty",
+            "value": "5 years",
+            "source": "Terms of sale, section 7",
+            "verified_at": "2026-10-01",
+            "note": "Frame only; upholstery has its own terms."
+          },
+          {
+            "id": "catalogue_size",
+            "label": "Products in the catalogue",
+            "value": "33",
+            "source": "PIM export",
+            "verified_at": "2026-10-01",
+            "note": "Changes with every season; check before quoting."
+          },
+          {
+            "id": "collections",
+            "label": "Collections",
+            "value": "10",
+            "source": "PIM export",
+            "verified_at": "2026-10-01",
+            "note": ""
+          },
+          {
+            "id": "dock_delivery",
+            "label": "Delivery to a station dock",
+            "value": "14 days",
+            "source": "",
+            "verified_at": "",
+            "note": "To confirm with logistics before use."
+          },
+          {
+            "id": "spare_parts",
+            "label": "Spare parts availability",
+            "value": "10 years after the last sale",
+            "source": "",
+            "verified_at": "",
+            "note": "To confirm; do not publish yet."
+          }
+        ],
+        "tone": {
+          "text": "Three rules, each with a test. Not nine adjectives: an adjective has no pass criterion.\n\n## Rule 1: practitioner to practitioner\n\nWrite like someone who has fitted a cabin, to someone who is fitting one.\n\nTest: read it aloud. A sentence you would not say to a customer at the dock gets rewritten until you would.\n\n- DO: \"The Docking Bay Chair locks to the floor rail in two clicks, so it stays put during a hard burn.\"\n- DON'T: \"Our extensive experience allows us to deliver exceptional seating solutions.\"\n\n## Rule 2: a specific instead of an adjective\n\nTest: swap our name for a competitor's. If the sentence is still true, cut it.\n\n- DO: \"The frame is tested for 500 vacuum cycles.\"\n- DON'T: \"Premium quality and outstanding durability.\"\n\n## Rule 3: warm in voice, firm in promise\n\nSpeak directly, use \"you\". What we promise is hard: measurements, test results, warranty terms.\n\nActive voice, first person plural: we test, we ship, we repair. Not \"is tested by\".\n\n## Zero is a valid result\n\nNo good FAQ question? Zero questions is correct. No number in the facts registry? The sentence goes without a number or not at all. Filler looks useful and is not.\n",
+          "ai_patterns": [
+            "Contrast for show: \"it's not X, it's Y\" and its relatives.",
+            "Forced triplets: three adjectives or three clauses only because three sounds good.",
+            "Symmetric sentences and paragraphs of the same length.",
+            "Warm-up openers: \"in today's world\", \"in an era of\", \"more and more\".",
+            "Process narration: \"in this article\", \"let's dive in\", \"our first step\".",
+            "An aphorism closing every section; at most two per text.",
+            "The long dash; use a short dash with spaces or a comma."
+          ]
+        },
+        "language": {
+          "text": "## Names\n\n- **Orbital Foundry**: two words, both capitalised, never shortened to \"OF\" in customer texts.\n- Collection names are proper names: \"Orion Collection\", \"Nebula Heritage\". Never translated.\n\n## Dashes\n\n| Mark | When |\n|---|---|\n| Hyphen `-` without spaces | joining words: `low-gravity cabin` |\n| Dash `-` with spaces | an aside |\n| Long dash `—` | never |\n| En dash `–` | numeric ranges only: `0.3–1.2 g` |\n\n## Banned phrases\n\n| Phrase | Instead |\n|---|---|\n| state-of-the-art | name the part or the test |\n| game-changing | say what changes |\n| one-stop solution | list what is included |\n| world-class | give a number from the facts registry |\n| revolutionise your cabin | say what will be different |\n\n## Capitals\n\nHeadings in sentence case. Not Every Word Capitalised.\n",
+          "spellings": [
+            {
+              "wrong": "OrbitalFoundry",
+              "right": "Orbital Foundry"
+            },
+            {
+              "wrong": "Orbital-Foundry",
+              "right": "Orbital Foundry"
+            },
+            {
+              "wrong": "zero-g",
+              "right": "zero gravity"
+            },
+            {
+              "wrong": "space-ship",
+              "right": "spaceship"
+            }
+          ],
+          "glossary": [
+            {
+              "term": "vacuum-tested",
+              "translations": {
+                "pl": "testowany w próżni",
+                "de": "vakuumgeprüft",
+                "es": "probado al vacío"
+              }
+            },
+            {
+              "term": "artificial gravity",
+              "translations": {
+                "pl": "sztuczna grawitacja",
+                "de": "künstliche Schwerkraft",
+                "es": "gravedad artificial"
+              }
+            },
+            {
+              "term": "crew quarters",
+              "translations": {
+                "pl": "kwatery załogi",
+                "de": "Mannschaftsquartiere",
+                "es": "camarotes de la tripulación"
+              }
+            },
+            {
+              "term": "cargo pod",
+              "translations": {
+                "pl": "kontener ładunkowy",
+                "de": "Frachtkapsel",
+                "es": "cápsula de carga"
+              }
+            }
+          ]
+        },
+        "headlines": {
+          "text": "A headline names the reader's situation or shows the mechanism. It never praises us.\n\n- DO: \"A desk that stays put when the station spins up\"\n- DON'T: \"Discover our amazing new desk\"\n\nA call to action is a verb and an object: \"Check dimensions\", \"Order spare parts\". One primary call per page.\n"
+        },
+        "proof": {
+          "text": "Proof is a number from the facts registry, a test result or a named collection. Read this before deciding to put a proof in a text, not after.\n\n- A number goes in only if it is in the facts registry and verified.\n- Numbers from others (industry reports) go in only with the source named in the same sentence.\n- No invented customer quotes, no invented reviews, no \"thousands of happy crews\".\n"
+        },
+        "seo": {
+          "text": "Intent first, volume second: pick the phrase whose results page shows texts of the same type as ours.\n\n- Exactly one H1; sections as H2, subsections as H3, no skipped levels.\n- Each main section answers its question in the first 40-60 words.\n- Primary phrase in the H1 and the lead; each secondary phrase in at least one heading or the first sentence of its section, never stuffed.\n- Meta title 40-60 characters, primary phrase near the start, not a copy of the H1. Meta description 140-160 characters, with a concrete benefit.\n- Image alt text describes what the image shows, in natural language.\n"
+        },
+        "checklists": {
+          "text": "Only checkable items. An item you cannot verify in a few seconds is a wish, not a check.\n\n## Every text\n\n- [ ] No long dash. Check with search, not by eye.\n- [ ] \"Orbital Foundry\" spelled as two capitalised words.\n- [ ] Every number comes from the facts registry.\n- [ ] No phrase from the banned list.\n- [ ] No \"it's not X, it's Y\" construction.\n- [ ] Sentences vary in length.\n- [ ] Swap test: no sentence about us stays true with a competitor's name.\n\n## Product description\n\n- [ ] Opens with the main benefit in one sentence.\n- [ ] Every specification comes from the product data.\n- [ ] Says when the product is the wrong choice, if the data supports it.\n\n## Article\n\n- [ ] Each section answers its question in the first 40-60 words.\n- [ ] Every factual sentence has a source in the brief, the answers or the facts registry.\n- [ ] FAQ has 0-6 questions; zero is fine.\n"
+        },
+        "always_rules": [
+          "Write \"Orbital Foundry\" as two capitalised words; never shorten it in customer texts.",
+          "Never use the long dash; use a short dash with spaces or a comma.",
+          "No number that is not in the facts registry. Do not estimate, round or copy from old texts.",
+          "No AI patterns from the tone section, above all \"it's not X, it's Y\" and warm-up openers.",
+          "Every sales text stands on at least one differentiator from the brand section."
+        ],
+        "rules": [
+          {
+            "id": "long-dash",
+            "pattern": "—",
+            "flags": "",
+            "message": "Long dash is not used.",
+            "do": "Tested for 500 cycles - and it shows.",
+            "dont": "Tested for 500 cycles — and it shows.",
+            "active": true
+          },
+          {
+            "id": "not-x-but-y",
+            "pattern": "\\b(?:it'?s|this is) not (?:just )?[^.,;]{1,40}[,;] (?:it'?s|but)\\b",
+            "flags": "i",
+            "message": "Contrast for show (\"it's not X, it's Y\").",
+            "do": "The chair locks to the floor rail.",
+            "dont": "It's not just a chair, it's a command post.",
+            "active": true
+          },
+          {
+            "id": "warm-up-opener",
+            "pattern": "\\b(?:in today'?s (?:fast-paced )?world|in an era of|more and more)\\b",
+            "flags": "i",
+            "message": "Warm-up opener; start with the thing itself.",
+            "do": "Cabins on long-haul freighters are small.",
+            "dont": "In today's fast-paced world, cabins are getting smaller.",
+            "active": true
+          },
+          {
+            "id": "process-narration",
+            "pattern": "\\b(?:in this article|let'?s dive in|without further ado)\\b",
+            "flags": "i",
+            "message": "Process narration; the reader came for the answer.",
+            "do": "Low gravity changes how a sofa wears.",
+            "dont": "In this article we will look at sofas.",
+            "active": true
+          },
+          {
+            "id": "banned-phrases",
+            "pattern": "\\b(?:state-of-the-art|game-?changing|one-stop|world-class|revolutioni[sz]e)\\b",
+            "flags": "i",
+            "message": "Banned phrase; name the specific instead.",
+            "do": "Frame tested for 500 vacuum cycles.",
+            "dont": "A world-class, state-of-the-art frame.",
+            "active": true
+          },
+          {
+            "id": "exclamation",
+            "pattern": "!",
+            "flags": "",
+            "message": "No exclamation marks in catalogue copy.",
+            "do": "Folds flat for storage.",
+            "dont": "Folds flat for storage!",
+            "active": false
+          }
+        ],
+        "routing": {
+          "pim.writer": [
+            "facts",
+            "brand",
+            "persona",
+            "tone",
+            "language",
+            "seo"
+          ],
+          "pim.tagger": [
+            "brand",
+            "language"
+          ],
+          "article.questions": [
+            "facts",
+            "brand",
+            "persona"
+          ],
+          "article.keywords": [
+            "brand",
+            "persona",
+            "seo"
+          ],
+          "article.outline": [
+            "facts",
+            "brand",
+            "persona",
+            "headlines",
+            "seo"
+          ],
+          "article.draft": [
+            "facts",
+            "brand",
+            "persona",
+            "tone",
+            "language",
+            "proof",
+            "seo"
+          ],
+          "article.meta": [
+            "facts",
+            "brand",
+            "language",
+            "headlines",
+            "seo"
+          ]
+        }
+      },
+      "schema_version": 1,
+      "version": 1,
+      "updated_by": null,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.profileversion",
+    "pk": 1,
+    "fields": {
+      "profile": 1,
+      "version": 1,
+      "data": {
+        "brand": {
+          "text": "## What the customer actually buys\n\nOrbital Foundry builds furniture and interior fittings for ships, orbital stations and colonies. The customer does not buy a sofa first. They buy a fitting that survives a hard dock, works in partial gravity and still looks like home after five years of recycled air.\n\nPractical rule: **a material name is never a promise.** \"Titanium frame\" describes a part. The promise is what stops happening: a chair that no longer rattles when the station spins up.\n\n## Mechanism\n\nEvery product goes through the vacuum test bench before it leaves the Foundry, and the test result ships with it. The customer buys a measured result, not a declaration of quality. Say the mechanism early, not in the small print.\n\n## Differentiators\n\nEvery sales text stands on at least one of them. A text that stands on none describes the furniture trade, not us.\n\n1. **Tested, not claimed.** Each piece is vacuum-tested and certified for artificial gravity; the test card travels with the order.\n2. **Built to be repaired on board.** Standard fasteners, spare parts listed per product, no glued joints in load-bearing parts.\n3. **Designed for small cabins.** Every collection has a fold, stack or wall-mount variant for crew quarters.\n\n## AI\n\nWe use automation to write first drafts of catalogue texts. It is a way of working, not a product. We never sell \"AI furniture\".\n",
+          "differentiators": [
+            "Tested, not claimed: every piece is vacuum-tested and the test card ships with the order.",
+            "Built to be repaired on board: standard fasteners and a spare parts list per product.",
+            "Designed for small cabins: every collection has a fold, stack or wall-mount variant."
+          ],
+          "never_say": [
+            "Indestructible",
+            "Space-age luxury",
+            "AI-designed furniture",
+            "The best furniture in the galaxy"
+          ]
+        },
+        "persona": {
+          "text": "Readers are practical people furnishing a place where every cubic metre is paid for. They have been burned by furniture that looked good in a render and came apart in the first gravity cycle. They believe specifications more than adjectives and expect to be told when a product is the wrong choice.\n",
+          "personas": [
+            {
+              "name": "Station quartermaster",
+              "text": "Buys for a whole deck at once. Cares about lead time, spare parts and how many pieces fit in one cargo pod. Reads the specification table before the description."
+            },
+            {
+              "name": "Long-haul crew member",
+              "text": "Furnishes one cabin for a two-year contract. Cares about comfort in low gravity, noise and whether the piece folds away. Skims; decides on the first two sentences."
+            },
+            {
+              "name": "Colony homesteader",
+              "text": "Furnishes a first permanent home. Cares about durability and repair on site, distrusts anything that needs a service technician."
+            }
+          ]
+        },
+        "facts": [
+          {
+            "id": "founded",
+            "label": "Founded",
+            "value": "2131",
+            "source": "Company register, Emporium station charter",
+            "verified_at": "2026-10-01",
+            "note": "Use the year, never 'over a century'."
+          },
+          {
+            "id": "vacuum_cycles",
+            "label": "Vacuum test cycles per product",
+            "value": "500",
+            "source": "Quality handbook QH-3, section 2",
+            "verified_at": "2026-10-01",
+            "note": "Per product line, not per individual piece."
+          },
+          {
+            "id": "gravity_range",
+            "label": "Certified gravity range",
+            "value": "0.3 g to 1.2 g",
+            "source": "Certification sheet CS-12",
+            "verified_at": "2026-10-01",
+            "note": ""
+          },
+          {
+            "id": "warranty",
+            "label": "Frame warranty",
+            "value": "5 years",
+            "source": "Terms of sale, section 7",
+            "verified_at": "2026-10-01",
+            "note": "Frame only; upholstery has its own terms."
+          },
+          {
+            "id": "catalogue_size",
+            "label": "Products in the catalogue",
+            "value": "33",
+            "source": "PIM export",
+            "verified_at": "2026-10-01",
+            "note": "Changes with every season; check before quoting."
+          },
+          {
+            "id": "collections",
+            "label": "Collections",
+            "value": "10",
+            "source": "PIM export",
+            "verified_at": "2026-10-01",
+            "note": ""
+          },
+          {
+            "id": "dock_delivery",
+            "label": "Delivery to a station dock",
+            "value": "14 days",
+            "source": "",
+            "verified_at": "",
+            "note": "To confirm with logistics before use."
+          },
+          {
+            "id": "spare_parts",
+            "label": "Spare parts availability",
+            "value": "10 years after the last sale",
+            "source": "",
+            "verified_at": "",
+            "note": "To confirm; do not publish yet."
+          }
+        ],
+        "tone": {
+          "text": "Three rules, each with a test. Not nine adjectives: an adjective has no pass criterion.\n\n## Rule 1: practitioner to practitioner\n\nWrite like someone who has fitted a cabin, to someone who is fitting one.\n\nTest: read it aloud. A sentence you would not say to a customer at the dock gets rewritten until you would.\n\n- DO: \"The Docking Bay Chair locks to the floor rail in two clicks, so it stays put during a hard burn.\"\n- DON'T: \"Our extensive experience allows us to deliver exceptional seating solutions.\"\n\n## Rule 2: a specific instead of an adjective\n\nTest: swap our name for a competitor's. If the sentence is still true, cut it.\n\n- DO: \"The frame is tested for 500 vacuum cycles.\"\n- DON'T: \"Premium quality and outstanding durability.\"\n\n## Rule 3: warm in voice, firm in promise\n\nSpeak directly, use \"you\". What we promise is hard: measurements, test results, warranty terms.\n\nActive voice, first person plural: we test, we ship, we repair. Not \"is tested by\".\n\n## Zero is a valid result\n\nNo good FAQ question? Zero questions is correct. No number in the facts registry? The sentence goes without a number or not at all. Filler looks useful and is not.\n",
+          "ai_patterns": [
+            "Contrast for show: \"it's not X, it's Y\" and its relatives.",
+            "Forced triplets: three adjectives or three clauses only because three sounds good.",
+            "Symmetric sentences and paragraphs of the same length.",
+            "Warm-up openers: \"in today's world\", \"in an era of\", \"more and more\".",
+            "Process narration: \"in this article\", \"let's dive in\", \"our first step\".",
+            "An aphorism closing every section; at most two per text.",
+            "The long dash; use a short dash with spaces or a comma."
+          ]
+        },
+        "language": {
+          "text": "## Names\n\n- **Orbital Foundry**: two words, both capitalised, never shortened to \"OF\" in customer texts.\n- Collection names are proper names: \"Orion Collection\", \"Nebula Heritage\". Never translated.\n\n## Dashes\n\n| Mark | When |\n|---|---|\n| Hyphen `-` without spaces | joining words: `low-gravity cabin` |\n| Dash `-` with spaces | an aside |\n| Long dash `—` | never |\n| En dash `–` | numeric ranges only: `0.3–1.2 g` |\n\n## Banned phrases\n\n| Phrase | Instead |\n|---|---|\n| state-of-the-art | name the part or the test |\n| game-changing | say what changes |\n| one-stop solution | list what is included |\n| world-class | give a number from the facts registry |\n| revolutionise your cabin | say what will be different |\n\n## Capitals\n\nHeadings in sentence case. Not Every Word Capitalised.\n",
+          "spellings": [
+            {
+              "wrong": "OrbitalFoundry",
+              "right": "Orbital Foundry"
+            },
+            {
+              "wrong": "Orbital-Foundry",
+              "right": "Orbital Foundry"
+            },
+            {
+              "wrong": "zero-g",
+              "right": "zero gravity"
+            },
+            {
+              "wrong": "space-ship",
+              "right": "spaceship"
+            }
+          ],
+          "glossary": [
+            {
+              "term": "vacuum-tested",
+              "translations": {
+                "pl": "testowany w próżni",
+                "de": "vakuumgeprüft",
+                "es": "probado al vacío"
+              }
+            },
+            {
+              "term": "artificial gravity",
+              "translations": {
+                "pl": "sztuczna grawitacja",
+                "de": "künstliche Schwerkraft",
+                "es": "gravedad artificial"
+              }
+            },
+            {
+              "term": "crew quarters",
+              "translations": {
+                "pl": "kwatery załogi",
+                "de": "Mannschaftsquartiere",
+                "es": "camarotes de la tripulación"
+              }
+            },
+            {
+              "term": "cargo pod",
+              "translations": {
+                "pl": "kontener ładunkowy",
+                "de": "Frachtkapsel",
+                "es": "cápsula de carga"
+              }
+            }
+          ]
+        },
+        "headlines": {
+          "text": "A headline names the reader's situation or shows the mechanism. It never praises us.\n\n- DO: \"A desk that stays put when the station spins up\"\n- DON'T: \"Discover our amazing new desk\"\n\nA call to action is a verb and an object: \"Check dimensions\", \"Order spare parts\". One primary call per page.\n"
+        },
+        "proof": {
+          "text": "Proof is a number from the facts registry, a test result or a named collection. Read this before deciding to put a proof in a text, not after.\n\n- A number goes in only if it is in the facts registry and verified.\n- Numbers from others (industry reports) go in only with the source named in the same sentence.\n- No invented customer quotes, no invented reviews, no \"thousands of happy crews\".\n"
+        },
+        "seo": {
+          "text": "Intent first, volume second: pick the phrase whose results page shows texts of the same type as ours.\n\n- Exactly one H1; sections as H2, subsections as H3, no skipped levels.\n- Each main section answers its question in the first 40-60 words.\n- Primary phrase in the H1 and the lead; each secondary phrase in at least one heading or the first sentence of its section, never stuffed.\n- Meta title 40-60 characters, primary phrase near the start, not a copy of the H1. Meta description 140-160 characters, with a concrete benefit.\n- Image alt text describes what the image shows, in natural language.\n"
+        },
+        "checklists": {
+          "text": "Only checkable items. An item you cannot verify in a few seconds is a wish, not a check.\n\n## Every text\n\n- [ ] No long dash. Check with search, not by eye.\n- [ ] \"Orbital Foundry\" spelled as two capitalised words.\n- [ ] Every number comes from the facts registry.\n- [ ] No phrase from the banned list.\n- [ ] No \"it's not X, it's Y\" construction.\n- [ ] Sentences vary in length.\n- [ ] Swap test: no sentence about us stays true with a competitor's name.\n\n## Product description\n\n- [ ] Opens with the main benefit in one sentence.\n- [ ] Every specification comes from the product data.\n- [ ] Says when the product is the wrong choice, if the data supports it.\n\n## Article\n\n- [ ] Each section answers its question in the first 40-60 words.\n- [ ] Every factual sentence has a source in the brief, the answers or the facts registry.\n- [ ] FAQ has 0-6 questions; zero is fine.\n"
+        },
+        "always_rules": [
+          "Write \"Orbital Foundry\" as two capitalised words; never shorten it in customer texts.",
+          "Never use the long dash; use a short dash with spaces or a comma.",
+          "No number that is not in the facts registry. Do not estimate, round or copy from old texts.",
+          "No AI patterns from the tone section, above all \"it's not X, it's Y\" and warm-up openers.",
+          "Every sales text stands on at least one differentiator from the brand section."
+        ],
+        "rules": [
+          {
+            "id": "long-dash",
+            "pattern": "—",
+            "flags": "",
+            "message": "Long dash is not used.",
+            "do": "Tested for 500 cycles - and it shows.",
+            "dont": "Tested for 500 cycles — and it shows.",
+            "active": true
+          },
+          {
+            "id": "not-x-but-y",
+            "pattern": "\\b(?:it'?s|this is) not (?:just )?[^.,;]{1,40}[,;] (?:it'?s|but)\\b",
+            "flags": "i",
+            "message": "Contrast for show (\"it's not X, it's Y\").",
+            "do": "The chair locks to the floor rail.",
+            "dont": "It's not just a chair, it's a command post.",
+            "active": true
+          },
+          {
+            "id": "warm-up-opener",
+            "pattern": "\\b(?:in today'?s (?:fast-paced )?world|in an era of|more and more)\\b",
+            "flags": "i",
+            "message": "Warm-up opener; start with the thing itself.",
+            "do": "Cabins on long-haul freighters are small.",
+            "dont": "In today's fast-paced world, cabins are getting smaller.",
+            "active": true
+          },
+          {
+            "id": "process-narration",
+            "pattern": "\\b(?:in this article|let'?s dive in|without further ado)\\b",
+            "flags": "i",
+            "message": "Process narration; the reader came for the answer.",
+            "do": "Low gravity changes how a sofa wears.",
+            "dont": "In this article we will look at sofas.",
+            "active": true
+          },
+          {
+            "id": "banned-phrases",
+            "pattern": "\\b(?:state-of-the-art|game-?changing|one-stop|world-class|revolutioni[sz]e)\\b",
+            "flags": "i",
+            "message": "Banned phrase; name the specific instead.",
+            "do": "Frame tested for 500 vacuum cycles.",
+            "dont": "A world-class, state-of-the-art frame.",
+            "active": true
+          },
+          {
+            "id": "exclamation",
+            "pattern": "!",
+            "flags": "",
+            "message": "No exclamation marks in catalogue copy.",
+            "do": "Folds flat for storage.",
+            "dont": "Folds flat for storage!",
+            "active": false
+          }
+        ],
+        "routing": {
+          "pim.writer": [
+            "facts",
+            "brand",
+            "persona",
+            "tone",
+            "language",
+            "seo"
+          ],
+          "pim.tagger": [
+            "brand",
+            "language"
+          ],
+          "article.questions": [
+            "facts",
+            "brand",
+            "persona"
+          ],
+          "article.keywords": [
+            "brand",
+            "persona",
+            "seo"
+          ],
+          "article.outline": [
+            "facts",
+            "brand",
+            "persona",
+            "headlines",
+            "seo"
+          ],
+          "article.draft": [
+            "facts",
+            "brand",
+            "persona",
+            "tone",
+            "language",
+            "proof",
+            "seo"
+          ],
+          "article.meta": [
+            "facts",
+            "brand",
+            "language",
+            "headlines",
+            "seo"
+          ]
+        }
+      },
+      "note": "Demo profile (seed)",
+      "created_by": null,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  }
+]
