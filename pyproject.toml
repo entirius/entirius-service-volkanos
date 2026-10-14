@@ -117,6 +117,7 @@ dev = [
     "ruff>=0.12",
     "pytest>=8.4",
     "pytest-django>=4.11",
+    "respx>=0.21",
     "pytest-cov>=6.2",
     "pre-commit>=4.0",
     "pyyaml>=6.0",

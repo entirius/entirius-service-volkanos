@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   baked stack cannot load them until the pin is bumped. `profile_demo.json` is for an empty demo database only: it
   writes the instance profile and its version-1 snapshot directly, past `profile_service`, so loading it over a
   profile saved through the API replaces that profile and breaks its version history.
+- `tests/test_ai_studio_e2e.py`: the AI studio end to end through enrichment, PIM and ContentDB on a mocked toolbox
+  (`mock_toolbox`, no real AI or SEO calls) — product writer with `seo_brief` (proposals per field × language,
+  costs, category brief reused, QA number warning), the correction loop up to a promoted profile rule, and the
+  article workflow down to an unpublished ContentDB blog-post draft. Skips like the seed tests until the lock pins
+  the enrichment release with contract A3/A4. `respx` joins the dev dependencies (needed by `mock_toolbox`).
 
 ## [4.0.1] - 2026-10-13
 
