@@ -205,5 +205,95 @@
       "created_at": "2026-10-15T00:00:00Z",
       "modified_at": "2026-10-15T00:00:00Z"
     }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 13,
+    "fields": {
+      "key": "pim.image",
+      "label": "Image processing",
+      "kind": "image",
+      "mode": "internal",
+      "target_module": "pim",
+      "system_prompt": "Keep the product exactly as in the photo: shape, colour, proportions and label text.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z",
+      "version": 1
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 10,
+    "fields": {
+      "key": "image-packshot",
+      "label": "Packshot na białym tle",
+      "worker": 13,
+      "params": {
+        "operation": "packshot",
+        "preset": "packshot-white"
+      },
+      "rules": [],
+      "position": 40,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 11,
+    "fields": {
+      "key": "image-lifestyle",
+      "label": "Produkt w aranżacji",
+      "worker": 13,
+      "params": {
+        "operation": "lifestyle",
+        "preset": "lifestyle-scene"
+      },
+      "rules": [],
+      "position": 41,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 12,
+    "fields": {
+      "key": "image-enhance",
+      "label": "Popraw zdjęcie",
+      "worker": 13,
+      "params": {
+        "operation": "enhance",
+        "preset": "enhance-photo"
+      },
+      "rules": [],
+      "position": 42,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 13,
+    "fields": {
+      "key": "image-custom",
+      "label": "Własne polecenie do zdjęcia",
+      "worker": 13,
+      "params": {
+        "operation": "instruct",
+        "preset": "instruct-free"
+      },
+      "rules": [],
+      "position": 43,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
   }
 ]
