@@ -53,6 +53,8 @@ it reads and whether it routes URLs.
   when `urls: true`.
 - The `platform` entry (access) is never listed: the service enables it itself in every environment.
 - The worker consumes `celery` plus the `queues` of every enabled module: `celery -A main worker -Q <list>`.
+  `enrichment_bulk` (the enrichment queue lane) belongs on its own worker with `-c 1`, so a bulk run never blocks
+  a single click on `enrichment_interactive`.
 - `make settings-example` regenerates the module list of `main/settings_example.py` from the registry.
 - `make first-channel` creates the first sales channel on a migrated, empty database.
 
