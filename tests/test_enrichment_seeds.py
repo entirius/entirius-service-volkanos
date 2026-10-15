@@ -83,9 +83,10 @@ def test_seeds_load_and_pass_model_validation():
     assert profile_service.status("")["complete"]
 
 
-def test_templates_with_seo_scope_enable_the_seo_brief():
+def test_product_templates_leave_seo_research_opt_in():
+    """SEO research costs toolbox calls: the operator turns it on per run; `seo_scope` only presets its scope."""
     templates = [row["fields"] for row in _rows("enrichment_workers.json") if row["model"].endswith("tasktemplate")]
     scoped = [template for template in templates if "seo_scope" in template["params"]]
 
     assert scoped
-    assert all("seo_brief" in template["params"].get("augment", []) for template in scoped)
+    assert not any("augment" in template["params"] for template in scoped)

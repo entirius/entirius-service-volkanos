@@ -155,9 +155,6 @@
         "languages": [
           "*"
         ],
-        "augment": [
-          "seo_brief"
-        ],
         "seo_scope": "category"
       },
       "rules": [],
@@ -180,9 +177,6 @@
         ],
         "languages": [
           "*"
-        ],
-        "augment": [
-          "seo_brief"
         ],
         "seo_scope": "category"
       },
