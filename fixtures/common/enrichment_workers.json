@@ -295,5 +295,95 @@
       "created_at": "2026-10-15T00:00:00Z",
       "modified_at": "2026-10-15T00:00:00Z"
     }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 14,
+    "fields": {
+      "key": "contentdb.image",
+      "label": "Gallery image processing",
+      "kind": "image",
+      "mode": "internal",
+      "target_module": "contentdb",
+      "system_prompt": "Keep the subject exactly as in the photo: shape, colour, proportions and any text on it.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z",
+      "version": 1
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 14,
+    "fields": {
+      "key": "gallery-image-packshot",
+      "label": "Galeria: packshot na białym tle",
+      "worker": 14,
+      "params": {
+        "operation": "packshot",
+        "preset": "packshot-white"
+      },
+      "rules": [],
+      "position": 50,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 15,
+    "fields": {
+      "key": "gallery-image-lifestyle",
+      "label": "Galeria: zdjęcie w aranżacji",
+      "worker": 14,
+      "params": {
+        "operation": "lifestyle",
+        "preset": "lifestyle-scene"
+      },
+      "rules": [],
+      "position": 51,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 16,
+    "fields": {
+      "key": "gallery-image-enhance",
+      "label": "Galeria: popraw zdjęcie",
+      "worker": 14,
+      "params": {
+        "operation": "enhance",
+        "preset": "enhance-photo"
+      },
+      "rules": [],
+      "position": 52,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 17,
+    "fields": {
+      "key": "gallery-image-custom",
+      "label": "Galeria: własne polecenie do zdjęcia",
+      "worker": 14,
+      "params": {
+        "operation": "instruct",
+        "preset": "instruct-free"
+      },
+      "rules": [],
+      "position": 53,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
   }
 ]
