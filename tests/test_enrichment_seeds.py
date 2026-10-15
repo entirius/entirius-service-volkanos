@@ -81,3 +81,11 @@ def test_seeds_load_and_pass_model_validation():
             row.full_clean()
     assert set(Worker.objects.filter(kind="field").values_list("active", flat=True)) == {False}
     assert profile_service.status("")["complete"]
+
+
+def test_templates_with_seo_scope_enable_the_seo_brief():
+    templates = [row["fields"] for row in _rows("enrichment_workers.json") if row["model"].endswith("tasktemplate")]
+    scoped = [template for template in templates if "seo_scope" in template["params"]]
+
+    assert scoped
+    assert all("seo_brief" in template["params"].get("augment", []) for template in scoped)
