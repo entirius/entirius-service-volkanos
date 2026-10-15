@@ -248,10 +248,9 @@ def operator(db):
 
 
 @pytest.fixture
-def catalog(db, monkeypatch):
+def catalog(db):
     """A PIM channel (pl + en) with the description and SEO text features and two sofas in one category."""
     from django_pim import models as pim
-    from django_pim.services import enrichment_adapter
     from django_regional.models import Currency, Language
 
     polish, _ = Language.objects.get_or_create(
@@ -274,10 +273,6 @@ def catalog(db, monkeypatch):
         real = pim.RealProduct.objects.create(sku=sku)
         product = pim.Product.objects.create(shop=channel, real_product=real, feature_set=feature_set)
         pim.ProductInCategory.objects.create(product=product, category=category, position=0)
-    # TODO(pim): drop the stand-in once the PIM adapter ships the `category_of` extra (contract A4 § 3);
-    # `test_the_pim_adapter_exposes_category_of` turns red then. Without it a category brief falls back to the subject.
-    if not hasattr(enrichment_adapter, "category_of"):
-        monkeypatch.setattr(enrichment_adapter, "category_of", _category_of, raising=False)
     return channel
 
 
@@ -289,13 +284,6 @@ def _system_feature(pim, idx: str, feature_type: str) -> dict:
         "is_seo": idx.startswith("meta_"),
         "name_t9n": {"en": idx},
     }
-
-
-def _category_of(subject_ref: str) -> str | None:
-    from django_pim.models import ProductInCategory
-
-    links = ProductInCategory.objects.filter(product__real_product__sku=subject_ref).order_by("position", "pk")
-    return links.values_list("category__idx", flat=True).first()
 
 
 def _write(run_tasks, operator, *, template: str, sku: str, params: dict | None = None):
@@ -340,8 +328,8 @@ class TestProductWriterWithSeo:
 
         briefs = MemoryEntry.objects.filter(kind="seo_brief")
         assert {(b.subject_ref, b.data["language"], b.data["primary"]) for b in briefs} == {
-            (CATEGORY, "pl", "low gravity sofa"),
-            (CATEGORY, "en", "low gravity sofa"),
+            (f"category:{CATEGORY}", "pl", "low gravity sofa"),
+            (f"category:{CATEGORY}", "en", "low gravity sofa"),
         }
         assert {b.source for b in briefs} == {f"task:{first.pk}"}
 
@@ -366,13 +354,6 @@ class TestProductWriterWithSeo:
         ]
         assert title.warnings == []
         assert description.revisions.get().warnings == description.warnings
-
-
-@pytest.mark.xfail(strict=True, reason="pim: the enrichment adapter has no `category_of` extra yet (contract A4 § 3)")
-def test_the_pim_adapter_exposes_category_of():
-    from django_pim.services import enrichment_adapter
-
-    assert hasattr(enrichment_adapter, "category_of")
 
 
 class TestCorrectionLoop:
@@ -428,10 +409,6 @@ class TestCorrectionLoop:
         assert after.profile_versions == profile_service.version_ids(CHANNEL) != before.profile_versions
         assert (self.RULE in _last(toolbox)["system"], self.RULE in _last(toolbox)["user"]) == (True, False)
 
-    @pytest.mark.xfail(
-        strict=True,
-        reason="enrichment: promote overwrites merged always_rules (the channel overlay replaces the section)",
-    )
     def test_promotion_keeps_the_instance_always_rules(self, proposal, operator):
         from django_enrichment.models import MemoryEntry
         from django_enrichment.services import memory_promotion, profile_service, rules_service
