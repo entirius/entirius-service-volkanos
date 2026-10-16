@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.0rc1] - 2026-10-16
+
+### Changed
+
+- The AI studio module releases: entirius-django-pim 3.5.0rc1, entirius-django-contentdb 5.3.0rc1,
+  entirius-django-enrichment 2.3.0rc1, entirius-django-pim-translator 2.1.1rc1 and
+  entirius-django-contentdb-translator 2.1.1rc1. The release candidates resolve from their git tags
+  (`[tool.uv.sources]`) until the final releases are on PyPI; the final release drops the sources.
+
 ### Added
 
 - AI studio seeds in `fixtures/common/`: `profile_demo.json` (company profile of the fictitious Orbital Foundry,
@@ -14,16 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the `article` workflow: questions → search phrases → outline → draft → metadata → ContentDB document). Every
   worker's model is blank (the toolbox channel's first allowed model). Load with
   `manage.py loaddata fixtures/common/enrichment_workers.json fixtures/common/article_workflow.json fixtures/common/profile_demo.json`;
-  `tests/test_enrichment_seeds.py` validates them. The seeds need the `entirius-django-enrichment` release that
-  ships contract A3/A4 (profile schema, templates, workflows); the lock still pins 2.2.0, so the tests skip and a
-  baked stack cannot load them until the pin is bumped. `profile_demo.json` is for an empty demo database only: it
+  `tests/test_enrichment_seeds.py` validates them. The seeds need `entirius-django-enrichment` 2.3.0 (contract A3/A4:
+  profile schema, templates, workflows). `profile_demo.json` is for an empty demo database only: it
   writes the instance profile and its version-1 snapshot directly, past `profile_service`, so loading it over a
   profile saved through the API replaces that profile and breaks its version history.
 - `tests/test_ai_studio_e2e.py`: the AI studio end to end through enrichment, PIM and ContentDB on a mocked toolbox
   (`mock_toolbox`, no real AI or SEO calls) — product writer with `seo_brief` (proposals per field × language,
   costs, category brief reused, QA number warning), the correction loop up to a promoted profile rule, and the
-  article workflow down to an unpublished ContentDB blog-post draft. Skips like the seed tests until the lock pins
-  the enrichment release with contract A3/A4. `respx` joins the dev dependencies (needed by `mock_toolbox`).
+  article workflow down to an unpublished ContentDB blog-post draft. `respx` joins the dev dependencies (needed by `mock_toolbox`).
 
 ## [4.0.1] - 2026-10-13
 
