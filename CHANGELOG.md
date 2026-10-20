@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `article_workflow.json` follows the content-workbench writing process: search phrases first (`seo_brief` with
+  `seo_detail: full`), then the interview (questions aimed at the gaps the research found, `min_answers: 1`), a new
+  insights step (numbered author, profile and search material with a readable source each, no search volumes,
+  dropped items listed, a warning when the answers give nothing usable), the outline assigning insights by number,
+  the draft written section by section (worker `article.draft` on kind `sections`, the closing under its own
+  heading; its prompt spells out what a draft may add — transitions, scenes, conclusions from the material — and what
+  never — facts, mechanisms, signs, tips, the author's setting from general knowledge; thin material = a short section), then the new voice
+  and edit passes; metadata and the document read the edited text (`body_step: edit`). One research per run feeds
+  every step at cost 0; every step's craft rules say that search research is never the source of a fact. Needs the
+  `entirius-django-enrichment` release with kind `sections`, `seo_detail` and `min_answers`.
 - AI studio seeds in `fixtures/common/`: `profile_demo.json` (company profile of the fictitious Orbital Foundry,
   version 1), `enrichment_workers.json` gains the `pim.writer` / `pim.tagger` workers with the `meta`, `description`
   and `tags` templates (the old `field` workers are inactive), `article_workflow.json` (step workers, templates and
