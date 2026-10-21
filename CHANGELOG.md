@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `article.cover_brief`: a scene shows the article's advice done right and names the details (position, hold); each
   scene lists 1-3 `must_show` conditions, which the `cover` kind adds to its image prompt.
+- `article.keywords` leaves out brand phrases of other companies and the phrases the profile's SEO section never
+  targets (`seo.exclude_terms`, filtered from the research by `seo_brief`); own brands stay unless the brief forbids brands.
 - `article_workflow.json` gets a cover: brief fields `cover_hint`, `cover_product` (a PIM product, checked at start),
   `cover_text_wanted` + `cover_text`, all four seen only by the cover steps (`x-steps`); step `cover_brief` (worker `article.cover_brief`: three different scene ideas
   with an alt text each, from the edited article, the profile's brand and visual sections and the product's facts)
