@@ -83,6 +83,17 @@ def test_seeds_load_and_pass_model_validation():
     assert profile_service.status("")["complete"]
 
 
+def test_product_writer_holds_the_meta_fields_to_numeric_length_ranges():
+    """A prose rule does not hold a model to a length (five meta descriptions averaged 195 characters); the numbers
+    do: `options.field_limits` of kind `write` (an enrichment without it ignores the key)."""
+    writer = next(row["fields"] for row in _rows("enrichment_workers.json") if row["fields"].get("key") == "pim.writer")
+    limits = writer["options"]["field_limits"]
+
+    assert limits == {"meta_title": {"min": 40, "max": 60}, "meta_description": {"min": 120, "max": 160}}
+    assert set(limits) <= set(writer["options"]["field_rules"])
+    assert writer["version"] == 2
+
+
 def test_product_templates_leave_seo_research_opt_in():
     """SEO research costs toolbox calls: the operator turns it on per run; `seo_scope` only presets its scope."""
     templates = [row["fields"] for row in _rows("enrichment_workers.json") if row["model"].endswith("tasktemplate")]

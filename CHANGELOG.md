@@ -27,6 +27,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `pim.writer` (worker version 2): the meta fields have numeric length ranges, `options.field_limits`
+  (`meta_title` 40-60, `meta_description` 120-160 characters). The prose in `field_rules` said "140-160 characters"
+  and five meta descriptions written for real products averaged 195 characters, none within 120-160: a model does
+  not count. The enrichment `write` kind shows the range next to the field, rewrites a value outside it once, and QA
+  flags what is still outside with `LIMIT`; the prose rules stay for the content guidance. Needs the
+  `entirius-django-enrichment` release with `field_limits`; an older one ignores the key. The AI studio e2e answers
+  with meta texts inside the ranges.
 - `article.insights` (worker version 2): the profile insights come only from the facts table of the `company_profile`
   block, each citing the fact's `id` exactly as `(profile fact: <id>)`. With an empty company profile the prompt has
   no such block, and the model used to invent a "From the company profile" section with made-up fact ids built from

@@ -102,6 +102,11 @@ META = {
     "slug": "Sofas for Low Gravity",
     "faq": [{"question": "How do I clean it?", "answer": "Brush the fabric once a week."}],
 }
+META_TITLE = "Low gravity sofa for freighter crews and long hauls"  # 40-60 characters
+META_DESCRIPTION = (  # 120-160 characters
+    f"Rated for {UNKNOWN_NUMBER} docking cycles, this low gravity sofa keeps its cushions in place with a double seam. "
+    "See the frame details and the care notes."
+)
 SHORTER = "Shorter sentences, please."
 LONG_HTML = "<p>The frame passes 500 vacuum test cycles.</p><ul><li>Double seam</li></ul>" + "<p>Calm.</p>" * 30
 
@@ -115,8 +120,9 @@ def _selector(request: httpx.Request) -> tuple[str, dict]:
 
 
 def _write_answer(properties: dict) -> dict:
-    """One string per field; the meta description carries a number the facts registry does not know."""
-    texts = {"meta_title": "Low gravity sofa", "meta_description": f"Rated for {UNKNOWN_NUMBER} docking cycles."}
+    """One string per field, inside the seeded `field_limits` of `pim.writer` (a rewrite would add completions); the
+    meta description carries a number the facts registry does not know."""
+    texts = {"meta_title": META_TITLE, "meta_description": META_DESCRIPTION}
     return {key: texts.get(key, LONG_HTML) for key in properties}
 
 
@@ -370,6 +376,50 @@ class TestProductWriterWithSeo:
         ]
         assert title.warnings == []
         assert description.revisions.get().warnings == description.warnings
+
+
+LIMITS = ENRICHMENT and importlib.util.find_spec("django_enrichment.kinds.field_limits") is not None
+
+
+@pytest.mark.skipif(not LIMITS, reason="enrichment with `field_limits` (kind write length ranges) not installed")
+class TestProductWriterLengthLimits:
+    """The seeded `pim.writer` keeps meta fields inside its `field_limits` through the real PIM adapter."""
+
+    TOO_LONG = "L" * 195
+
+    def _run(self, toolbox, run_tasks, operator, rewritten: str):
+        def answer(parsed: dict) -> httpx.Response:
+            return httpx.Response(200, json={**CANNED_COMPLETION, "parsed": parsed, "cost": COMPLETION_COST})
+
+        toolbox.complete.mock(
+            side_effect=[
+                answer({"meta_title": META_TITLE, "meta_description": self.TOO_LONG}),
+                answer({"meta_description": rewritten}),
+            ]
+        )
+        return _write(run_tasks, operator, template="meta", sku=SKUS[0], params={"languages": ["en"]})
+
+    @pytest.fixture(autouse=True)
+    def _env(self, seeds, catalog):
+        pass
+
+    def test_a_description_over_the_limit_is_rewritten_once(self, toolbox, run_tasks, operator):
+        task = self._run(toolbox, run_tasks, operator, rewritten=META_DESCRIPTION)
+        description = _proposals(task)[("meta_description", "en")]
+        assert _selectors(toolbox) == ["enrichment.write.meta"] * 2
+        assert description.proposed_value == {"text": META_DESCRIPTION}
+        assert [w["code"] for w in description.warnings] == ["NUMBER_NOT_IN_FACTS"]  # the mock's number, no LIMIT
+        assert task.cost_usd == 2 * Decimal(COMPLETION_COST)
+
+    def test_a_rewrite_that_missed_stays_and_review_sees_the_limit(self, toolbox, run_tasks, operator):
+        task = self._run(toolbox, run_tasks, operator, rewritten="M" * 170)
+        description = _proposals(task)[("meta_description", "en")]
+        assert toolbox.complete.call_count == 2
+        assert description.proposed_value == {"text": "M" * 170}
+        assert [(w["code"], w["message"]) for w in description.warnings] == [
+            ("LIMIT", "170 characters, the limit is 160.")
+        ]
+        assert _proposals(task)[("meta_title", "en")].warnings == []
 
 
 class TestCorrectionLoop:
