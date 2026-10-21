@@ -1126,7 +1126,7 @@ wheels = [
 [[package]]
 name = "entirius-django-enrichment"
 version = "2.3.0rc3"
-source = { git = "https://github.com/entirius/entirius-django-enrichment?rev=8b4b2d8f5ade8f484b86c315053b5f5871706abe#8b4b2d8f5ade8f484b86c315053b5f5871706abe" }
+source = { git = "https://github.com/entirius/entirius-django-enrichment?rev=e634db4bb6058aed85f7256666fb9c04edf49385#e634db4bb6058aed85f7256666fb9c04edf49385" }
 dependencies = [
     { name = "celery" },
     { name = "django" },
@@ -2087,7 +2087,7 @@ requires-dist = [
     { name = "entirius-django-crypt", specifier = ">=2.0.0" },
     { name = "entirius-django-deliverypoints", specifier = ">=2.2.0" },
     { name = "entirius-django-email", specifier = ">=4.2.0" },
-    { name = "entirius-django-enrichment", git = "https://github.com/entirius/entirius-django-enrichment?rev=8b4b2d8f5ade8f484b86c315053b5f5871706abe" },
+    { name = "entirius-django-enrichment", git = "https://github.com/entirius/entirius-django-enrichment?rev=e634db4bb6058aed85f7256666fb9c04edf49385" },
     { name = "entirius-django-faq", specifier = ">=2.1.0" },
     { name = "entirius-django-getresponse", specifier = ">=3.0.0" },
     { name = "entirius-django-leads", specifier = ">=0.4.0" },
