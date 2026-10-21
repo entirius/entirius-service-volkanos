@@ -92,7 +92,10 @@ KEYWORDS = {
         {"phrase": "station sofa care", "volume": 300, "intent": "informational", "serp_notes": "Guides"},
     ],
 }
-INSIGHTS = "# Insights\n\n## From the author\n\n- I1 (author: who buys it) Long-haul freighter crews."
+INSIGHTS = (
+    "# Insights\n\n**Direction:** Low-gravity sofas are built for long-haul freighter crews.\n\n"
+    "- I1 Crews on long-haul freighters buy them. (author)"
+)
 OUTLINE = "# Sofas for low gravity\n\n### 1. Frame\n- material: I1\n\n### 2. Care\n- material: I1"
 DRAFT = (
     "# Sofas for low gravity\n\n## Frame\n\nThe frame of every sofa passes 500 vacuum test cycles before it leaves "
@@ -672,7 +675,7 @@ class TestArticleWorkflow:
     def test_a_section_is_written_from_the_insights_its_outline_block_assigns(self, article, toolbox):
         sections = [c for c in _calls(toolbox, "enrichment.sections.article.draft") if "Write section" in c["user"]]
         assert all("- material: I1" in call["user"] for call in sections)
-        assert _in_data_only("I1 (author: who buys it)", sections)
+        assert _in_data_only("I1 Crews on long-haul freighters buy them. (author)", sections)
 
     def test_the_draft_is_written_section_by_section_then_its_lead_and_closing(self, article, toolbox):
         assert len(_calls(toolbox, "enrichment.sections.article.draft")) == 3  # two outline sections + the ends
