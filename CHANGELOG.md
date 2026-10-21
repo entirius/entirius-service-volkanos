@@ -6,15 +6,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [4.1.0rc1] - 2026-10-16
-
-### Changed
-
-- The AI studio module releases: entirius-django-pim 3.5.0rc1, entirius-django-contentdb 5.3.0rc1,
-  entirius-django-enrichment 2.3.0rc1, entirius-django-pim-translator 2.1.1rc1 and
-  entirius-django-contentdb-translator 2.1.1rc1. The release candidates resolve from their git tags
-  (`[tool.uv.sources]`) until the final releases are on PyPI; the final release drops the sources.
-
 ### Added
 
 - `article_workflow.json` follows the content-workbench writing process: search phrases first (`seo_brief` with
@@ -27,6 +18,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and edit passes; metadata and the document read the edited text (`body_step: edit`). One research per run feeds
   every step at cost 0; every step's craft rules say that search research is never the source of a fact. Needs the
   `entirius-django-enrichment` release with kind `sections`, `seo_detail` and `min_answers`.
+
+### Changed
+
+- Module release candidates as the AI studio needs them: `entirius-django-enrichment` from its `release/2.3.0`
+  branch (kind `sections`, `seo_detail`, `min_answers`, past `v2.3.0rc3`), `entirius-django-matrix` 4.4.2rc1 and
+  `entirius-django-utils` 2.3.1rc1 from their release-branch commits (no rc tags yet).
+
+## [4.1.0rc1] - 2026-10-16
+
+### Changed
+
+- The AI studio module releases: entirius-django-pim 3.5.0rc1, entirius-django-contentdb 5.3.0rc1,
+  entirius-django-enrichment 2.3.0rc1, entirius-django-pim-translator 2.1.1rc1 and
+  entirius-django-contentdb-translator 2.1.1rc1. The release candidates resolve from their git tags
+  (`[tool.uv.sources]`) until the final releases are on PyPI; the final release drops the sources.
+
+### Added
+
 - AI studio seeds in `fixtures/common/`: `profile_demo.json` (company profile of the fictitious Orbital Foundry,
   version 1), `enrichment_workers.json` gains the `pim.writer` / `pim.tagger` workers with the `meta`, `description`
   and `tags` templates (the old `field` workers are inactive), `article_workflow.json` (step workers, templates and
