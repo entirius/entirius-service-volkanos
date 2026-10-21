@@ -107,7 +107,7 @@
         ],
         "field_rules": {
           "meta_title": "40-60 characters, product name first, no brand suffix unless it fits.",
-          "meta_description": "140-160 characters: what it is, the main benefit, an invitation to see details.",
+          "meta_description": "120-160 characters: what it is, the main benefit, an invitation to see details.",
           "description": "HTML: an opening paragraph, a <ul> of key features, a short paragraph on use or care if the data supports it.",
           "short_description": "One or two sentences with the main benefit."
         },
