@@ -9,8 +9,8 @@
    is not in the facts registry.
 2. The correction loop: revise (edits), restore, a rule promoted into a memory suggestion, then into the
    profile — the next correction uses the new profile version.
-3. The article workflow: brief → questions → search phrases → outline → draft (one correction) → metadata →
-   document → an unpublished ContentDB blog-post draft.
+3. The article workflow: brief → search phrases → questions → insights → outline → draft (section by section) → voice →
+   edit (one correction) → metadata → document → an unpublished ContentDB blog-post draft.
 
 The toolbox is `mock_toolbox` (respx): scripted completions picked by the selector tag and SEO answers with
 costs. No real AI or DataForSEO call leaves the process.
@@ -18,6 +18,7 @@ costs. No real AI or DataForSEO call leaves the process.
 
 import importlib.util
 import json
+import re
 from decimal import Decimal
 from pathlib import Path
 from types import SimpleNamespace
@@ -85,7 +86,8 @@ KEYWORDS = {
         {"phrase": "station sofa care", "volume": 300, "intent": "informational", "serp_notes": "Guides"},
     ],
 }
-OUTLINE = "# Sofas for low gravity\n\n## Frame\n\n## Care"
+INSIGHTS = "# Insights\n\n## From the author\n\n- I1 (author: who buys it) Long-haul freighter crews."
+OUTLINE = "# Sofas for low gravity\n\n### 1. Frame\n- material: I1\n\n### 2. Care\n- material: I1"
 DRAFT = (
     "# Sofas for low gravity\n\n## Frame\n\nThe frame of every sofa passes 500 vacuum test cycles before it leaves "
     "the workshop, so the joints stay tight when the station gravity drops to 0.3 g. The upholstery is stitched "
@@ -127,13 +129,18 @@ def _revise_answer(properties: dict) -> dict:
 _STEP_ANSWERS = {
     "article.questions": QUESTIONS,
     "article.keywords": KEYWORDS,
+    "article.insights": {"text": INSIGHTS},
     "article.outline": {"text": OUTLINE},
     "article.draft": {"text": DRAFT},
+    "article.voice": {"text": DRAFT},
+    "article.edit": {"text": DRAFT},
     "article.meta": META,
 }
 
 
 def _parsed(selector: str, properties: dict) -> dict:
+    if "lead" in properties:  # the draft's last call: lead and closing around the written sections
+        return {"lead": "Freighter crews sit a lot.", "closing": "## Your lounge\n\nWhat does your lounge need?"}
     if selector.startswith("enrichment.seo_brief.seeds"):
         return SEEDS
     if selector.startswith("enrichment.seo_brief.evaluate"):
@@ -145,8 +152,17 @@ def _parsed(selector: str, properties: dict) -> dict:
     return next(answer for step, answer in _STEP_ANSWERS.items() if selector.endswith(step))
 
 
+SECTIONS = {1: "## Frame\n\nThe frame passes 500 vacuum test cycles.", 2: "## Care\n\nBrush the fabric weekly."}
+
+
+def _section(request: httpx.Request) -> dict | None:
+    """A draft call for one outline section answers with that section only."""
+    match = re.search(r"Write section (\d+) of", json.loads(request.content)["messages"][-1]["content"])
+    return {"text": SECTIONS[int(match.group(1))]} if match else None
+
+
 def _complete(request: httpx.Request) -> httpx.Response:
-    parsed = _parsed(*_selector(request))
+    parsed = _section(request) or _parsed(*_selector(request))
     return httpx.Response(200, json={**CANNED_COMPLETION, "parsed": parsed, "cost": COMPLETION_COST})
 
 
@@ -424,7 +440,7 @@ class TestCorrectionLoop:
 BRIEF_INPUTS = {"topic": "Sofas for low gravity", "language": "en", "audience": "Freighter crews"}
 ANSWERS = {"audience": "Crews on long-haul freighters", "tone": "warm"}
 PICKED = {**KEYWORDS, "secondary": ["station sofa care"]}
-STEPS = ("questions", "keywords", "outline", "draft", "meta", "compose")
+STEPS = ("keywords", "questions", "insights", "outline", "draft", "voice", "edit", "meta", "compose")
 
 
 @pytest.fixture
@@ -459,17 +475,18 @@ def _approve(run_tasks, uid: str, key: str, operator, value: dict | None = None)
 
 @pytest.fixture
 def article(seeds, blog, toolbox, run_tasks, operator):
-    """The article run driven to its end: answers, a phrase pick, one draft correction, every step approved."""
+    """The article run driven to its end: a phrase pick, answers, one edit correction, every step approved."""
     from django_enrichment.services import revise_service, workflow_queries, workflow_service
 
     with run_tasks():
         uid = workflow_service.start(definition="article", inputs=BRIEF_INPUTS, channel="web", user=operator).uid
+    _approve(run_tasks, uid, "keywords", operator, {"data": PICKED})
     questions = _step_proposal(uid, "questions").proposed_value
     _approve(run_tasks, uid, "questions", operator, {**questions, "answers": ANSWERS})
-    _approve(run_tasks, uid, "keywords", operator, {"data": PICKED})
-    _approve(run_tasks, uid, "outline", operator)
-    revise_service.revise(_step_proposal(uid, "draft"), instruction=SHORTER, user=operator)
-    for key in ("draft", "meta", "compose"):
+    for key in ("insights", "outline", "draft", "voice"):
+        _approve(run_tasks, uid, key, operator)
+    revise_service.revise(_step_proposal(uid, "edit"), instruction=SHORTER, user=operator)
+    for key in ("edit", "meta", "compose"):
         _approve(run_tasks, uid, key, operator)
     return workflow_queries.get_run(uid)
 
@@ -511,11 +528,40 @@ class TestArticleWorkflow:
         outline = EnrichmentTask.objects.get(params__run=article.uid, params__template="article.outline")
         assert outline.params["inputs"]["keywords"] == {"data": PICKED}
 
-    def test_the_answers_reach_the_outline_and_draft_prompts_as_data(self, article, toolbox):
-        for step in ("article.outline", "article.draft"):
+    def test_the_answers_reach_the_writing_prompts_as_data(self, article, toolbox):
+        for step in ("article.insights", "article.outline", "article.draft", "article.voice"):
             assert _in_data_only(ANSWERS["audience"], _calls(toolbox, step)), step
 
-    def test_the_draft_correction_is_a_revision_of_the_approved_draft(self, article):
-        draft = _step_proposal(article.uid, "draft")
-        assert [(r.number, r.author_kind) for r in draft.revisions.order_by("number")] == [(1, "ai"), (2, "ai")]
-        assert draft.status == "applied" and "double seam line" in draft.proposed_value["text"]
+    def test_questions_and_insights_see_the_search_evidence_of_the_keywords_step(self, article, toolbox):
+        steps = ("generate.article.keywords", "questions.article.questions", "generate.article.insights")
+        for step in steps:
+            assert _in_data_only('SERP "low gravity sofa"', _calls(toolbox, f"enrichment.{step}")), step
+
+    def test_the_research_runs_once_for_the_whole_run(self, article):
+        from django_enrichment.models import EnrichmentTask
+
+        tasks = EnrichmentTask.objects.filter(params__run=article.uid)
+        assert [task.params["template"] for task in tasks if "seo" in (task.cost_breakdown or {})] == [
+            "article.keywords"
+        ]
+
+    def test_the_questions_need_at_least_one_answer(self, article):
+        assert _step_proposal(article.uid, "questions").proposed_value["min_answers"] == 1
+
+    def test_a_section_is_written_from_the_insights_its_outline_block_assigns(self, article, toolbox):
+        sections = [c for c in _calls(toolbox, "enrichment.sections.article.draft") if "Write section" in c["user"]]
+        assert all("- material: I1" in call["user"] for call in sections)
+        assert _in_data_only("I1 (author: who buys it)", sections)
+
+    def test_the_draft_is_written_section_by_section_then_its_lead_and_closing(self, article, toolbox):
+        assert len(_calls(toolbox, "enrichment.sections.article.draft")) == 3  # two outline sections + the ends
+        text = _step_proposal(article.uid, "draft").proposed_value["text"]
+        assert text.startswith("Freighter crews sit a lot.") and text.endswith(
+            "## Your lounge\n\nWhat does your lounge need?"
+        )
+        assert text.count("## Frame") == 1 and "## Care" in text
+
+    def test_the_edit_correction_is_a_revision_of_the_document_body(self, article):
+        edit = _step_proposal(article.uid, "edit")
+        assert [(r.number, r.author_kind) for r in edit.revisions.order_by("number")] == [(1, "ai"), (2, "ai")]
+        assert edit.status == "applied" and "double seam line" in edit.proposed_value["text"]
