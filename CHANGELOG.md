@@ -25,6 +25,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   branch (kind `sections`, `seo_detail`, `min_answers`, past `v2.3.0rc3`), `entirius-django-matrix` 4.4.2rc1 and
   `entirius-django-utils` 2.3.1rc1 from their release-branch commits (no rc tags yet).
 
+### Fixed
+
+- `article.insights` (worker version 2): the profile insights come only from the facts table of the `company_profile`
+  block, each citing the fact's `id` exactly as `(profile fact: <id>)`. With an empty company profile the prompt has
+  no such block, and the model used to invent a "From the company profile" section with made-up fact ids built from
+  search snippets; now the section is left out, nothing is labelled `profile fact`, and search snippets never become
+  profile facts.
+
 ## [4.1.0rc1] - 2026-10-16
 
 ### Changed
