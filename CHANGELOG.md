@@ -32,6 +32,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   no such block, and the model used to invent a "From the company profile" section with made-up fact ids built from
   search snippets; now the section is left out, nothing is labelled `profile fact`, and search snippets never become
   profile facts.
+- `article.keywords` (worker version 3): the results-page notes of the search phrases step were one paragraph (up to
+  1185 characters against the 1000 limit), and the model sometimes wrote straight double quotes escaped with a
+  backslash. The step's `serp_notes` is now several short labelled lines (primary, secondary and rejected phrases,
+  what ranks, people also ask; at most 700 characters), each candidate's note one sentence, and phrases are quoted
+  with the quotation marks of the brief's language (`„…”` in Polish).
 
 ## [4.1.0rc1] - 2026-10-16
 
