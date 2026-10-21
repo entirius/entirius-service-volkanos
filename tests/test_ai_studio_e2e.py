@@ -16,6 +16,7 @@ The toolbox is `mock_toolbox` (respx): scripted completions picked by the select
 costs. No real AI or DataForSEO call leaves the process.
 """
 
+import base64
 import importlib.util
 import json
 import re
@@ -46,6 +47,11 @@ CHANNEL = "studio-shop"
 CATEGORY = "low-gravity-sofas"
 SKUS = ("OF-SOFA-1", "OF-SOFA-2")
 SEO = "http://toolbox.test/api/ai-seo/v2/admin/shop"
+IMAGES = "http://toolbox.test/api/ai-media/v2/admin/shop/images"
+IMAGE_JOB = "7a1c0d2e-0000-4000-8000-000000000000"
+IMAGE_COST = "0.039"
+# A 1×1 PNG: what every image job answers.
+PNG = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M8AAAMBAQDJ/pLvAAAAAElFTkSuQmCC")
 COMPLETION_COST = "0.002"
 SEO_COST = "0.05"
 UNKNOWN_NUMBER = "777"
@@ -135,6 +141,16 @@ _STEP_ANSWERS = {
     "article.voice": {"text": DRAFT},
     "article.edit": {"text": DRAFT},
     "article.meta": META,
+    "article.cover_brief": {
+        "scenes": [
+            {
+                "title": "Docked lounge",
+                "prompt": "A sofa in a freighter lounge, soft cabin light.",
+                "alt": "A sofa aboard",
+            },
+            {"title": "Seam detail", "prompt": "A hand pressing a double seam line, close-up.", "alt": "A double seam"},
+        ]
+    },
 }
 
 
@@ -185,12 +201,16 @@ def _volumes(request: httpx.Request) -> httpx.Response:
 
 
 @pytest.fixture
-def toolbox(settings):
-    """The mocked toolbox: `complete` and the three SEO routes, each answering with a cost."""
+def toolbox(settings, tmp_path):
+    """The mocked toolbox: `complete`, the three SEO routes and the image job, each answering with a cost."""
     settings.AI_TOOLBOX_BASE_URL = "http://toolbox.test"
     settings.AI_TOOLBOX_API_KEY = "test-key"
     settings.AI_TOOLBOX_CHANNEL = "shop"
+    settings.ENRICHMENT_STAGING_DIR = str(tmp_path / "staging")
+    settings.MEDIA_ROOT = str(tmp_path / "media")
+    settings.TMP_DIR = str(tmp_path / "tmp")
     with mock_toolbox() as router:
+        done = {"job_id": IMAGE_JOB, "status": "done", "outputs": [{"index": 0}], "cost": IMAGE_COST}
         yield SimpleNamespace(
             complete=router["complete"].mock(side_effect=_complete),
             seo=[
@@ -198,7 +218,20 @@ def toolbox(settings):
                 router.post(f"{SEO}/keyword-ideas/").mock(side_effect=_volumes),
                 router.post(f"{SEO}/serp/").mock(side_effect=_serp),
             ],
+            images=router.post(f"{IMAGES}/").mock(
+                return_value=httpx.Response(202, json={"job_id": IMAGE_JOB, "status": "pending"})
+            ),
+            image_job=router.get(f"{IMAGES}/{IMAGE_JOB}/").mock(return_value=httpx.Response(200, json=done)),
+            image_file=router.get(f"{IMAGES}/{IMAGE_JOB}/outputs/0/download/").mock(
+                return_value=httpx.Response(200, content=PNG)
+            ),
         )
+
+
+def _form(request: httpx.Request) -> dict[str, str]:
+    """The text fields of a multipart image-job request."""
+    fields = re.findall(rb'name="([^"]+)"\r\n\r\n(.*?)\r\n--', request.content, re.S)
+    return {name.decode(): value.decode() for name, value in fields if name != b"image"}
 
 
 def _seo_calls(toolbox) -> int:
@@ -437,10 +470,27 @@ class TestCorrectionLoop:
 
 # --- article workflow ----------------------------------------------------------------------------------------
 
-BRIEF_INPUTS = {"topic": "Sofas for low gravity", "language": "en", "audience": "Freighter crews"}
+BRIEF_INPUTS = {
+    "topic": "Sofas for low gravity",
+    "language": "en",
+    "audience": "Freighter crews",
+    "cover_hint": "Warm cabin light, no stars",
+}
 ANSWERS = {"audience": "Crews on long-haul freighters", "tone": "warm"}
 PICKED = {**KEYWORDS, "secondary": ["station sofa care"]}
-STEPS = ("keywords", "questions", "insights", "outline", "draft", "voice", "edit", "meta", "compose")
+STEPS = (
+    "keywords",
+    "questions",
+    "insights",
+    "outline",
+    "draft",
+    "voice",
+    "edit",
+    "meta",
+    "cover_brief",
+    "cover",
+    "compose",
+)
 
 
 @pytest.fixture
@@ -486,8 +536,11 @@ def article(seeds, blog, toolbox, run_tasks, operator):
     for key in ("insights", "outline", "draft", "voice"):
         _approve(run_tasks, uid, key, operator)
     revise_service.revise(_step_proposal(uid, "edit"), instruction=SHORTER, user=operator)
-    for key in ("edit", "meta", "compose"):
+    for key in ("edit", "meta", "cover_brief"):
         _approve(run_tasks, uid, key, operator)
+    cover = _step_proposal(uid, "cover").proposed_value
+    _approve(run_tasks, uid, "cover", operator, {**cover, "chosen": 1, "alt": "A double seam line, close-up"})
+    _approve(run_tasks, uid, "compose", operator)
     return workflow_queries.get_run(uid)
 
 
@@ -508,6 +561,24 @@ class TestArticleWorkflow:
         assert {"section-text", "section-faq"} <= {section["core_type"] for section in sections}
         assert content.meta["title"] == META["title"]
         assert "seam line" in json.dumps(content.content)
+
+    def test_the_picked_cover_is_the_blog_tile_image_and_the_og_image(self, article, toolbox):
+        from django_contentdb.models import Content, Image
+
+        content = Content.objects.get(uid=article.subject_ref)
+        image = Image.objects.get(uid=content.extension["images_set"]["desktop"]["uid"])
+        assert image.meta["alt"] == "A double seam line, close-up"
+        assert content.meta["og_image"] == image.image.url
+        prompts = [_form(call.request)["prompt"] for call in toolbox.images.calls]
+        assert len(prompts) == 2 and "A hand pressing a double seam line" in prompts[1]
+        assert all("No text, letters" in prompt for prompt in prompts)
+
+    def test_the_cover_hints_reach_only_the_cover_scenes(self, article, toolbox):
+        assert _in_data_only("Warm cabin light", _calls(toolbox, "article.cover_brief"))
+        others = [
+            call for call in toolbox.complete.calls if "cover_brief" not in json.loads(call.request.content)["tags"][0]
+        ]
+        assert others and all("Warm cabin light" not in call.request.content.decode() for call in others)
 
     def test_run_cost_is_the_sum_of_its_tasks(self, article):
         from django_enrichment.models import EnrichmentTask

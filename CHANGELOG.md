@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `article.cover_brief`: a scene shows the article's advice done right and names the details (position, hold); each
+  scene lists 1-3 `must_show` conditions, which the `cover` kind adds to its image prompt.
+- `article_workflow.json` gets a cover: brief fields `cover_hint`, `cover_product` (a PIM product, checked at start),
+  `cover_text_wanted` + `cover_text`, all four seen only by the cover steps (`x-steps`); step `cover_brief` (worker `article.cover_brief`: three different scene ideas
+  with an alt text each, from the edited article, the profile's brand and visual sections and the product's facts)
+  and step `cover` (worker `article.cover`, kind `cover`: one 16:9 picture per scene, the operator picks one); the
+  document carries the picked cover into the blog tile and `og_image` (`cover_step: cover`). Needs the
+  `entirius-django-enrichment` release with kind `cover` and the `entirius-django-contentdb` release that writes the
+  cover.
 - `article_workflow.json` follows the content-workbench writing process: search phrases first (`seo_brief` with
   `seo_detail: full`), then the interview (questions aimed at the gaps the research found, `min_answers: 1`), a new
   insights step (numbered author, profile and search material with a readable source each, no search volumes,
