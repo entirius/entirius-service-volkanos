@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "4.0.1"
+version = "4.1.0rc1"
 description = "Backend service of Entirius: a thin Django shell that runs the platform's modules behind one REST API"
 keywords = ["django", "ecommerce", "entirius", "rest-api", "headless", "backend"]
 authors = [
@@ -61,11 +61,11 @@ dependencies = [
     "entirius-django-access>=1.0.0",
     "entirius-django-regional>=2.1.0",
     "entirius-django-utils>=2.3.0",
-    "entirius-django-pim>=3.4.0",
+    "entirius-django-pim>=3.5.0rc1",
     "entirius-django-utils-translator>=2.2.0",
     "entirius-django-pricemanager>=4.3.0",
     "entirius-django-pim-csv>=4.1.0",
-    "entirius-django-pim-translator>=2.1.0",
+    "entirius-django-pim-translator>=2.1.1rc1",
     "entirius-django-pim-export-to-magento-api>=2.1.0",
     "entirius-django-faq>=2.1.0",
     "entirius-django-munin>=2.3.0",
@@ -78,11 +78,11 @@ dependencies = [
     "entirius-django-regon-api>=3.0.0",
     "entirius-django-baselinker>=2.0.1",
     "entirius-django-crypt>=2.0.0",
-    "entirius-django-enrichment>=2.2.0",
-    "entirius-django-contentdb>=5.2.0",
+    "entirius-django-enrichment>=2.3.0rc1",
+    "entirius-django-contentdb>=5.3.0rc1",
     "entirius-django-accounts[pim]>=6.0.0",
     "entirius-django-suppliers[qms]>=2.1.0",
-    "entirius-django-contentdb-translator>=2.1.0",
+    "entirius-django-contentdb-translator>=2.1.1rc1",
     "entirius-django-sitemap[pim,contentdb,faq]>=4.0.1",
     "entirius-django-accounts-export-to-magento-api>=2.0.0",
     "entirius-django-vault>=3.0.0",
@@ -125,6 +125,19 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["apps", "main"]
+
+[tool.uv.sources]
+# Release candidates come from their git tags (an untagged one: its release-branch commit) until the final releases
+# are on PyPI.
+entirius-django-pim = { git = "https://github.com/entirius/entirius-django-pim", tag = "v3.5.0rc1" }
+entirius-django-pim-translator = { git = "https://github.com/entirius/entirius-django-pim-translator", tag = "v2.1.1rc1" }
+# release/2.3.0 past v2.3.0rc3 (kind `sections`, `seo_detail`, `min_answers`): its branch commit until the next rc tag.
+entirius-django-enrichment = { git = "https://github.com/entirius/entirius-django-enrichment", rev = "427881524dd183d067848066fb1e32ae97062160" }
+# release/4.4.2 and release/2.3.1 have no rc tags yet: their rc1 commits.
+entirius-django-matrix = { git = "https://github.com/entirius/entirius-django-matrix", rev = "17c3ff3cde5a1001dcdd5549c0879ae4095da714" }
+entirius-django-utils = { git = "https://github.com/entirius/entirius-django-utils", rev = "a6fd3be0152b33ea53ad3d21c3f7d64827b5898d" }
+entirius-django-contentdb = { git = "https://github.com/entirius/entirius-django-contentdb", tag = "v5.3.0rc1" }
+entirius-django-contentdb-translator = { git = "https://github.com/entirius/entirius-django-contentdb-translator", tag = "v2.1.1rc1" }
 
 [tool.ruff]
 line-length = 120
