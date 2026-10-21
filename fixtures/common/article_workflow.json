@@ -26,11 +26,11 @@
       "kind": "generate",
       "mode": "internal",
       "target_module": "enrichment",
-      "system_prompt": "You choose the search phrases an article should target. Intent first, volume second: a phrase qualifies only when its results page shows texts of the same type as this article (guide or analysis, not an offer, price list or product page). Prefer a long-tail phrase with a clear intent over a short phrase dominated by giants and comparison sites. Volume only breaks ties and filters out phrases nobody types.\nUse the search brief data block when present (volumes, ideas, results-page notes); never invent volumes or results-page content: without data, set the volume to 0 and say so in the notes.\nReturn 1 primary phrase, 1 or 2 secondary phrases, the intent, results-page notes, the gaps (what the top results all have that we lack, and what nobody has that we can offer) and the candidate table the operator picks from. The primary phrase must be among the candidates.\nThe top-level `serp_notes` is several short lines separated by newline characters, one topic per line, no paragraph prose, at most 700 characters in total. Start each line with a label in the brief's language and leave a line out when it has no content. In this order: the primary phrase with its volume and why it won; the secondary phrases with their volumes and role; the rejected phrases with volume and reason; what ranks (result types, a few domains, AI Overview) and the winning format; the people-also-ask questions the article should cover. Each candidate's `serp_notes` is one sentence. Quote phrases with the quotation marks of the brief's language („...” in Polish), never with straight double quotes.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.\n- Search research (results pages, people also ask, volumes) tells what readers look for and what other pages cover; it is never the source of a fact, number or claim in the text.",
+      "system_prompt": "You choose the search phrases an article should target. Intent first, volume second: a phrase qualifies only when its results page shows texts of the same type as this article (guide or analysis, not an offer, price list or product page). Prefer a long-tail phrase with a clear intent over a short phrase dominated by giants and comparison sites. Volume only breaks ties and filters out phrases nobody types.\nUse the search brief data block when present (volumes, ideas, results-page notes); never invent volumes or results-page content: without data, set the volume to 0 and say so in the notes.\nBrand phrases: leave out every phrase with another company's brand or product-line name (its searchers want that brand, not this article) and every phrase the company profile's SEO section says never to target; the company's own brands are fine unless the brief asks for no brand names.\nReturn 1 primary phrase, 1 or 2 secondary phrases, the intent, results-page notes, the gaps (what the top results all have that we lack, and what nobody has that we can offer) and the candidate table the operator picks from. The primary phrase must be among the candidates.\nThe top-level `serp_notes` is several short lines separated by newline characters, one topic per line, no paragraph prose, at most 700 characters in total. Start each line with a label in the brief's language and leave a line out when it has no content. In this order: the primary phrase with its volume and why it won; the secondary phrases with their volumes and role; the rejected phrases with volume and reason; what ranks (result types, a few domains, AI Overview) and the winning format; the people-also-ask questions the article should cover. Each candidate's `serp_notes` is one sentence. Quote phrases with the quotation marks of the brief's language („...” in Polish), never with straight double quotes.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.\n- Search research (results pages, people also ask, volumes) tells what readers look for and what other pages cover; it is never the source of a fact, number or claim in the text.",
       "model": "",
       "options": {},
       "active": true,
-      "version": 3,
+      "version": 4,
       "created_at": "2026-10-15T00:00:00Z",
       "modified_at": "2026-10-21T00:00:00Z"
     }
@@ -159,6 +159,42 @@
       "version": 1,
       "created_at": "2026-10-20T00:00:00Z",
       "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 23,
+    "fields": {
+      "key": "article.cover_brief",
+      "label": "Article cover scenes",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You are the art director of an article's cover. From the finished article, its brief, the company's visual style and the operator's cover hints, you write three different scene ideas for the cover image; an image model renders each one and the operator picks one.\n\n- Start from the article's central idea: the one moment, problem or change it is about, never its search phrase. One idea per scene, one clear focal point.\n- The three scenes differ in concept (moment, setting, angle), not only in wording, so the operator has a real choice.\n- The company profile's visual style decides the look: photograph or illustration, palette, whether people appear, what is never shown. Without one, write a realistic editorial photograph: soft natural light, a calm neutral palette, shallow depth of field.\n- The cover hints in the brief come first when they conflict with your idea.\n- When the brief names a product (its facts are in the cover_product block), every scene shows that product in use or in its natural place, at true scale and physically plausible: lying flat, held, in use; never floating, never standing like a cut-out. Its brand mark may be visible but is never the close-up subject.\n- When the brief asks for text on the cover, leave a calm area in the composition for it; never write the text into the scene yourself.\n- When the article advises how something is done (a position, a hold, how a product is used), every scene that shows it shows it done the way the article says, and the prompt names those details outright: body position, angles, who holds what and how. An image model fills every detail you leave out with its own default, often the wrong one. Never show what the article warns against; people, and children above all, appear only in safe positions.\n- must_show: 1 to 3 short English conditions the picture must meet for this article (e.g. \"baby held semi-upright, head above the tummy\", \"bottle almost horizontal\"); code adds them to the image prompt, so make each one visible and checkable. Do not repeat the ban on text and logos; code adds it. Without such advice in the article, name what keeps the scene true to it.\n- prompt: English, 40-90 words, in this order: subject and action; light; composition and camera; palette and mood; background. Only what a camera or brush can show; no camera brands, no parameters, no style names of living artists.\n- Never put text, letters, logos, UI, charts or watermarks into a scene. Faces may be cropped out of frame; children are shown naturally and never in a way that could embarrass them.\n- Show only what the article supports; never invent product features or results.\n- title: 2-5 words naming the idea, in the article's language.\n- alt: one sentence in the article's language, 80-200 characters: what the scene shows and why it belongs on this page; the primary search phrase only where it fits naturally. Never empty, never the article's title.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 2,
+      "created_at": "2026-10-21T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 24,
+    "fields": {
+      "key": "article.cover",
+      "label": "Article cover",
+      "kind": "cover",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-21T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
     }
   },
   {
@@ -476,13 +512,109 @@
       "worker": 12,
       "params": {
         "body_step": "edit",
-        "meta_step": "meta"
+        "meta_step": "meta",
+        "cover_step": "cover"
       },
       "rules": [],
       "position": 150,
       "active": true,
       "created_at": "2026-10-15T00:00:00Z",
-      "modified_at": "2026-10-20T00:00:00Z"
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 23,
+    "fields": {
+      "key": "article.cover_brief",
+      "label": "Article: cover scenes",
+      "worker": 23,
+      "params": {
+        "prompt": "Write three cover scenes for the edited article.",
+        "format": "json",
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "scenes": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 60
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "minLength": 40,
+                    "maxLength": 650
+                  },
+                  "alt": {
+                    "type": "string",
+                    "minLength": 20,
+                    "maxLength": 250
+                  },
+                  "must_show": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120
+                    }
+                  }
+                },
+                "required": [
+                  "title",
+                  "prompt",
+                  "alt",
+                  "must_show"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "scenes"
+          ],
+          "additionalProperties": false
+        },
+        "augment": [
+          "cover_product"
+        ],
+        "profile_sections": [
+          "brand",
+          "visual"
+        ]
+      },
+      "rules": [],
+      "position": 144,
+      "active": true,
+      "created_at": "2026-10-21T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 24,
+    "fields": {
+      "key": "article.cover",
+      "label": "Article: cover",
+      "worker": 24,
+      "params": {
+        "scenes_step": "cover_brief",
+        "aspect_ratio": "16:9",
+        "max_variants": 3
+      },
+      "rules": [],
+      "position": 146,
+      "active": true,
+      "created_at": "2026-10-21T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
     }
   },
   {
@@ -530,9 +662,84 @@
             "type": "string",
             "title": "Notes",
             "maxLength": 4000
+          },
+          "cover_hint": {
+            "type": "string",
+            "title": "Cover — hints",
+            "maxLength": 1000,
+            "x-steps": [
+              "cover_brief",
+              "cover"
+            ]
+          },
+          "cover_product": {
+            "type": "object",
+            "title": "Product on the cover",
+            "x-picker": "pim-product",
+            "x-picture-of": "pim",
+            "properties": {
+              "channel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "ref": {
+                "type": "string",
+                "minLength": 1
+              },
+              "label": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "channel",
+              "ref"
+            ],
+            "additionalProperties": false,
+            "x-steps": [
+              "cover_brief",
+              "cover"
+            ]
+          },
+          "cover_text_wanted": {
+            "type": "boolean",
+            "title": "Text on the cover",
+            "default": false,
+            "x-steps": [
+              "cover_brief",
+              "cover"
+            ]
+          },
+          "cover_text": {
+            "type": "string",
+            "title": "Cover text",
+            "maxLength": 80,
+            "x-visible-if": "cover_text_wanted",
+            "x-steps": [
+              "cover_brief",
+              "cover"
+            ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "cover_text_wanted": {
+                  "const": true
+                }
+              },
+              "required": [
+                "cover_text_wanted"
+              ]
+            },
+            "then": {
+              "required": [
+                "cover_text"
+              ]
+            }
+          }
+        ]
       },
       "steps": [
         {
@@ -624,12 +831,34 @@
           "output": "artifact"
         },
         {
+          "key": "cover_brief",
+          "label": "Cover scenes",
+          "template": "article.cover_brief",
+          "needs": [
+            "keywords",
+            "edit"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "cover",
+          "label": "Cover",
+          "template": "article.cover",
+          "needs": [
+            "cover_brief"
+          ],
+          "gate": "review",
+          "output": "image"
+        },
+        {
           "key": "compose",
           "label": "Document",
           "template": "article.compose",
           "needs": [
             "edit",
-            "meta"
+            "meta",
+            "cover"
           ],
           "gate": "review",
           "output": "document"
@@ -637,7 +866,7 @@
       ],
       "active": true,
       "created_at": "2026-10-15T00:00:00Z",
-      "modified_at": "2026-10-20T00:00:00Z"
+      "modified_at": "2026-10-21T00:00:00Z"
     }
   }
 ]
