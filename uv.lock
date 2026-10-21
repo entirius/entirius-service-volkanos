@@ -1034,7 +1034,7 @@ google-ads = [
 [[package]]
 name = "entirius-django-contentdb"
 version = "5.3.0rc1"
-source = { git = "https://github.com/entirius/entirius-django-contentdb?tag=v5.3.0rc1#0ef8db478df704b8f760b5226ed22c8fed8ce0c7" }
+source = { git = "https://github.com/entirius/entirius-django-contentdb?rev=2ab38337e69396b00f71268de05e68ff3c680c66#2ab38337e69396b00f71268de05e68ff3c680c66" }
 dependencies = [
     { name = "celery" },
     { name = "django" },
@@ -1126,7 +1126,7 @@ wheels = [
 [[package]]
 name = "entirius-django-enrichment"
 version = "2.3.0rc3"
-source = { git = "https://github.com/entirius/entirius-django-enrichment?rev=e634db4bb6058aed85f7256666fb9c04edf49385#e634db4bb6058aed85f7256666fb9c04edf49385" }
+source = { git = "https://github.com/entirius/entirius-django-enrichment?rev=7d8107ca5c8c99e1440329778df99913c76dbe81#7d8107ca5c8c99e1440329778df99913c76dbe81" }
 dependencies = [
     { name = "celery" },
     { name = "django" },
@@ -2082,12 +2082,12 @@ requires-dist = [
     { name = "entirius-django-checkout-import-from-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-communicator", specifier = ">=0.4.0" },
     { name = "entirius-django-contact-forms", extras = ["bookings", "google-ads"], specifier = ">=4.0.0" },
-    { name = "entirius-django-contentdb", git = "https://github.com/entirius/entirius-django-contentdb?tag=v5.3.0rc1" },
+    { name = "entirius-django-contentdb", git = "https://github.com/entirius/entirius-django-contentdb?rev=2ab38337e69396b00f71268de05e68ff3c680c66" },
     { name = "entirius-django-contentdb-translator", git = "https://github.com/entirius/entirius-django-contentdb-translator?tag=v2.1.1rc1" },
     { name = "entirius-django-crypt", specifier = ">=2.0.0" },
     { name = "entirius-django-deliverypoints", specifier = ">=2.2.0" },
     { name = "entirius-django-email", specifier = ">=4.2.0" },
-    { name = "entirius-django-enrichment", git = "https://github.com/entirius/entirius-django-enrichment?rev=e634db4bb6058aed85f7256666fb9c04edf49385" },
+    { name = "entirius-django-enrichment", git = "https://github.com/entirius/entirius-django-enrichment?rev=7d8107ca5c8c99e1440329778df99913c76dbe81" },
     { name = "entirius-django-faq", specifier = ">=2.1.0" },
     { name = "entirius-django-getresponse", specifier = ">=3.0.0" },
     { name = "entirius-django-leads", specifier = ">=0.4.0" },
