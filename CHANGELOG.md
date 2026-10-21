@@ -50,6 +50,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   no such block, and the model used to invent a "From the company profile" section with made-up fact ids built from
   search snippets; now the section is left out, nothing is labelled `profile fact`, and search snippets never become
   profile facts.
+- `article.insights` (worker version 3): one list instead of a section per source. The sections and the "5 to 10
+  insights" quota pushed the model to fill each section: one operator answer came back as three insights with the
+  model's own conclusions labelled as the author's, and profile facts picked up comments from the search research.
+  The output is now `# Insights`, the warning line, a `**Direction:**` line and bullets `- I<n> <insight> (<source>)`,
+  author material first, then profile facts, the brief and search. Each insight carries exactly one source tag, kept
+  in English whatever the text's language (`(author)`, `(profile fact: <id>)`, `(brief)`, `(search: <phrase or
+  domain>)`), and says only what that source says; an author point is never credited to the company or a brand. At
+  most 10 insights, no minimum, no `Dropped` list; a profile fact only when the article would tell it to the reader as
+  part of its argument (a product or company fact that merely touches the topic does not qualify), none is fine.
 - `article.keywords` (worker version 3): the results-page notes of the search phrases step were one paragraph (up to
   1185 characters against the 1000 limit), and the model sometimes wrote straight double quotes escaped with a
   backslash. The step's `serp_notes` is now several short labelled lines (primary, secondary and rejected phrases,
