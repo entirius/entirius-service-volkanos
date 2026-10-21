@@ -132,7 +132,7 @@ packages = ["apps", "main"]
 entirius-django-pim = { git = "https://github.com/entirius/entirius-django-pim", tag = "v3.5.0rc1" }
 entirius-django-pim-translator = { git = "https://github.com/entirius/entirius-django-pim-translator", tag = "v2.1.1rc1" }
 # release/2.3.0 past v2.3.0rc3 (kind `sections`, `seo_detail`, `min_answers`): its branch commit until the next rc tag.
-entirius-django-enrichment = { git = "https://github.com/entirius/entirius-django-enrichment", rev = "315e3df9b5546d6c06aafe1c24eddf12a5ad6065" }
+entirius-django-enrichment = { git = "https://github.com/entirius/entirius-django-enrichment", rev = "8b4b2d8f5ade8f484b86c315053b5f5871706abe" }
 # release/4.4.2 and release/2.3.1 have no rc tags yet: their rc1 commits.
 entirius-django-matrix = { git = "https://github.com/entirius/entirius-django-matrix", rev = "17c3ff3cde5a1001dcdd5549c0879ae4095da714" }
 entirius-django-utils = { git = "https://github.com/entirius/entirius-django-utils", rev = "a6fd3be0152b33ea53ad3d21c3f7d64827b5898d" }
