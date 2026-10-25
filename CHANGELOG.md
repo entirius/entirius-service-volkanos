@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- entirius-django-access 1.1.0: an application key with admin scopes buys a short-lived admin JWT at
+  `POST /api/access/v2/token/exchange/` (the access urlconf is already included); `migrate` applies access `0006` and
+  `0007`. Integrations stop signing in with a service account password.
 - Module release candidates as the AI studio needs them: `entirius-django-enrichment` from its `release/2.3.0`
   branch (kind `sections`, `seo_detail`, `min_answers`, past `v2.3.0rc3`), `entirius-django-matrix` 4.4.2rc1 and
   `entirius-django-utils` 2.3.1rc1 from their release-branch commits (no rc tags yet).
