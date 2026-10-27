@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "4.1.0rc2"
+version = "4.1.0rc3"
 description = "Backend service of Entirius: a thin Django shell that runs the platform's modules behind one REST API"
 keywords = ["django", "ecommerce", "entirius", "rest-api", "headless", "backend"]
 authors = [
@@ -141,7 +141,7 @@ entirius-django-email = { git = "https://github.com/entirius/entirius-django-ema
 entirius-django-contact-forms = { git = "https://github.com/entirius/entirius-django-contact-forms", rev = "a4ed09dd4b2f6bd438638db70e34828a9f951ffb" }
 entirius-django-crypt = { git = "https://github.com/entirius/entirius-django-crypt", rev = "df17cf67524c727cea5a8dea9d8a1c2f09edcf4c" }
 entirius-django-contentdb = { git = "https://github.com/entirius/entirius-django-contentdb", rev = "a21735c1532618d2cac821baa41c7a6744181a26" }
-entirius-django-accounts = { git = "https://github.com/entirius/entirius-django-accounts", rev = "2a716d85f16c4be22d1ea0a25d6270ee8ea02c8a" }
+entirius-django-accounts = { git = "https://github.com/entirius/entirius-django-accounts", rev = "acef033dd06cef6ac8cdc2326726f5aa1a2602f2" }
 entirius-django-sitemap = { git = "https://github.com/entirius/entirius-django-sitemap", rev = "9815e56b79f21d177325eb234aaa39b3a3ba1cc8" }
 entirius-django-matrix = { git = "https://github.com/entirius/entirius-django-matrix", rev = "b3839cf96bdc1afae9a2c88a8956209a77a24f02" }
 entirius-django-checkout = { git = "https://github.com/entirius/entirius-django-checkout", rev = "9253820666f3757c467101cf0ac05c899c600687" }

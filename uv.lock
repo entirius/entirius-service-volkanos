@@ -759,7 +759,7 @@ wheels = [
 [[package]]
 name = "entirius-django-accounts"
 version = "6.0.1rc1"
-source = { git = "https://github.com/entirius/entirius-django-accounts?rev=2a716d85f16c4be22d1ea0a25d6270ee8ea02c8a#2a716d85f16c4be22d1ea0a25d6270ee8ea02c8a" }
+source = { git = "https://github.com/entirius/entirius-django-accounts?rev=acef033dd06cef6ac8cdc2326726f5aa1a2602f2#acef033dd06cef6ac8cdc2326726f5aa1a2602f2" }
 dependencies = [
     { name = "django" },
     { name = "django-admin-inline-paginator" },
@@ -1940,7 +1940,7 @@ wheels = [
 
 [[package]]
 name = "entirius-service-volkanos"
-version = "4.1.0rc2"
+version = "4.1.0rc3"
 source = { editable = "." }
 dependencies = [
     { name = "dj-database-url" },
@@ -2035,7 +2035,7 @@ requires-dist = [
     { name = "djangorestframework", specifier = ">=3.16" },
     { name = "drf-spectacular", specifier = ">=0.28" },
     { name = "entirius-django-access", specifier = ">=1.1.0" },
-    { name = "entirius-django-accounts", extras = ["pim"], git = "https://github.com/entirius/entirius-django-accounts?rev=2a716d85f16c4be22d1ea0a25d6270ee8ea02c8a" },
+    { name = "entirius-django-accounts", extras = ["pim"], git = "https://github.com/entirius/entirius-django-accounts?rev=acef033dd06cef6ac8cdc2326726f5aa1a2602f2" },
     { name = "entirius-django-accounts-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-agreements", specifier = ">=3.0.0" },
     { name = "entirius-django-atlas", extras = ["qms", "lookup"], specifier = ">=2.1.0" },

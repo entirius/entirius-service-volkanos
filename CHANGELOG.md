@@ -42,7 +42,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   5.3.0rc2, crypt 2.1.0rc1, email 4.3.0rc1, matrix 4.5.0rc1 (replaces 4.4.2rc1), pim 3.5.0rc2, qms 4.1.1rc1, sitemap
   4.0.2rc1, utils 2.4.0rc1 (replaces 2.3.1rc1), magento2-sdk2 2.1.0rc1, salesmanago-sdk 2.1.0rc1. What a deployment
   sees:
-  - accounts: a password reset link works once; links sent before the upgrade stop working. Without
+  - accounts: a password reset link works once; links sent before the upgrade stop working. Signup confirmation
+    proves the mailbox (4.1.0rc3): the signup response no longer carries `confirmation_key`, and a key activates
+    only its own customer. Without
     `RESET_PASSWORD_REDIRECT_URL` (or `NEW_ACCOUNT_REDIRECT_URL` with `EMAIL_DOUBLE_OPTIN`) the reset and signup
     calls answer 500 `NOT_CONFIGURED` instead of an unexplained 500, and checks `django_accounts.W001`/`W002` warn;
     see `main/settings_example.py`.
