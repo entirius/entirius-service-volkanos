@@ -4,7 +4,7 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [4.1.0] - 2026-10-27
 
 ### Added
 
@@ -35,15 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - entirius-django-access 1.1.0: an application key with admin scopes buys a short-lived admin JWT at
   `POST /api/access/v2/token/exchange/` (the access urlconf is already included); `migrate` applies access `0006` and
   `0007`. Integrations stop signing in with a service account password.
-- Module release candidates as the AI studio needs them: `entirius-django-enrichment` from its `release/2.3.0`
-  branch (kind `sections`, `seo_detail`, `min_answers`, past `v2.3.0rc3`).
-- Module release candidates of the 2026-10-26 review, from their release-branch commits (no rc tags yet; each
-  module's CHANGELOG has the details): accounts 6.0.1rc1, checkout 10.0.1rc1, contact-forms 4.1.0rc1, contentdb
-  5.3.0rc2, crypt 2.1.0rc1, email 4.3.0rc1, matrix 4.5.0rc1 (replaces 4.4.2rc1), pim 3.5.0rc2, qms 4.1.1rc1, sitemap
-  4.0.2rc1, utils 2.4.0rc1 (replaces 2.3.1rc1), magento2-sdk2 2.1.0rc1, salesmanago-sdk 2.1.0rc1. What a deployment
-  sees:
+- Module releases, all from PyPI (`[tool.uv.sources]` is gone; each module's CHANGELOG has the details): accounts
+  6.0.1, checkout 10.0.1, contact-forms 4.1.0, contentdb 5.3.0, contentdb-translator 2.1.1, crypt 2.1.0, email
+  4.3.0, enrichment 2.3.0 (kind `sections`, `seo_detail`, `min_answers`), matrix 4.5.0, pim 3.5.0, pim-translator
+  2.1.1, qms 4.1.1, sitemap 4.0.2, utils 2.4.0, magento2-sdk2 2.1.0, salesmanago-sdk 2.1.0. What a deployment sees:
   - accounts: a password reset link works once; links sent before the upgrade stop working. Signup confirmation
-    proves the mailbox (4.1.0rc3): the signup response no longer carries `confirmation_key`, and a key activates
+    proves the mailbox: the signup response no longer carries `confirmation_key`, and a key activates
     only its own customer. Without
     `RESET_PASSWORD_REDIRECT_URL` (or `NEW_ACCOUNT_REDIRECT_URL` with `EMAIL_DOUBLE_OPTIN`) the reset and signup
     calls answer 500 `NOT_CONFIGURED` instead of an unexplained 500, and checks `django_accounts.W001`/`W002` warn;

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "4.1.0rc3"
+version = "4.1.0"
 description = "Backend service of Entirius: a thin Django shell that runs the platform's modules behind one REST API"
 keywords = ["django", "ecommerce", "entirius", "rest-api", "headless", "backend"]
 authors = [
@@ -54,41 +54,41 @@ dependencies = [
     "entirius-py-paynow-sdk>=2.0.0",
     "entirius-py-magento2-sdk>=2.0.0",
     "entirius-py-synerise-sdk>=2.0.0",
-    "entirius-py-salesmanago-sdk>=2.1.0rc1",
+    "entirius-py-salesmanago-sdk>=2.1.0",
     "entirius-py-edrone-sdk>=2.0.0",
     "entirius-py-get-response-sdk>=3.0.0",
-    "entirius-py-magento2-sdk2>=2.1.0rc1",
+    "entirius-py-magento2-sdk2>=2.1.0",
     "entirius-django-access>=1.1.0",
     "entirius-django-regional>=2.1.0",
-    "entirius-django-utils>=2.4.0rc1",
-    "entirius-django-pim>=3.5.0rc2",
+    "entirius-django-utils>=2.4.0",
+    "entirius-django-pim>=3.5.0",
     "entirius-django-utils-translator>=2.2.0",
     "entirius-django-pricemanager>=4.3.0",
     "entirius-django-pim-csv>=4.1.0",
-    "entirius-django-pim-translator>=2.1.1rc1",
+    "entirius-django-pim-translator>=2.1.1",
     "entirius-django-pim-export-to-magento-api>=2.1.0",
     "entirius-django-faq>=2.1.0",
     "entirius-django-munin>=2.3.0",
     "entirius-django-captcha>=2.0.0",
     "entirius-django-agreements>=3.0.0",
     "entirius-django-deliverypoints>=2.2.0",
-    "entirius-django-qms>=4.1.1rc1",
-    "entirius-django-email>=4.3.0rc1",
-    "entirius-django-contact-forms[bookings,google-ads]>=4.1.0rc1",
+    "entirius-django-qms>=4.1.1",
+    "entirius-django-email>=4.3.0",
+    "entirius-django-contact-forms[bookings,google-ads]>=4.1.0",
     "entirius-django-regon-api>=3.0.0",
     "entirius-django-baselinker>=2.0.1",
-    "entirius-django-crypt>=2.1.0rc1",
-    "entirius-django-enrichment>=2.3.0rc1",
-    "entirius-django-contentdb>=5.3.0rc2",
-    "entirius-django-accounts[pim]>=6.0.1rc1",
+    "entirius-django-crypt>=2.1.0",
+    "entirius-django-enrichment>=2.3.0",
+    "entirius-django-contentdb>=5.3.0",
+    "entirius-django-accounts[pim]>=6.0.1",
     "entirius-django-suppliers[qms]>=2.1.0",
-    "entirius-django-contentdb-translator>=2.1.1rc1",
-    "entirius-django-sitemap[pim,contentdb,faq]>=4.0.2rc1",
+    "entirius-django-contentdb-translator>=2.1.1",
+    "entirius-django-sitemap[pim,contentdb,faq]>=4.0.2",
     "entirius-django-accounts-export-to-magento-api>=2.0.0",
     "entirius-django-vault>=3.0.0",
     "entirius-django-reviews[magento]>=3.0.0",
-    "entirius-django-matrix[qms,pricemanager]>=4.5.0rc1",
-    "entirius-django-checkout[qms,vault,returns]>=10.0.1rc1",
+    "entirius-django-matrix[qms,pricemanager]>=4.5.0",
+    "entirius-django-checkout[qms,vault,returns]>=10.0.1",
     "entirius-django-checkout-export-to-magento-api>=2.0.0",
     "entirius-django-checkout-import-from-magento-api>=2.0.0",
     "entirius-django-getresponse>=3.0.0",
@@ -125,28 +125,6 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["apps", "main"]
-
-[tool.uv.sources]
-# Release candidates come from their git tags (an untagged one: its release-branch commit) until the final releases
-# are on PyPI.
-entirius-django-pim-translator = { git = "https://github.com/entirius/entirius-django-pim-translator", tag = "v2.1.1rc1" }
-# release/2.3.0 past v2.3.0rc3 (kind `sections`, `seo_detail`, `min_answers`): its branch commit until the next rc tag.
-entirius-django-enrichment = { git = "https://github.com/entirius/entirius-django-enrichment", rev = "e8488916466d7caf97696f7f903182917dcecff9" }
-entirius-django-contentdb-translator = { git = "https://github.com/entirius/entirius-django-contentdb-translator", tag = "v2.1.1rc1" }
-# Release candidates of the 2026-10-26 review sweep: their release-branch commits (no rc tags yet).
-entirius-django-utils = { git = "https://github.com/entirius/entirius-django-utils", rev = "e0efb07ab48b59c6c02c8698e754b89b1d02a773" }
-entirius-django-pim = { git = "https://github.com/entirius/entirius-django-pim", rev = "7a5786d8a151325d2ee08a6054141ba18dd43be6" }
-entirius-django-qms = { git = "https://github.com/entirius/entirius-django-qms", rev = "09c715a1568780cb4bb2e3f343183acfb3e40b78" }
-entirius-django-email = { git = "https://github.com/entirius/entirius-django-email", rev = "ca879cb1a36e18c442d18a5f1d9000babaed1af2" }
-entirius-django-contact-forms = { git = "https://github.com/entirius/entirius-django-contact-forms", rev = "a4ed09dd4b2f6bd438638db70e34828a9f951ffb" }
-entirius-django-crypt = { git = "https://github.com/entirius/entirius-django-crypt", rev = "df17cf67524c727cea5a8dea9d8a1c2f09edcf4c" }
-entirius-django-contentdb = { git = "https://github.com/entirius/entirius-django-contentdb", rev = "a21735c1532618d2cac821baa41c7a6744181a26" }
-entirius-django-accounts = { git = "https://github.com/entirius/entirius-django-accounts", rev = "acef033dd06cef6ac8cdc2326726f5aa1a2602f2" }
-entirius-django-sitemap = { git = "https://github.com/entirius/entirius-django-sitemap", rev = "9815e56b79f21d177325eb234aaa39b3a3ba1cc8" }
-entirius-django-matrix = { git = "https://github.com/entirius/entirius-django-matrix", rev = "b3839cf96bdc1afae9a2c88a8956209a77a24f02" }
-entirius-django-checkout = { git = "https://github.com/entirius/entirius-django-checkout", rev = "9253820666f3757c467101cf0ac05c899c600687" }
-entirius-py-magento2-sdk2 = { git = "https://github.com/entirius/entirius-py-magento2-sdk2", rev = "f4586e9156b52f86cd4004318b483b1a5ce8a283" }
-entirius-py-salesmanago-sdk = { git = "https://github.com/entirius/entirius-py-salesmanago-sdk", rev = "b624103e92cff093cc68ce93dab788c235369790" }
 
 [tool.ruff]
 line-length = 120
