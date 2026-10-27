@@ -741,7 +741,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-access"
-version = "1.0.0"
+version = "1.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -751,9 +751,9 @@ dependencies = [
     { name = "entirius-django-utils" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/61/ba/2056a78c314bb1899d56f7bada0d14ea66a51af01685304e41f126f9e17d/entirius_django_access-1.0.0.tar.gz", hash = "sha256:52f6b7ae797995ae38e2920b3a87530942f7784666b0b4410d1f2d9671fc4c88", size = 239874, upload-time = "2026-10-12T09:28:37.98Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9e/7d/2b2867ed41507fd092fdfda42a3163c3ce896cf17027a9f39aac42826825/entirius_django_access-1.1.0.tar.gz", hash = "sha256:b9cdabf6543b2916607f7be8ed5003a094c39ed031cb92104612994b0c4a68aa", size = 256410, upload-time = "2026-10-25T11:28:48.143Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/fb/27/3f4e4059f1d75eb795ba2c7ce6b370a9602944c6d9a0acff21a3054ce6c1/entirius_django_access-1.0.0-py3-none-any.whl", hash = "sha256:ffbd221d6b690e6fb0647890eed45afd0ec984c42882f0cbd3d6528500cf0870", size = 103807, upload-time = "2026-10-12T09:28:36.861Z" },
+    { url = "https://files.pythonhosted.org/packages/9b/e4/aa659d51c7091dde047ae85f901ba385b32d8ae4072b4b69580044c8bbc7/entirius_django_access-1.1.0-py3-none-any.whl", hash = "sha256:54a4eacfe70a0d6348476499485215b29a42febe58d27955b0d297eea390a504", size = 112447, upload-time = "2026-10-25T11:28:47.146Z" },
 ]
 
 [[package]]
@@ -2070,7 +2070,7 @@ requires-dist = [
     { name = "django-redis", specifier = ">=5.4" },
     { name = "djangorestframework", specifier = ">=3.16" },
     { name = "drf-spectacular", specifier = ">=0.28" },
-    { name = "entirius-django-access", specifier = ">=1.0.0" },
+    { name = "entirius-django-access", specifier = ">=1.1.0" },
     { name = "entirius-django-accounts", extras = ["pim"], specifier = ">=6.0.0" },
     { name = "entirius-django-accounts-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-agreements", specifier = ">=3.0.0" },
