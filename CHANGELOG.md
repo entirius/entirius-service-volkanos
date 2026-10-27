@@ -4,7 +4,7 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [4.1.0] - 2026-10-27
 
 ### Added
 
@@ -32,9 +32,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Module release candidates as the AI studio needs them: `entirius-django-enrichment` from its `release/2.3.0`
-  branch (kind `sections`, `seo_detail`, `min_answers`, past `v2.3.0rc3`), `entirius-django-matrix` 4.4.2rc1 and
-  `entirius-django-utils` 2.3.1rc1 from their release-branch commits (no rc tags yet).
+- entirius-django-access 1.1.0: an application key with admin scopes buys a short-lived admin JWT at
+  `POST /api/access/v2/token/exchange/` (the access urlconf is already included); `migrate` applies access `0006` and
+  `0007`. Integrations stop signing in with a service account password.
+- Module releases, all from PyPI (`[tool.uv.sources]` is gone; each module's CHANGELOG has the details): accounts
+  6.0.1, checkout 10.0.1, contact-forms 4.1.0, contentdb 5.3.0, contentdb-translator 2.1.1, crypt 2.1.0, email
+  4.3.0, enrichment 2.3.0 (kind `sections`, `seo_detail`, `min_answers`), matrix 4.5.0, pim 3.5.0, pim-translator
+  2.1.1, qms 4.1.1, sitemap 4.0.2, utils 2.4.0, magento2-sdk2 2.1.0, salesmanago-sdk 2.1.0. What a deployment sees:
+  - accounts: a password reset link works once; links sent before the upgrade stop working. Signup confirmation
+    proves the mailbox: the signup response no longer carries `confirmation_key`, and a key activates
+    only its own customer. Without
+    `RESET_PASSWORD_REDIRECT_URL` (or `NEW_ACCOUNT_REDIRECT_URL` with `EMAIL_DOUBLE_OPTIN`) the reset and signup
+    calls answer 500 `NOT_CONFIGURED` instead of an unexplained 500, and checks `django_accounts.W001`/`W002` warn;
+    see `main/settings_example.py`.
+  - checkout: v2 cart writes name why each rejected discount code was rejected (`DISCOUNT_*` details in `_errors`
+    next to `ONE_OR_MORE_DISCOUNT_INVALID`); automatic rules take part in priority arbitration whatever codes the
+    cart holds; two orders of one channel placed at once no longer fail on the order number.
+  - matrix: the product listing stops leaking database connections; `MATRIX_SORT_ATTRIBUTES_BY_CHANNEL_POSITION`
+    (default `False`) and `fetch_categories=true` on the v1 product views are new.
+  - crypt: a value that no longer decrypts raises `DecryptionError` instead of reading as `""`.
+  - email and contact-forms: migration `django_email` 0018 (help text only); notification mails list the form fields.
+  - magento2-sdk2: SKUs with a slash are URL-encoded; the Magento host needs Apache `AllowEncodedSlashes NoDecode`.
 
 ### Fixed
 
