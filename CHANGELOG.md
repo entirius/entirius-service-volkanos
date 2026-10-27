@@ -36,8 +36,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `POST /api/access/v2/token/exchange/` (the access urlconf is already included); `migrate` applies access `0006` and
   `0007`. Integrations stop signing in with a service account password.
 - Module release candidates as the AI studio needs them: `entirius-django-enrichment` from its `release/2.3.0`
-  branch (kind `sections`, `seo_detail`, `min_answers`, past `v2.3.0rc3`), `entirius-django-matrix` 4.4.2rc1 and
-  `entirius-django-utils` 2.3.1rc1 from their release-branch commits (no rc tags yet).
+  branch (kind `sections`, `seo_detail`, `min_answers`, past `v2.3.0rc3`).
+- Module release candidates of the 2026-10-26 review, from their release-branch commits (no rc tags yet; each
+  module's CHANGELOG has the details): accounts 6.0.1rc1, checkout 10.0.1rc1, contact-forms 4.1.0rc1, contentdb
+  5.3.0rc2, crypt 2.1.0rc1, email 4.3.0rc1, matrix 4.5.0rc1 (replaces 4.4.2rc1), pim 3.5.0rc2, qms 4.1.1rc1, sitemap
+  4.0.2rc1, utils 2.4.0rc1 (replaces 2.3.1rc1), magento2-sdk2 2.1.0rc1, salesmanago-sdk 2.1.0rc1. What a deployment
+  sees:
+  - accounts: a password reset link works once; links sent before the upgrade stop working. Without
+    `RESET_PASSWORD_REDIRECT_URL` (or `NEW_ACCOUNT_REDIRECT_URL` with `EMAIL_DOUBLE_OPTIN`) the reset and signup
+    calls answer 500 `NOT_CONFIGURED` instead of an unexplained 500, and checks `django_accounts.W001`/`W002` warn;
+    see `main/settings_example.py`.
+  - checkout: v2 cart writes name why each rejected discount code was rejected (`DISCOUNT_*` details in `_errors`
+    next to `ONE_OR_MORE_DISCOUNT_INVALID`); automatic rules take part in priority arbitration whatever codes the
+    cart holds; two orders of one channel placed at once no longer fail on the order number.
+  - matrix: the product listing stops leaking database connections; `MATRIX_SORT_ATTRIBUTES_BY_CHANNEL_POSITION`
+    (default `False`) and `fetch_categories=true` on the v1 product views are new.
+  - crypt: a value that no longer decrypts raises `DecryptionError` instead of reading as `""`.
+  - email and contact-forms: migration `django_email` 0018 (help text only); notification mails list the form fields.
+  - magento2-sdk2: SKUs with a slash are URL-encoded; the Magento host needs Apache `AllowEncodedSlashes NoDecode`.
 
 ### Fixed
 
