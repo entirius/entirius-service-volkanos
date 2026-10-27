@@ -4,6 +4,111 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2026-10-27
+
+### Added
+
+- `article.cover_brief`: a scene shows the article's advice done right and names the details (position, hold); each
+  scene lists 1-3 `must_show` conditions, which the `cover` kind adds to its image prompt.
+- `article.keywords` leaves out brand phrases of other companies and the phrases the profile's SEO section never
+  targets (`seo.exclude_terms`, filtered from the research by `seo_brief`); own brands stay unless the brief forbids brands.
+- `article_workflow.json` gets a cover: brief fields `cover_hint`, `cover_product` (a PIM product, checked at start),
+  `cover_text_wanted` + `cover_text`, all four seen only by the cover steps (`x-steps`); step `cover_brief` (worker `article.cover_brief`: three different scene ideas
+  with an alt text each, from the edited article, the profile's brand and visual sections and the product's facts)
+  and step `cover` (worker `article.cover`, kind `cover`: one 16:9 picture per scene, the operator picks one); the
+  document carries the picked cover into the blog tile and `og_image` (`cover_step: cover`). Needs the
+  `entirius-django-enrichment` release with kind `cover` and the `entirius-django-contentdb` release that writes the
+  cover.
+- `article_workflow.json` follows the content-workbench writing process: search phrases first (`seo_brief` with
+  `seo_detail: full`), then the interview (questions aimed at the gaps the research found, `min_answers: 1`), a new
+  insights step (numbered author, profile and search material with a readable source each, no search volumes,
+  dropped items listed, a warning when the answers give nothing usable), the outline assigning insights by number,
+  the draft written section by section (worker `article.draft` on kind `sections`, the closing under its own
+  heading; its prompt spells out what a draft may add — transitions, scenes, conclusions from the material — and what
+  never — facts, mechanisms, signs, tips, the author's setting from general knowledge; thin material = a short section), then the new voice
+  and edit passes; metadata and the document read the edited text (`body_step: edit`). One research per run feeds
+  every step at cost 0; every step's craft rules say that search research is never the source of a fact. Needs the
+  `entirius-django-enrichment` release with kind `sections`, `seo_detail` and `min_answers`.
+
+### Changed
+
+- entirius-django-access 1.1.0: an application key with admin scopes buys a short-lived admin JWT at
+  `POST /api/access/v2/token/exchange/` (the access urlconf is already included); `migrate` applies access `0006` and
+  `0007`. Integrations stop signing in with a service account password.
+- Module releases, all from PyPI (`[tool.uv.sources]` is gone; each module's CHANGELOG has the details): accounts
+  6.0.1, checkout 10.0.1, contact-forms 4.1.0, contentdb 5.3.0, contentdb-translator 2.1.1, crypt 2.1.0, email
+  4.3.0, enrichment 2.3.0 (kind `sections`, `seo_detail`, `min_answers`), matrix 4.5.0, pim 3.5.0, pim-translator
+  2.1.1, qms 4.1.1, sitemap 4.0.2, utils 2.4.0, magento2-sdk2 2.1.0, salesmanago-sdk 2.1.0. What a deployment sees:
+  - accounts: a password reset link works once; links sent before the upgrade stop working. Signup confirmation
+    proves the mailbox: the signup response no longer carries `confirmation_key`, and a key activates
+    only its own customer. Without
+    `RESET_PASSWORD_REDIRECT_URL` (or `NEW_ACCOUNT_REDIRECT_URL` with `EMAIL_DOUBLE_OPTIN`) the reset and signup
+    calls answer 500 `NOT_CONFIGURED` instead of an unexplained 500, and checks `django_accounts.W001`/`W002` warn;
+    see `main/settings_example.py`.
+  - checkout: v2 cart writes name why each rejected discount code was rejected (`DISCOUNT_*` details in `_errors`
+    next to `ONE_OR_MORE_DISCOUNT_INVALID`); automatic rules take part in priority arbitration whatever codes the
+    cart holds; two orders of one channel placed at once no longer fail on the order number.
+  - matrix: the product listing stops leaking database connections; `MATRIX_SORT_ATTRIBUTES_BY_CHANNEL_POSITION`
+    (default `False`) and `fetch_categories=true` on the v1 product views are new.
+  - crypt: a value that no longer decrypts raises `DecryptionError` instead of reading as `""`.
+  - email and contact-forms: migration `django_email` 0018 (help text only); notification mails list the form fields.
+  - magento2-sdk2: SKUs with a slash are URL-encoded; the Magento host needs Apache `AllowEncodedSlashes NoDecode`.
+
+### Fixed
+
+- `pim.writer` (worker version 2): the meta fields have numeric length ranges, `options.field_limits`
+  (`meta_title` 40-60, `meta_description` 120-160 characters). The prose in `field_rules` said "140-160 characters"
+  and five meta descriptions written for real products averaged 195 characters, none within 120-160: a model does
+  not count. The enrichment `write` kind shows the range next to the field, rewrites a value outside it once, and QA
+  flags what is still outside with `LIMIT`; the prose rules stay for the content guidance. Needs the
+  `entirius-django-enrichment` release with `field_limits`; an older one ignores the key. The AI studio e2e answers
+  with meta texts inside the ranges.
+- `article.insights` (worker version 2): the profile insights come only from the facts table of the `company_profile`
+  block, each citing the fact's `id` exactly as `(profile fact: <id>)`. With an empty company profile the prompt has
+  no such block, and the model used to invent a "From the company profile" section with made-up fact ids built from
+  search snippets; now the section is left out, nothing is labelled `profile fact`, and search snippets never become
+  profile facts.
+- `article.insights` (worker version 3): one list instead of a section per source. The sections and the "5 to 10
+  insights" quota pushed the model to fill each section: one operator answer came back as three insights with the
+  model's own conclusions labelled as the author's, and profile facts picked up comments from the search research.
+  The output is now `# Insights`, the warning line, a `**Direction:**` line and bullets `- I<n> <insight> (<source>)`,
+  author material first, then profile facts, the brief and search. Each insight carries exactly one source tag, kept
+  in English whatever the text's language (`(author)`, `(profile fact: <id>)`, `(brief)`, `(search: <phrase or
+  domain>)`), and says only what that source says; an author point is never credited to the company or a brand. At
+  most 10 insights, no minimum, no `Dropped` list; a profile fact only when the article would tell it to the reader as
+  part of its argument (a product or company fact that merely touches the topic does not qualify), none is fine.
+- `article.keywords` (worker version 3): the results-page notes of the search phrases step were one paragraph (up to
+  1185 characters against the 1000 limit), and the model sometimes wrote straight double quotes escaped with a
+  backslash. The step's `serp_notes` is now several short labelled lines (primary, secondary and rejected phrases,
+  what ranks, people also ask; at most 700 characters), each candidate's note one sentence, and phrases are quoted
+  with the quotation marks of the brief's language (`„…”` in Polish).
+
+## [4.1.0rc1] - 2026-10-16
+
+### Changed
+
+- The AI studio module releases: entirius-django-pim 3.5.0rc1, entirius-django-contentdb 5.3.0rc1,
+  entirius-django-enrichment 2.3.0rc1, entirius-django-pim-translator 2.1.1rc1 and
+  entirius-django-contentdb-translator 2.1.1rc1. The release candidates resolve from their git tags
+  (`[tool.uv.sources]`) until the final releases are on PyPI; the final release drops the sources.
+
+### Added
+
+- AI studio seeds in `fixtures/common/`: `profile_demo.json` (company profile of the fictitious Orbital Foundry,
+  version 1), `enrichment_workers.json` gains the `pim.writer` / `pim.tagger` workers with the `meta`, `description`
+  and `tags` templates (the old `field` workers are inactive), `article_workflow.json` (step workers, templates and
+  the `article` workflow: questions → search phrases → outline → draft → metadata → ContentDB document). Every
+  worker's model is blank (the toolbox channel's first allowed model). Load with
+  `manage.py loaddata fixtures/common/enrichment_workers.json fixtures/common/article_workflow.json fixtures/common/profile_demo.json`;
+  `tests/test_enrichment_seeds.py` validates them. The seeds need `entirius-django-enrichment` 2.3.0 (contract A3/A4:
+  profile schema, templates, workflows). `profile_demo.json` is for an empty demo database only: it
+  writes the instance profile and its version-1 snapshot directly, past `profile_service`, so loading it over a
+  profile saved through the API replaces that profile and breaks its version history.
+- `tests/test_ai_studio_e2e.py`: the AI studio end to end through enrichment, PIM and ContentDB on a mocked toolbox
+  (`mock_toolbox`, no real AI or SEO calls) — product writer with `seo_brief` (proposals per field × language,
+  costs, category brief reused, QA number warning), the correction loop up to a promoted profile rule, and the
+  article workflow down to an unpublished ContentDB blog-post draft. `respx` joins the dev dependencies (needed by `mock_toolbox`).
+
 ## [4.0.1] - 2026-10-13
 
 ### Fixed

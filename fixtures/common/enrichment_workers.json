@@ -1,0 +1,399 @@
+[
+  {
+    "model": "django_enrichment.worker",
+    "pk": 1,
+    "fields": {
+      "key": "pim.translate",
+      "label": "Translate product texts",
+      "kind": "translate",
+      "mode": "internal",
+      "target_module": "pim",
+      "system_prompt": "You translate e-commerce product content. Keep the meaning, tone and formatting of the source. Keep brand names, product names, model numbers, units and HTML tags unchanged. Use natural, idiomatic wording a native shopper would expect, not a literal translation.",
+      "model": "",
+      "options": {
+        "fields": [
+          "name",
+          "short_description",
+          "description"
+        ]
+      },
+      "active": true,
+      "created_at": "2026-10-14T00:00:00Z",
+      "modified_at": "2026-10-14T00:00:00Z",
+      "version": 1
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 2,
+    "fields": {
+      "key": "pim.description",
+      "label": "Write product description",
+      "kind": "field",
+      "mode": "internal",
+      "target_module": "pim",
+      "system_prompt": "You are a senior e-commerce copywriter. Write a product description from the product data you are given. Use only facts present in the data; never invent specifications, materials, certificates or claims. Structure: one short opening paragraph with the main benefit, then a bullet list of key features, then one paragraph on use or care if the data supports it. Plain, confident tone, no superlatives, no exclamation marks. Write in the requested language.",
+      "model": "",
+      "options": {
+        "field": "description",
+        "format": "html",
+        "max_length": 2500
+      },
+      "active": false,
+      "created_at": "2026-10-14T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z",
+      "version": 1
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 3,
+    "fields": {
+      "key": "pim.meta_description",
+      "label": "Write meta description",
+      "kind": "field",
+      "mode": "internal",
+      "target_module": "pim",
+      "system_prompt": "You write SEO meta descriptions for product pages. One or two sentences, 120 to 155 characters, that name the product and its main benefit and invite a click. Use only facts from the product data. No quotes, no emojis, no keyword stuffing. Write in the requested language.",
+      "model": "",
+      "options": {
+        "field": "meta_description",
+        "format": "text",
+        "max_length": 160
+      },
+      "active": false,
+      "created_at": "2026-10-14T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z",
+      "version": 1
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 4,
+    "fields": {
+      "key": "pim.social_video",
+      "label": "Social video from main picture",
+      "kind": "video",
+      "mode": "internal",
+      "target_module": "pim",
+      "system_prompt": "Keep the product exactly as in the photo.",
+      "model": "",
+      "options": {
+        "preset": "product-social-pull-back",
+        "duration_s": 4,
+        "aspect": "9:16"
+      },
+      "active": true,
+      "created_at": "2026-10-14T00:00:00Z",
+      "modified_at": "2026-10-14T00:00:00Z",
+      "version": 1
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 5,
+    "fields": {
+      "key": "pim.writer",
+      "label": "Product writer",
+      "kind": "write",
+      "mode": "internal",
+      "target_module": "pim",
+      "system_prompt": "You are a senior e-shop copywriter who writes catalogue texts for one product at a time.\nUse only facts present in the product data, the company profile and the research blocks; never invent specifications, materials, certificates, numbers or claims. A field you cannot fill from the data gets a shorter text, not an invented one.\nOpen with the main benefit for the buyer, then the specifics that prove it. Plain, confident tone: no superlatives, no exclamation marks, no filler openers, no \"it's not X, it's Y\" contrasts. Vary sentence length. Keep brand names, product names, model numbers and units exactly as in the data.\nWhen a search brief is given, use its primary phrase naturally in the title-like fields and its secondary phrases only where they read naturally; never stuff phrases.\nWrite every field in the requested language, respecting each field's limit.",
+      "model": "",
+      "options": {
+        "rules": [
+          "Use only facts from the product data and the company profile.",
+          "No superlatives and no exclamation marks."
+        ],
+        "field_rules": {
+          "meta_title": "40-60 characters, product name first, no brand suffix unless it fits.",
+          "meta_description": "120-160 characters: what it is, the main benefit, an invitation to see details.",
+          "description": "HTML: an opening paragraph, a <ul> of key features, a short paragraph on use or care if the data supports it.",
+          "short_description": "One or two sentences with the main benefit."
+        },
+        "field_limits": {
+          "meta_title": {
+            "min": 40,
+            "max": 60
+          },
+          "meta_description": {
+            "min": 120,
+            "max": 160
+          }
+        }
+      },
+      "active": true,
+      "version": 2,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 6,
+    "fields": {
+      "key": "pim.tagger",
+      "label": "Product tagger",
+      "kind": "pick",
+      "mode": "internal",
+      "target_module": "pim",
+      "system_prompt": "You assign catalogue attributes (select and multiselect values) to one product.\nChoose only from the allowed values. Choose a value only when the product data supports it; when in doubt, choose fewer values rather than more. Never choose a value because it sounds attractive.",
+      "model": "",
+      "options": {
+        "rules": [
+          "Choose only values the product data supports."
+        ]
+      },
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 1,
+    "fields": {
+      "key": "meta",
+      "label": "Meta opisy",
+      "worker": 5,
+      "params": {
+        "fields": [
+          "meta_title",
+          "meta_description"
+        ],
+        "languages": [
+          "*"
+        ],
+        "seo_scope": "category"
+      },
+      "rules": [],
+      "position": 10,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 2,
+    "fields": {
+      "key": "description",
+      "label": "Opis produktu",
+      "worker": 5,
+      "params": {
+        "fields": [
+          "description"
+        ],
+        "languages": [
+          "*"
+        ],
+        "seo_scope": "category"
+      },
+      "rules": [],
+      "position": 20,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 3,
+    "fields": {
+      "key": "tags",
+      "label": "Otaguj produkt",
+      "worker": 6,
+      "params": {
+        "fields": [
+          "badge"
+        ]
+      },
+      "rules": [],
+      "position": 30,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 13,
+    "fields": {
+      "key": "pim.image",
+      "label": "Image processing",
+      "kind": "image",
+      "mode": "internal",
+      "target_module": "pim",
+      "system_prompt": "Keep the product exactly as in the photo: shape, colour, proportions and label text.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z",
+      "version": 1
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 10,
+    "fields": {
+      "key": "image-packshot",
+      "label": "Packshot na białym tle",
+      "worker": 13,
+      "params": {
+        "operation": "packshot",
+        "preset": "packshot-white"
+      },
+      "rules": [],
+      "position": 40,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 11,
+    "fields": {
+      "key": "image-lifestyle",
+      "label": "Produkt w aranżacji",
+      "worker": 13,
+      "params": {
+        "operation": "lifestyle",
+        "preset": "lifestyle-scene"
+      },
+      "rules": [],
+      "position": 41,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 12,
+    "fields": {
+      "key": "image-enhance",
+      "label": "Popraw zdjęcie",
+      "worker": 13,
+      "params": {
+        "operation": "enhance",
+        "preset": "enhance-photo"
+      },
+      "rules": [],
+      "position": 42,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 13,
+    "fields": {
+      "key": "image-custom",
+      "label": "Własne polecenie do zdjęcia",
+      "worker": 13,
+      "params": {
+        "operation": "instruct",
+        "preset": "instruct-free"
+      },
+      "rules": [],
+      "position": 43,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 14,
+    "fields": {
+      "key": "contentdb.image",
+      "label": "Gallery image processing",
+      "kind": "image",
+      "mode": "internal",
+      "target_module": "contentdb",
+      "system_prompt": "Keep the subject exactly as in the photo: shape, colour, proportions and any text on it.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z",
+      "version": 1
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 14,
+    "fields": {
+      "key": "gallery-image-packshot",
+      "label": "Galeria: packshot na białym tle",
+      "worker": 14,
+      "params": {
+        "operation": "packshot",
+        "preset": "packshot-white"
+      },
+      "rules": [],
+      "position": 50,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 15,
+    "fields": {
+      "key": "gallery-image-lifestyle",
+      "label": "Galeria: zdjęcie w aranżacji",
+      "worker": 14,
+      "params": {
+        "operation": "lifestyle",
+        "preset": "lifestyle-scene"
+      },
+      "rules": [],
+      "position": 51,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 16,
+    "fields": {
+      "key": "gallery-image-enhance",
+      "label": "Galeria: popraw zdjęcie",
+      "worker": 14,
+      "params": {
+        "operation": "enhance",
+        "preset": "enhance-photo"
+      },
+      "rules": [],
+      "position": 52,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 17,
+    "fields": {
+      "key": "gallery-image-custom",
+      "label": "Galeria: własne polecenie do zdjęcia",
+      "worker": 14,
+      "params": {
+        "operation": "instruct",
+        "preset": "instruct-free"
+      },
+      "rules": [],
+      "position": 53,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  }
+]

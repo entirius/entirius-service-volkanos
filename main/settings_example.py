@@ -88,12 +88,22 @@ LOCAL_APPS: list[str] = []
 #   python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
 # CRYPT_SALT = "change-me-valid-fernet-key"
 
+# django_accounts: storefront pages the customer mails link to (?key=... is appended). Unset, the system checks
+# warn (django_accounts.W001/W002) and customer/password/reset/ (and signup with EMAIL_DOUBLE_OPTIN) answer 500
+# NOT_CONFIGURED. CMS_RESET_PASSWORD_REDIRECT_URL is the admin CMS page for a staff reset link.
+# RESET_PASSWORD_REDIRECT_URL = "https://shop.example.com/reset-password"
+# NEW_ACCOUNT_REDIRECT_URL = "https://shop.example.com/account/confirm"
+# CMS_RESET_PASSWORD_REDIRECT_URL = "https://cms.example.com/password-reset"
+
 # Celery (module workers: QMS quantities, PIM thumbnails, pricemanager pricelists).
 # The app lives in main/celery.py and reads CELERY_-prefixed keys from settings;
 # REDIS_URL additionally feeds the celery_once backend used by some module tasks.
 # CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
 # REDIS_URL = "redis://localhost:6379"
 # CELERY_RESULT_BACKEND = REDIS_URL + "/2"
+# Beat: the enrichment work queue needs its reaper (expired leases, stalled work, consumer restart) every minute.
+# Beat entries are named by app prefix: "enrichment.reap" belongs to django_enrichment.
+# CELERY_BEAT_SCHEDULE = {"enrichment-reap": {"task": "enrichment.reap", "schedule": 60}}
 
 # QMS quantities strategy per environment: "XRAY" (CSV/point-in-time driven, used by the
 # Emporium demo package) or "ZULU" (storage-driven). Default in django_qms is ZULU.

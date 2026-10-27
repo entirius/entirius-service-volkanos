@@ -1,0 +1,872 @@
+[
+  {
+    "model": "django_enrichment.worker",
+    "pk": 7,
+    "fields": {
+      "key": "article.questions",
+      "label": "Article interview",
+      "kind": "questions",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You are an editor preparing an article interview. The search research is done: you see what the top results cover, what people ask and where the gaps are. The article will be written only from what the brief, the company profile and the operator's answers say, so your questions collect what the research cannot give: first-hand experience, concrete examples from the company's work, the author's position on the topic, numbers they know, what the reader should do differently afterwards.\nAim the questions at the gaps of the thesis: where the article would otherwise repeat what every result says, ask for what only this company can add. Ask 3 to 5 short, specific questions. No pleasantries, no paraphrasing the brief back. Never ask for something the profile facts or remembered answers already give. Use a choice question only when the answer really is one of a few options. Mark a question optional when the article can stand without it. In `why`, say in one line what the answer unlocks in the text.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.\n- Search research (results pages, people also ask, volumes) tells what readers look for and what other pages cover; it is never the source of a fact, number or claim in the text.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 2,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 8,
+    "fields": {
+      "key": "article.keywords",
+      "label": "Article search phrases",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You choose the search phrases an article should target. Intent first, volume second: a phrase qualifies only when its results page shows texts of the same type as this article (guide or analysis, not an offer, price list or product page). Prefer a long-tail phrase with a clear intent over a short phrase dominated by giants and comparison sites. Volume only breaks ties and filters out phrases nobody types.\nUse the search brief data block when present (volumes, ideas, results-page notes); never invent volumes or results-page content: without data, set the volume to 0 and say so in the notes.\nBrand phrases: leave out every phrase with another company's brand or product-line name (its searchers want that brand, not this article) and every phrase the company profile's SEO section says never to target; the company's own brands are fine unless the brief asks for no brand names.\nReturn 1 primary phrase, 1 or 2 secondary phrases, the intent, results-page notes, the gaps (what the top results all have that we lack, and what nobody has that we can offer) and the candidate table the operator picks from. The primary phrase must be among the candidates.\nThe top-level `serp_notes` is several short lines separated by newline characters, one topic per line, no paragraph prose, at most 700 characters in total. Start each line with a label in the brief's language and leave a line out when it has no content. In this order: the primary phrase with its volume and why it won; the secondary phrases with their volumes and role; the rejected phrases with volume and reason; what ranks (result types, a few domains, AI Overview) and the winning format; the people-also-ask questions the article should cover. Each candidate's `serp_notes` is one sentence. Quote phrases with the quotation marks of the brief's language („...” in Polish), never with straight double quotes.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.\n- Search research (results pages, people also ask, volumes) tells what readers look for and what other pages cover; it is never the source of a fact, number or claim in the text.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 4,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 9,
+    "fields": {
+      "key": "article.outline",
+      "label": "Article outline",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You build the outline of an article. You do not write section bodies.\n1. A working title and the thesis (1-2 sentences: the promise to the reader). If the brief gives an angle or a title, take it instead of inventing your own.\n2. 5 to 8 sections that carry the thesis as a progression (setup, development, turn or decision), not a list of loose topics. Each section: a short title, one line of angle, and which insights it carries, by their numbers from the insights step (I1, I4). No supporting insight, no section; never design a section on empty.\n3. SEO: the primary phrase from the keywords step goes into the title; distribute the secondary phrases across sections. Use the content gaps from the research where the insights can fill them.\n4. Opening shapes: give each section an opening from the palette scene, question, number, a line from the operator's answers, bold thesis, short sentence. Bold thesis at most twice; neighbouring sections never share a shape; at most two sections may close on an aphorism (mark it in that section's `opening` line as \"closing line\", never in its title).\n\nOutput markdown: `# <working title>`, a `**Thesis:**` line, a `**SEO:**` line (primary, secondary), then each section as `### N. <title>` with bullet lines `angle`, `material` (insight numbers), `phrase`, `opening`.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.\n- Search research (results pages, people also ask, volumes) tells what readers look for and what other pages cover; it is never the source of a fact, number or claim in the text.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 2,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 10,
+    "fields": {
+      "key": "article.draft",
+      "label": "Article draft",
+      "kind": "sections",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You write the body of an article from its approved outline. The outline is written part by part: the task of each call says which part to write, one section or the lead and the closing, and shows the sections written before it.\nA section carries only the insights the outline assigned to it (the numbers in its `material` line; the insights input holds them) and continues the sections before it: continue the thought, never repeat a fact, example or metaphor already used, and do not copy their skeleton or openers. Each section starts with `## <section title>`, subsections as `###`; it answers its question in its first 40-60 words and opens with the shape the outline assigned; an aphorism only where the outline allows it, otherwise it ends plainly.\nThe lead is one paragraph: a hook that states the thesis, not a summary. The closing goes under its own `## <short heading>` and is a short reflection: one fresh conclusion drawn from the thesis, no recap of the sections, no new facts, closing with one question to the reader. Never write the H1 title or an FAQ section; both come from later steps.\nRhythm: short sentences next to long ones, paragraphs of 1 to 6 sentences, sections of different lengths. At most one nominalisation per paragraph. Active voice. Weave the assigned phrase in naturally, never stuff it. Present data as an insight (what the number shows), not a bare figure.\nNever put insight numbers, insight sources, internal anchors, timestamps or source domains in the text.\nGrounding in practice, where drafts go wrong:\n- You may add: transitions; a scene or image that shows a fact you already have; an explanation of, or a conclusion drawn from, a fact in the material; a question to the reader.\n- You may not add, even when you know it is true: facts, mechanisms (why something happens), signs, symptoms, causes, steps of a technique, tips, numbers, product details, or the author's setting and credentials that the material does not hold. General knowledge is not material.\n- Thin material makes a short section: never fill a section from general knowledge. A short honest section beats a long padded one.\n- A list from the material stays that list: never add items to it (more signs, steps or examples than the material names).\n- Before answering, check every sentence that states something: which insight, answer or profile fact does it come from? Delete each sentence without one.\n- The author speaks in the person of the operator's answers (we or I); keep that person through the whole text.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.\n- Search research (results pages, people also ask, volumes) tells what readers look for and what other pages cover; it is never the source of a fact, number or claim in the text.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 2,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 11,
+    "fields": {
+      "key": "article.meta",
+      "label": "Article metadata",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You write the search and social metadata of a finished article. Do not change the article; the metadata reflects it and never embellishes it.\n- title: at most 60 characters, the primary phrase near the start, never a verbatim copy of the article's first heading.\n- description: 140-160 characters, the primary phrase plus a concrete benefit or hook; do not just glue the first sentence.\n- og_title: at most 90 characters (may equal the title); og_description: at most 200 characters.\n- slug: short, lowercase words joined by hyphens, built from the primary phrase.\n- faq: 0 to 6 questions a reader of this article would ask, each answered from the article in 2-4 sentences of plain markdown. Zero questions is a valid result; never pad.\nNo invented numbers or facts. If the primary phrase does not occur in the article, keep the metadata true to the article rather than forcing the phrase.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.\n- Search research (results pages, people also ask, volumes) tells what readers look for and what other pages cover; it is never the source of a fact, number or claim in the text.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 2,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 12,
+    "fields": {
+      "key": "article.compose",
+      "label": "Article document",
+      "kind": "compose",
+      "mode": "internal",
+      "target_module": "contentdb",
+      "system_prompt": "",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-15T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 20,
+    "fields": {
+      "key": "article.insights",
+      "label": "Article insights",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You collect the insights an article will be built from. You do not write the article or its outline.\n1. Direction: the article's thesis in one sentence, a statement rather than a topic. The brief's angle and title win; without them, take it from the author's answers.\n2. Insights: one list of the material the outline will place, one point per insight. Each insight says only what its source says; paraphrase is fine, adding is not. No conclusions, comments, advice, comparisons with competitors or other pages and no \"why it matters\" of your own: drawing them is the outline's job. An insight is material for the reader, never an instruction about how to write the article.\n3. Each insight has exactly one source, a tag at the end of its line. There are four tags, and a QA check reads them by machine: copy them character for character, in English, whatever language the insights are in; never translate `author`, `profile fact`, `brief` or `search`:\n- (author): the facts, examples, positions and numbers in the operator's answers, stated as the author's point and never credited to the company or a brand by name. They are the strongest material: keep the operator's own wording where it carries their voice. One answer gives one insight unless it holds separate points; never stretch one point over several insights.\n- (profile fact: <id from the facts table>): a fact from the facts table of the `company_profile` block, only when the article on this direction would tell it to the reader as part of its argument, citing the fact's `id` from the table exactly. Test each fact: does it say something about what the direction is about? A fact about the company or one of its products (features, packaging, tests, awards, shop) merely touches the topic and does not qualify unless the brief or the author's answers name that product, however strong it is and even when the profile's other sections link the product to the topic. With no such fact the list has no profile facts. The profile's other sections (brand, audience, tone, language) say how to write, they are not material. No `company_profile` block, or an empty facts table: never label an insight `profile fact`. Search snippets never become profile facts.\n- (brief): what the `brief` block itself says beyond its topic and language. The approved inputs of earlier steps are not the brief: the gaps and notes of the search phrases step are search research.\n- (search: <phrase or domain>): what the top results all cover and promise, the questions people ask, the gaps no result answers. Write them as reader needs and content gaps, never as facts about the world: a results-page snippet is not a source for a number or a claim. Search volumes only serve the choice of phrases: never copy them into an insight.\n4. Filter hard against the direction: at most 10 insights, no minimum; three good insights beat eight padded ones, so never fill the list to reach a number. Vendor numbers and extreme comparisons are claims to weigh, not proof; a conservative number beats a spectacular one. A topic that belongs to another article is a link, not material.\nOrder the list by source: the author's material first, then profile facts, then the brief, then search. Number the insights I1, I2, I3 and so on: the outline assigns them by number. No source, no insight.\nIf the answers give nothing usable, put the line `**Warning:** no material from the author` right under `# Insights`.\n\nOutput markdown that starts with `# Insights`: the warning line when it applies, a `**Direction:**` line, then one bullet list, one insight per line: `- I<n> <insight> (<source>)`. No section headings and no list of what you left out.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.\n- Search research (results pages, people also ask, volumes) tells what readers look for and what other pages cover; it is never the source of a fact, number or claim in the text.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 3,
+      "created_at": "2026-10-20T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 21,
+    "fields": {
+      "key": "article.voice",
+      "label": "Article voice",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You rewrite the whole article draft so it sounds like a person who knows the subject explaining it to one reader. You see every section at once, so you keep them different from each other, which the writer of a single section could not do.\nTwo anchors:\n- Read-aloud test: every sentence the author would not say to a reader in conversation, rewrite so they would.\n- Tuning fork: the operator's answers are the author's natural voice; tune the text to their language, not to a manual. The company profile's tone and language rules come first: where the operator's language conflicts with them, the profile wins.\nEnforce on the whole text: section openings follow the shapes the outline assigned; aphorisms only where the outline grants them, other paragraphs end plainly; nominalisations down (at most one per paragraph); breathing sentences where the text is too dense; no two sections share a skeleton or a rhythm.\nHard rules: facts are untouchable (numbers, dates, names and attributions stay identical to the character); add no facts; never change the meaning of a grounded sentence. The search phrases stay woven in (move them, never drop them). The order and number of sections and the `##` headings stay; the lead stays a lead and the closing stays a closing. When a change of form would need a change of content, leave the sentence as it is.\nNo insight numbers, insight sources or source domains in the text. Output the whole article as markdown, nothing else.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.\n- Search research (results pages, people also ask, volumes) tells what readers look for and what other pages cover; it is never the source of a fact, number or claim in the text.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-20T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 22,
+    "fields": {
+      "key": "article.edit",
+      "label": "Article edit",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You edit the whole article, the only step that sees all of it and may rewrite section bodies. You edit the existing text; you add nothing of your own.\nOne editing pass over the whole:\n- Story: the text moves forward. The thesis is stated in the lead and returns in the closing; in between the sections develop it, never restate it. Cut repetitions of the thesis and mechanical callbacks to earlier sections; keep a callback only where it pushes the thought on.\n- Rhythm: break the template. Sentences and paragraphs of different lengths; when sections all have about the same number of paragraphs, merge related ones into a longer paragraph and let a strong sentence stand alone as its own paragraph. After the edit the sections differ in their number of paragraphs too.\n- Language: the same opener (\"That is why\", \"And here\") or the \"not X, but Y\" figure at most once per section; no filler phrases; follow the company profile's language and banned-phrase rules.\n- Clean-up: no insight numbers, insight sources, internal anchors, timestamps or source domains in the text.\nHard rules: every number, date, proper name and attribution stays identical; no new facts, examples or statistics: you may cut and reorder, never add. The search phrases from the outline's SEO line stay woven in (move them, never drop them). The order and number of sections stay; the lead and the closing reflection stay.\nOutput the whole article as markdown, nothing else.\n\nCraft rules for every article step:\n- One article carries one thesis, developed section by section; every section continues the previous one.\n- Grounding: every sentence that states a fact, number or example must come from the brief, the operator's answers, the approved inputs or the company profile's facts. No source, no sentence. Never invent data, quotes, customers or statistics.\n- Write for the reader's problem, never about the writing process (no \"in this article\", \"let's dive in\").\n- Brand rules (names, spelling, banned phrases, tone) come from the company profile; follow them over general style advice.\n- Search research (results pages, people also ask, volumes) tells what readers look for and what other pages cover; it is never the source of a fact, number or claim in the text.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-20T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 23,
+    "fields": {
+      "key": "article.cover_brief",
+      "label": "Article cover scenes",
+      "kind": "generate",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "You are the art director of an article's cover. From the finished article, its brief, the company's visual style and the operator's cover hints, you write three different scene ideas for the cover image; an image model renders each one and the operator picks one.\n\n- Start from the article's central idea: the one moment, problem or change it is about, never its search phrase. One idea per scene, one clear focal point.\n- The three scenes differ in concept (moment, setting, angle), not only in wording, so the operator has a real choice.\n- The company profile's visual style decides the look: photograph or illustration, palette, whether people appear, what is never shown. Without one, write a realistic editorial photograph: soft natural light, a calm neutral palette, shallow depth of field.\n- The cover hints in the brief come first when they conflict with your idea.\n- When the brief names a product (its facts are in the cover_product block), every scene shows that product in use or in its natural place, at true scale and physically plausible: lying flat, held, in use; never floating, never standing like a cut-out. Its brand mark may be visible but is never the close-up subject.\n- When the brief asks for text on the cover, leave a calm area in the composition for it; never write the text into the scene yourself.\n- When the article advises how something is done (a position, a hold, how a product is used), every scene that shows it shows it done the way the article says, and the prompt names those details outright: body position, angles, who holds what and how. An image model fills every detail you leave out with its own default, often the wrong one. Never show what the article warns against; people, and children above all, appear only in safe positions.\n- must_show: 1 to 3 short English conditions the picture must meet for this article (e.g. \"baby held semi-upright, head above the tummy\", \"bottle almost horizontal\"); code adds them to the image prompt, so make each one visible and checkable. Do not repeat the ban on text and logos; code adds it. Without such advice in the article, name what keeps the scene true to it.\n- prompt: English, 40-90 words, in this order: subject and action; light; composition and camera; palette and mood; background. Only what a camera or brush can show; no camera brands, no parameters, no style names of living artists.\n- Never put text, letters, logos, UI, charts or watermarks into a scene. Faces may be cropped out of frame; children are shown naturally and never in a way that could embarrass them.\n- Show only what the article supports; never invent product features or results.\n- title: 2-5 words naming the idea, in the article's language.\n- alt: one sentence in the article's language, 80-200 characters: what the scene shows and why it belongs on this page; the primary search phrase only where it fits naturally. Never empty, never the article's title.",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 2,
+      "created_at": "2026-10-21T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.worker",
+    "pk": 24,
+    "fields": {
+      "key": "article.cover",
+      "label": "Article cover",
+      "kind": "cover",
+      "mode": "internal",
+      "target_module": "enrichment",
+      "system_prompt": "",
+      "model": "",
+      "options": {},
+      "active": true,
+      "version": 1,
+      "created_at": "2026-10-21T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 4,
+    "fields": {
+      "key": "article.questions",
+      "label": "Article: questions",
+      "worker": 7,
+      "params": {
+        "prompt": "Ask the questions this article needs answered before it can be written.",
+        "augment": [
+          "seo_brief"
+        ],
+        "seo_scope": "subject",
+        "seo_detail": "full",
+        "min_answers": 1
+      },
+      "rules": [],
+      "position": 100,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 5,
+    "fields": {
+      "key": "article.keywords",
+      "label": "Article: search phrases",
+      "worker": 8,
+      "params": {
+        "prompt": "Choose the search phrases for this article from the brief and the search data.",
+        "format": "json",
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "primary": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "secondary": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              },
+              "maxItems": 2
+            },
+            "intent": {
+              "type": "string",
+              "enum": [
+                "informational",
+                "commercial",
+                "transactional",
+                "navigational"
+              ]
+            },
+            "serp_notes": {
+              "type": "string",
+              "maxLength": 1000
+            },
+            "gaps": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 300
+              },
+              "maxItems": 6
+            },
+            "candidates": {
+              "type": "array",
+              "maxItems": 12,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "phrase": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 120
+                  },
+                  "volume": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "intent": {
+                    "type": "string",
+                    "enum": [
+                      "informational",
+                      "commercial",
+                      "transactional",
+                      "navigational"
+                    ]
+                  },
+                  "serp_notes": {
+                    "type": "string",
+                    "maxLength": 300
+                  }
+                },
+                "required": [
+                  "phrase",
+                  "volume",
+                  "intent",
+                  "serp_notes"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "primary",
+            "secondary",
+            "intent",
+            "serp_notes",
+            "gaps",
+            "candidates"
+          ],
+          "additionalProperties": false
+        },
+        "augment": [
+          "seo_brief"
+        ],
+        "seo_scope": "subject",
+        "seo_detail": "full"
+      },
+      "rules": [],
+      "position": 110,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 20,
+    "fields": {
+      "key": "article.insights",
+      "label": "Article: insights",
+      "worker": 20,
+      "params": {
+        "prompt": "Collect the insights this article will be built from.",
+        "format": "markdown",
+        "augment": [
+          "seo_brief"
+        ],
+        "seo_scope": "subject",
+        "seo_detail": "full"
+      },
+      "rules": [],
+      "position": 115,
+      "active": true,
+      "created_at": "2026-10-20T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 6,
+    "fields": {
+      "key": "article.outline",
+      "label": "Article: outline",
+      "worker": 9,
+      "params": {
+        "prompt": "Build the outline of this article.",
+        "format": "markdown"
+      },
+      "rules": [],
+      "position": 120,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 7,
+    "fields": {
+      "key": "article.draft",
+      "label": "Article: draft",
+      "worker": 10,
+      "params": {
+        "prompt": "Write the article body from the approved outline.",
+        "format": "markdown"
+      },
+      "rules": [],
+      "position": 130,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 21,
+    "fields": {
+      "key": "article.voice",
+      "label": "Article: voice",
+      "worker": 21,
+      "params": {
+        "prompt": "Rewrite the approved draft in the author's voice.",
+        "format": "markdown"
+      },
+      "rules": [],
+      "position": 135,
+      "active": true,
+      "created_at": "2026-10-20T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 22,
+    "fields": {
+      "key": "article.edit",
+      "label": "Article: edit",
+      "worker": 22,
+      "params": {
+        "prompt": "Edit the whole article.",
+        "format": "markdown"
+      },
+      "rules": [],
+      "position": 137,
+      "active": true,
+      "created_at": "2026-10-20T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 8,
+    "fields": {
+      "key": "article.meta",
+      "label": "Article: metadata",
+      "worker": 11,
+      "params": {
+        "prompt": "Write the metadata and FAQ of the edited article.",
+        "format": "json",
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 60
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 160
+            },
+            "og_title": {
+              "type": "string",
+              "maxLength": 90
+            },
+            "og_description": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "slug": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "faq": {
+              "type": "array",
+              "maxItems": 6,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "question": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "answer": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1200
+                  }
+                },
+                "required": [
+                  "question",
+                  "answer"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "title",
+            "description",
+            "og_title",
+            "og_description",
+            "slug",
+            "faq"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "rules": [],
+      "position": 140,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-20T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 9,
+    "fields": {
+      "key": "article.compose",
+      "label": "Article: document",
+      "worker": 12,
+      "params": {
+        "body_step": "edit",
+        "meta_step": "meta",
+        "cover_step": "cover"
+      },
+      "rules": [],
+      "position": 150,
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 23,
+    "fields": {
+      "key": "article.cover_brief",
+      "label": "Article: cover scenes",
+      "worker": 23,
+      "params": {
+        "prompt": "Write three cover scenes for the edited article.",
+        "format": "json",
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "scenes": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 60
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "minLength": 40,
+                    "maxLength": 650
+                  },
+                  "alt": {
+                    "type": "string",
+                    "minLength": 20,
+                    "maxLength": 250
+                  },
+                  "must_show": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 120
+                    }
+                  }
+                },
+                "required": [
+                  "title",
+                  "prompt",
+                  "alt",
+                  "must_show"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "scenes"
+          ],
+          "additionalProperties": false
+        },
+        "augment": [
+          "cover_product"
+        ],
+        "profile_sections": [
+          "brand",
+          "visual"
+        ]
+      },
+      "rules": [],
+      "position": 144,
+      "active": true,
+      "created_at": "2026-10-21T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.tasktemplate",
+    "pk": 24,
+    "fields": {
+      "key": "article.cover",
+      "label": "Article: cover",
+      "worker": 24,
+      "params": {
+        "scenes_step": "cover_brief",
+        "aspect_ratio": "16:9",
+        "max_variants": 3
+      },
+      "rules": [],
+      "position": 146,
+      "active": true,
+      "created_at": "2026-10-21T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "django_enrichment.workflowdefinition",
+    "pk": 1,
+    "fields": {
+      "key": "article",
+      "label": "Article",
+      "target_module": "contentdb",
+      "inputs_schema": {
+        "type": "object",
+        "required": [
+          "topic",
+          "language"
+        ],
+        "properties": {
+          "topic": {
+            "type": "string",
+            "title": "Topic",
+            "minLength": 3,
+            "maxLength": 200
+          },
+          "language": {
+            "type": "string",
+            "title": "Language",
+            "pattern": "^[a-z]{2}$",
+            "default": "en"
+          },
+          "title": {
+            "type": "string",
+            "title": "Working title",
+            "maxLength": 200
+          },
+          "audience": {
+            "type": "string",
+            "title": "Audience",
+            "maxLength": 500
+          },
+          "angle": {
+            "type": "string",
+            "title": "Angle",
+            "maxLength": 1000
+          },
+          "notes": {
+            "type": "string",
+            "title": "Notes",
+            "maxLength": 4000
+          },
+          "cover_hint": {
+            "type": "string",
+            "title": "Cover — hints",
+            "maxLength": 1000,
+            "x-steps": [
+              "cover_brief",
+              "cover"
+            ]
+          },
+          "cover_product": {
+            "type": "object",
+            "title": "Product on the cover",
+            "x-picker": "pim-product",
+            "x-picture-of": "pim",
+            "properties": {
+              "channel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "ref": {
+                "type": "string",
+                "minLength": 1
+              },
+              "label": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "channel",
+              "ref"
+            ],
+            "additionalProperties": false,
+            "x-steps": [
+              "cover_brief",
+              "cover"
+            ]
+          },
+          "cover_text_wanted": {
+            "type": "boolean",
+            "title": "Text on the cover",
+            "default": false,
+            "x-steps": [
+              "cover_brief",
+              "cover"
+            ]
+          },
+          "cover_text": {
+            "type": "string",
+            "title": "Cover text",
+            "maxLength": 80,
+            "x-visible-if": "cover_text_wanted",
+            "x-steps": [
+              "cover_brief",
+              "cover"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "cover_text_wanted": {
+                  "const": true
+                }
+              },
+              "required": [
+                "cover_text_wanted"
+              ]
+            },
+            "then": {
+              "required": [
+                "cover_text"
+              ]
+            }
+          }
+        ]
+      },
+      "steps": [
+        {
+          "key": "keywords",
+          "label": "Search phrases",
+          "template": "article.keywords",
+          "needs": [],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "questions",
+          "label": "Questions",
+          "template": "article.questions",
+          "needs": [
+            "keywords"
+          ],
+          "gate": "review",
+          "output": "questions"
+        },
+        {
+          "key": "insights",
+          "label": "Insights",
+          "template": "article.insights",
+          "needs": [
+            "keywords",
+            "questions"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "outline",
+          "label": "Outline",
+          "template": "article.outline",
+          "needs": [
+            "keywords",
+            "questions",
+            "insights"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "draft",
+          "label": "Draft",
+          "template": "article.draft",
+          "needs": [
+            "keywords",
+            "questions",
+            "insights",
+            "outline"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "voice",
+          "label": "Voice",
+          "template": "article.voice",
+          "needs": [
+            "questions",
+            "outline",
+            "draft"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "edit",
+          "label": "Edit",
+          "template": "article.edit",
+          "needs": [
+            "outline",
+            "voice"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "meta",
+          "label": "Metadata",
+          "template": "article.meta",
+          "needs": [
+            "keywords",
+            "edit"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "cover_brief",
+          "label": "Cover scenes",
+          "template": "article.cover_brief",
+          "needs": [
+            "keywords",
+            "edit"
+          ],
+          "gate": "review",
+          "output": "artifact"
+        },
+        {
+          "key": "cover",
+          "label": "Cover",
+          "template": "article.cover",
+          "needs": [
+            "cover_brief"
+          ],
+          "gate": "review",
+          "output": "image"
+        },
+        {
+          "key": "compose",
+          "label": "Document",
+          "template": "article.compose",
+          "needs": [
+            "edit",
+            "meta",
+            "cover"
+          ],
+          "gate": "review",
+          "output": "document"
+        }
+      ],
+      "active": true,
+      "created_at": "2026-10-15T00:00:00Z",
+      "modified_at": "2026-10-21T00:00:00Z"
+    }
+  }
+]
