@@ -21,8 +21,8 @@ Platform 4.2. Module versions: entirius-django-checkout 10.1.0, -matrix 4.5.1, -
 - **Agreements:** set `STOREFRONT_BASE_URL` (agreements 3.1.0 warns while unset).
 - **Customer erasure:** after the deploy run `manage.py complete-erasures` and `manage.py scrub-gateway-payloads`,
   both dry-run first, then `--apply`.
-- **Discount codes:** a code is unique per channel and currency; a database with duplicates fails the checkout
-  migration check: see the checkout 10.1.0 changelog.
+- **Discount codes:** a code is unique per channel and currency. No migration: clashes stored before keep working
+  and the checkout configuration check lists them in config health; fix them in the CMS.
 
 ### Security
 
