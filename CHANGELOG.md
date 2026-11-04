@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   when unset) and `THUMBS_CONFIG` (django_pim: without it `pim-thumbs-generate` refuses to run and `source_set` carries
   only the original picture).
 
+### Security
+
+- `entirius-django-agreements` 3.0.1: the public write endpoints (consent create and withdraw, newsletter subscribe,
+  order agreements) need the channel's `X-API-KEY` (scope `agreements.subscribe`) or a JWT, and a key alone records no
+  marketing consent (that goes through the newsletter's double opt-in). It brings `entirius-django-utils` 2.4.2.
+
 ## [4.1.0] - 2026-10-27
 
 ### Added
