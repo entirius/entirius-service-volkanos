@@ -4,6 +4,38 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [4.2.0] - 2026-11-04
+
+Platform 4.2. Module versions: entirius-django-checkout 10.1.0, -matrix 4.5.1, -pim 3.6.0, -agreements 3.1.0,
+-contentdb 5.3.1, -contact-forms 4.1.2, -utils 2.4.3, -checkout-export-to-magento-api 2.0.1.
+
+### Upgrade
+
+- **PayPal:** every PayPal payment method needs `webhook_id` (checkout 10.1.0 refuses notifications without it;
+  `django_checkout.W002` warns in config health).
+- **Przelewy24:** a method without `crc_key` has its notifications refused (403).
+- **Payment return URL:** `PAYMENT_REDIRECT_ALLOWED_HOSTS` must hold the storefront host: checkout validates
+  `continue_url` for every method, a wrong value blocks checkout. Storefront: `SITE_URL` on https.
+- **Agreements:** set `STOREFRONT_BASE_URL` (agreements 3.1.0 warns while unset).
+- **Customer erasure:** after the deploy run `manage.py complete-erasures` and `manage.py scrub-gateway-payloads`,
+  both dry-run first, then `--apply`.
+- **Discount codes:** a code is unique per channel and currency. No migration: clashes stored before keep working
+  and the checkout configuration check lists them in config health; fix them in the CMS.
+
+### Security
+
+- Lock refresh for Dependabot alerts: certifi 2026.10.23, dnspython 2.9.2, filelock 4.2.8, pyasn1 0.6.5,
+  virtualenv 21.15.5, pillow 13.0.0. oauthlib stays 3.3.1 (no dependency allows 4.0).
+
+
+### Changed
+
+- `main/settings_example.py` shows `STOREFRONT_BASE_URL` (django_agreements: the newsletter links, `localhost:3000`
+  when unset) and `THUMBS_CONFIG` (django_pim: without it `pim-thumbs-generate` refuses to run and `source_set` carries
+  only the original picture).
+
 ## [4.1.0] - 2026-10-27
 
 ### Added
