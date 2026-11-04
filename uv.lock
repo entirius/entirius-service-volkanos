@@ -892,7 +892,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-checkout"
-version = "10.1.0"
+version = "10.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -924,9 +924,9 @@ dependencies = [
     { name = "stripe" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b4/a0/680aad62a8b219a4fafc3b0dc4c9ab1c1dedfb14a99be0804e93911d9282/entirius_django_checkout-10.1.0.tar.gz", hash = "sha256:44c3b15713ae1a1aa732b1bd682e497d2e91897da54fdcc618a2ef19190bd154", size = 1056310, upload-time = "2026-11-04T18:18:37.805Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/96/31/1dc709908b165eb9f3fe091a9b51c19264661c0591d49099716ca6cc0320/entirius_django_checkout-10.1.1.tar.gz", hash = "sha256:cf53cea2290ee2bf2b27933b21fcc8f45b64667f6aa08272ee248b475f6a21ad", size = 1059557, upload-time = "2026-11-04T21:14:50.916Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cf/53/6890a00d180346f150e1fde82352aebccd65a0f645e87caa926136190cf7/entirius_django_checkout-10.1.0-py3-none-any.whl", hash = "sha256:d1a3cf81029c08b30b730b9519d9ad40a08e265bd03a1e13010e26afa4bc1404", size = 382335, upload-time = "2026-11-04T18:18:36.308Z" },
+    { url = "https://files.pythonhosted.org/packages/c7/0d/2c27b017f3fdb6beabcd4194e5fcaacc577d7c40bb8feebeda928b7959b7/entirius_django_checkout-10.1.1-py3-none-any.whl", hash = "sha256:7d318a1b13de7731f8a2f4fcaec94d2ecf90d1decca34c6304d7f77146f010ca", size = 383450, upload-time = "2026-11-04T21:14:49.27Z" },
 ]
 
 [package.optional-dependencies]
@@ -942,7 +942,7 @@ vault = [
 
 [[package]]
 name = "entirius-django-checkout-export-to-magento-api"
-version = "2.0.1"
+version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -951,9 +951,9 @@ dependencies = [
     { name = "entirius-py-idx-normalizator" },
     { name = "entirius-py-magento2-sdk" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9e/2e/f1228e259fd296c562e7b97d33c8b7a127c395802de00c093a260d4a8dbc/entirius_django_checkout_export_to_magento_api-2.0.1.tar.gz", hash = "sha256:ec759db8b9ac492da9338b5a0f934074c18cc8d17cb9a5871ffd346b5f6071ea", size = 157498, upload-time = "2026-11-04T18:15:11.626Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/4a/d7/8dd112d71acc8779728ed4464d30b1a239bb1f7e890ae67ad8e10cfcdfb0/entirius_django_checkout_export_to_magento_api-2.1.0.tar.gz", hash = "sha256:3605a81e94048bd3f06857fbdceed7da195172eb5bdb62bd922331d3ebe41813", size = 163393, upload-time = "2026-11-04T21:11:27.133Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2a/4c/a7e42c2a179e22ca0299b826194946c73662939fb31241f86ac8b79678f0/entirius_django_checkout_export_to_magento_api-2.0.1-py3-none-any.whl", hash = "sha256:a8b95a4f659b66aef9f9ad06511bc1532f19b40d736b25b2828f340d3785dd70", size = 35766, upload-time = "2026-11-04T18:15:10.526Z" },
+    { url = "https://files.pythonhosted.org/packages/ac/22/fbd13e4f863f63ece7e6498a5cd76fcd01f5844d8ffcd6a2fd1b33a079ac/entirius_django_checkout_export_to_magento_api-2.1.0-py3-none-any.whl", hash = "sha256:c07dd916150ac99bf1f5927e42b78d1e2aa11bdfe54ea13d0673900611b4d123", size = 37011, upload-time = "2026-11-04T21:11:25.799Z" },
 ]
 
 [[package]]
@@ -973,7 +973,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-communicator"
-version = "0.4.0"
+version = "0.4.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -993,9 +993,9 @@ dependencies = [
     { name = "pydantic" },
     { name = "redis" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/37/0a/365d10edf9991d7b829466f66db1577d00b8cd6ba6aaa6800687c526ec6b/entirius_django_communicator-0.4.0.tar.gz", hash = "sha256:56800cc1ba04fc49a63bf2c36ae55c949433e31357a99353b7645095ff496f48", size = 233049, upload-time = "2026-10-12T08:55:12.861Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b6/3c/ced1c8b51e99eaafe6aaaa65873b3edd3f5d234d3705c13f2b6d3afee9aa/entirius_django_communicator-0.4.1.tar.gz", hash = "sha256:5dc4040b57892f125c769038f0c5f6bf8368574cfdd01af1fc3a3191b52c413d", size = 237054, upload-time = "2026-11-04T21:11:46.859Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/57/45/845001fade1d24ec371decc847a3d9a4c4b84b7f4e0b7b826fa3aca3d473/entirius_django_communicator-0.4.0-py3-none-any.whl", hash = "sha256:857582a41069f9d4297244a1e2d27193286d095df0649a9455c606f06b3c9985", size = 145651, upload-time = "2026-10-12T08:55:11.766Z" },
+    { url = "https://files.pythonhosted.org/packages/f8/f8/a686b4d81df9a3e4b54fca8ef16b7cd9aaeed8a8f873e64f8ca4d4af71af/entirius_django_communicator-0.4.1-py3-none-any.whl", hash = "sha256:a4ad1dc5c643ade18366f756373a3ae73328d66793d29ead22e654fb6692d104", size = 146678, upload-time = "2026-11-04T21:11:45.529Z" },
 ]
 
 [[package]]
@@ -1277,7 +1277,7 @@ qms = [
 
 [[package]]
 name = "entirius-django-munin"
-version = "2.3.0"
+version = "2.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -1287,9 +1287,9 @@ dependencies = [
     { name = "entirius-django-utils" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/06/00/e73c17fd10581acd8166adca4a0b0934542bb6d0f1225ea521bf3bfd207c/entirius_django_munin-2.3.0.tar.gz", hash = "sha256:c361716ff040c97b11885ed07da8776506252955c193198196348acfa97013d7", size = 80201, upload-time = "2026-10-12T08:44:10.757Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ce/2f/2e63778b80b8be6ed2198af49b5f0922cd646d5176451029569dd833f2d3/entirius_django_munin-2.3.1.tar.gz", hash = "sha256:edba7d18a787f7a00c441a6d04381afe255b9074f1900a9839dbffaabb113c93", size = 81121, upload-time = "2026-11-04T21:10:54.064Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c9/bd/e5ee6e43e7086c67ddf7962a510a36cdfe24b6e02953efc9ba6d425f0ffc/entirius_django_munin-2.3.0-py3-none-any.whl", hash = "sha256:799e5f10b7681190f5ba4a7f7f23722b9d9df40c9c0e43b52660902492d76a49", size = 31461, upload-time = "2026-10-12T08:44:09.664Z" },
+    { url = "https://files.pythonhosted.org/packages/7f/b5/9a9120b78c3cab5d93a81ba4c62df6d3d72125139ece8c3aa0bbc3d4ced3/entirius_django_munin-2.3.1-py3-none-any.whl", hash = "sha256:57430527e33f4a65e7e6003dc1e404b5708aff35c8d06af1e036ef5fc5d9d4c2", size = 31725, upload-time = "2026-11-04T21:10:53.12Z" },
 ]
 
 [[package]]
@@ -1338,7 +1338,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-pim"
-version = "3.6.0"
+version = "3.6.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
@@ -1366,9 +1366,9 @@ dependencies = [
     { name = "trafaret" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c0/37/b421f16c372ee31e9da8433a4d644b7405528ef6aa2618701f954d03aa1b/entirius_django_pim-3.6.0.tar.gz", hash = "sha256:c3d8f6abe67191603b42cf5139ee894500cacf41a547b2a29092ea38ecc11dbd", size = 520276, upload-time = "2026-11-04T18:19:53.218Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6b/7a/c2ebb192c346a3554b6a2f810910b0c86c0cafc3f556d928f97c089560ac/entirius_django_pim-3.6.1.tar.gz", hash = "sha256:c0c4fc9ea05e454ec9dd8d78947d2eddcad76968a92fa62fc7428b7e72ee9b3c", size = 525479, upload-time = "2026-11-04T21:16:36.055Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/31/29/6be0e3f4526b9ca11fe23b954cb4722f9c4eb568d69a0ea8d99246e97da9/entirius_django_pim-3.6.0-py3-none-any.whl", hash = "sha256:796911655dfe3f7b946d2f647f4ccfd55e7fa94d3d082dc08fa195d7f7afff35", size = 366268, upload-time = "2026-11-04T18:19:51.689Z" },
+    { url = "https://files.pythonhosted.org/packages/aa/dc/b544cda2f37158ff529696c88bec6fd639b822c4ac7d727ddd19c2bc36a6/entirius_django_pim-3.6.1-py3-none-any.whl", hash = "sha256:363f2e843acd81acb2d6b8687bca01c0e78c83cf557498183e6724bba04e3f33", size = 367877, upload-time = "2026-11-04T21:16:34.59Z" },
 ]
 
 [[package]]
@@ -2004,7 +2004,7 @@ wheels = [
 
 [[package]]
 name = "entirius-service-volkanos"
-version = "4.2.0"
+version = "4.2.1"
 source = { editable = "." }
 dependencies = [
     { name = "dj-database-url" },
@@ -2105,10 +2105,10 @@ requires-dist = [
     { name = "entirius-django-atlas", extras = ["qms", "lookup"], specifier = ">=2.1.0" },
     { name = "entirius-django-baselinker", specifier = ">=2.0.1" },
     { name = "entirius-django-captcha", specifier = ">=2.0.0" },
-    { name = "entirius-django-checkout", extras = ["qms", "vault", "returns"], specifier = ">=10.1.0" },
-    { name = "entirius-django-checkout-export-to-magento-api", specifier = ">=2.0.1" },
+    { name = "entirius-django-checkout", extras = ["qms", "vault", "returns"], specifier = ">=10.1.1" },
+    { name = "entirius-django-checkout-export-to-magento-api", specifier = ">=2.1.0" },
     { name = "entirius-django-checkout-import-from-magento-api", specifier = ">=2.0.0" },
-    { name = "entirius-django-communicator", specifier = ">=0.4.0" },
+    { name = "entirius-django-communicator", specifier = ">=0.4.1" },
     { name = "entirius-django-contact-forms", extras = ["bookings", "google-ads"], specifier = ">=4.1.2" },
     { name = "entirius-django-contentdb", specifier = ">=5.3.1" },
     { name = "entirius-django-contentdb-translator", specifier = ">=2.1.1" },
@@ -2121,10 +2121,10 @@ requires-dist = [
     { name = "entirius-django-leads", specifier = ">=0.4.0" },
     { name = "entirius-django-lookup", specifier = ">=0.4.0" },
     { name = "entirius-django-matrix", extras = ["qms", "pricemanager"], specifier = ">=4.5.1" },
-    { name = "entirius-django-munin", specifier = ">=2.3.0" },
+    { name = "entirius-django-munin", specifier = ">=2.3.1" },
     { name = "entirius-django-notifications", extras = ["googlechat"], specifier = ">=0.2.0" },
     { name = "entirius-django-omnibus", specifier = ">=3.0.1" },
-    { name = "entirius-django-pim", specifier = ">=3.6.0" },
+    { name = "entirius-django-pim", specifier = ">=3.6.1" },
     { name = "entirius-django-pim-csv", specifier = ">=4.1.0" },
     { name = "entirius-django-pim-export-to-magento-api", specifier = ">=2.1.0" },
     { name = "entirius-django-pim-translator", specifier = ">=2.1.1" },

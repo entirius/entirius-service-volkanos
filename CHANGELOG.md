@@ -6,6 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.2.1] - 2026-11-04
+
+Module versions: entirius-django-pim 3.6.1, -checkout 10.1.1, -communicator 0.4.1, -munin 2.3.1,
+-checkout-export-to-magento-api 2.1.0.
+
+### Security
+
+- PIM, checkout and communicator answer with messages the module writes only; any other exception is a 500
+  `INTERNAL_ERROR` with a `debug_id` (CodeQL `py/stack-trace-exposure` closed in all three). Client-visible: a
+  foreign error that used to come back as 400 (or 404 in checkout) with its own text is now a 500; refusals the
+  modules write keep their status, code and message.
+
+### Fixed
+
+- Configuration health honors silenced Django checks for config checks and probes (munin 2.3.1).
+- Orders paid partly or fully with a voucher export to Magento (export 2.1.0: the voucher is an order discount,
+  a fully covered order uses `voucher_payment_magento_name`, default `free`).
+- PIM: paging parameters are named in their 400; an unknown `file_type` on upload is a 400 (was 500).
+- Communicator: a NUL byte in a suppression value is a 400 (was 500).
+
 ## [4.2.0] - 2026-11-04
 
 Platform 4.2. Module versions: entirius-django-checkout 10.1.0, -matrix 4.5.1, -pim 3.6.0, -agreements 3.1.0,
