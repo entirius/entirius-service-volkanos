@@ -95,6 +95,14 @@ LOCAL_APPS: list[str] = []
 # NEW_ACCOUNT_REDIRECT_URL = "https://shop.example.com/account/confirm"
 # CMS_RESET_PASSWORD_REDIRECT_URL = "https://cms.example.com/password-reset"
 
+# django_agreements: the storefront the newsletter confirmation and unsubscribe links point at. Unset, they point at
+# the development default http://localhost:3000.
+# STOREFRONT_BASE_URL = "https://shop.example.com"
+
+# django_pim: thumbnails made by pim-thumbs-generate, as (width, height, transform method, format, quality). Unset, the
+# command refuses to run and the API's source_set carries only the original picture.
+# THUMBS_CONFIG = [(size, size, "resize ratio, white", "webp", 90) for size in (160, 320, 768, 1024, 1400)]
+
 # Celery (module workers: QMS quantities, PIM thumbnails, pricemanager pricelists).
 # The app lives in main/celery.py and reads CELERY_-prefixed keys from settings;
 # REDIS_URL additionally feeds the celery_once backend used by some module tasks.

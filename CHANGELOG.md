@@ -4,6 +4,14 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- `main/settings_example.py` shows `STOREFRONT_BASE_URL` (django_agreements: the newsletter links, `localhost:3000`
+  when unset) and `THUMBS_CONFIG` (django_pim: without it `pim-thumbs-generate` refuses to run and `source_set` carries
+  only the original picture).
+
 ## [4.1.0] - 2026-10-27
 
 ### Added
