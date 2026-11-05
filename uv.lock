@@ -758,7 +758,7 @@ wheels = [
 
 [[package]]
 name = "entirius-django-accounts"
-version = "6.0.1"
+version = "6.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -780,9 +780,9 @@ dependencies = [
     { name = "requests" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/04/22/6323479c553e2b4873be2efc8689ed169610cc963c0da369f6bda35b464c/entirius_django_accounts-6.0.1.tar.gz", hash = "sha256:6bd19d1e7aa992e934e340c9bda9af243462d871efacdfb7aff26d49dc34547d", size = 207578, upload-time = "2026-10-27T10:51:39.913Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f9/f7/fa35e0bc910a533e3e6d9ec56ae812f02fa666eac96a698d7680a3d14c3e/entirius_django_accounts-6.1.0.tar.gz", hash = "sha256:c760197c1617f69f94447b9999fcc32d5bacd652eb0bf0f52e62fa1d0dbd281a", size = 214831, upload-time = "2026-11-05T05:35:20.252Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/20/ab/2c56b08fc1bd37aba6d5c529f00fcf26a9b26ccc054e3f557f71c369dd9b/entirius_django_accounts-6.0.1-py3-none-any.whl", hash = "sha256:3269fd2ca13993ef893d317405e4367dfc097741cb50900dac8d4f5f7722da15", size = 82282, upload-time = "2026-10-27T10:51:38.823Z" },
+    { url = "https://files.pythonhosted.org/packages/92/dc/8220404492baeb31d0a045ab37ebb833540579416e4740f573c5a485fb8e/entirius_django_accounts-6.1.0-py3-none-any.whl", hash = "sha256:89888b6f93563ffd532551a637428a2c844a2da27849e04bd19f344f5a35720f", size = 84273, upload-time = "2026-11-05T05:35:19.127Z" },
 ]
 
 [package.optional-dependencies]
@@ -2004,7 +2004,7 @@ wheels = [
 
 [[package]]
 name = "entirius-service-volkanos"
-version = "4.2.1"
+version = "4.3.0"
 source = { editable = "." }
 dependencies = [
     { name = "dj-database-url" },
@@ -2099,7 +2099,7 @@ requires-dist = [
     { name = "djangorestframework", specifier = ">=3.16" },
     { name = "drf-spectacular", specifier = ">=0.28" },
     { name = "entirius-django-access", specifier = ">=1.1.0" },
-    { name = "entirius-django-accounts", extras = ["pim"], specifier = ">=6.0.1" },
+    { name = "entirius-django-accounts", extras = ["pim"], specifier = ">=6.1.0" },
     { name = "entirius-django-accounts-export-to-magento-api", specifier = ">=2.0.0" },
     { name = "entirius-django-agreements", specifier = ">=3.1.0" },
     { name = "entirius-django-atlas", extras = ["qms", "lookup"], specifier = ">=2.1.0" },

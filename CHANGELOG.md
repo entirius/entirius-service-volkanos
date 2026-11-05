@@ -6,6 +6,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.3.0] - 2026-11-05
+
+Platform 4.3. Module versions: entirius-django-accounts 6.1.0 (from 6.0.1; 6.0.2 included). Admin CMS 3.5.0.
+
+### Added
+
+- `ACCOUNTS_NATIVE_AUTH_ENABLED` (accounts 6.1.0, default `True`: nothing changes). `False` is for SSO-only
+  deployments: customer login, signup, password reset and password change answer 403 `native_auth_disabled`, the CMS
+  password login of staff included. Refresh, validate, profile, social login, `api/token/` and the Django admin login
+  stay open, and issued sessions live until their refresh token expires.
+
+### Security
+
+- Customer login, signup and password reset are throttled (accounts 6.0.2): over the limit they answer 429 with
+  `Retry-After`. Scopes `accounts_login_ip` (30/min), `accounts_signup_ip` (10/hour), `accounts_signup_email`
+  (3/hour), `accounts_password_reset_ip` (10/hour), `accounts_password_reset_email` (3/hour), overridable in
+  `REST_FRAMEWORK["DEFAULT_THROTTLE_RATES"]`.
+
+### Fixed
+
+- `create_user` and the Google/Facebook login of a new user no longer crash with `AttributeError` on Django 5
+  (accounts 6.0.2).
+
+### Upgrade
+
+- The per-IP throttles read the client address through `django_utils.api.client_ip`. Behind Cloudflare set
+  `CLIENT_IP_HEADER = "HTTP_CF_CONNECTING_IP"` (and allow the origin only through Cloudflare); otherwise
+  `REMOTE_ADDR` and `DRF_NUM_PROXIES` decide, and every visitor behind a proxy shares one counter. The counters
+  live in the default cache: use a shared one (Redis) when the service runs several processes.
+
 ## [4.2.1] - 2026-11-04
 
 Module versions: entirius-django-pim 3.6.1, -checkout 10.1.1, -communicator 0.4.1, -munin 2.3.1,
