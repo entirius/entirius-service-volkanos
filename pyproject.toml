@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "entirius-service-volkanos"
-version = "4.2.1"
+version = "4.3.0"
 description = "Backend service of Entirius: a thin Django shell that runs the platform's modules behind one REST API"
 keywords = ["django", "ecommerce", "entirius", "rest-api", "headless", "backend"]
 authors = [
@@ -80,7 +80,7 @@ dependencies = [
     "entirius-django-crypt>=2.1.0",
     "entirius-django-enrichment>=2.3.0",
     "entirius-django-contentdb>=5.3.1",
-    "entirius-django-accounts[pim]>=6.0.1",
+    "entirius-django-accounts[pim]>=6.1.0",
     "entirius-django-suppliers[qms]>=2.1.0",
     "entirius-django-contentdb-translator>=2.1.1",
     "entirius-django-sitemap[pim,contentdb,faq]>=4.0.2",
