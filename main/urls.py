@@ -88,6 +88,8 @@ if "django_checkout" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_checkout.urls")))
 if "django_returns" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_returns.urls")))
+if "django_stock_alerts" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_stock_alerts.urls")))
 if "django_contact_forms" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_contact_forms.urls")))
 if "django_notifications" in settings.INSTALLED_APPS:

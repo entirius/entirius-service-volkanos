@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Back-in-stock alerts (`entirius-django-stock-alerts`, new module in the registry, domain `orders`): a shopper asks
+  for one e-mail when a sold-out variant can be bought again; the module sends a signup e-mail, checks the saleable
+  quantity of the waited-for variants every 5 minutes, sends the alerts in waves (oldest request first), and records
+  the consent and its withdrawal in agreements. Routes under `api/stock-alerts/v2/` (storefront: save, cancel by
+  token; admin: demand, requests, CSV export, cancel). `main/settings_example.py` shows the beat entries and the link
+  templates.
+
+### Upgrade
+
+- To switch the alerts on: `django_stock_alerts` in `LOCAL_APPS` after `django_matrix`, `manage.py migrate`, a worker
+  on the queue `stock_alerts`, the beat entries `django_stock_alerts.check` (300 s) and `django_stock_alerts.retention`
+  (daily), `STOCK_ALERTS_PRODUCT_URL` and `STOCK_ALERTS_CANCEL_URL` per channel, `EMAIL_MEDIA_BASE_URL`, a storefront
+  token with the scope `stock_alerts.subscribe`, and `manage.py loaddata stock_alerts_agreement` with agreements.
+  A service that leaves the app out of `LOCAL_APPS` changes nothing.
+
 ## [4.3.0] - 2026-11-05
 
 Platform 4.3. Module versions: entirius-django-accounts 6.1.0 (from 6.0.1; 6.0.2 included). Admin CMS 3.5.0.

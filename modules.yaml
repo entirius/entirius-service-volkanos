@@ -844,6 +844,25 @@ modules:
     docs: true
     frontend: []
 
+  - dist: entirius-django-stock-alerts
+    name: Stock Alerts
+    apps: [django_stock_alerts]
+    domain: orders
+    description: Back-in-stock requests and alert emails.
+    core: false
+    requires: [entirius-django-email, entirius-django-matrix, entirius-django-utils]
+    optional: [entirius-django-access, entirius-django-agreements]
+    also_enable: []
+    queues: [stock_alerts]
+    settings: [
+      LEADS_ANONYMISED_DOMAIN, STOCK_ALERTS_AGREEMENT_SLUG, STOCK_ALERTS_ANONYMISE_DAYS, STOCK_ALERTS_CANCEL_URL,
+      STOCK_ALERTS_CHECK_BATCH, STOCK_ALERTS_MAX_WAITING_PER_EMAIL, STOCK_ALERTS_PRODUCT_URL, STOCK_ALERTS_SEND_RATE,
+      STOCK_ALERTS_SIGNUP_EMAIL, STOCK_ALERTS_WAITING_DAYS, STOCK_ALERTS_WAVE_FACTOR
+    ]
+    urls: true
+    docs: true
+    frontend: [cms, storefront]
+
 # Installed by the service itself wherever the package is importable (main/settings.py); never listed in LOCAL_APPS.
 platform:
   - dist: entirius-django-access

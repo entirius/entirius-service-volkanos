@@ -101,6 +101,7 @@ dependencies = [
     "entirius-django-siteintel>=0.3.0",
     "entirius-django-communicator>=0.4.1",
     "entirius-django-leads>=0.4.0",
+    "entirius-django-stock-alerts>=1.0.0",
     "dj-database-url>=2.2",
     "psycopg[binary]>=3.2",
 ]

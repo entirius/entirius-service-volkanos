@@ -79,6 +79,7 @@ DATABASES = {
 #     "django_getresponse",
 #     "django_returns",
 #     "django_omnibus",
+#     "django_stock_alerts",
 # ]
 # django_access is added by main/settings.py in every environment (a required dependency)
 # END generated
@@ -112,6 +113,17 @@ LOCAL_APPS: list[str] = []
 # Beat: the enrichment work queue needs its reaper (expired leases, stalled work, consumer restart) every minute.
 # Beat entries are named by app prefix: "enrichment.reap" belongs to django_enrichment.
 # CELERY_BEAT_SCHEDULE = {"enrichment-reap": {"task": "enrichment.reap", "schedule": 60}}
+# django_stock_alerts: the restock check every 5 minutes and the daily retention, both on the stock_alerts queue.
+# from celery.schedules import crontab
+# CELERY_BEAT_SCHEDULE["stock-alerts-check"] = {"task": "django_stock_alerts.check", "schedule": 300}
+# CELERY_BEAT_SCHEDULE["stock-alerts-retention"] = {
+#     "task": "django_stock_alerts.retention", "schedule": crontab(hour=3, minute=30)
+# }
+
+# django_stock_alerts: storefront links of the alert emails, per channel idx. A channel without a product link accepts
+# no back-in-stock requests (the public API answers 404 there).
+# STOCK_ALERTS_PRODUCT_URL = {"default-europe": "https://shop.example.com/{country}/product/{url_key}?variant={sku}"}
+# STOCK_ALERTS_CANCEL_URL = {"default-europe": "https://shop.example.com/{country}/stock-alert/cancel?token={token}"}
 
 # QMS quantities strategy per environment: "XRAY" (CSV/point-in-time driven, used by the
 # Emporium demo package) or "ZULU" (storage-driven). Default in django_qms is ZULU.
