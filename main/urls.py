@@ -94,6 +94,8 @@ if "django_contact_forms" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_contact_forms.urls")))
 if "django_notifications" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_notifications.urls")))
+if "django_todo" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_todo.urls")))
 if "django_siteintel" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_siteintel.urls")))
 if "django_communicator" in settings.INSTALLED_APPS:

@@ -46,6 +46,7 @@ DATABASES = {
 #     "django_pricefighter",
 #     "django_lookup",
 #     "django_notifications",
+#     "django_todo",
 #     "django_siteintel",
 #     "django_pim_csv",
 #     "django_pim_translator",

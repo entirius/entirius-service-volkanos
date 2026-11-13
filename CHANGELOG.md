@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Tasks (`entirius-django-todo`, new module in the registry, domain `leads`, queue `todo_default`): tasks with a due
+  date about any object, a today list and a due reminder in the bell. Routes under `api/todo/v2/`. The leads and
+  communicator entries list the settings of the CRM release (mailboxes, do-not-contact scope, one-click unsubscribe,
+  address verification, bulk approval). The dependency and the lock follow the module releases.
 - Back-in-stock alerts (`entirius-django-stock-alerts`, new module in the registry, domain `orders`): a shopper asks
   for one e-mail when a sold-out variant can be bought again; the module sends a signup e-mail, checks the saleable
   quantity of the waited-for variants every 5 minutes, sends the alerts in waves (oldest request first), and records
