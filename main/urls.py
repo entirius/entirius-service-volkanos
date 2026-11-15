@@ -102,6 +102,10 @@ if "django_communicator" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_communicator.urls")))
 if "django_leads" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_leads.urls")))
+if "django_ai_crm" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_ai_crm.urls")))
+if "django_prospecting" in settings.INSTALLED_APPS:
+    urlpatterns.append(path("", include("django_prospecting.urls")))
 if "django_regon_api" in settings.INSTALLED_APPS:
     urlpatterns.append(path("", include("django_regon_api.urls")))
 if "django_atlas" in settings.INSTALLED_APPS:

@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- AI CRM and Prospecting, two new apps of the leads package (`entirius-django-leads`, no new dependency): the
+  registry entry of leads lists `django_ai_crm` and `django_prospecting` next to `django_leads`, with the queue
+  `prospecting_default` and their settings; each app is enabled only when `LOCAL_APPS` lists it, after
+  `django_leads`. `django_ai_crm`: a salesperson's day plan and an agent that closes tasks, writes notes and moves
+  deals, irreversible actions only as proposals; routes under `api/ai-crm/v2/` (REST and an MCP server).
+  `django_prospecting`: new people to contact at a company with their checks, accepted into leads; routes under
+  `api/prospecting/v2/`. The lock follows the leads release that ships them.
 - Tasks (`entirius-django-todo`, new module in the registry, domain `leads`, queue `todo_default`): tasks with a due
   date about any object, a today list and a due reminder in the bell. Routes under `api/todo/v2/`. The leads and
   communicator entries list the settings of the CRM release (mailboxes, do-not-contact scope, one-click unsubscribe,
