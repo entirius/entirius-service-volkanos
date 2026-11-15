@@ -435,9 +435,11 @@ modules:
 
   - dist: entirius-django-leads
     name: Leads
-    apps: [django_leads]
+    # django_ai_crm (a salesperson's day plan and an agent over REST API v2 and MCP) and django_prospecting (new
+    # people to contact at a company) ship in the leads package; each is enabled only when listed.
+    apps: [django_leads, django_ai_crm, django_prospecting]
     domain: leads
-    description: B2B lead pipeline with companies, contacts, stages, rules and recipient selection.
+    description: B2B lead pipeline, recipient selection, an AI CRM agent (REST API v2 and MCP) and prospecting.
     core: false
     requires: [
       entirius-django-agreements, entirius-django-communicator, entirius-django-regional, entirius-django-siteintel,
@@ -445,13 +447,16 @@ modules:
     ]
     optional: [entirius-django-contact-forms, entirius-django-notifications]
     also_enable: []
-    queues: [leads_default]
+    queues: [leads_default, prospecting_default]
     settings: [
-      AI_TOOLBOX_CHANNEL, COMMUNICATOR_SUPPRESSION_SCOPE, LEADS_ANALYSIS_MAX_HOOKS, LEADS_ANONYMISED_DOMAIN,
+      AI_CRM_MAX_ACTIONS, AI_CRM_MAX_TOKENS, AI_CRM_MODEL, AI_CRM_PROPOSAL_TTL_HOURS, AI_TOOLBOX_CHANNEL,
+      AI_TOOLBOX_ENABLED, COMMUNICATOR_SUPPRESSION_SCOPE, LEADS_ANALYSIS_MAX_HOOKS, LEADS_ANONYMISED_DOMAIN,
       LEADS_CLAIM_STALE_MINUTES, LEADS_FORM_CONSENT_KEYS, LEADS_FORM_WEBSITE_KEYS, LEADS_FREEMAIL_DOMAINS,
       LEADS_IMPORT_CHUNK_SIZE, LEADS_IMPORT_REPORT_MAX, LEADS_IMPORT_STALE_MINUTES, LEADS_IMPORT_TMP_DIR,
       LEADS_INTEL_RETRY_LIMIT, LEADS_NOTIFY_ROLE, LEADS_QUEUE_DEFAULT, LEADS_RETENTION_DAYS, LEADS_ROTATION_MAX,
-      LEADS_ROTATION_MAX_FAILURES, LEADS_ROTATION_RETRY_HOURS
+      LEADS_ROTATION_MAX_FAILURES, LEADS_ROTATION_RETRY_HOURS, PROSPECTING_ADDRESS_TESTER,
+      PROSPECTING_COMPANY_SEARCH_LIMIT, PROSPECTING_DAILY_BUDGET, PROSPECTING_MAX_ADDRESSES, PROSPECTING_MAX_ATTEMPTS,
+      PROSPECTING_MAX_CANDIDATES, PROSPECTING_QUEUE_DEFAULT, PROSPECTING_SEARCH_MODEL, PROSPECTING_SEARCH_PROVIDER
     ]
     urls: true
     docs: true

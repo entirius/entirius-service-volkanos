@@ -60,6 +60,8 @@ DATABASES = {
 #     "django_email",
 #     "django_communicator",
 #     "django_leads",
+#     "django_ai_crm",
+#     "django_prospecting",
 #     "django_contact_forms",
 #     "django_regon_api",
 #     "django_baselinker",
