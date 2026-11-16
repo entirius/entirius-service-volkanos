@@ -1,11 +1,13 @@
 # dev-integration only: modules with unreleased work come from their `develop` at a fixed commit, so a server can
 # deploy service develop + module develops reproducibly. Never merge this block into develop or master: releases and
 # client forks resolve from PyPI. Refresh: new SHAs here, `uv lock`.
+# communicator, notifications and todo follow `branch = "develop"` because leads names them that way in its own
+# sources (two URLs for one package do not resolve); uv.lock still records the exact commit of each.
 [tool.uv.sources]
 entirius-django-leads = { git = "https://github.com/entirius/entirius-django-leads", rev = "91948c064a455c3d4ca91f27732fe19e3e10bbf8" }
-entirius-django-communicator = { git = "https://github.com/entirius/entirius-django-communicator", rev = "e1ad622cd204fc64289e7cb11ff37b564b3263b1" }
-entirius-django-notifications = { git = "https://github.com/entirius/entirius-django-notifications", rev = "d50b1eaf8e4128283adea74a55ddbb5d4b56c13b" }
-entirius-django-todo = { git = "https://github.com/entirius/entirius-django-todo", rev = "c9a082f128d99f89674102d391e60ba7046476c4" }
+entirius-django-communicator = { git = "https://github.com/entirius/entirius-django-communicator", branch = "develop" }
+entirius-django-notifications = { git = "https://github.com/entirius/entirius-django-notifications", branch = "develop" }
+entirius-django-todo = { git = "https://github.com/entirius/entirius-django-todo", branch = "develop" }
 entirius-django-stock-alerts = { git = "https://github.com/entirius/entirius-django-stock-alerts", rev = "97e92447c17e95d37bcb09c5a342de34c4f23fc4" }
 entirius-django-email = { git = "https://github.com/entirius/entirius-django-email", rev = "b351cb11eae7cc4be70fae8685962b8db73df8b9" }
 entirius-django-checkout = { git = "https://github.com/entirius/entirius-django-checkout", rev = "bc072533f861d484b62f8043d73326395a719813" }
