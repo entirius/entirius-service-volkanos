@@ -2,14 +2,16 @@
 # deploy service develop + module develops reproducibly. Never merge this block into develop or master: releases and
 # client forks resolve from PyPI. Refresh: new SHAs here, `uv lock`.
 [tool.uv.sources]
-entirius-django-leads = { git = "https://github.com/entirius/entirius-django-leads", rev = "2a5ad20530a9fba75ae5bb30de22a4265047e87d" }
-entirius-django-communicator = { git = "https://github.com/entirius/entirius-django-communicator", rev = "bd88a987abee787a641cf5cb6495d6c6e65e33aa" }
+entirius-django-leads = { git = "https://github.com/entirius/entirius-django-leads", rev = "91948c064a455c3d4ca91f27732fe19e3e10bbf8" }
+entirius-django-communicator = { git = "https://github.com/entirius/entirius-django-communicator", rev = "e1ad622cd204fc64289e7cb11ff37b564b3263b1" }
 entirius-django-notifications = { git = "https://github.com/entirius/entirius-django-notifications", rev = "d50b1eaf8e4128283adea74a55ddbb5d4b56c13b" }
 entirius-django-todo = { git = "https://github.com/entirius/entirius-django-todo", rev = "c9a082f128d99f89674102d391e60ba7046476c4" }
-entirius-django-stock-alerts = { git = "https://github.com/entirius/entirius-django-stock-alerts", rev = "d1c8eab76ecb8e59225f998afd2acf0989359cfd" }
+entirius-django-stock-alerts = { git = "https://github.com/entirius/entirius-django-stock-alerts", rev = "97e92447c17e95d37bcb09c5a342de34c4f23fc4" }
 entirius-django-email = { git = "https://github.com/entirius/entirius-django-email", rev = "b351cb11eae7cc4be70fae8685962b8db73df8b9" }
-entirius-django-checkout = { git = "https://github.com/entirius/entirius-django-checkout", rev = "fb5ff8e325ab8d61c2862c06e70d0abfaf7c67f3" }
+entirius-django-checkout = { git = "https://github.com/entirius/entirius-django-checkout", rev = "bc072533f861d484b62f8043d73326395a719813" }
 entirius-django-pricemanager = { git = "https://github.com/entirius/entirius-django-pricemanager", rev = "763e20394ee9efb1c536b3a76ec2da45d2551aa5" }
+entirius-django-access = { git = "https://github.com/entirius/entirius-django-access", rev = "6e1ba17daf3a3c8aa9c00e4cd6f514046053544d" }
+entirius-django-matrix = { git = "https://github.com/entirius/entirius-django-matrix", rev = "72605dcebea8c7c0806d26939d44c31d48b45640" }
 
 [build-system]
 requires = ["hatchling"]
