@@ -744,7 +744,7 @@ modules:
       entirius-django-accounts, entirius-django-pim, entirius-django-pricemanager, entirius-django-regional,
       entirius-django-utils
     ]
-    optional: [entirius-django-qms, entirius-django-returns, entirius-django-vault]
+    optional: [entirius-django-email, entirius-django-qms, entirius-django-returns, entirius-django-vault]
     also_enable: []
     queues: [celery]
     settings: [
