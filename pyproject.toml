@@ -4,7 +4,7 @@
 # communicator, notifications and todo follow `branch = "develop"` because leads names them that way in its own
 # sources (two URLs for one package do not resolve); uv.lock still records the exact commit of each.
 [tool.uv.sources]
-entirius-django-leads = { git = "https://github.com/entirius/entirius-django-leads", rev = "91948c064a455c3d4ca91f27732fe19e3e10bbf8" }
+entirius-django-leads = { git = "https://github.com/entirius/entirius-django-leads", rev = "4c016881bdfeb2ae83dba808c5b7d6be6818195f" }
 entirius-django-communicator = { git = "https://github.com/entirius/entirius-django-communicator", branch = "develop" }
 entirius-django-notifications = { git = "https://github.com/entirius/entirius-django-notifications", branch = "develop" }
 entirius-django-todo = { git = "https://github.com/entirius/entirius-django-todo", branch = "develop" }

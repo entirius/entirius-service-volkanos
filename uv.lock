@@ -966,7 +966,7 @@ wheels = [
 [[package]]
 name = "entirius-django-communicator"
 version = "0.5.0"
-source = { git = "https://github.com/entirius/entirius-django-communicator?branch=develop#e1ad622cd204fc64289e7cb11ff37b564b3263b1" }
+source = { git = "https://github.com/entirius/entirius-django-communicator?branch=develop#584023e4df416acac45725b334c05dce910b7300" }
 dependencies = [
     { name = "celery" },
     { name = "celery-once" },
@@ -1181,7 +1181,7 @@ wheels = [
 [[package]]
 name = "entirius-django-leads"
 version = "0.5.0"
-source = { git = "https://github.com/entirius/entirius-django-leads?rev=91948c064a455c3d4ca91f27732fe19e3e10bbf8#91948c064a455c3d4ca91f27732fe19e3e10bbf8" }
+source = { git = "https://github.com/entirius/entirius-django-leads?rev=4c016881bdfeb2ae83dba808c5b7d6be6818195f#4c016881bdfeb2ae83dba808c5b7d6be6818195f" }
 dependencies = [
     { name = "celery" },
     { name = "celery-once" },
@@ -2121,7 +2121,7 @@ requires-dist = [
     { name = "entirius-django-enrichment", specifier = ">=2.3.0" },
     { name = "entirius-django-faq", specifier = ">=2.1.0" },
     { name = "entirius-django-getresponse", specifier = ">=3.0.0" },
-    { name = "entirius-django-leads", git = "https://github.com/entirius/entirius-django-leads?rev=91948c064a455c3d4ca91f27732fe19e3e10bbf8" },
+    { name = "entirius-django-leads", git = "https://github.com/entirius/entirius-django-leads?rev=4c016881bdfeb2ae83dba808c5b7d6be6818195f" },
     { name = "entirius-django-lookup", specifier = ">=0.4.0" },
     { name = "entirius-django-matrix", extras = ["qms", "pricemanager"], git = "https://github.com/entirius/entirius-django-matrix?rev=72605dcebea8c7c0806d26939d44c31d48b45640" },
     { name = "entirius-django-munin", specifier = ">=2.3.1" },
